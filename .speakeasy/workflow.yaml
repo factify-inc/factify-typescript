@@ -13,4 +13,6 @@ targets:
         output: .
         codeSamples:
             output: codeSamples.yaml
+            registry:
+                location: registry.speakeasyapi.dev/factify/api/factify-api-typescript-code-samples
             style: standard
