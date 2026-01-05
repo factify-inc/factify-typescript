@@ -4,6 +4,8 @@ sources:
     factify-api:
         inputs:
             - location: ./openapi.json
+        registry:
+            location: registry.speakeasyapi.dev/factify/api/factify-api
 targets:
     typescript:
         target: typescript
