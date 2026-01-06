@@ -6,7 +6,7 @@ sources:
         sourceBlobDigest: sha256:1aa10a4f34d69cbd8ae6c202da568b1c5073ba890b9cc083ba78b5cfe7cd47d8
         tags:
             - latest
-            - speakeasy-sdk-regen-1767709674
+            - speakeasy-sdk-regen-1767710287
             - 1.0.0
 targets:
     typescript:
@@ -15,7 +15,7 @@ targets:
         sourceRevisionDigest: sha256:2a4c3fb953847f3b60084e4e3060746063656255290b3641bfd1881a12984385
         sourceBlobDigest: sha256:1aa10a4f34d69cbd8ae6c202da568b1c5073ba890b9cc083ba78b5cfe7cd47d8
         codeSamplesNamespace: factify-api-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:7278318273bea579b85208ee5db37fe06f088cdb265c6cefd7604112d6821957
+        codeSamplesRevisionDigest: sha256:e243f16895532e112fc8060a69e9dbf1179e7778dea355328e9186a77649a8cd
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
