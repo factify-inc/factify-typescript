@@ -11,6 +11,9 @@ targets:
         target: typescript
         source: factify-api
         output: .
+        publish:
+            npm:
+                token: $npm_token
         codeSamples:
             output: codeSamples.yaml
             registry:
