@@ -29,4 +29,5 @@ jobs:
       target: typescript
     secrets:
       github_access_token: ${{ secrets.SDK_PUBLISH_GH_TOKEN }}
+      npm_token: ${{ secrets.NPM_TOKEN }}
       speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
