@@ -1,4 +1,4 @@
-speakeasyVersion: 1.680.12
+speakeasyVersion: 1.682.0
 sources:
     factify-api:
         sourceNamespace: factify-api
@@ -6,7 +6,7 @@ sources:
         sourceBlobDigest: sha256:1aa10a4f34d69cbd8ae6c202da568b1c5073ba890b9cc083ba78b5cfe7cd47d8
         tags:
             - latest
-            - speakeasy-sdk-regen-1767621474
+            - speakeasy-sdk-regen-1767707969
             - 1.0.0
 targets:
     typescript:
@@ -15,7 +15,7 @@ targets:
         sourceRevisionDigest: sha256:2a4c3fb953847f3b60084e4e3060746063656255290b3641bfd1881a12984385
         sourceBlobDigest: sha256:1aa10a4f34d69cbd8ae6c202da568b1c5073ba890b9cc083ba78b5cfe7cd47d8
         codeSamplesNamespace: factify-api-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:8c4252b6c829dcdf214059790913b666f6f7084e14a08ba6d4c23a8c4959a5ea
+        codeSamplesRevisionDigest: sha256:0018ff99ee19c8be93e641c832ff44263acc1513f53ae9f3ab6c5700e6f3ae48
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -30,6 +30,9 @@ workflow:
             target: typescript
             source: factify-api
             output: .
+            publish:
+                npm:
+                    token: $npm_token
             codeSamples:
                 output: codeSamples.yaml
                 registry:
