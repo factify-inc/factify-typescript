@@ -5,7 +5,7 @@
 import * as z from "zod/v4-mini";
 import { FactifyCore } from "../core.js";
 import { dlv } from "../lib/dlv.js";
-import { encodeFormQuery } from "../lib/encodings.js";
+import { encodeFormQuery, queryJoin } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -108,11 +108,18 @@ async function $do(
 
   const path = pathToFunc("/v1beta/documents")();
 
-  const query = encodeFormQuery({
-    "created_after": payload?.created_after,
-    "page_size": payload?.page_size,
-    "page_token": payload?.page_token,
-  });
+  const query = queryJoin(
+    encodeFormQuery({
+      "access_level": payload?.access_level,
+      "created_by_id": payload?.created_by_id,
+      "processing_status": payload?.processing_status,
+    }, { explode: false }),
+    encodeFormQuery({
+      "created.after": payload?.["created.after"],
+      "page_size": payload?.page_size,
+      "page_token": payload?.page_token,
+    }),
+  );
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
