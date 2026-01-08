@@ -628,20 +628,25 @@
       },
       "ListDocumentsRequest": {
         "additionalProperties": false,
-        "description": "ListDocumentsRequest specifies filters and pagination for listing documents.\n Follows Google AIP-158 for pagination field naming.\n Note: Keeping filters flat (not nested) for cleaner REST API query parameters.\n Nested message would result in ?filters.created_after=... which is verbose.\n To implement nested filters with flat REST params would require both:\n 1. OpenAPI post-processing (cosmetic for docs)\n 2. Custom middleware/transcoding (runtime behavior)\ncreated_time_range // created_after must be before created_before\n",
+        "description": "ListDocumentsRequest specifies filters and pagination for listing documents.\n Follows Google AIP-158 for pagination field naming.\n Uses Vanguard-compatible dot notation for nested filters: ?created.after=...\u0026created.before=...\ncreated_time_range // created.after must be before created.before\n",
         "properties": {
-          "created_after": {
-            "description": "Filter: return documents created after this timestamp.",
-            "format": "date-time",
+          "access_level": {
+            "description": "Filter by access level(s). Returns documents matching ANY of the specified levels.\n Accepts single value or comma-separated list.\n REST: ?access_level=private or ?access_level=private,organization\n Accepts clean enum names (case-insensitive): \"private\", \"organization\", \"public\"",
             "nullable": true,
-            "title": "created_after",
+            "title": "access_level",
             "type": "string"
           },
-          "created_before": {
-            "description": "Filter: return documents created before this timestamp.",
+          "created": {
+            "description": "Filter by creation time range.\n REST: ?created.after=2024-01-01T00:00:00Z\u0026created.before=2024-12-31T23:59:59Z",
             "format": "date-time",
             "nullable": true,
-            "title": "created_before",
+            "title": "created",
+            "type": "string"
+          },
+          "created_by_id": {
+            "description": "Filter by creator ID(s) (user or service account). Returns documents matching ANY of the specified IDs.\n Accepts single value or comma-separated list.\n REST: ?created_by_id=user_01h2xcejqtf2nbrexx3vqjhp41 or ?created_by_id=user_xxx,svc_yyy",
+            "nullable": true,
+            "title": "created_by_id",
             "type": "string"
           },
           "page_size": {
@@ -657,6 +662,12 @@
             "description": "Opaque pagination token from a previous response.\n Pass next_page_token or prev_page_token from a previous response to continue pagination.\n Empty or omitted for the first page.",
             "example": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0",
             "title": "page_token",
+            "type": "string"
+          },
+          "processing_status": {
+            "description": "Filter by processing status(es). Returns documents matching ANY of the specified statuses.\n Accepts single value or comma-separated list.\n REST: ?processing_status=ready or ?processing_status=processing,ready,failed\n Accepts clean enum names (case-insensitive): \"processing\", \"ready\", \"failed\"",
+            "nullable": true,
+            "title": "processing_status",
             "type": "string"
           }
         },
@@ -798,6 +809,28 @@
           "ready",
           "failed"
         ]
+      },
+      "TimestampFilter": {
+        "additionalProperties": false,
+        "description": "TimestampFilter specifies a time range for filtering.\n Used with Vanguard dot notation: ?created.after=...\u0026created.before=...",
+        "properties": {
+          "after": {
+            "description": "Return results after this timestamp (inclusive).",
+            "format": "date-time",
+            "nullable": true,
+            "title": "after",
+            "type": "string"
+          },
+          "before": {
+            "description": "Return results before this timestamp (inclusive).",
+            "format": "date-time",
+            "nullable": true,
+            "title": "before",
+            "type": "string"
+          }
+        },
+        "title": "TimestampFilter",
+        "type": "object"
       },
       "UpdateDocumentRequest": {
         "additionalProperties": false,
@@ -1001,7 +1034,7 @@
     "securitySchemes": {
       "bearerAuth": {
         "bearerFormat": "API Key",
-        "description": "Bearer authentication header of the form Bearer <token>, where <token> is your auth token.",
+        "description": "Bearer authentication header of the form Bearer \u003ctoken\u003e, where \u003ctoken\u003e is your auth token.",
         "scheme": "bearer",
         "type": "http"
       }
@@ -1013,7 +1046,7 @@
       "name": "Factify API Support",
       "url": "https://factify.com/support"
     },
-    "description": "Factify API enables you to create, manage, and control access to legally-binding documents that replace PDFs.\n\n## Authentication\n\nBearer authentication header of the form Bearer <token>, where <token> is your auth token.\n\n```\nAuthorization: Bearer ffy...\n```\n\n## Rate Limiting\n\n- 1000 requests per minute per API key\n- 100 requests per minute for resource creation (POST)\n\n## Errors\n\nFactify uses conventional HTTP status codes and returns structured error responses:\n\n```json\n{\n  \"error\": {\n    \"type\": \"invalid_request_error\",\n    \"message\": \"Document title cannot be empty\",\n    \"param\": \"title\",\n    \"code\": \"missing_required_field\"\n  }\n}\n```\n",
+    "description": "Factify API enables you to create, manage, and control access to legally-binding documents that replace PDFs.\n\n## Authentication\n\nBearer authentication header of the form Bearer \u003ctoken\u003e, where \u003ctoken\u003e is your auth token.\n\n```\nAuthorization: Bearer ffy...\n```\n\n## Rate Limiting\n\n- 1000 requests per minute per API key\n- 100 requests per minute for resource creation (POST)\n\n## Errors\n\nFactify uses conventional HTTP status codes and returns structured error responses:\n\n```json\n{\n  \"error\": {\n    \"type\": \"invalid_request_error\",\n    \"message\": \"Document title cannot be empty\",\n    \"param\": \"title\",\n    \"code\": \"missing_required_field\"\n  }\n}\n```\n",
     "license": {
       "name": "Proprietary",
       "url": "https://factify.com/terms"
@@ -1053,9 +1086,64 @@
             }
           },
           {
-            "description": "Filter by created after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)",
+            "description": "Filter by creator ID(s). Returns documents matching ANY of the specified IDs.",
+            "explode": false,
             "in": "query",
-            "name": "created_after",
+            "name": "created_by_id",
+            "required": false,
+            "schema": {
+              "items": {
+                "description": "User or service account TypeID (e.g., user_xxx, svc_yyy)",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
+          },
+          {
+            "description": "Filter by access level(s). Returns documents matching ANY of the specified levels.",
+            "explode": false,
+            "in": "query",
+            "name": "access_level",
+            "required": false,
+            "schema": {
+              "items": {
+                "description": "Access level",
+                "enum": [
+                  "private",
+                  "organization",
+                  "public"
+                ],
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
+          },
+          {
+            "description": "Filter by processing status(es). Returns documents matching ANY of the specified statuses.",
+            "explode": false,
+            "in": "query",
+            "name": "processing_status",
+            "required": false,
+            "schema": {
+              "items": {
+                "description": "Processing status",
+                "enum": [
+                  "processing",
+                  "ready",
+                  "failed"
+                ],
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
+          },
+          {
+            "description": "Filter by created.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)",
+            "in": "query",
+            "name": "created.after",
             "schema": {
               "format": "date-time",
               "type": "string"
@@ -1114,12 +1202,22 @@
           {
             "lang": "typescript",
             "label": "listDocuments",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.documents.list({\n    pageToken: \"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.documents.list({\n    pageToken: \"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "listDocuments",
+            "source": "from openapi import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as factify:\n\n    res = factify.documents.list(page_token=\"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
+          },
+          {
+            "lang": "go",
+            "label": "listDocuments",
+            "source": "package main\n\nimport(\n\t\"context\"\n\t\"undefined\"\n\t\"undefined/models/operations\"\n\t\"log\"\n)\n\nfunc main() {\n    ctx := context.Background()\n\n    s := undefined.New(\n        undefined.WithSecurity(\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\"),\n    )\n\n    res, err := s.Documents.List(ctx, operations.ListDocumentsRequest{\n        PageToken: undefined.Pointer(\"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\"),\n    })\n    if err != nil {\n        log.Fatal(err)\n    }\n    if res.ListDocumentsResponse != nil {\n        for {\n            // handle items\n\n            res, err = res.Next()\n\n            if err != nil {\n                // handle error\n            }\n\n            if res == nil {\n                break\n            }\n        }\n    }\n}"
           },
           {
             "lang": "java",
             "label": "listDocuments",
-            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.errors.Error;\nimport org.openapis.openapi.models.operations.ListDocumentsResponse;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n\n        sdk.documents().list()\n                .pageToken(\"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\")\n                .callAsStream()\n                .forEach((ListDocumentsResponse item) -> {\n                   // handle page\n                });\n\n    }\n}"
+            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.errors.Error;\nimport org.openapis.openapi.models.operations.ListDocumentsRequest;\nimport org.openapis.openapi.models.operations.ListDocumentsResponse;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        ListDocumentsRequest req = ListDocumentsRequest.builder()\n                .pageToken(\"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\")\n                .build();\n\n\n        sdk.documents().list()\n                .callAsStream()\n                .forEach((ListDocumentsResponse item) -\u003e {\n                   // handle page\n                });\n\n    }\n}"
           }
         ]
       },
@@ -1175,12 +1273,22 @@
           {
             "lang": "typescript",
             "label": "createDocument",
-            "source": "import { Factify } from \"@factify/sdk\";\nimport { openAsBlob } from \"node:fs\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.documents.create({\n    payload: await openAsBlob(\"example.file\"),\n    title: \"<value>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\nimport { openAsBlob } from \"node:fs\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.documents.create({\n    payload: await openAsBlob(\"example.file\"),\n    title: \"\u003cvalue\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "createDocument",
+            "source": "from openapi import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as factify:\n\n    res = factify.documents.create(payload={\n        \"file_name\": \"example.file\",\n        \"content\": open(\"example.file\", \"rb\"),\n    }, title=\"\u003cvalue\u003e\")\n\n    # Handle response\n    print(res)"
+          },
+          {
+            "lang": "go",
+            "label": "createDocument",
+            "source": "package main\n\nimport(\n\t\"context\"\n\t\"undefined\"\n\t\"os\"\n\t\"undefined/models/components\"\n\t\"log\"\n)\n\nfunc main() {\n    ctx := context.Background()\n\n    s := undefined.New(\n        undefined.WithSecurity(\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\"),\n    )\n\n    example, fileErr := os.Open(\"example.file\")\n    if fileErr != nil {\n        panic(fileErr)\n    }\n\n    res, err := s.Documents.Create(ctx, components.CreateDocumentRequest{\n        Payload: components.CreateDocumentRequestPayload{\n            FileName: \"example.file\",\n            Content: example,\n        },\n        Title: \"\u003cvalue\u003e\",\n    })\n    if err != nil {\n        log.Fatal(err)\n    }\n    if res.CreateDocumentResponse != nil {\n        // handle response\n    }\n}"
           },
           {
             "lang": "java",
             "label": "createDocument",
-            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport java.nio.file.Paths;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.components.CreateDocumentRequest;\nimport org.openapis.openapi.models.components.CreateDocumentRequestPayload;\nimport org.openapis.openapi.models.errors.Error;\nimport org.openapis.openapi.models.operations.CreateDocumentResponse;\nimport org.openapis.openapi.utils.Blob;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        CreateDocumentRequest req = CreateDocumentRequest.builder()\n                .payload(CreateDocumentRequestPayload.builder()\n                    .fileName(\"example.file\")\n                    .content(Blob.from(Paths.get(\"example.file\")))\n                    .build())\n                .title(\"<value>\")\n                .build();\n\n        CreateDocumentResponse res = sdk.documents().create()\n                .request(req)\n                .call();\n\n    }\n}"
+            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport java.nio.file.Paths;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.components.CreateDocumentRequest;\nimport org.openapis.openapi.models.components.CreateDocumentRequestPayload;\nimport org.openapis.openapi.models.errors.Error;\nimport org.openapis.openapi.models.operations.CreateDocumentResponse;\nimport org.openapis.openapi.utils.Blob;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        CreateDocumentRequest req = CreateDocumentRequest.builder()\n                .payload(CreateDocumentRequestPayload.builder()\n                    .fileName(\"example.file\")\n                    .content(Blob.from(Paths.get(\"example.file\")))\n                    .build())\n                .title(\"\u003cvalue\u003e\")\n                .build();\n\n        CreateDocumentResponse res = sdk.documents().create()\n                .request(req)\n                .call();\n\n    }\n}"
           }
         ]
       }
@@ -1242,12 +1350,22 @@
           {
             "lang": "typescript",
             "label": "getDocument",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.documents.get({\n    documentId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.documents.get({\n    documentId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "getDocument",
+            "source": "from openapi import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as factify:\n\n    res = factify.documents.get(document_id=\"\u003cid\u003e\")\n\n    # Handle response\n    print(res)"
+          },
+          {
+            "lang": "go",
+            "label": "getDocument",
+            "source": "package main\n\nimport(\n\t\"context\"\n\t\"undefined\"\n\t\"log\"\n)\n\nfunc main() {\n    ctx := context.Background()\n\n    s := undefined.New(\n        undefined.WithSecurity(\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\"),\n    )\n\n    res, err := s.Documents.Get(ctx, \"\u003cid\u003e\")\n    if err != nil {\n        log.Fatal(err)\n    }\n    if res.GetDocumentResponse != nil {\n        // handle response\n    }\n}"
           },
           {
             "lang": "java",
             "label": "getDocument",
-            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.errors.Error;\nimport org.openapis.openapi.models.operations.GetDocumentResponse;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        GetDocumentResponse res = sdk.documents().get()\n                .documentId(\"<id>\")\n                .call();\n\n        if (res.getDocumentResponse().isPresent()) {\n            // handle response\n        }\n    }\n}"
+            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.errors.Error;\nimport org.openapis.openapi.models.operations.GetDocumentResponse;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        GetDocumentResponse res = sdk.documents().get()\n                .documentId(\"\u003cid\u003e\")\n                .call();\n\n        if (res.getDocumentResponse().isPresent()) {\n            // handle response\n        }\n    }\n}"
           }
         ]
       },
@@ -1337,12 +1455,22 @@
           {
             "lang": "typescript",
             "label": "updateDocument",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.documents.update({\n    documentId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.documents.update({\n    documentId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "updateDocument",
+            "source": "from openapi import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as factify:\n\n    res = factify.documents.update(document_id=\"\u003cid\u003e\")\n\n    # Handle response\n    print(res)"
+          },
+          {
+            "lang": "go",
+            "label": "updateDocument",
+            "source": "package main\n\nimport(\n\t\"context\"\n\t\"undefined\"\n\t\"undefined/models/operations\"\n\t\"log\"\n)\n\nfunc main() {\n    ctx := context.Background()\n\n    s := undefined.New(\n        undefined.WithSecurity(\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\"),\n    )\n\n    res, err := s.Documents.Update(ctx, \"\u003cid\u003e\", operations.UpdateDocumentUpdateDocumentRequest{})\n    if err != nil {\n        log.Fatal(err)\n    }\n    if res.UpdateDocumentResponse != nil {\n        // handle response\n    }\n}"
           },
           {
             "lang": "java",
             "label": "updateDocument",
-            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.errors.Error;\nimport org.openapis.openapi.models.operations.UpdateDocumentResponse;\nimport org.openapis.openapi.models.operations.UpdateDocumentUpdateDocumentRequest;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        UpdateDocumentResponse res = sdk.documents().update()\n                .documentId(\"<id>\")\n                .body(UpdateDocumentUpdateDocumentRequest.builder()\n                    .build())\n                .call();\n\n        if (res.updateDocumentResponse().isPresent()) {\n            // handle response\n        }\n    }\n}"
+            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.errors.Error;\nimport org.openapis.openapi.models.operations.UpdateDocumentResponse;\nimport org.openapis.openapi.models.operations.UpdateDocumentUpdateDocumentRequest;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        UpdateDocumentResponse res = sdk.documents().update()\n                .documentId(\"\u003cid\u003e\")\n                .body(UpdateDocumentUpdateDocumentRequest.builder()\n                    .build())\n                .call();\n\n        if (res.updateDocumentResponse().isPresent()) {\n            // handle response\n        }\n    }\n}"
           }
         ]
       }
@@ -1405,12 +1533,22 @@
           {
             "lang": "typescript",
             "label": "generateDocumentEntryPage",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.entryPages.generate({\n    documentId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.entryPages.generate({\n    documentId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "generateDocumentEntryPage",
+            "source": "from openapi import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as factify:\n\n    res = factify.entry_pages.generate(document_id=\"\u003cid\u003e\")\n\n    # Handle response\n    print(res)"
+          },
+          {
+            "lang": "go",
+            "label": "generateDocumentEntryPage",
+            "source": "package main\n\nimport(\n\t\"context\"\n\t\"undefined\"\n\t\"log\"\n)\n\nfunc main() {\n    ctx := context.Background()\n\n    s := undefined.New(\n        undefined.WithSecurity(\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\"),\n    )\n\n    res, err := s.EntryPages.Generate(ctx, \"\u003cid\u003e\")\n    if err != nil {\n        log.Fatal(err)\n    }\n    if res.GenerateEntryPageResponse != nil {\n        // handle response\n    }\n}"
           },
           {
             "lang": "java",
             "label": "generateDocumentEntryPage",
-            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.errors.Error;\nimport org.openapis.openapi.models.operations.GenerateDocumentEntryPageResponse;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        GenerateDocumentEntryPageResponse res = sdk.entryPages().generate()\n                .documentId(\"<id>\")\n                .call();\n\n        if (res.generateEntryPageResponse().isPresent()) {\n            // handle response\n        }\n    }\n}"
+            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.errors.Error;\nimport org.openapis.openapi.models.operations.GenerateDocumentEntryPageResponse;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        GenerateDocumentEntryPageResponse res = sdk.entryPages().generate()\n                .documentId(\"\u003cid\u003e\")\n                .call();\n\n        if (res.generateEntryPageResponse().isPresent()) {\n            // handle response\n        }\n    }\n}"
           }
         ]
       }
@@ -1509,12 +1647,22 @@
           {
             "lang": "typescript",
             "label": "listDocumentPolicies",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.policies.list({\n    documentId: \"<id>\",\n    pageToken: \"eyJpZCI6InBvbF8wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.policies.list({\n    documentId: \"\u003cid\u003e\",\n    pageToken: \"eyJpZCI6InBvbF8wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "listDocumentPolicies",
+            "source": "from openapi import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as factify:\n\n    res = factify.policies.list(document_id=\"\u003cid\u003e\", page_token=\"eyJpZCI6InBvbF8wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
+          },
+          {
+            "lang": "go",
+            "label": "listDocumentPolicies",
+            "source": "package main\n\nimport(\n\t\"context\"\n\t\"undefined\"\n\t\"log\"\n)\n\nfunc main() {\n    ctx := context.Background()\n\n    s := undefined.New(\n        undefined.WithSecurity(\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\"),\n    )\n\n    res, err := s.Policies.List(ctx, \"\u003cid\u003e\", undefined.Pointer(\"eyJpZCI6InBvbF8wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\"), nil)\n    if err != nil {\n        log.Fatal(err)\n    }\n    if res.ListDocumentPoliciesResponse != nil {\n        for {\n            // handle items\n\n            res, err = res.Next()\n\n            if err != nil {\n                // handle error\n            }\n\n            if res == nil {\n                break\n            }\n        }\n    }\n}"
           },
           {
             "lang": "java",
             "label": "listDocumentPolicies",
-            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.errors.Error;\nimport org.openapis.openapi.models.operations.ListDocumentPoliciesResponse;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n\n        sdk.policies().list()\n                .documentId(\"<id>\")\n                .pageToken(\"eyJpZCI6InBvbF8wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\")\n                .callAsStream()\n                .forEach((ListDocumentPoliciesResponse item) -> {\n                   // handle page\n                });\n\n    }\n}"
+            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.errors.Error;\nimport org.openapis.openapi.models.operations.ListDocumentPoliciesResponse;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n\n        sdk.policies().list()\n                .documentId(\"\u003cid\u003e\")\n                .pageToken(\"eyJpZCI6InBvbF8wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\")\n                .callAsStream()\n                .forEach((ListDocumentPoliciesResponse item) -\u003e {\n                   // handle page\n                });\n\n    }\n}"
           }
         ]
       },
@@ -1598,12 +1746,22 @@
           {
             "lang": "typescript",
             "label": "attachDocumentPolicy",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.policies.attach({\n    documentId: \"<id>\",\n    body: {\n      policyId: \"<id>\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.policies.attach({\n    documentId: \"\u003cid\u003e\",\n    body: {\n      policyId: \"\u003cid\u003e\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "attachDocumentPolicy",
+            "source": "from openapi import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as factify:\n\n    res = factify.policies.attach(document_id=\"\u003cid\u003e\", policy_id=\"\u003cid\u003e\")\n\n    # Handle response\n    print(res)"
+          },
+          {
+            "lang": "go",
+            "label": "attachDocumentPolicy",
+            "source": "package main\n\nimport(\n\t\"context\"\n\t\"undefined\"\n\t\"undefined/models/operations\"\n\t\"log\"\n)\n\nfunc main() {\n    ctx := context.Background()\n\n    s := undefined.New(\n        undefined.WithSecurity(\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\"),\n    )\n\n    res, err := s.Policies.Attach(ctx, \"\u003cid\u003e\", operations.AttachPolicyRequest{\n        PolicyID: \"\u003cid\u003e\",\n    })\n    if err != nil {\n        log.Fatal(err)\n    }\n    if res.DocumentPolicy != nil {\n        // handle response\n    }\n}"
           },
           {
             "lang": "java",
             "label": "attachDocumentPolicy",
-            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.errors.Error;\nimport org.openapis.openapi.models.operations.AttachDocumentPolicyResponse;\nimport org.openapis.openapi.models.operations.AttachPolicyRequest;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        AttachDocumentPolicyResponse res = sdk.policies().attach()\n                .documentId(\"<id>\")\n                .body(AttachPolicyRequest.builder()\n                    .policyId(\"<id>\")\n                    .build())\n                .call();\n\n        if (res.documentPolicy().isPresent()) {\n            // handle response\n        }\n    }\n}"
+            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.errors.Error;\nimport org.openapis.openapi.models.operations.AttachDocumentPolicyResponse;\nimport org.openapis.openapi.models.operations.AttachPolicyRequest;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        AttachDocumentPolicyResponse res = sdk.policies().attach()\n                .documentId(\"\u003cid\u003e\")\n                .body(AttachPolicyRequest.builder()\n                    .policyId(\"\u003cid\u003e\")\n                    .build())\n                .call();\n\n        if (res.documentPolicy().isPresent()) {\n            // handle response\n        }\n    }\n}"
           }
         ]
       }
@@ -1677,12 +1835,22 @@
           {
             "lang": "typescript",
             "label": "detachDocumentPolicy",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.policies.detach({\n    documentId: \"<id>\",\n    policyId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.policies.detach({\n    documentId: \"\u003cid\u003e\",\n    policyId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "detachDocumentPolicy",
+            "source": "from openapi import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as factify:\n\n    res = factify.policies.detach(document_id=\"\u003cid\u003e\", policy_id=\"\u003cid\u003e\")\n\n    # Handle response\n    print(res)"
+          },
+          {
+            "lang": "go",
+            "label": "detachDocumentPolicy",
+            "source": "package main\n\nimport(\n\t\"context\"\n\t\"undefined\"\n\t\"log\"\n)\n\nfunc main() {\n    ctx := context.Background()\n\n    s := undefined.New(\n        undefined.WithSecurity(\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\"),\n    )\n\n    res, err := s.Policies.Detach(ctx, \"\u003cid\u003e\", \"\u003cid\u003e\")\n    if err != nil {\n        log.Fatal(err)\n    }\n    if res.Empty != nil {\n        // handle response\n    }\n}"
           },
           {
             "lang": "java",
             "label": "detachDocumentPolicy",
-            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.errors.Error;\nimport org.openapis.openapi.models.operations.DetachDocumentPolicyResponse;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        DetachDocumentPolicyResponse res = sdk.policies().detach()\n                .documentId(\"<id>\")\n                .policyId(\"<id>\")\n                .call();\n\n        if (res.empty().isPresent()) {\n            // handle response\n        }\n    }\n}"
+            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.errors.Error;\nimport org.openapis.openapi.models.operations.DetachDocumentPolicyResponse;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        DetachDocumentPolicyResponse res = sdk.policies().detach()\n                .documentId(\"\u003cid\u003e\")\n                .policyId(\"\u003cid\u003e\")\n                .call();\n\n        if (res.empty().isPresent()) {\n            // handle response\n        }\n    }\n}"
           }
         ]
       }
@@ -1781,12 +1949,22 @@
           {
             "lang": "typescript",
             "label": "listDocumentVersions",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.versions.list({\n    documentId: \"<id>\",\n    pageToken: \"eyJpZCI6InZlcl8wMWgyYWJjZDEyMzRlZmdoNTY3OGprbW5wdCIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.versions.list({\n    documentId: \"\u003cid\u003e\",\n    pageToken: \"eyJpZCI6InZlcl8wMWgyYWJjZDEyMzRlZmdoNTY3OGprbW5wdCIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "listDocumentVersions",
+            "source": "from openapi import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as factify:\n\n    res = factify.versions.list(document_id=\"\u003cid\u003e\", page_token=\"eyJpZCI6InZlcl8wMWgyYWJjZDEyMzRlZmdoNTY3OGprbW5wdCIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
+          },
+          {
+            "lang": "go",
+            "label": "listDocumentVersions",
+            "source": "package main\n\nimport(\n\t\"context\"\n\t\"undefined\"\n\t\"log\"\n)\n\nfunc main() {\n    ctx := context.Background()\n\n    s := undefined.New(\n        undefined.WithSecurity(\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\"),\n    )\n\n    res, err := s.Versions.List(ctx, \"\u003cid\u003e\", undefined.Pointer(\"eyJpZCI6InZlcl8wMWgyYWJjZDEyMzRlZmdoNTY3OGprbW5wdCIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\"), nil)\n    if err != nil {\n        log.Fatal(err)\n    }\n    if res.ListVersionsResponse != nil {\n        for {\n            // handle items\n\n            res, err = res.Next()\n\n            if err != nil {\n                // handle error\n            }\n\n            if res == nil {\n                break\n            }\n        }\n    }\n}"
           },
           {
             "lang": "java",
             "label": "listDocumentVersions",
-            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.errors.Error;\nimport org.openapis.openapi.models.operations.ListDocumentVersionsResponse;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n\n        sdk.versions().list()\n                .documentId(\"<id>\")\n                .pageToken(\"eyJpZCI6InZlcl8wMWgyYWJjZDEyMzRlZmdoNTY3OGprbW5wdCIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\")\n                .callAsStream()\n                .forEach((ListDocumentVersionsResponse item) -> {\n                   // handle page\n                });\n\n    }\n}"
+            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.errors.Error;\nimport org.openapis.openapi.models.operations.ListDocumentVersionsResponse;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n\n        sdk.versions().list()\n                .documentId(\"\u003cid\u003e\")\n                .pageToken(\"eyJpZCI6InZlcl8wMWgyYWJjZDEyMzRlZmdoNTY3OGprbW5wdCIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\")\n                .callAsStream()\n                .forEach((ListDocumentVersionsResponse item) -\u003e {\n                   // handle page\n                });\n\n    }\n}"
           }
         ]
       },
@@ -1856,12 +2034,22 @@
           {
             "lang": "typescript",
             "label": "createDocumentVersion",
-            "source": "import { Factify } from \"@factify/sdk\";\nimport { openAsBlob } from \"node:fs\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.versions.create({\n    documentId: \"<id>\",\n    body: {\n      payload: await openAsBlob(\"example.file\"),\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\nimport { openAsBlob } from \"node:fs\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.versions.create({\n    documentId: \"\u003cid\u003e\",\n    body: {\n      payload: await openAsBlob(\"example.file\"),\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "createDocumentVersion",
+            "source": "from openapi import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as factify:\n\n    res = factify.versions.create(document_id_param=\"\u003cvalue\u003e\", payload={\n        \"file_name\": \"example.file\",\n        \"content\": open(\"example.file\", \"rb\"),\n    })\n\n    # Handle response\n    print(res)"
+          },
+          {
+            "lang": "go",
+            "label": "createDocumentVersion",
+            "source": "package main\n\nimport(\n\t\"context\"\n\t\"undefined\"\n\t\"os\"\n\t\"undefined/models/components\"\n\t\"log\"\n)\n\nfunc main() {\n    ctx := context.Background()\n\n    s := undefined.New(\n        undefined.WithSecurity(\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\"),\n    )\n\n    example, fileErr := os.Open(\"example.file\")\n    if fileErr != nil {\n        panic(fileErr)\n    }\n\n    res, err := s.Versions.Create(ctx, \"\u003cid\u003e\", components.CreateVersionRequest{\n        Payload: components.CreateVersionRequestPayload{\n            FileName: \"example.file\",\n            Content: example,\n        },\n    })\n    if err != nil {\n        log.Fatal(err)\n    }\n    if res.Version != nil {\n        // handle response\n    }\n}"
           },
           {
             "lang": "java",
             "label": "createDocumentVersion",
-            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport java.nio.file.Paths;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.components.CreateVersionRequest;\nimport org.openapis.openapi.models.components.CreateVersionRequestPayload;\nimport org.openapis.openapi.models.errors.Error;\nimport org.openapis.openapi.models.operations.CreateDocumentVersionResponse;\nimport org.openapis.openapi.utils.Blob;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        CreateDocumentVersionResponse res = sdk.versions().create()\n                .documentId(\"<id>\")\n                .body(CreateVersionRequest.builder()\n                    .payload(CreateVersionRequestPayload.builder()\n                        .fileName(\"example.file\")\n                        .content(Blob.from(Paths.get(\"example.file\")))\n                        .build())\n                    .build())\n                .call();\n\n    }\n}"
+            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport java.nio.file.Paths;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.components.CreateVersionRequest;\nimport org.openapis.openapi.models.components.CreateVersionRequestPayload;\nimport org.openapis.openapi.models.errors.Error;\nimport org.openapis.openapi.models.operations.CreateDocumentVersionResponse;\nimport org.openapis.openapi.utils.Blob;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        CreateDocumentVersionResponse res = sdk.versions().create()\n                .documentId(\"\u003cid\u003e\")\n                .body(CreateVersionRequest.builder()\n                    .payload(CreateVersionRequestPayload.builder()\n                        .fileName(\"example.file\")\n                        .content(Blob.from(Paths.get(\"example.file\")))\n                        .build())\n                    .build())\n                .call();\n\n    }\n}"
           }
         ]
       }
@@ -1935,12 +2123,22 @@
           {
             "lang": "typescript",
             "label": "getDocumentVersion",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.versions.get({\n    documentId: \"<id>\",\n    versionId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.versions.get({\n    documentId: \"\u003cid\u003e\",\n    versionId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "getDocumentVersion",
+            "source": "from openapi import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as factify:\n\n    res = factify.versions.get(document_id=\"\u003cid\u003e\", version_id=\"\u003cid\u003e\")\n\n    # Handle response\n    print(res)"
+          },
+          {
+            "lang": "go",
+            "label": "getDocumentVersion",
+            "source": "package main\n\nimport(\n\t\"context\"\n\t\"undefined\"\n\t\"log\"\n)\n\nfunc main() {\n    ctx := context.Background()\n\n    s := undefined.New(\n        undefined.WithSecurity(\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\"),\n    )\n\n    res, err := s.Versions.Get(ctx, \"\u003cid\u003e\", \"\u003cid\u003e\")\n    if err != nil {\n        log.Fatal(err)\n    }\n    if res.Version != nil {\n        // handle response\n    }\n}"
           },
           {
             "lang": "java",
             "label": "getDocumentVersion",
-            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.errors.Error;\nimport org.openapis.openapi.models.operations.GetDocumentVersionResponse;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        GetDocumentVersionResponse res = sdk.versions().get()\n                .documentId(\"<id>\")\n                .versionId(\"<id>\")\n                .call();\n\n        if (res.version().isPresent()) {\n            // handle response\n        }\n    }\n}"
+            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.errors.Error;\nimport org.openapis.openapi.models.operations.GetDocumentVersionResponse;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        GetDocumentVersionResponse res = sdk.versions().get()\n                .documentId(\"\u003cid\u003e\")\n                .versionId(\"\u003cid\u003e\")\n                .call();\n\n        if (res.version().isPresent()) {\n            // handle response\n        }\n    }\n}"
           }
         ]
       },
@@ -2040,12 +2238,22 @@
           {
             "lang": "typescript",
             "label": "updateDocumentVersion",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.versions.update({\n    documentId: \"<id>\",\n    versionId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.versions.update({\n    documentId: \"\u003cid\u003e\",\n    versionId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "updateDocumentVersion",
+            "source": "from openapi import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as factify:\n\n    res = factify.versions.update(document_id=\"\u003cid\u003e\", version_id=\"\u003cid\u003e\")\n\n    # Handle response\n    print(res)"
+          },
+          {
+            "lang": "go",
+            "label": "updateDocumentVersion",
+            "source": "package main\n\nimport(\n\t\"context\"\n\t\"undefined\"\n\t\"undefined/models/operations\"\n\t\"log\"\n)\n\nfunc main() {\n    ctx := context.Background()\n\n    s := undefined.New(\n        undefined.WithSecurity(\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\"),\n    )\n\n    res, err := s.Versions.Update(ctx, \"\u003cid\u003e\", \"\u003cid\u003e\", operations.UpdateVersionRequest{})\n    if err != nil {\n        log.Fatal(err)\n    }\n    if res.Version != nil {\n        // handle response\n    }\n}"
           },
           {
             "lang": "java",
             "label": "updateDocumentVersion",
-            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.errors.Error;\nimport org.openapis.openapi.models.operations.UpdateDocumentVersionResponse;\nimport org.openapis.openapi.models.operations.UpdateVersionRequest;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        UpdateDocumentVersionResponse res = sdk.versions().update()\n                .documentId(\"<id>\")\n                .versionId(\"<id>\")\n                .body(UpdateVersionRequest.builder()\n                    .build())\n                .call();\n\n        if (res.version().isPresent()) {\n            // handle response\n        }\n    }\n}"
+            "source": "package hello.world;\n\nimport java.lang.Exception;\nimport org.openapis.openapi.Factify;\nimport org.openapis.openapi.models.errors.Error;\nimport org.openapis.openapi.models.operations.UpdateDocumentVersionResponse;\nimport org.openapis.openapi.models.operations.UpdateVersionRequest;\n\npublic class Application {\n\n    public static void main(String[] args) throws Error, Exception {\n\n        Factify sdk = Factify.builder()\n                .bearerAuth(System.getenv().getOrDefault(\"BEARER_AUTH\", \"\"))\n            .build();\n\n        UpdateDocumentVersionResponse res = sdk.versions().update()\n                .documentId(\"\u003cid\u003e\")\n                .versionId(\"\u003cid\u003e\")\n                .body(UpdateVersionRequest.builder()\n                    .build())\n                .call();\n\n        if (res.version().isPresent()) {\n            // handle response\n        }\n    }\n}"
           }
         ]
       }
