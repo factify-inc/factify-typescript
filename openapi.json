@@ -168,6 +168,77 @@
           "public"
         ]
       },
+      "ApiKey": {
+        "additionalProperties": false,
+        "description": "ApiKey represents an authentication credential for programmatic API access.",
+        "properties": {
+          "created_at": {
+            "description": "Timestamp when the key was created.",
+            "format": "date-time",
+            "title": "created_at",
+            "type": "string"
+          },
+          "expires_at": {
+            "description": "Expiration timestamp. If set, the key becomes invalid after this time.",
+            "format": "date-time",
+            "title": "expires_at",
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique ID for the API key.\n Pattern: key_[0-9a-hjkmnp-tv-z]{26}",
+            "example": "key_01jd4h5mck9gq6zrp8bn2t4w3x",
+            "pattern": "^key_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "id",
+            "type": "string"
+          },
+          "is_active": {
+            "description": "Whether the key is currently active (not revoked and not expired).\n Computed: is_active = (revoked_at == null) \u0026\u0026 (expires_at == null || expires_at \u003e now())",
+            "readOnly": true,
+            "title": "is_active",
+            "type": "boolean"
+          },
+          "key_prefix": {
+            "description": "Truncated key prefix for identification in UI (e.g., \"ffy_prod_01jd4h5...\").\n Shows the first 16 characters for better uniqueness while maintaining security.",
+            "example": "ffy_prod_01jd4h5...",
+            "maxLength": 20,
+            "minLength": 16,
+            "title": "key_prefix",
+            "type": "string"
+          },
+          "name": {
+            "description": "Human-readable name for the key (e.g., \"Production\", \"Staging\").",
+            "example": "Production",
+            "maxLength": 63,
+            "minLength": 1,
+            "title": "name",
+            "type": "string"
+          },
+          "organization_id": {
+            "description": "ID of the organization this key belongs to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "example": "org_01h2xcejqtf2nbrexx3vqjhp41",
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "organization_id",
+            "type": "string"
+          },
+          "revoked_at": {
+            "description": "Timestamp when the key was revoked. Null if the key has not been revoked.",
+            "format": "date-time",
+            "readOnly": true,
+            "title": "revoked_at",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "organization_id",
+          "created_at",
+          "is_active",
+          "key_prefix"
+        ],
+        "title": "ApiKey",
+        "type": "object"
+      },
       "AttachPolicyRequest": {
         "additionalProperties": false,
         "description": "AttachPolicyRequest specifies a policy to attach to a document.",
@@ -189,6 +260,62 @@
           "policy_id"
         ],
         "title": "AttachPolicyRequest",
+        "type": "object"
+      },
+      "CreateApiKeyRequest": {
+        "additionalProperties": false,
+        "description": "CreateApiKeyRequest contains the data needed to create a new API key.",
+        "properties": {
+          "expires_at": {
+            "description": "Expiration timestamp. If not set, the key does not expire.\n When set, must be in the future and within 1 year.\n Security note: Keys without expiration should be rotated periodically.\ntimestamp.gt_now = true\ntimestamp.within = 8760h0m0s\n",
+            "format": "date-time",
+            "title": "expires_at",
+            "type": "string"
+          },
+          "name": {
+            "description": "Human-readable name for the key (e.g., \"Production\", \"Staging\").",
+            "maxLength": 63,
+            "minLength": 1,
+            "title": "name",
+            "type": "string"
+          },
+          "organization_id": {
+            "description": "Organization ID to create the key for.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "organization_id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "organization_id",
+          "name"
+        ],
+        "title": "CreateApiKeyRequest",
+        "type": "object"
+      },
+      "CreateApiKeyResponse": {
+        "additionalProperties": false,
+        "description": "CreateApiKeyResponse contains the newly created API key and its secret.",
+        "properties": {
+          "api_key": {
+            "$ref": "#/components/schemas/ApiKey",
+            "description": "The created API key metadata.",
+            "title": "api_key"
+          },
+          "secret": {
+            "description": "The API key secret. This is only returned once and cannot be retrieved later.\n Format: ffy_{env}_{base32_uuid7}{base62_random}\n - env: \"prod\" or \"test\"\n - base32_uuid7: 26 chars (TypeID base32 alphabet: 0-9a-hjkmnp-tv-z)\n - base62_random: 43 chars (0-9A-Za-z)\n Store this value securely - it will not be shown again.\n SECURITY WARNING: This field must NEVER be logged. Handlers must redact secrets from all logs.",
+            "example": "ffy_prod_01h2xcejqtf2nbrexx3vqjhp41KJ8f3mNpQrStUvWxYz0123456789ABCDEFGHIJKLmNo",
+            "minLength": 78,
+            "pattern": "^ffy_(prod|test)_[A-Za-z0-9]+$",
+            "title": "secret",
+            "type": "string"
+          }
+        },
+        "required": [
+          "api_key",
+          "secret"
+        ],
+        "title": "CreateApiKeyResponse",
         "type": "object"
       },
       "CreateDocumentRequest": {
@@ -257,7 +384,50 @@
             "title": "document"
           }
         },
+        "required": [
+          "document"
+        ],
         "title": "CreateDocumentResponse",
+        "type": "object"
+      },
+      "CreateOrganizationRequest": {
+        "additionalProperties": false,
+        "description": "CreateOrganizationRequest contains the data needed to create a new organization.",
+        "properties": {
+          "name": {
+            "description": "Human-readable organization name.",
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "name",
+            "type": "string"
+          },
+          "owner_user_id": {
+            "description": "Owner user ID. If not provided, the authenticated user becomes the owner.\n Authorization: Specifying a different user requires system maintainer role.\n Required when the caller is a service account (service accounts cannot own organizations).\n Pattern: user_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^user_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "owner_user_id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "CreateOrganizationRequest",
+        "type": "object"
+      },
+      "CreateOrganizationResponse": {
+        "additionalProperties": false,
+        "description": "CreateOrganizationResponse contains the newly created organization.",
+        "properties": {
+          "organization": {
+            "$ref": "#/components/schemas/Organization",
+            "description": "The created organization.",
+            "title": "organization"
+          }
+        },
+        "required": [
+          "organization"
+        ],
+        "title": "CreateOrganizationResponse",
         "type": "object"
       },
       "CreateVersionRequest": {
@@ -553,27 +723,117 @@
             "title": "document"
           }
         },
+        "required": [
+          "document"
+        ],
         "title": "GetDocumentResponse",
+        "type": "object"
+      },
+      "GetOrganizationRequest": {
+        "additionalProperties": false,
+        "description": "GetOrganizationRequest identifies an organization to retrieve.",
+        "properties": {
+          "organization_id": {
+            "description": "Organization ID.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "organization_id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "organization_id"
+        ],
+        "title": "GetOrganizationRequest",
+        "type": "object"
+      },
+      "GetOrganizationResponse": {
+        "additionalProperties": false,
+        "description": "GetOrganizationResponse contains the requested organization.",
+        "properties": {
+          "organization": {
+            "$ref": "#/components/schemas/Organization",
+            "description": "The requested organization.",
+            "title": "organization"
+          }
+        },
+        "required": [
+          "organization"
+        ],
+        "title": "GetOrganizationResponse",
         "type": "object"
       },
       "GetVersionRequest": {
         "additionalProperties": false,
         "description": "GetVersionRequest identifies a specific version to retrieve.",
         "properties": {
-          "document_id": {
-            "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
-            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
-            "title": "document_id",
-            "type": "string"
-          },
           "version_id": {
-            "description": "Version ID.\n Pattern: ver_[0-9a-hjkmnp-tv-z]{26}",
+            "description": "Version ID to retrieve.\n Pattern: ver_[0-9a-hjkmnp-tv-z]{26}",
             "pattern": "^ver_[0-9a-hjkmnp-tv-z]{26}$",
             "title": "version_id",
             "type": "string"
           }
         },
         "title": "GetVersionRequest",
+        "type": "object"
+      },
+      "ListApiKeysRequest": {
+        "additionalProperties": false,
+        "description": "ListApiKeysRequest specifies filters and pagination for listing API keys.",
+        "properties": {
+          "include_revoked": {
+            "description": "Whether to include revoked keys in the response.\n Default: false (only active and expired-but-not-revoked keys are returned).\n When true, all keys including revoked ones are returned.\n Note: Expired keys are always included unless also revoked; use is_active to filter.",
+            "title": "include_revoked",
+            "type": "boolean"
+          },
+          "organization_id": {
+            "description": "Organization ID to list keys for.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "organization_id",
+            "type": "string"
+          },
+          "page_size": {
+            "description": "Maximum number of items to return per page (1-100). Default: 50.",
+            "format": "int32",
+            "maximum": 100,
+            "minimum": 1,
+            "nullable": true,
+            "title": "page_size",
+            "type": "integer"
+          },
+          "page_token": {
+            "description": "Opaque pagination token from a previous response.",
+            "title": "page_token",
+            "type": "string"
+          }
+        },
+        "required": [
+          "organization_id"
+        ],
+        "title": "ListApiKeysRequest",
+        "type": "object"
+      },
+      "ListApiKeysResponse": {
+        "additionalProperties": false,
+        "description": "ListApiKeysResponse contains a page of API keys.",
+        "properties": {
+          "items": {
+            "description": "List of API keys (secrets are never included).",
+            "items": {
+              "$ref": "#/components/schemas/ApiKey"
+            },
+            "title": "items",
+            "type": "array"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination",
+            "description": "Pagination metadata.",
+            "title": "pagination"
+          }
+        },
+        "required": [
+          "pagination"
+        ],
+        "title": "ListApiKeysResponse",
         "type": "object"
       },
       "ListDocumentPoliciesRequest": {
@@ -623,6 +883,9 @@
             "title": "pagination"
           }
         },
+        "required": [
+          "pagination"
+        ],
         "title": "ListDocumentPoliciesResponse",
         "type": "object"
       },
@@ -692,7 +955,56 @@
             "title": "pagination"
           }
         },
+        "required": [
+          "pagination"
+        ],
         "title": "ListDocumentsResponse",
+        "type": "object"
+      },
+      "ListOrganizationsRequest": {
+        "additionalProperties": false,
+        "description": "ListOrganizationsRequest specifies pagination for listing organizations.",
+        "properties": {
+          "page_size": {
+            "description": "Maximum number of items to return per page (1-100). Default: 50.",
+            "format": "int32",
+            "maximum": 100,
+            "minimum": 1,
+            "nullable": true,
+            "title": "page_size",
+            "type": "integer"
+          },
+          "page_token": {
+            "description": "Opaque pagination token from a previous response.",
+            "title": "page_token",
+            "type": "string"
+          }
+        },
+        "title": "ListOrganizationsRequest",
+        "type": "object"
+      },
+      "ListOrganizationsResponse": {
+        "additionalProperties": false,
+        "description": "ListOrganizationsResponse contains a page of organizations.",
+        "properties": {
+          "items": {
+            "description": "List of organizations.",
+            "items": {
+              "$ref": "#/components/schemas/Organization"
+            },
+            "title": "items",
+            "type": "array"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination",
+            "description": "Pagination metadata.",
+            "title": "pagination"
+          }
+        },
+        "required": [
+          "pagination"
+        ],
+        "title": "ListOrganizationsResponse",
         "type": "object"
       },
       "ListVersionsRequest": {
@@ -742,7 +1054,44 @@
             "title": "pagination"
           }
         },
+        "required": [
+          "pagination"
+        ],
         "title": "ListVersionsResponse",
+        "type": "object"
+      },
+      "Organization": {
+        "additionalProperties": false,
+        "description": "Organization represents a Factify organization.",
+        "properties": {
+          "created_at": {
+            "description": "Timestamp when the organization was created.",
+            "format": "date-time",
+            "title": "created_at",
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique ID for the organization.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "example": "org_01h2xcejqtf2nbrexx3vqjhp41",
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "id",
+            "type": "string"
+          },
+          "name": {
+            "description": "Human-readable organization name.",
+            "example": "Acme Corporation",
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "created_at"
+        ],
+        "title": "Organization",
         "type": "object"
       },
       "Pagination": {
@@ -810,6 +1159,47 @@
           "failed"
         ]
       },
+      "RevokeApiKeyRequest": {
+        "additionalProperties": false,
+        "description": "RevokeApiKeyRequest identifies an API key to revoke.",
+        "properties": {
+          "api_key_id": {
+            "description": "API key ID to revoke.\n Pattern: key_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^key_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "api_key_id",
+            "type": "string"
+          },
+          "reason": {
+            "description": "Optional reason for revocation (for audit purposes).\n The revoking user's identity and timestamp are captured in audit logs separately.",
+            "maxLength": 500,
+            "minLength": 1,
+            "nullable": true,
+            "title": "reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "api_key_id"
+        ],
+        "title": "RevokeApiKeyRequest",
+        "type": "object"
+      },
+      "RevokeApiKeyResponse": {
+        "additionalProperties": false,
+        "description": "RevokeApiKeyResponse contains the revoked API key.",
+        "properties": {
+          "api_key": {
+            "$ref": "#/components/schemas/ApiKey",
+            "description": "The revoked API key with updated revoked_at timestamp.",
+            "title": "api_key"
+          }
+        },
+        "required": [
+          "api_key"
+        ],
+        "title": "RevokeApiKeyResponse",
+        "type": "object"
+      },
       "TimestampFilter": {
         "additionalProperties": false,
         "description": "TimestampFilter specifies a time range for filtering.\n Used with Vanguard dot notation: ?created.after=...\u0026created.before=...",
@@ -871,6 +1261,9 @@
             "title": "document"
           }
         },
+        "required": [
+          "document"
+        ],
         "title": "UpdateDocumentResponse",
         "type": "object"
       },
@@ -882,12 +1275,6 @@
             "description": "New description.",
             "nullable": true,
             "title": "description",
-            "type": "string"
-          },
-          "document_id": {
-            "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
-            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
-            "title": "document_id",
             "type": "string"
           },
           "title": {
@@ -1056,6 +1443,240 @@
   },
   "openapi": "3.1.0",
   "paths": {
+    "/v1beta/api-keys": {
+      "get": {
+        "description": "Lists API keys for an organization.",
+        "operationId": "listApiKeys",
+        "parameters": [
+          {
+            "description": "Organization ID to list keys for.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "query",
+            "name": "organization_id",
+            "required": true,
+            "schema": {
+              "description": "Organization ID to list keys for.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "organization_id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Whether to include revoked keys in the response.\n Default: false (only active and expired-but-not-revoked keys are returned).\n When true, all keys including revoked ones are returned.\n Note: Expired keys are always included unless also revoked; use is_active to filter.",
+            "in": "query",
+            "name": "include_revoked",
+            "schema": {
+              "description": "Whether to include revoked keys in the response.\n Default: false (only active and expired-but-not-revoked keys are returned).\n When true, all keys including revoked ones are returned.\n Note: Expired keys are always included unless also revoked; use is_active to filter.",
+              "title": "include_revoked",
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Opaque pagination token from a previous response.",
+            "in": "query",
+            "name": "page_token",
+            "schema": {
+              "description": "Opaque pagination token from a previous response.",
+              "title": "page_token",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Maximum number of items to return per page (1-100). Default: 50.",
+            "in": "query",
+            "name": "page_size",
+            "schema": {
+              "description": "Maximum number of items to return per page (1-100). Default: 50.",
+              "format": "int32",
+              "maximum": 100,
+              "minimum": 1,
+              "title": "page_size",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListApiKeysResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "List API keys",
+        "tags": [
+          "API Keys"
+        ],
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "listApiKeys",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.apiKeys.listApiKeys({\n    organizationId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          }
+        ]
+      },
+      "post": {
+        "description": "Creates a new API key for the specified organization. The secret is only returned once in the response and cannot be retrieved later.",
+        "operationId": "createApiKey",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateApiKeyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateApiKeyResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Create an API key",
+        "tags": [
+          "API Keys"
+        ],
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "createApiKey",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.apiKeys.createApiKey({\n    name: \"\u003cvalue\u003e\",\n    organizationId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          }
+        ]
+      }
+    },
+    "/v1beta/api-keys/{api_key_id}/revoke": {
+      "post": {
+        "description": "Revokes an API key, immediately preventing it from being used for authentication.",
+        "operationId": "revokeApiKey",
+        "parameters": [
+          {
+            "description": "API key ID to revoke.\n Pattern: key_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "api_key_id",
+            "required": true,
+            "schema": {
+              "description": "API key ID to revoke.\n Pattern: key_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^key_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "api_key_id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "description": "RevokeApiKeyRequest identifies an API key to revoke.",
+                "properties": {
+                  "reason": {
+                    "description": "Optional reason for revocation (for audit purposes).\n The revoking user's identity and timestamp are captured in audit logs separately.",
+                    "maxLength": 500,
+                    "minLength": 1,
+                    "nullable": true,
+                    "title": "reason",
+                    "type": "string"
+                  }
+                },
+                "required": [],
+                "title": "RevokeApiKeyRequest",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevokeApiKeyResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Revoke an API key",
+        "tags": [
+          "API Keys"
+        ],
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "revokeApiKey",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.apiKeys.revokeApiKey({\n    apiKeyId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          }
+        ]
+      }
+    },
     "/v1beta/documents": {
       "get": {
         "description": "List documents with cursor-based pagination.",
@@ -1465,7 +2086,7 @@
         },
         "summary": "Generate entry page",
         "tags": [
-          "Entry Pages"
+          "Sharing \u0026 Distribution"
         ],
         "x-speakeasy-group": "entryPages",
         "x-speakeasy-name-override": "generate",
@@ -1904,30 +2525,206 @@
         ]
       }
     },
-    "/v1beta/documents/{document_id}/versions/{version_id}": {
+    "/v1beta/organizations": {
       "get": {
-        "description": "Retrieve a specific version by ID.",
-        "operationId": "getDocumentVersion",
+        "description": "List organizations the caller has access to.",
+        "operationId": "listOrganizations",
         "parameters": [
           {
-            "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
-            "in": "path",
-            "name": "document_id",
-            "required": true,
+            "description": "Opaque pagination token from a previous response.",
+            "in": "query",
+            "name": "page_token",
             "schema": {
-              "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
-              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
-              "title": "document_id",
+              "description": "Opaque pagination token from a previous response.",
+              "title": "page_token",
               "type": "string"
             }
           },
           {
-            "description": "Version ID.\n Pattern: ver_[0-9a-hjkmnp-tv-z]{26}",
+            "description": "Maximum number of items to return per page (1-100). Default: 50.",
+            "in": "query",
+            "name": "page_size",
+            "schema": {
+              "description": "Maximum number of items to return per page (1-100). Default: 50.",
+              "format": "int32",
+              "maximum": 100,
+              "minimum": 1,
+              "title": "page_size",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListOrganizationsResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "List organizations",
+        "tags": [
+          "Organizations"
+        ],
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "listOrganizations",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.listOrganizations();\n\n  console.log(result);\n}\n\nrun();"
+          }
+        ]
+      },
+      "post": {
+        "description": "Creates a new organization. The authenticated user becomes the organization owner.",
+        "operationId": "createOrganization",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrganizationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateOrganizationResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Create an organization",
+        "tags": [
+          "Organizations"
+        ],
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "createOrganization",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.createOrganization({\n    name: \"\u003cvalue\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          }
+        ]
+      }
+    },
+    "/v1beta/organizations/{organization_id}": {
+      "get": {
+        "description": "Retrieve an organization by ID.",
+        "operationId": "getOrganization",
+        "parameters": [
+          {
+            "description": "Organization ID.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "organization_id",
+            "required": true,
+            "schema": {
+              "description": "Organization ID.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "organization_id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOrganizationResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Retrieve an organization",
+        "tags": [
+          "Organizations"
+        ],
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "getOrganization",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.getOrganization({\n    organizationId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          }
+        ]
+      }
+    },
+    "/v1beta/versions/{version_id}": {
+      "get": {
+        "description": "Retrieve a specific version by ID.",
+        "operationId": "getVersion",
+        "parameters": [
+          {
+            "description": "Version ID to retrieve.\n Pattern: ver_[0-9a-hjkmnp-tv-z]{26}",
             "in": "path",
             "name": "version_id",
             "required": true,
             "schema": {
-              "description": "Version ID.\n Pattern: ver_[0-9a-hjkmnp-tv-z]{26}",
+              "description": "Version ID to retrieve.\n Pattern: ver_[0-9a-hjkmnp-tv-z]{26}",
               "pattern": "^ver_[0-9a-hjkmnp-tv-z]{26}$",
               "title": "version_id",
               "type": "string"
@@ -1968,31 +2765,18 @@
         "tags": [
           "Versions"
         ],
-        "x-speakeasy-name-override": "get",
         "x-codeSamples": [
           {
             "lang": "typescript",
-            "label": "getDocumentVersion",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.versions.get({\n    documentId: \"\u003cid\u003e\",\n    versionId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "label": "getVersion",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.versions.getVersion({\n    versionId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
           }
         ]
       },
       "patch": {
         "description": "Update version title and description.",
-        "operationId": "updateDocumentVersion",
+        "operationId": "updateVersion",
         "parameters": [
-          {
-            "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
-            "in": "path",
-            "name": "document_id",
-            "required": true,
-            "schema": {
-              "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
-              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
-              "title": "document_id",
-              "type": "string"
-            }
-          },
           {
             "description": "Version ID to update.\n Pattern: ver_[0-9a-hjkmnp-tv-z]{26}",
             "in": "path",
@@ -2068,12 +2852,11 @@
         "tags": [
           "Versions"
         ],
-        "x-speakeasy-name-override": "update",
         "x-codeSamples": [
           {
             "lang": "typescript",
-            "label": "updateDocumentVersion",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.versions.update({\n    documentId: \"\u003cid\u003e\",\n    versionId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "label": "updateVersion",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.versions.updateVersion({\n    versionId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
           }
         ]
       }
@@ -2104,12 +2887,20 @@
       "name": "Versions"
     },
     {
+      "description": "Create and manage organizations.",
+      "name": "Organizations"
+    },
+    {
+      "description": "Generate and manage API keys for authentication.",
+      "name": "API Keys"
+    },
+    {
       "description": "Attach and manage access policies for documents.",
       "name": "Policies"
     },
     {
       "description": "Generate shareable entry pages for documents.",
-      "name": "Entry Pages"
+      "name": "Sharing \u0026 Distribution"
     }
   ]
 }
