@@ -3,8 +3,13 @@
  */
 
 export * from "./accesslevel.js";
+export * from "./apikey.js";
+export * from "./createapikeyrequest.js";
+export * from "./createapikeyresponse.js";
 export * from "./createdocumentrequest.js";
 export * from "./createdocumentresponse.js";
+export * from "./createorganizationrequest.js";
+export * from "./createorganizationresponse.js";
 export * from "./createversionrequest.js";
 export * from "./document.js";
 export * from "./documentpolicy.js";
@@ -12,13 +17,18 @@ export * from "./empty.js";
 export * from "./error.js";
 export * from "./generateentrypageresponse.js";
 export * from "./getdocumentresponse.js";
+export * from "./getorganizationresponse.js";
 export * from "./httpmetadata.js";
+export * from "./listapikeysresponse.js";
 export * from "./listdocumentpoliciesresponse.js";
 export * from "./listdocumentsresponse.js";
+export * from "./listorganizationsresponse.js";
 export * from "./listversionsresponse.js";
+export * from "./organization.js";
 export * from "./pagination.js";
 export * from "./policy.js";
 export * from "./processingstatus.js";
+export * from "./revokeapikeyresponse.js";
 export * from "./security.js";
 export * from "./updatedocumentresponse.js";
 export * from "./user.js";

@@ -3,14 +3,20 @@
  */
 
 export * from "./attachdocumentpolicy.js";
+export * from "./createapikey.js";
 export * from "./createdocument.js";
 export * from "./createdocumentversion.js";
+export * from "./createorganization.js";
 export * from "./detachdocumentpolicy.js";
 export * from "./generatedocumententrypage.js";
 export * from "./getdocument.js";
-export * from "./getdocumentversion.js";
+export * from "./getorganization.js";
+export * from "./getversion.js";
+export * from "./listapikeys.js";
 export * from "./listdocumentpolicies.js";
 export * from "./listdocuments.js";
 export * from "./listdocumentversions.js";
+export * from "./listorganizations.js";
+export * from "./revokeapikey.js";
 export * from "./updatedocument.js";
-export * from "./updatedocumentversion.js";
+export * from "./updateversion.js";

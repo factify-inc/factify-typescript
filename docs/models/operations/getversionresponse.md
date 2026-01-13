@@ -1,20 +1,14 @@
-# UpdateDocumentVersionResponse
+# GetVersionResponse
 
 ## Example Usage
 
 ```typescript
-import { UpdateDocumentVersionResponse } from "@factify/sdk/models/operations";
+import { GetVersionResponse } from "@factify/sdk/models/operations";
 
-let value: UpdateDocumentVersionResponse = {
+let value: GetVersionResponse = {
   headers: {
     "key": [
       "<value 1>",
-      "<value 2>",
-      "<value 3>",
-    ],
-    "key1": [
-      "<value 1>",
-      "<value 2>",
     ],
   },
 };

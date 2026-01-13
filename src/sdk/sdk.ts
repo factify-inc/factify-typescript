@@ -3,12 +3,19 @@
  */
 
 import { ClientSDK } from "../lib/sdks.js";
+import { APIKeys } from "./apikeys.js";
 import { Documents } from "./documents.js";
 import { EntryPages } from "./entrypages.js";
+import { Organizations } from "./organizations.js";
 import { Policies } from "./policies.js";
 import { Versions } from "./versions.js";
 
 export class Factify extends ClientSDK {
+  private _apiKeys?: APIKeys;
+  get apiKeys(): APIKeys {
+    return (this._apiKeys ??= new APIKeys(this._options));
+  }
+
   private _documents?: Documents;
   get documents(): Documents {
     return (this._documents ??= new Documents(this._options));
@@ -27,5 +34,10 @@ export class Factify extends ClientSDK {
   private _versions?: Versions;
   get versions(): Versions {
     return (this._versions ??= new Versions(this._options));
+  }
+
+  private _organizations?: Organizations;
+  get organizations(): Organizations {
+    return (this._organizations ??= new Organizations(this._options));
   }
 }

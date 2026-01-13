@@ -32,4 +32,4 @@ let value: UpdateDocumentResponse = {
 
 | Field                                                      | Type                                                       | Required                                                   | Description                                                |
 | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
-| `document`                                                 | [components.Document](../../models/components/document.md) | :heavy_minus_sign:                                         | Document represents a Factify document.                    |
+| `document`                                                 | [components.Document](../../models/components/document.md) | :heavy_check_mark:                                         | Document represents a Factify document.                    |

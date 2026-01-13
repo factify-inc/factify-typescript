@@ -3,6 +3,24 @@ info:
   title: CodeSamples overlay for typescript target
   version: 0.0.0
 actions:
+  - target: $["paths"]["/v1beta/api-keys"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "listApiKeys"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.apiKeys.listApiKeys({\n    organizationId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/api-keys"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "createApiKey"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.apiKeys.createApiKey({\n    name: \"<value>\",\n    organizationId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/api-keys/{api_key_id}/revoke"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "revokeApiKey"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.apiKeys.revokeApiKey({\n    apiKeyId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
   - target: $["paths"]["/v1beta/documents"]["get"]
     update:
       "x-codeSamples":
@@ -63,15 +81,33 @@ actions:
         - "lang": "typescript"
           "label": "createDocumentVersion"
           "source": "import { Factify } from \"@factify/sdk\";\nimport { openAsBlob } from \"node:fs\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.versions.create({\n    documentId: \"<id>\",\n    body: {\n      payload: await openAsBlob(\"example.file\"),\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
-  - target: $["paths"]["/v1beta/documents/{document_id}/versions/{version_id}"]["get"]
+  - target: $["paths"]["/v1beta/organizations"]["get"]
     update:
       "x-codeSamples":
         - "lang": "typescript"
-          "label": "getDocumentVersion"
-          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.versions.get({\n    documentId: \"<id>\",\n    versionId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
-  - target: $["paths"]["/v1beta/documents/{document_id}/versions/{version_id}"]["patch"]
+          "label": "listOrganizations"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.listOrganizations();\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/organizations"]["post"]
     update:
       "x-codeSamples":
         - "lang": "typescript"
-          "label": "updateDocumentVersion"
-          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.versions.update({\n    documentId: \"<id>\",\n    versionId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          "label": "createOrganization"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.createOrganization({\n    name: \"<value>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/organizations/{organization_id}"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "getOrganization"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.getOrganization({\n    organizationId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/versions/{version_id}"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "getVersion"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.versions.getVersion({\n    versionId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/versions/{version_id}"]["patch"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "updateVersion"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.versions.updateVersion({\n    versionId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"

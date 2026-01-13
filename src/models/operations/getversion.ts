@@ -10,16 +10,9 @@ import * as types from "../../types/primitives.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type GetDocumentVersionRequest = {
+export type GetVersionRequest = {
   /**
-   * Document ID.
-   *
-   * @remarks
-   *  Pattern: doc_[0-9a-hjkmnp-tv-z]{26}
-   */
-  documentId: string;
-  /**
-   * Version ID.
+   * Version ID to retrieve.
    *
    * @remarks
    *  Pattern: ver_[0-9a-hjkmnp-tv-z]{26}
@@ -27,7 +20,7 @@ export type GetDocumentVersionRequest = {
   versionId: string;
 };
 
-export type GetDocumentVersionResponse = {
+export type GetVersionResponse = {
   httpMeta: components.HTTPMetadata;
   /**
    * Success
@@ -37,39 +30,36 @@ export type GetDocumentVersionResponse = {
 };
 
 /** @internal */
-export type GetDocumentVersionRequest$Outbound = {
-  document_id: string;
+export type GetVersionRequest$Outbound = {
   version_id: string;
 };
 
 /** @internal */
-export const GetDocumentVersionRequest$outboundSchema: z.ZodMiniType<
-  GetDocumentVersionRequest$Outbound,
-  GetDocumentVersionRequest
+export const GetVersionRequest$outboundSchema: z.ZodMiniType<
+  GetVersionRequest$Outbound,
+  GetVersionRequest
 > = z.pipe(
   z.object({
-    documentId: z.string(),
     versionId: z.string(),
   }),
   z.transform((v) => {
     return remap$(v, {
-      documentId: "document_id",
       versionId: "version_id",
     });
   }),
 );
 
-export function getDocumentVersionRequestToJSON(
-  getDocumentVersionRequest: GetDocumentVersionRequest,
+export function getVersionRequestToJSON(
+  getVersionRequest: GetVersionRequest,
 ): string {
   return JSON.stringify(
-    GetDocumentVersionRequest$outboundSchema.parse(getDocumentVersionRequest),
+    GetVersionRequest$outboundSchema.parse(getVersionRequest),
   );
 }
 
 /** @internal */
-export const GetDocumentVersionResponse$inboundSchema: z.ZodMiniType<
-  GetDocumentVersionResponse,
+export const GetVersionResponse$inboundSchema: z.ZodMiniType<
+  GetVersionResponse,
   unknown
 > = z.pipe(
   z.object({
@@ -86,12 +76,12 @@ export const GetDocumentVersionResponse$inboundSchema: z.ZodMiniType<
   }),
 );
 
-export function getDocumentVersionResponseFromJSON(
+export function getVersionResponseFromJSON(
   jsonString: string,
-): SafeParseResult<GetDocumentVersionResponse, SDKValidationError> {
+): SafeParseResult<GetVersionResponse, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => GetDocumentVersionResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetDocumentVersionResponse' from JSON`,
+    (x) => GetVersionResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetVersionResponse' from JSON`,
   );
 }

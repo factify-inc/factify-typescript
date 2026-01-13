@@ -5,7 +5,6 @@
 import * as z from "zod/v4-mini";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Document, Document$inboundSchema } from "./document.js";
 
@@ -16,7 +15,7 @@ export type CreateDocumentResponse = {
   /**
    * Document represents a Factify document.
    */
-  document?: Document | undefined;
+  document: Document;
 };
 
 /** @internal */
@@ -24,7 +23,7 @@ export const CreateDocumentResponse$inboundSchema: z.ZodMiniType<
   CreateDocumentResponse,
   unknown
 > = z.object({
-  document: types.optional(Document$inboundSchema),
+  document: Document$inboundSchema,
 });
 
 export function createDocumentResponseFromJSON(

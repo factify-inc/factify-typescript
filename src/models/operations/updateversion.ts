@@ -13,7 +13,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * UpdateVersionRequest specifies fields to update on a version.
  */
-export type UpdateVersionRequest = {
+export type UpdateVersionUpdateVersionRequest = {
   /**
    * New description.
    */
@@ -24,14 +24,7 @@ export type UpdateVersionRequest = {
   title?: string | null | undefined;
 };
 
-export type UpdateDocumentVersionRequest = {
-  /**
-   * Document ID.
-   *
-   * @remarks
-   *  Pattern: doc_[0-9a-hjkmnp-tv-z]{26}
-   */
-  documentId: string;
+export type UpdateVersionRequest = {
   /**
    * Version ID to update.
    *
@@ -39,10 +32,10 @@ export type UpdateDocumentVersionRequest = {
    *  Pattern: ver_[0-9a-hjkmnp-tv-z]{26}
    */
   versionId: string;
-  body: UpdateVersionRequest;
+  body: UpdateVersionUpdateVersionRequest;
 };
 
-export type UpdateDocumentVersionResponse = {
+export type UpdateVersionResponse = {
   httpMeta: components.HTTPMetadata;
   /**
    * Success
@@ -52,19 +45,51 @@ export type UpdateDocumentVersionResponse = {
 };
 
 /** @internal */
-export type UpdateVersionRequest$Outbound = {
+export type UpdateVersionUpdateVersionRequest$Outbound = {
   description?: string | null | undefined;
   title?: string | null | undefined;
+};
+
+/** @internal */
+export const UpdateVersionUpdateVersionRequest$outboundSchema: z.ZodMiniType<
+  UpdateVersionUpdateVersionRequest$Outbound,
+  UpdateVersionUpdateVersionRequest
+> = z.object({
+  description: z.optional(z.nullable(z.string())),
+  title: z.optional(z.nullable(z.string())),
+});
+
+export function updateVersionUpdateVersionRequestToJSON(
+  updateVersionUpdateVersionRequest: UpdateVersionUpdateVersionRequest,
+): string {
+  return JSON.stringify(
+    UpdateVersionUpdateVersionRequest$outboundSchema.parse(
+      updateVersionUpdateVersionRequest,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateVersionRequest$Outbound = {
+  version_id: string;
+  body: UpdateVersionUpdateVersionRequest$Outbound;
 };
 
 /** @internal */
 export const UpdateVersionRequest$outboundSchema: z.ZodMiniType<
   UpdateVersionRequest$Outbound,
   UpdateVersionRequest
-> = z.object({
-  description: z.optional(z.nullable(z.string())),
-  title: z.optional(z.nullable(z.string())),
-});
+> = z.pipe(
+  z.object({
+    versionId: z.string(),
+    body: z.lazy(() => UpdateVersionUpdateVersionRequest$outboundSchema),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      versionId: "version_id",
+    });
+  }),
+);
 
 export function updateVersionRequestToJSON(
   updateVersionRequest: UpdateVersionRequest,
@@ -75,43 +100,8 @@ export function updateVersionRequestToJSON(
 }
 
 /** @internal */
-export type UpdateDocumentVersionRequest$Outbound = {
-  document_id: string;
-  version_id: string;
-  body: UpdateVersionRequest$Outbound;
-};
-
-/** @internal */
-export const UpdateDocumentVersionRequest$outboundSchema: z.ZodMiniType<
-  UpdateDocumentVersionRequest$Outbound,
-  UpdateDocumentVersionRequest
-> = z.pipe(
-  z.object({
-    documentId: z.string(),
-    versionId: z.string(),
-    body: z.lazy(() => UpdateVersionRequest$outboundSchema),
-  }),
-  z.transform((v) => {
-    return remap$(v, {
-      documentId: "document_id",
-      versionId: "version_id",
-    });
-  }),
-);
-
-export function updateDocumentVersionRequestToJSON(
-  updateDocumentVersionRequest: UpdateDocumentVersionRequest,
-): string {
-  return JSON.stringify(
-    UpdateDocumentVersionRequest$outboundSchema.parse(
-      updateDocumentVersionRequest,
-    ),
-  );
-}
-
-/** @internal */
-export const UpdateDocumentVersionResponse$inboundSchema: z.ZodMiniType<
-  UpdateDocumentVersionResponse,
+export const UpdateVersionResponse$inboundSchema: z.ZodMiniType<
+  UpdateVersionResponse,
   unknown
 > = z.pipe(
   z.object({
@@ -128,12 +118,12 @@ export const UpdateDocumentVersionResponse$inboundSchema: z.ZodMiniType<
   }),
 );
 
-export function updateDocumentVersionResponseFromJSON(
+export function updateVersionResponseFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateDocumentVersionResponse, SDKValidationError> {
+): SafeParseResult<UpdateVersionResponse, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateDocumentVersionResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateDocumentVersionResponse' from JSON`,
+    (x) => UpdateVersionResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateVersionResponse' from JSON`,
   );
 }

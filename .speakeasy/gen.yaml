@@ -29,7 +29,7 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 typescript:
-  version: 0.3.9
+  version: 0.3.10
   acceptHeaderEnum: false
   additionalDependencies:
     dependencies: {}
@@ -76,6 +76,7 @@ typescript:
   outputModelSuffix: output
   packageName: '@factify/sdk'
   preApplyUnionDiscriminators: true
+  preserveModelFieldNames: false
   responseFormat: envelope-http
   sseFlatResponse: false
   templateVersion: v2

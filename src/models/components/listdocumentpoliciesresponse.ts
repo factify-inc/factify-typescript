@@ -27,7 +27,7 @@ export type ListDocumentPoliciesResponse = {
    * @remarks
    *  Follows Google AIP-158 for pagination field naming.
    */
-  pagination?: Pagination | undefined;
+  pagination: Pagination;
 };
 
 /** @internal */
@@ -36,7 +36,7 @@ export const ListDocumentPoliciesResponse$inboundSchema: z.ZodMiniType<
   unknown
 > = z.object({
   items: types.optional(z.array(DocumentPolicy$inboundSchema)),
-  pagination: types.optional(Pagination$inboundSchema),
+  pagination: Pagination$inboundSchema,
 });
 
 export function listDocumentPoliciesResponseFromJSON(

@@ -8,8 +8,8 @@ Manage document versions and version history.
 
 * [list](#list) - List document versions
 * [create](#create) - Create a new version
-* [get](#get) - Retrieve a version
-* [update](#update) - Update a version
+* [getVersion](#getversion) - Retrieve a version
+* [updateVersion](#updateversion) - Update a version
 
 ## list
 
@@ -177,13 +177,13 @@ run();
 | errors.ErrorT              | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## get
+## getVersion
 
 Retrieve a specific version by ID.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="getDocumentVersion" method="get" path="/v1beta/documents/{document_id}/versions/{version_id}" -->
+<!-- UsageSnippet language="typescript" operationID="getVersion" method="get" path="/v1beta/versions/{version_id}" -->
 ```typescript
 import { Factify } from "@factify/sdk";
 
@@ -192,8 +192,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.versions.get({
-    documentId: "<id>",
+  const result = await factify.versions.getVersion({
     versionId: "<id>",
   });
 
@@ -209,7 +208,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { versionsGet } from "@factify/sdk/funcs/versionsGet.js";
+import { versionsGetVersion } from "@factify/sdk/funcs/versionsGetVersion.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -218,15 +217,14 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await versionsGet(factify, {
-    documentId: "<id>",
+  const res = await versionsGetVersion(factify, {
     versionId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("versionsGet failed:", res.error);
+    console.log("versionsGetVersion failed:", res.error);
   }
 }
 
@@ -237,14 +235,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetDocumentVersionRequest](../../models/operations/getdocumentversionrequest.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.GetVersionRequest](../../models/operations/getversionrequest.md)                                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.GetDocumentVersionResponse](../../models/operations/getdocumentversionresponse.md)\>**
+**Promise\<[operations.GetVersionResponse](../../models/operations/getversionresponse.md)\>**
 
 ### Errors
 
@@ -255,13 +253,13 @@ run();
 | errors.ErrorT              | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## update
+## updateVersion
 
 Update version title and description.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="updateDocumentVersion" method="patch" path="/v1beta/documents/{document_id}/versions/{version_id}" -->
+<!-- UsageSnippet language="typescript" operationID="updateVersion" method="patch" path="/v1beta/versions/{version_id}" -->
 ```typescript
 import { Factify } from "@factify/sdk";
 
@@ -270,8 +268,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.versions.update({
-    documentId: "<id>",
+  const result = await factify.versions.updateVersion({
     versionId: "<id>",
     body: {},
   });
@@ -288,7 +285,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { versionsUpdate } from "@factify/sdk/funcs/versionsUpdate.js";
+import { versionsUpdateVersion } from "@factify/sdk/funcs/versionsUpdateVersion.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -297,8 +294,7 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await versionsUpdate(factify, {
-    documentId: "<id>",
+  const res = await versionsUpdateVersion(factify, {
     versionId: "<id>",
     body: {},
   });
@@ -306,7 +302,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("versionsUpdate failed:", res.error);
+    console.log("versionsUpdateVersion failed:", res.error);
   }
 }
 
@@ -317,14 +313,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.UpdateDocumentVersionRequest](../../models/operations/updatedocumentversionrequest.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.UpdateVersionRequest](../../models/operations/updateversionrequest.md)                                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.UpdateDocumentVersionResponse](../../models/operations/updatedocumentversionresponse.md)\>**
+**Promise\<[operations.UpdateVersionResponse](../../models/operations/updateversionresponse.md)\>**
 
 ### Errors
 
