@@ -27,7 +27,7 @@ jobs:
       mode: direct
       set_version: ${{ github.event.inputs.set_version }}
       target: typescript
+      publish_with_provenance: true
     secrets:
       github_access_token: ${{ secrets.SDK_PUBLISH_GH_TOKEN }}
-      npm_token: ${{ secrets.NPM_TOKEN }}
       speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
