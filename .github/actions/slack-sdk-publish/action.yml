@@ -1,0 +1,77 @@
+name: 'Slack SDK Publish Notification'
+description: 'Send Slack notification when SDK is published to package registry (success or failure)'
+
+inputs:
+  webhook-url:
+    description: 'Slack webhook URL for #prod-release channel'
+    required: true
+  sdk-name:
+    description: 'Name of the SDK (e.g., Python, Go, TypeScript)'
+    required: true
+  sdk-version:
+    description: 'Version that was published'
+    required: true
+  package-registry:
+    description: 'Registry where it was published (e.g., PyPI, npm, Go Modules)'
+    required: true
+  repository:
+    description: 'SDK repository (e.g., factify-inc/factify-python)'
+    required: true
+  workflow-run-url:
+    description: 'URL to the publishing workflow run'
+    required: false
+    default: ''
+  publish-status:
+    description: 'Publish status (success or failure)'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Prepare success message payload
+      id: prepare-success-message
+      if: inputs.publish-status == 'success'
+      shell: bash
+      run: |
+        WORKFLOW_LINK=""
+        if [ -n "${{ inputs.workflow-run-url }}" ]; then
+          WORKFLOW_LINK="\n*Workflow Run:* <${{ inputs.workflow-run-url }}|View Run>"
+        fi
+
+        MESSAGE="✅ *SDK Published Successfully*\n\n*SDK:* ${{ inputs.sdk-name }} v${{ inputs.sdk-version }}\n*Registry:* ${{ inputs.package-registry }}\n*Repository:* <https://github.com/${{ inputs.repository }}|${{ inputs.repository }}>$WORKFLOW_LINK"
+
+        echo "payload<<EOF" >> $GITHUB_OUTPUT
+        echo "{\"text\":\"$MESSAGE\"}" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+
+    - name: Prepare failure message payload
+      id: prepare-failure-message
+      if: inputs.publish-status == 'failure'
+      shell: bash
+      run: |
+        WORKFLOW_LINK=""
+        if [ -n "${{ inputs.workflow-run-url }}" ]; then
+          WORKFLOW_LINK="\n*Workflow Run:* <${{ inputs.workflow-run-url }}|View Run>"
+        fi
+
+        MESSAGE="❌ *SDK Publishing Failed*\n\n*SDK:* ${{ inputs.sdk-name }}\n*Repository:* <https://github.com/${{ inputs.repository }}|${{ inputs.repository }}>$WORKFLOW_LINK"
+
+        echo "payload<<EOF" >> $GITHUB_OUTPUT
+        echo "{\"text\":\"$MESSAGE\"}" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+
+    - name: Send success notification to #prod-release
+      if: inputs.publish-status == 'success'
+      uses: slackapi/slack-github-action@v1.27.0
+      with:
+        payload: ${{ steps.prepare-success-message.outputs.payload }}
+      env:
+        SLACK_WEBHOOK_URL: ${{ inputs.webhook-url }}
+
+    - name: Send failure notification to #prod-release
+      if: inputs.publish-status == 'failure'
+      uses: slackapi/slack-github-action@v1.27.0
+      with:
+        payload: ${{ steps.prepare-failure-message.outputs.payload }}
+      env:
+        SLACK_WEBHOOK_URL: ${{ inputs.webhook-url }}
