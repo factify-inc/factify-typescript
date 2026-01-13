@@ -21,6 +21,9 @@ inputs:
     description: 'URL to the publishing workflow run'
     required: false
     default: ''
+  run-number:
+    description: 'GitHub workflow run number'
+    required: true
   publish-status:
     description: 'Publish status (success or failure)'
     required: true
@@ -38,7 +41,7 @@ runs:
           WORKFLOW_LINK="\n*Workflow Run:* <${{ inputs.workflow-run-url }}|View Run>"
         fi
 
-        MESSAGE="✅ *SDK Published Successfully*\n\n*SDK:* ${{ inputs.sdk-name }} v${{ inputs.sdk-version }}\n*Registry:* ${{ inputs.package-registry }}\n*Repository:* <https://github.com/${{ inputs.repository }}|${{ inputs.repository }}>$WORKFLOW_LINK"
+        MESSAGE="✅ *SDK Published Successfully (Run #${{ inputs.run-number }})*\n\n*SDK:* ${{ inputs.sdk-name }} v${{ inputs.sdk-version }}\n*Registry:* ${{ inputs.package-registry }}\n*Repository:* <https://github.com/${{ inputs.repository }}|${{ inputs.repository }}>$WORKFLOW_LINK"
 
         echo "payload<<EOF" >> $GITHUB_OUTPUT
         echo "{\"text\":\"$MESSAGE\"}" >> $GITHUB_OUTPUT
@@ -54,7 +57,7 @@ runs:
           WORKFLOW_LINK="\n*Workflow Run:* <${{ inputs.workflow-run-url }}|View Run>"
         fi
 
-        MESSAGE="❌ *SDK Publishing Failed*\n\n*SDK:* ${{ inputs.sdk-name }}\n*Repository:* <https://github.com/${{ inputs.repository }}|${{ inputs.repository }}>$WORKFLOW_LINK"
+        MESSAGE="❌ *SDK Publishing Failed (Run #${{ inputs.run-number }})*\n\n*SDK:* ${{ inputs.sdk-name }}\n*Repository:* <https://github.com/${{ inputs.repository }}|${{ inputs.repository }}>$WORKFLOW_LINK"
 
         echo "payload<<EOF" >> $GITHUB_OUTPUT
         echo "{\"text\":\"$MESSAGE\"}" >> $GITHUB_OUTPUT
