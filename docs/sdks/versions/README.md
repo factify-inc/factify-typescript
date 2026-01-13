@@ -8,8 +8,8 @@ Manage document versions and version history.
 
 * [list](#list) - List document versions
 * [create](#create) - Create a new version
-* [getVersion](#getversion) - Retrieve a version
-* [updateVersion](#updateversion) - Update a version
+* [get](#get) - Retrieve a version
+* [update](#update) - Update a version
 
 ## list
 
@@ -177,7 +177,7 @@ run();
 | errors.ErrorT              | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## getVersion
+## get
 
 Retrieve a specific version by ID.
 
@@ -192,7 +192,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.versions.getVersion({
+  const result = await factify.versions.get({
     versionId: "<id>",
   });
 
@@ -208,7 +208,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { versionsGetVersion } from "@factify/sdk/funcs/versionsGetVersion.js";
+import { versionsGet } from "@factify/sdk/funcs/versionsGet.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -217,14 +217,14 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await versionsGetVersion(factify, {
+  const res = await versionsGet(factify, {
     versionId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("versionsGetVersion failed:", res.error);
+    console.log("versionsGet failed:", res.error);
   }
 }
 
@@ -253,7 +253,7 @@ run();
 | errors.ErrorT              | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## updateVersion
+## update
 
 Update version title and description.
 
@@ -268,7 +268,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.versions.updateVersion({
+  const result = await factify.versions.update({
     versionId: "<id>",
     body: {},
   });
@@ -285,7 +285,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { versionsUpdateVersion } from "@factify/sdk/funcs/versionsUpdateVersion.js";
+import { versionsUpdate } from "@factify/sdk/funcs/versionsUpdate.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -294,7 +294,7 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await versionsUpdateVersion(factify, {
+  const res = await versionsUpdate(factify, {
     versionId: "<id>",
     body: {},
   });
@@ -302,7 +302,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("versionsUpdateVersion failed:", res.error);
+    console.log("versionsUpdate failed:", res.error);
   }
 }
 

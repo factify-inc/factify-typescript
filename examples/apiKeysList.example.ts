@@ -8,7 +8,7 @@ dotenv.config();
  * Example usage of the @factify/sdk SDK
  *
  * To run this example from the examples directory:
- * npm run build && npx tsx apiKeysListAPIKeys.example.ts
+ * npm run build && npx tsx apiKeysList.example.ts
  */
 
 import { Factify } from "@factify/sdk";
@@ -18,11 +18,13 @@ const factify = new Factify({
 });
 
 async function main() {
-  const result = await factify.apiKeys.listApiKeys({
+  const result = await factify.apiKeys.list({
     organizationId: "<id>",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 main().catch(console.error);

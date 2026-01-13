@@ -117,11 +117,13 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.apiKeys.listApiKeys({
+  const result = await factify.apiKeys.list({
     organizationId: "<id>",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -149,11 +151,13 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.apiKeys.listApiKeys({
+  const result = await factify.apiKeys.list({
     organizationId: "<id>",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -169,9 +173,9 @@ run();
 
 ### [APIKeys](docs/sdks/apikeys/README.md)
 
-* [listApiKeys](docs/sdks/apikeys/README.md#listapikeys) - List API keys
-* [createApiKey](docs/sdks/apikeys/README.md#createapikey) - Create an API key
-* [revokeApiKey](docs/sdks/apikeys/README.md#revokeapikey) - Revoke an API key
+* [list](docs/sdks/apikeys/README.md#list) - List API keys
+* [create](docs/sdks/apikeys/README.md#create) - Create an API key
+* [revoke](docs/sdks/apikeys/README.md#revoke) - Revoke an API key
 
 ### [Documents](docs/sdks/documents/README.md)
 
@@ -186,9 +190,9 @@ run();
 
 ### [Organizations](docs/sdks/organizations/README.md)
 
-* [listOrganizations](docs/sdks/organizations/README.md#listorganizations) - List organizations
-* [createOrganization](docs/sdks/organizations/README.md#createorganization) - Create an organization
-* [getOrganization](docs/sdks/organizations/README.md#getorganization) - Retrieve an organization
+* [list](docs/sdks/organizations/README.md#list) - List organizations
+* [create](docs/sdks/organizations/README.md#create) - Create an organization
+* [get](docs/sdks/organizations/README.md#get) - Retrieve an organization
 
 ### [Policies](docs/sdks/policies/README.md)
 
@@ -200,8 +204,8 @@ run();
 
 * [list](docs/sdks/versions/README.md#list) - List document versions
 * [create](docs/sdks/versions/README.md#create) - Create a new version
-* [getVersion](docs/sdks/versions/README.md#getversion) - Retrieve a version
-* [updateVersion](docs/sdks/versions/README.md#updateversion) - Update a version
+* [get](docs/sdks/versions/README.md#get) - Retrieve a version
+* [update](docs/sdks/versions/README.md#update) - Update a version
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -221,24 +225,24 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <summary>Available standalone functions</summary>
 
-- [`apiKeysCreateAPIKey`](docs/sdks/apikeys/README.md#createapikey) - Create an API key
-- [`apiKeysListAPIKeys`](docs/sdks/apikeys/README.md#listapikeys) - List API keys
-- [`apiKeysRevokeAPIKey`](docs/sdks/apikeys/README.md#revokeapikey) - Revoke an API key
+- [`apiKeysCreate`](docs/sdks/apikeys/README.md#create) - Create an API key
+- [`apiKeysList`](docs/sdks/apikeys/README.md#list) - List API keys
+- [`apiKeysRevoke`](docs/sdks/apikeys/README.md#revoke) - Revoke an API key
 - [`documentsCreate`](docs/sdks/documents/README.md#create) - Create a document
 - [`documentsGet`](docs/sdks/documents/README.md#get) - Retrieve a document
 - [`documentsList`](docs/sdks/documents/README.md#list) - List documents
 - [`documentsUpdate`](docs/sdks/documents/README.md#update) - Update a document
 - [`entryPagesGenerate`](docs/sdks/entrypages/README.md#generate) - Generate entry page
-- [`organizationsCreateOrganization`](docs/sdks/organizations/README.md#createorganization) - Create an organization
-- [`organizationsGetOrganization`](docs/sdks/organizations/README.md#getorganization) - Retrieve an organization
-- [`organizationsListOrganizations`](docs/sdks/organizations/README.md#listorganizations) - List organizations
+- [`organizationsCreate`](docs/sdks/organizations/README.md#create) - Create an organization
+- [`organizationsGet`](docs/sdks/organizations/README.md#get) - Retrieve an organization
+- [`organizationsList`](docs/sdks/organizations/README.md#list) - List organizations
 - [`policiesAttach`](docs/sdks/policies/README.md#attach) - Attach a policy
 - [`policiesDetach`](docs/sdks/policies/README.md#detach) - Detach a policy
 - [`policiesList`](docs/sdks/policies/README.md#list) - List document policies
 - [`versionsCreate`](docs/sdks/versions/README.md#create) - Create a new version
-- [`versionsGetVersion`](docs/sdks/versions/README.md#getversion) - Retrieve a version
+- [`versionsGet`](docs/sdks/versions/README.md#get) - Retrieve a version
 - [`versionsList`](docs/sdks/versions/README.md#list) - List document versions
-- [`versionsUpdateVersion`](docs/sdks/versions/README.md#updateversion) - Update a version
+- [`versionsUpdate`](docs/sdks/versions/README.md#update) - Update a version
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
@@ -263,9 +267,8 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.documents.list({
-    pageToken:
-      "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0",
+  const result = await factify.apiKeys.list({
+    organizationId: "<id>",
   });
 
   for await (const page of result) {
@@ -328,7 +331,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.apiKeys.listApiKeys({
+  const result = await factify.apiKeys.list({
     organizationId: "<id>",
   }, {
     retries: {
@@ -343,7 +346,9 @@ async function run() {
     },
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -369,11 +374,13 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.apiKeys.listApiKeys({
+  const result = await factify.apiKeys.list({
     organizationId: "<id>",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -404,11 +411,13 @@ const factify = new Factify({
 
 async function run() {
   try {
-    const result = await factify.apiKeys.listApiKeys({
+    const result = await factify.apiKeys.list({
       organizationId: "<id>",
     });
 
-    console.log(result);
+    for await (const page of result) {
+      console.log(page);
+    }
   } catch (error) {
     // The base class for HTTP error responses
     if (error instanceof errors.FactifyError) {
@@ -476,11 +485,13 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.apiKeys.listApiKeys({
+  const result = await factify.apiKeys.list({
     organizationId: "<id>",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -499,11 +510,13 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.apiKeys.listApiKeys({
+  const result = await factify.apiKeys.list({
     organizationId: "<id>",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();

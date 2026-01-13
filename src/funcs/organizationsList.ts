@@ -4,6 +4,7 @@
 
 import * as z from "zod/v4-mini";
 import { FactifyCore } from "../core.js";
+import { dlv } from "../lib/dlv.js";
 import { encodeFormQuery } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -25,29 +26,38 @@ import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
+import {
+  createPageIterator,
+  haltIterator,
+  PageIterator,
+  Paginator,
+} from "../types/operations.js";
 
 /**
- * List API keys
+ * List organizations
  *
  * @remarks
- * Lists API keys for an organization.
+ * List organizations the caller has access to.
  */
-export function apiKeysListAPIKeys(
+export function organizationsList(
   client: FactifyCore,
-  request: operations.ListApiKeysRequest,
+  request?: operations.ListOrganizationsRequest | undefined,
   options?: RequestOptions,
 ): APIPromise<
-  Result<
-    operations.ListApiKeysResponse,
-    | errors.ErrorT
-    | FactifyError
-    | ResponseValidationError
-    | ConnectionError
-    | RequestAbortedError
-    | RequestTimeoutError
-    | InvalidRequestError
-    | UnexpectedClientError
-    | SDKValidationError
+  PageIterator<
+    Result<
+      operations.ListOrganizationsResponse,
+      | errors.ErrorT
+      | FactifyError
+      | ResponseValidationError
+      | ConnectionError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | InvalidRequestError
+      | UnexpectedClientError
+      | SDKValidationError
+    >,
+    { cursor: string }
   >
 > {
   return new APIPromise($do(
@@ -59,43 +69,48 @@ export function apiKeysListAPIKeys(
 
 async function $do(
   client: FactifyCore,
-  request: operations.ListApiKeysRequest,
+  request?: operations.ListOrganizationsRequest | undefined,
   options?: RequestOptions,
 ): Promise<
   [
-    Result<
-      operations.ListApiKeysResponse,
-      | errors.ErrorT
-      | FactifyError
-      | ResponseValidationError
-      | ConnectionError
-      | RequestAbortedError
-      | RequestTimeoutError
-      | InvalidRequestError
-      | UnexpectedClientError
-      | SDKValidationError
+    PageIterator<
+      Result<
+        operations.ListOrganizationsResponse,
+        | errors.ErrorT
+        | FactifyError
+        | ResponseValidationError
+        | ConnectionError
+        | RequestAbortedError
+        | RequestTimeoutError
+        | InvalidRequestError
+        | UnexpectedClientError
+        | SDKValidationError
+      >,
+      { cursor: string }
     >,
     APICall,
   ]
 > {
   const parsed = safeParse(
     request,
-    (value) => z.parse(operations.ListApiKeysRequest$outboundSchema, value),
+    (value) =>
+      z.parse(
+        z.optional(operations.ListOrganizationsRequest$outboundSchema),
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return [parsed, { status: "invalid" }];
+    return [haltIterator(parsed), { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = null;
 
-  const path = pathToFunc("/v1beta/api-keys")();
+  const path = pathToFunc("/v1beta/organizations")();
 
   const query = encodeFormQuery({
-    "include_revoked": payload.include_revoked,
-    "organization_id": payload.organization_id,
-    "page_size": payload.page_size,
-    "page_token": payload.page_token,
+    "page_size": payload?.page_size,
+    "page_token": payload?.page_token,
   });
 
   const headers = new Headers(compactMap({
@@ -109,7 +124,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "listApiKeys",
+    operationID: "listOrganizations",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -133,7 +148,7 @@ async function $do(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return [requestRes, { status: "invalid" }];
+    return [haltIterator(requestRes), { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -144,7 +159,7 @@ async function $do(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return [doResult, { status: "request-error", request: req }];
+    return [haltIterator(doResult), { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -152,8 +167,8 @@ async function $do(
     HttpMeta: { Response: response, Request: req },
   };
 
-  const [result] = await M.match<
-    operations.ListApiKeysResponse,
+  const [result, raw] = await M.match<
+    operations.ListOrganizationsResponse,
     | errors.ErrorT
     | FactifyError
     | ResponseValidationError
@@ -164,8 +179,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.ListApiKeysResponse$inboundSchema, {
-      key: "ListApiKeysResponse",
+    M.json(200, operations.ListOrganizationsResponse$inboundSchema, {
+      key: "ListOrganizationsResponse",
     }),
     M.jsonErr([400, 401, 403, 404], errors.ErrorT$inboundSchema),
     M.jsonErr(429, errors.ErrorT$inboundSchema, { hdrs: true }),
@@ -174,8 +189,57 @@ async function $do(
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {
-    return [result, { status: "complete", request: req, response }];
+    return [haltIterator(result), {
+      status: "complete",
+      request: req,
+      response,
+    }];
   }
 
-  return [result, { status: "complete", request: req, response }];
+  const nextFunc = (
+    responseData: unknown,
+  ): {
+    next: Paginator<
+      Result<
+        operations.ListOrganizationsResponse,
+        | errors.ErrorT
+        | FactifyError
+        | ResponseValidationError
+        | ConnectionError
+        | RequestAbortedError
+        | RequestTimeoutError
+        | InvalidRequestError
+        | UnexpectedClientError
+        | SDKValidationError
+      >
+    >;
+    "~next"?: { cursor: string };
+  } => {
+    const nextCursor = dlv(responseData, "pagination.next_page_token");
+    if (typeof nextCursor !== "string") {
+      return { next: () => null };
+    }
+    if (nextCursor.trim() === "") {
+      return { next: () => null };
+    }
+
+    const nextVal = () =>
+      organizationsList(
+        client,
+        {
+          ...request,
+          pageToken: nextCursor,
+        },
+        options,
+      );
+
+    return { next: nextVal, "~next": { cursor: nextCursor } };
+  };
+
+  const page = { ...result, ...nextFunc(raw) };
+  return [{ ...page, ...createPageIterator(page, (v) => !v.ok) }, {
+    status: "complete",
+    request: req,
+    response,
+  }];
 }

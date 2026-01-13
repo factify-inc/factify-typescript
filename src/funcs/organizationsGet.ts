@@ -27,18 +27,18 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve a version
+ * Retrieve an organization
  *
  * @remarks
- * Retrieve a specific version by ID.
+ * Retrieve an organization by ID.
  */
-export function versionsGetVersion(
+export function organizationsGet(
   client: FactifyCore,
-  request: operations.GetVersionRequest,
+  request: operations.GetOrganizationRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetVersionResponse,
+    operations.GetOrganizationResponse,
     | errors.ErrorT
     | FactifyError
     | ResponseValidationError
@@ -59,12 +59,12 @@ export function versionsGetVersion(
 
 async function $do(
   client: FactifyCore,
-  request: operations.GetVersionRequest,
+  request: operations.GetOrganizationRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetVersionResponse,
+      operations.GetOrganizationResponse,
       | errors.ErrorT
       | FactifyError
       | ResponseValidationError
@@ -80,7 +80,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => z.parse(operations.GetVersionRequest$outboundSchema, value),
+    (value) => z.parse(operations.GetOrganizationRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -90,13 +90,15 @@ async function $do(
   const body = null;
 
   const pathParams = {
-    version_id: encodeSimple("version_id", payload.version_id, {
+    organization_id: encodeSimple("organization_id", payload.organization_id, {
       explode: false,
       charEncoding: "percent",
     }),
   };
 
-  const path = pathToFunc("/v1beta/versions/{version_id}")(pathParams);
+  const path = pathToFunc("/v1beta/organizations/{organization_id}")(
+    pathParams,
+  );
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -109,7 +111,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "getVersion",
+    operationID: "getOrganization",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -152,7 +154,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetVersionResponse,
+    operations.GetOrganizationResponse,
     | errors.ErrorT
     | FactifyError
     | ResponseValidationError
@@ -163,8 +165,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.GetVersionResponse$inboundSchema, {
-      key: "Version",
+    M.json(200, operations.GetOrganizationResponse$inboundSchema, {
+      key: "GetOrganizationResponse",
     }),
     M.jsonErr([400, 401, 403, 404], errors.ErrorT$inboundSchema),
     M.jsonErr(429, errors.ErrorT$inboundSchema, { hdrs: true }),

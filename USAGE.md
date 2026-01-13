@@ -7,11 +7,13 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.apiKeys.listApiKeys({
+  const result = await factify.apiKeys.list({
     organizationId: "<id>",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();

@@ -8,19 +8,19 @@ actions:
       "x-codeSamples":
         - "lang": "typescript"
           "label": "listApiKeys"
-          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.apiKeys.listApiKeys({\n    organizationId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.apiKeys.list({\n    organizationId: \"<id>\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
   - target: $["paths"]["/v1beta/api-keys"]["post"]
     update:
       "x-codeSamples":
         - "lang": "typescript"
           "label": "createApiKey"
-          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.apiKeys.createApiKey({\n    name: \"<value>\",\n    organizationId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.apiKeys.create({\n    name: \"<value>\",\n    organizationId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
   - target: $["paths"]["/v1beta/api-keys/{api_key_id}/revoke"]["post"]
     update:
       "x-codeSamples":
         - "lang": "typescript"
           "label": "revokeApiKey"
-          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.apiKeys.revokeApiKey({\n    apiKeyId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.apiKeys.revoke({\n    apiKeyId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
   - target: $["paths"]["/v1beta/documents"]["get"]
     update:
       "x-codeSamples":
@@ -86,28 +86,28 @@ actions:
       "x-codeSamples":
         - "lang": "typescript"
           "label": "listOrganizations"
-          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.listOrganizations();\n\n  console.log(result);\n}\n\nrun();"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.list();\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
   - target: $["paths"]["/v1beta/organizations"]["post"]
     update:
       "x-codeSamples":
         - "lang": "typescript"
           "label": "createOrganization"
-          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.createOrganization({\n    name: \"<value>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.create({\n    name: \"<value>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
   - target: $["paths"]["/v1beta/organizations/{organization_id}"]["get"]
     update:
       "x-codeSamples":
         - "lang": "typescript"
           "label": "getOrganization"
-          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.getOrganization({\n    organizationId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.get({\n    organizationId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
   - target: $["paths"]["/v1beta/versions/{version_id}"]["get"]
     update:
       "x-codeSamples":
         - "lang": "typescript"
           "label": "getVersion"
-          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.versions.getVersion({\n    versionId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.versions.get({\n    versionId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
   - target: $["paths"]["/v1beta/versions/{version_id}"]["patch"]
     update:
       "x-codeSamples":
         - "lang": "typescript"
           "label": "updateVersion"
-          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.versions.updateVersion({\n    versionId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.versions.update({\n    versionId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"

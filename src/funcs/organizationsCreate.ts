@@ -4,13 +4,14 @@
 
 import * as z from "zod/v4-mini";
 import { FactifyCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { encodeJSON } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import { FactifyError } from "../models/errors/factifyerror.js";
 import {
   ConnectionError,
@@ -27,18 +28,18 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve an organization
+ * Create an organization
  *
  * @remarks
- * Retrieve an organization by ID.
+ * Creates a new organization. The authenticated user becomes the organization owner.
  */
-export function organizationsGetOrganization(
+export function organizationsCreate(
   client: FactifyCore,
-  request: operations.GetOrganizationRequest,
+  request: components.CreateOrganizationRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetOrganizationResponse,
+    operations.CreateOrganizationResponse,
     | errors.ErrorT
     | FactifyError
     | ResponseValidationError
@@ -59,12 +60,12 @@ export function organizationsGetOrganization(
 
 async function $do(
   client: FactifyCore,
-  request: operations.GetOrganizationRequest,
+  request: components.CreateOrganizationRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetOrganizationResponse,
+      operations.CreateOrganizationResponse,
       | errors.ErrorT
       | FactifyError
       | ResponseValidationError
@@ -80,27 +81,20 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => z.parse(operations.GetOrganizationRequest$outboundSchema, value),
+    (value) =>
+      z.parse(components.CreateOrganizationRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = null;
+  const body = encodeJSON("body", payload, { explode: true });
 
-  const pathParams = {
-    organization_id: encodeSimple("organization_id", payload.organization_id, {
-      explode: false,
-      charEncoding: "percent",
-    }),
-  };
-
-  const path = pathToFunc("/v1beta/organizations/{organization_id}")(
-    pathParams,
-  );
+  const path = pathToFunc("/v1beta/organizations")();
 
   const headers = new Headers(compactMap({
+    "Content-Type": "application/json",
     Accept: "application/json",
   }));
 
@@ -111,7 +105,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "getOrganization",
+    operationID: "createOrganization",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -125,7 +119,7 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "GET",
+    method: "POST",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
@@ -154,7 +148,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetOrganizationResponse,
+    operations.CreateOrganizationResponse,
     | errors.ErrorT
     | FactifyError
     | ResponseValidationError
@@ -165,8 +159,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.GetOrganizationResponse$inboundSchema, {
-      key: "GetOrganizationResponse",
+    M.json(200, operations.CreateOrganizationResponse$inboundSchema, {
+      key: "CreateOrganizationResponse",
     }),
     M.jsonErr([400, 401, 403, 404], errors.ErrorT$inboundSchema),
     M.jsonErr(429, errors.ErrorT$inboundSchema, { hdrs: true }),

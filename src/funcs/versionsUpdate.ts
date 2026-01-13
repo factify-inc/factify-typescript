@@ -4,14 +4,13 @@
 
 import * as z from "zod/v4-mini";
 import { FactifyCore } from "../core.js";
-import { encodeJSON } from "../lib/encodings.js";
+import { encodeJSON, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import * as components from "../models/components/index.js";
 import { FactifyError } from "../models/errors/factifyerror.js";
 import {
   ConnectionError,
@@ -28,18 +27,18 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Create an API key
+ * Update a version
  *
  * @remarks
- * Creates a new API key for the specified organization. The secret is only returned once in the response and cannot be retrieved later.
+ * Update version title and description.
  */
-export function apiKeysCreateAPIKey(
+export function versionsUpdate(
   client: FactifyCore,
-  request: components.CreateApiKeyRequest,
+  request: operations.UpdateVersionRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.CreateApiKeyResponse,
+    operations.UpdateVersionResponse,
     | errors.ErrorT
     | FactifyError
     | ResponseValidationError
@@ -60,12 +59,12 @@ export function apiKeysCreateAPIKey(
 
 async function $do(
   client: FactifyCore,
-  request: components.CreateApiKeyRequest,
+  request: operations.UpdateVersionRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.CreateApiKeyResponse,
+      operations.UpdateVersionResponse,
       | errors.ErrorT
       | FactifyError
       | ResponseValidationError
@@ -81,16 +80,23 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => z.parse(components.CreateApiKeyRequest$outboundSchema, value),
+    (value) => z.parse(operations.UpdateVersionRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload, { explode: true });
+  const body = encodeJSON("body", payload.body, { explode: true });
 
-  const path = pathToFunc("/v1beta/api-keys")();
+  const pathParams = {
+    version_id: encodeSimple("version_id", payload.version_id, {
+      explode: false,
+      charEncoding: "percent",
+    }),
+  };
+
+  const path = pathToFunc("/v1beta/versions/{version_id}")(pathParams);
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
@@ -104,7 +110,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "createApiKey",
+    operationID: "updateVersion",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -118,7 +124,7 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "POST",
+    method: "PATCH",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
@@ -147,7 +153,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.CreateApiKeyResponse,
+    operations.UpdateVersionResponse,
     | errors.ErrorT
     | FactifyError
     | ResponseValidationError
@@ -158,8 +164,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.CreateApiKeyResponse$inboundSchema, {
-      key: "CreateApiKeyResponse",
+    M.json(200, operations.UpdateVersionResponse$inboundSchema, {
+      key: "Version",
     }),
     M.jsonErr([400, 401, 403, 404], errors.ErrorT$inboundSchema),
     M.jsonErr(429, errors.ErrorT$inboundSchema, { hdrs: true }),

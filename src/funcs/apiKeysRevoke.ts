@@ -27,18 +27,18 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Update a version
+ * Revoke an API key
  *
  * @remarks
- * Update version title and description.
+ * Revokes an API key, immediately preventing it from being used for authentication.
  */
-export function versionsUpdateVersion(
+export function apiKeysRevoke(
   client: FactifyCore,
-  request: operations.UpdateVersionRequest,
+  request: operations.RevokeApiKeyRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.UpdateVersionResponse,
+    operations.RevokeApiKeyResponse,
     | errors.ErrorT
     | FactifyError
     | ResponseValidationError
@@ -59,12 +59,12 @@ export function versionsUpdateVersion(
 
 async function $do(
   client: FactifyCore,
-  request: operations.UpdateVersionRequest,
+  request: operations.RevokeApiKeyRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.UpdateVersionResponse,
+      operations.RevokeApiKeyResponse,
       | errors.ErrorT
       | FactifyError
       | ResponseValidationError
@@ -80,7 +80,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => z.parse(operations.UpdateVersionRequest$outboundSchema, value),
+    (value) => z.parse(operations.RevokeApiKeyRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -90,13 +90,13 @@ async function $do(
   const body = encodeJSON("body", payload.body, { explode: true });
 
   const pathParams = {
-    version_id: encodeSimple("version_id", payload.version_id, {
+    api_key_id: encodeSimple("api_key_id", payload.api_key_id, {
       explode: false,
       charEncoding: "percent",
     }),
   };
 
-  const path = pathToFunc("/v1beta/versions/{version_id}")(pathParams);
+  const path = pathToFunc("/v1beta/api-keys/{api_key_id}/revoke")(pathParams);
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
@@ -110,7 +110,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "updateVersion",
+    operationID: "revokeApiKey",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -124,7 +124,7 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "PATCH",
+    method: "POST",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
@@ -153,7 +153,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.UpdateVersionResponse,
+    operations.RevokeApiKeyResponse,
     | errors.ErrorT
     | FactifyError
     | ResponseValidationError
@@ -164,8 +164,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.UpdateVersionResponse$inboundSchema, {
-      key: "Version",
+    M.json(200, operations.RevokeApiKeyResponse$inboundSchema, {
+      key: "RevokeApiKeyResponse",
     }),
     M.jsonErr([400, 401, 403, 404], errors.ErrorT$inboundSchema),
     M.jsonErr(429, errors.ErrorT$inboundSchema, { hdrs: true }),

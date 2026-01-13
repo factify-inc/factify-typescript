@@ -6,11 +6,11 @@ Generate and manage API keys for authentication.
 
 ### Available Operations
 
-* [listApiKeys](#listapikeys) - List API keys
-* [createApiKey](#createapikey) - Create an API key
-* [revokeApiKey](#revokeapikey) - Revoke an API key
+* [list](#list) - List API keys
+* [create](#create) - Create an API key
+* [revoke](#revoke) - Revoke an API key
 
-## listApiKeys
+## list
 
 Lists API keys for an organization.
 
@@ -25,11 +25,13 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.apiKeys.listApiKeys({
+  const result = await factify.apiKeys.list({
     organizationId: "<id>",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -41,7 +43,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { apiKeysListAPIKeys } from "@factify/sdk/funcs/apiKeysListAPIKeys.js";
+import { apiKeysList } from "@factify/sdk/funcs/apiKeysList.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -50,14 +52,16 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await apiKeysListAPIKeys(factify, {
+  const res = await apiKeysList(factify, {
     organizationId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
-    console.log("apiKeysListAPIKeys failed:", res.error);
+    console.log("apiKeysList failed:", res.error);
   }
 }
 
@@ -86,7 +90,7 @@ run();
 | errors.ErrorT              | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## createApiKey
+## create
 
 Creates a new API key for the specified organization. The secret is only returned once in the response and cannot be retrieved later.
 
@@ -101,7 +105,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.apiKeys.createApiKey({
+  const result = await factify.apiKeys.create({
     name: "<value>",
     organizationId: "<id>",
   });
@@ -118,7 +122,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { apiKeysCreateAPIKey } from "@factify/sdk/funcs/apiKeysCreateAPIKey.js";
+import { apiKeysCreate } from "@factify/sdk/funcs/apiKeysCreate.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -127,7 +131,7 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await apiKeysCreateAPIKey(factify, {
+  const res = await apiKeysCreate(factify, {
     name: "<value>",
     organizationId: "<id>",
   });
@@ -135,7 +139,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("apiKeysCreateAPIKey failed:", res.error);
+    console.log("apiKeysCreate failed:", res.error);
   }
 }
 
@@ -164,7 +168,7 @@ run();
 | errors.ErrorT              | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## revokeApiKey
+## revoke
 
 Revokes an API key, immediately preventing it from being used for authentication.
 
@@ -179,7 +183,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.apiKeys.revokeApiKey({
+  const result = await factify.apiKeys.revoke({
     apiKeyId: "<id>",
     body: {},
   });
@@ -196,7 +200,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { apiKeysRevokeAPIKey } from "@factify/sdk/funcs/apiKeysRevokeAPIKey.js";
+import { apiKeysRevoke } from "@factify/sdk/funcs/apiKeysRevoke.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -205,7 +209,7 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await apiKeysRevokeAPIKey(factify, {
+  const res = await apiKeysRevoke(factify, {
     apiKeyId: "<id>",
     body: {},
   });
@@ -213,7 +217,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("apiKeysRevokeAPIKey failed:", res.error);
+    console.log("apiKeysRevoke failed:", res.error);
   }
 }
 

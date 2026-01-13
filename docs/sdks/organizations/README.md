@@ -6,11 +6,11 @@ Create and manage organizations.
 
 ### Available Operations
 
-* [listOrganizations](#listorganizations) - List organizations
-* [createOrganization](#createorganization) - Create an organization
-* [getOrganization](#getorganization) - Retrieve an organization
+* [list](#list) - List organizations
+* [create](#create) - Create an organization
+* [get](#get) - Retrieve an organization
 
-## listOrganizations
+## list
 
 List organizations the caller has access to.
 
@@ -25,9 +25,11 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.organizations.listOrganizations();
+  const result = await factify.organizations.list();
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -39,7 +41,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { organizationsListOrganizations } from "@factify/sdk/funcs/organizationsListOrganizations.js";
+import { organizationsList } from "@factify/sdk/funcs/organizationsList.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -48,12 +50,14 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await organizationsListOrganizations(factify);
+  const res = await organizationsList(factify);
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
-    console.log("organizationsListOrganizations failed:", res.error);
+    console.log("organizationsList failed:", res.error);
   }
 }
 
@@ -82,7 +86,7 @@ run();
 | errors.ErrorT              | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## createOrganization
+## create
 
 Creates a new organization. The authenticated user becomes the organization owner.
 
@@ -97,7 +101,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.organizations.createOrganization({
+  const result = await factify.organizations.create({
     name: "<value>",
   });
 
@@ -113,7 +117,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { organizationsCreateOrganization } from "@factify/sdk/funcs/organizationsCreateOrganization.js";
+import { organizationsCreate } from "@factify/sdk/funcs/organizationsCreate.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -122,14 +126,14 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await organizationsCreateOrganization(factify, {
+  const res = await organizationsCreate(factify, {
     name: "<value>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("organizationsCreateOrganization failed:", res.error);
+    console.log("organizationsCreate failed:", res.error);
   }
 }
 
@@ -158,7 +162,7 @@ run();
 | errors.ErrorT              | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## getOrganization
+## get
 
 Retrieve an organization by ID.
 
@@ -173,7 +177,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.organizations.getOrganization({
+  const result = await factify.organizations.get({
     organizationId: "<id>",
   });
 
@@ -189,7 +193,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { organizationsGetOrganization } from "@factify/sdk/funcs/organizationsGetOrganization.js";
+import { organizationsGet } from "@factify/sdk/funcs/organizationsGet.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -198,14 +202,14 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await organizationsGetOrganization(factify, {
+  const res = await organizationsGet(factify, {
     organizationId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("organizationsGetOrganization failed:", res.error);
+    console.log("organizationsGet failed:", res.error);
   }
 }
 

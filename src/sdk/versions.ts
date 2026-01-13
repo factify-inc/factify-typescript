@@ -3,9 +3,9 @@
  */
 
 import { versionsCreate } from "../funcs/versionsCreate.js";
-import { versionsGetVersion } from "../funcs/versionsGetVersion.js";
+import { versionsGet } from "../funcs/versionsGet.js";
 import { versionsList } from "../funcs/versionsList.js";
-import { versionsUpdateVersion } from "../funcs/versionsUpdateVersion.js";
+import { versionsUpdate } from "../funcs/versionsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
@@ -54,11 +54,11 @@ export class Versions extends ClientSDK {
    * @remarks
    * Retrieve a specific version by ID.
    */
-  async getVersion(
+  async get(
     request: operations.GetVersionRequest,
     options?: RequestOptions,
   ): Promise<operations.GetVersionResponse> {
-    return unwrapAsync(versionsGetVersion(
+    return unwrapAsync(versionsGet(
       this,
       request,
       options,
@@ -71,11 +71,11 @@ export class Versions extends ClientSDK {
    * @remarks
    * Update version title and description.
    */
-  async updateVersion(
+  async update(
     request: operations.UpdateVersionRequest,
     options?: RequestOptions,
   ): Promise<operations.UpdateVersionResponse> {
-    return unwrapAsync(versionsUpdateVersion(
+    return unwrapAsync(versionsUpdate(
       this,
       request,
       options,
