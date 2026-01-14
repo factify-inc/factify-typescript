@@ -25,13 +25,15 @@ jobs:
             RELEASE_BODY="No release notes provided."
           fi
           
-          # Escape for JSON: backslashes first, then quotes, then newlines
-          RELEASE_BODY=$(echo "$RELEASE_BODY" | sed 's/\\/\\\\/g' | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')
-          
-          MESSAGE="✅ *SDK Published: ${RELEASE_NAME}*\n\n${RELEASE_BODY}\n\n<${RELEASE_URL}|View Release>"
+          # Build the entire JSON payload using jq to properly escape everything
+          PAYLOAD=$(jq -n \
+            --arg name "$RELEASE_NAME" \
+            --arg body "$RELEASE_BODY" \
+            --arg url "$RELEASE_URL" \
+            '{text: "✅ *SDK Published: \($name)*\n\n\($body)\n\n<\($url)|View Release>"}')
 
           echo "payload<<EOF" >> $GITHUB_OUTPUT
-          echo "{\"text\":\"$MESSAGE\"}" >> $GITHUB_OUTPUT
+          echo "$PAYLOAD" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Send Slack notification

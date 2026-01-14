@@ -28,10 +28,17 @@ runs:
       id: prepare-failure-message
       shell: bash
       run: |
-        MESSAGE="❌ *SDK Generation Failed (Run #${{ inputs.run-number }})*\n\n*SDK:* ${{ inputs.sdk-name }}\n*Repository:* <https://github.com/${{ inputs.repository }}|${{ inputs.repository }}>\n*Commit:* <https://github.com/${{ inputs.repository }}/commit/${{ inputs.commit-sha }}|View commit>\n*Workflow Run:* <${{ inputs.workflow-run-url }}|View Run>"
+        # Build the entire JSON payload using jq to properly escape everything
+        PAYLOAD=$(jq -n \
+          --arg sdk "${{ inputs.sdk-name }}" \
+          --arg repo "${{ inputs.repository }}" \
+          --arg commit "${{ inputs.commit-sha }}" \
+          --arg runUrl "${{ inputs.workflow-run-url }}" \
+          --arg runNum "${{ inputs.run-number }}" \
+          '{text: "❌ *SDK Generation Failed (Run #\($runNum))*\n\n*SDK:* \($sdk)\n*Repository:* <https://github.com/\($repo)|\($repo)>\n*Commit:* <https://github.com/\($repo)/commit/\($commit)|View commit>\n*Workflow Run:* <\($runUrl)|View Run>"}')
 
         echo "payload<<EOF" >> $GITHUB_OUTPUT
-        echo "{\"text\":\"$MESSAGE\"}" >> $GITHUB_OUTPUT
+        echo "$PAYLOAD" >> $GITHUB_OUTPUT
         echo "EOF" >> $GITHUB_OUTPUT
 
     - name: Send failure notification to #prod-release
