@@ -26,7 +26,7 @@ on:
 jobs:
   generate:
     uses: speakeasy-api/sdk-generation-action/.github/workflows/workflow-executor.yaml@v15
-    if: ${{ !inputs.test_failure_notification }}
+    if: ${{ github.event_name != 'workflow_dispatch' || !inputs.test_failure_notification }}
     with:
       force: ${{ github.event.inputs.force || false }}
       mode: direct
@@ -41,7 +41,7 @@ jobs:
     name: Send Slack failure notification
     needs: generate
     runs-on: ubuntu-latest
-    if: failure() || inputs.test_failure_notification
+    if: failure() || (github.event_name == 'workflow_dispatch' && inputs.test_failure_notification)
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -51,19 +51,11 @@ jobs:
         shell: bash
         run: |
           # Use test inputs if provided, otherwise use actual workflow values
-          if [ "${{ inputs.test_failure_notification }}" == "true" ]; then
-            SDK_NAME="TypeScript"
-            REPO="factify-inc/factify-typescript"
-            COMMIT_SHA="${{ github.sha }}"
-            RUN_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-            RUN_NUM="${{ github.run_number }}"
-          else
-            SDK_NAME="TypeScript"
-            REPO="factify-inc/factify-typescript"
-            COMMIT_SHA="${{ github.sha }}"
-            RUN_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-            RUN_NUM="${{ github.run_number }}"
-          fi
+          SDK_NAME="TypeScript"
+          REPO="factify-inc/factify-typescript"
+          COMMIT_SHA="${{ github.sha }}"
+          RUN_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          RUN_NUM="${{ github.run_number }}"
           
           # Build the entire JSON payload using jq to properly escape everything
           PAYLOAD=$(jq -n \
