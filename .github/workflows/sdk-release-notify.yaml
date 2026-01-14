@@ -15,17 +15,13 @@ jobs:
       - name: Prepare message payload
         id: prepare-message
         shell: bash
+        env:
+          RELEASE_NAME: ${{ github.event.release.name }}
+          RELEASE_BODY: ${{ github.event.release.body }}
+          RELEASE_URL: ${{ github.event.release.html_url }}
         run: |
-          RELEASE_NAME="${{ github.event.release.name }}"
-          RELEASE_BODY="${{ github.event.release.body }}"
-          RELEASE_URL="${{ github.event.release.html_url }}"
-          
-          # Handle empty release body
-          if [ -z "$RELEASE_BODY" ]; then
-            RELEASE_BODY="No release notes provided."
-          fi
-          
-          # Build the entire JSON payload using jq to properly escape everything
+          # Use environment variables to safely handle multiline content
+          # jq's --arg properly escapes all content including newlines
           PAYLOAD=$(jq -n \
             --arg name "$RELEASE_NAME" \
             --arg body "$RELEASE_BODY" \
