@@ -51,6 +51,9 @@ jobs:
     runs-on: ubuntu-latest
     if: failure()
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
       - name: Send Slack failure notification
         uses: ./.github/actions/slack-sdk-failure
         with:
