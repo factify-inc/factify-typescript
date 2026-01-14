@@ -15,10 +15,6 @@ on:
       set_version:
         description: optionally set a specific SDK version
         type: string
-      test_failure_notification:
-        description: 'Test failure notification (skip actual generation)'
-        type: boolean
-        default: false
   repository_dispatch:
     types: [openapi-update]
   schedule:
@@ -40,50 +36,17 @@ jobs:
     name: Send Slack failure notification
     needs: generate
     runs-on: ubuntu-latest
-    if: failure() || (github.event_name == 'workflow_dispatch' && inputs.test_failure_notification)
+    if: failure()
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Prepare failure notification payload
-        id: prepare-failure-message
-        shell: bash
-        run: |
-          SDK_NAME="TypeScript"
-          REPO="factify-inc/factify-typescript"
-          COMMIT_SHA="${{ github.sha }}"
-          RUN_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          RUN_NUM="${{ github.run_number }}"
-          
-          # Build the entire JSON payload using jq to properly escape everything
-          PAYLOAD=$(jq -n \
-            --arg sdk "$SDK_NAME" \
-            --arg repo "$REPO" \
-            --arg commit "$COMMIT_SHA" \
-            --arg runUrl "$RUN_URL" \
-            --arg runNum "$RUN_NUM" \
-            '{text: "❌ *SDK Generation Failed (Run #\($runNum))*\n\n*SDK:* \($sdk)\n*Repository:* <https://github.com/\($repo)|\($repo)>\n*Commit:* <https://github.com/\($repo)/commit/\($commit)|View commit>\n*Workflow Run:* <\($runUrl)|View Run>"}')
-
-          echo "payload<<EOF" >> $GITHUB_OUTPUT
-          echo "$PAYLOAD" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-          
-          # For testing: show the payload
-          echo "=== Generated Payload ==="
-          echo "$PAYLOAD" | jq .
-
-      # TESTING: Comment out actual Slack sending, uncomment to test real notifications
-      # - name: Send Slack failure notification
-      #   uses: ./.github/actions/slack-sdk-failure
-      #   with:
-      #     webhook-url: ${{ secrets.FACTOPS_PROD_RELEASE_SLACK_URL }}
-      #     sdk-name: "TypeScript"
-      #     repository: "factify-inc/factify-typescript"
-      #     workflow-run-url: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-      #     commit-sha: ${{ github.sha }}
-      #     run-number: ${{ github.run_number }}
-      
-      - name: Show payload (testing only)
-        run: |
-          echo "Payload that would be sent:"
-          echo "${{ steps.prepare-failure-message.outputs.payload }}" | jq .
+      - name: Send Slack failure notification
+        uses: ./.github/actions/slack-sdk-failure
+        with:
+          webhook-url: ${{ secrets.FACTOPS_PROD_RELEASE_SLACK_URL }}
+          sdk-name: "TypeScript"
+          repository: "factify-inc/factify-typescript"
+          workflow-run-url: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          commit-sha: ${{ github.sha }}
+          run-number: ${{ github.run_number }}

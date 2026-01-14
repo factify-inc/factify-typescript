@@ -6,20 +6,6 @@ permissions:
 on:
   release:
     types: [created]
-  workflow_dispatch:
-    inputs:
-      test_release_name:
-        description: 'Test release name'
-        required: false
-        default: 'v0.3.14-test'
-      test_release_body:
-        description: 'Test release body (supports special chars like quotes, backticks, etc.)'
-        required: false
-        default: 'Test release with special chars: "quotes", `backticks`, and newlines\n\nLine 2'
-      test_release_url:
-        description: 'Test release URL'
-        required: false
-        default: 'https://github.com/factify-inc/factify-typescript/releases/tag/v0.3.14-test'
 
 jobs:
   notify:
@@ -30,16 +16,9 @@ jobs:
         id: prepare-message
         shell: bash
         run: |
-          # Use test inputs if provided (manual trigger), otherwise use release event
-          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
-            RELEASE_NAME="${{ inputs.test_release_name }}"
-            RELEASE_BODY="${{ inputs.test_release_body }}"
-            RELEASE_URL="${{ inputs.test_release_url }}"
-          else
-            RELEASE_NAME="${{ github.event.release.name }}"
-            RELEASE_BODY="${{ github.event.release.body }}"
-            RELEASE_URL="${{ github.event.release.html_url }}"
-          fi
+          RELEASE_NAME="${{ github.event.release.name }}"
+          RELEASE_BODY="${{ github.event.release.body }}"
+          RELEASE_URL="${{ github.event.release.html_url }}"
           
           # Handle empty release body
           if [ -z "$RELEASE_BODY" ]; then
@@ -56,20 +35,10 @@ jobs:
           echo "payload<<EOF" >> $GITHUB_OUTPUT
           echo "$PAYLOAD" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
-          
-          # For testing: show the payload
-          echo "=== Generated Payload ==="
-          echo "$PAYLOAD" | jq .
 
-      # TESTING: Comment out actual Slack sending, uncomment to test real notifications
-      # - name: Send Slack notification
-      #   uses: slackapi/slack-github-action@v1.27.0
-      #   with:
-      #     payload: ${{ steps.prepare-message.outputs.payload }}
-      #   env:
-      #     SLACK_WEBHOOK_URL: ${{ secrets.FACTOPS_PROD_RELEASE_SLACK_URL }}
-      
-      - name: Show payload (testing only)
-        run: |
-          echo "Payload that would be sent:"
-          echo "${{ steps.prepare-message.outputs.payload }}" | jq .
+      - name: Send Slack notification
+        uses: slackapi/slack-github-action@v1.27.0
+        with:
+          payload: ${{ steps.prepare-message.outputs.payload }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.FACTOPS_PROD_RELEASE_SLACK_URL }}
