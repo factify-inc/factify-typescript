@@ -32,29 +32,17 @@ jobs:
       npm_token: ${{ secrets.NPM_TOKEN }}
       speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
 
-  notify:
-    name: Send Slack notification
+  notify-failure:
+    name: Send Slack failure notification
     needs: generate
     runs-on: ubuntu-latest
-    if: always()
+    if: failure()
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-
-      - name: Get SDK version
-        id: get-version
-        run: |
-          VERSION=$(node -p "require('./package.json').version")
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-
-      - name: Send Slack notification
-        uses: ./.github/actions/slack-sdk-publish
+      - name: Send Slack failure notification
+        uses: ./.github/actions/slack-sdk-failure
         with:
           webhook-url: ${{ secrets.FACTOPS_PROD_RELEASE_SLACK_URL }}
           sdk-name: "TypeScript"
-          sdk-version: ${{ steps.get-version.outputs.version }}
-          package-registry: "npm"
           repository: "factify-inc/factify-typescript"
           workflow-run-url: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           run-number: ${{ github.run_number }}
-          publish-status: ${{ needs.generate.result == 'success' && 'success' || 'failure' }}

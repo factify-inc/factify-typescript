@@ -1,0 +1,39 @@
+name: 'Slack SDK Release Notification'
+description: 'Send Slack notification when SDK release is created'
+
+inputs:
+  webhook-url:
+    description: 'Slack webhook URL for #prod-release channel'
+    required: true
+  release-name:
+    description: 'Release name/title'
+    required: true
+  release-body:
+    description: 'Release notes/body in markdown'
+    required: true
+  release-url:
+    description: 'URL to the release page'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Prepare message payload
+      id: prepare-message
+      shell: bash
+      run: |
+        # Escape the release body for JSON (handle newlines and special characters)
+        RELEASE_BODY=$(echo "${{ inputs.release-body }}" | sed 's/\\/\\\\/g' | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')
+        
+        MESSAGE="✅ *SDK Published: ${{ inputs.release-name }}*\n\n${RELEASE_BODY}\n\n<${{ inputs.release-url }}|View Release>"
+
+        echo "payload<<EOF" >> $GITHUB_OUTPUT
+        echo "{\"text\":\"$MESSAGE\"}" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+
+    - name: Send Slack notification
+      uses: slackapi/slack-github-action@v1.27.0
+      with:
+        payload: ${{ steps.prepare-message.outputs.payload }}
+      env:
+        SLACK_WEBHOOK_URL: ${{ inputs.webhook-url }}
