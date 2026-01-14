@@ -22,8 +22,13 @@ runs:
       id: prepare-message
       shell: bash
       run: |
-        # Escape the release body for JSON (handle newlines and special characters)
-        RELEASE_BODY=$(echo "${{ inputs.release-body }}" | sed 's/\\/\\\\/g' | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')
+        # Escape the release body for JSON (handle newlines, quotes, and backslashes)
+        RELEASE_BODY="${{ inputs.release-body }}"
+        if [ -z "$RELEASE_BODY" ]; then
+          RELEASE_BODY="No release notes provided."
+        fi
+        # Escape for JSON: backslashes first, then quotes, then newlines
+        RELEASE_BODY=$(echo "$RELEASE_BODY" | sed 's/\\/\\\\/g' | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')
         
         MESSAGE="✅ *SDK Published: ${{ inputs.release-name }}*\n\n${RELEASE_BODY}\n\n<${{ inputs.release-url }}|View Release>"
 
