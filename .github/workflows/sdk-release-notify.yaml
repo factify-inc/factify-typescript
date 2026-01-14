@@ -6,16 +6,58 @@ permissions:
 on:
   release:
     types: [created]
+  workflow_dispatch:
+    inputs:
+      release-name:
+        description: 'Release name/title (for testing)'
+        required: false
+        default: 'typescript - v0.0.0-test - 2026-01-14 00:00:00'
+      release-body:
+        description: 'Release notes/body (for testing)'
+        required: false
+        default: 'Test release notes'
+      release-url:
+        description: 'Release URL (for testing)'
+        required: false
+        default: 'https://github.com/factify-inc/factify-typescript/releases/tag/v0.0.0-test'
 
 jobs:
   notify:
     name: Send Slack notification
     runs-on: ubuntu-latest
     steps:
+      - name: Prepare message payload
+        id: prepare-message
+        shell: bash
+        run: |
+          # Use event data if available, otherwise use workflow_dispatch inputs
+          if [ "${{ github.event_name }}" = "release" ]; then
+            RELEASE_NAME="${{ github.event.release.name }}"
+            RELEASE_BODY="${{ github.event.release.body }}"
+            RELEASE_URL="${{ github.event.release.html_url }}"
+          else
+            RELEASE_NAME="${{ github.event.inputs.release-name }}"
+            RELEASE_BODY="${{ github.event.inputs.release-body }}"
+            RELEASE_URL="${{ github.event.inputs.release-url }}"
+          fi
+          
+          # Handle empty release body
+          if [ -z "$RELEASE_BODY" ]; then
+            RELEASE_BODY="No release notes provided."
+          fi
+          
+          # Escape for JSON: backslashes first, then quotes, then newlines
+          RELEASE_BODY=$(echo "$RELEASE_BODY" | sed 's/\\/\\\\/g' | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')
+          
+          MESSAGE="✅ *SDK Published: ${RELEASE_NAME}*\n\n${RELEASE_BODY}\n\n<${RELEASE_URL}|View Release>"
+
+          echo "payload<<EOF" >> $GITHUB_OUTPUT
+          echo "{\"text\":\"$MESSAGE\"}" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
       - name: Send Slack notification
-        uses: ./.github/actions/slack-sdk-release
+        uses: slackapi/slack-github-action@v1.27.0
         with:
-          webhook-url: ${{ secrets.FACTOPS_PROD_RELEASE_SLACK_URL }}
-          release-name: ${{ github.event.release.name }}
-          release-body: ${{ github.event.release.body }}
-          release-url: ${{ github.event.release.html_url }}
+          payload: ${{ steps.prepare-message.outputs.payload }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.FACTOPS_PROD_RELEASE_SLACK_URL }}

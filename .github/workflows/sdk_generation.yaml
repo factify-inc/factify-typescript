@@ -15,6 +15,10 @@ on:
       set_version:
         description: optionally set a specific SDK version
         type: string
+      test_failure:
+        description: 'Test failure notification (temporary)'
+        type: boolean
+        default: false
   repository_dispatch:
     types: [openapi-update]
   schedule:
@@ -36,7 +40,7 @@ jobs:
     name: Send Slack failure notification
     needs: generate
     runs-on: ubuntu-latest
-    if: failure()
+    if: failure() || github.event.inputs.test_failure == 'true'
     steps:
       - name: Send Slack failure notification
         uses: ./.github/actions/slack-sdk-failure
