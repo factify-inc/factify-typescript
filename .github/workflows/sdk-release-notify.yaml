@@ -24,7 +24,7 @@ jobs:
           # jq's --arg properly escapes all content including newlines
           PAYLOAD=$(jq -n \
             --arg name "$RELEASE_NAME" \
-            --arg body "${RELEASE_BODY:-No release notes provided.}" \
+            --arg body "$RELEASE_BODY" \
             --arg url "$RELEASE_URL" \
             '{text: "✅ *SDK Published: \($name)*\n\n\($body)\n\n<\($url)|View Release>"}')
 
