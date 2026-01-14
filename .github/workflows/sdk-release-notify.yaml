@@ -39,9 +39,6 @@ jobs:
                     },
                     url: $url
                   }
-                },
-                {
-                  type: "divider"
                 }
               ]
             }')
