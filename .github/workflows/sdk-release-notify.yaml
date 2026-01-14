@@ -1,0 +1,42 @@
+name: SDK Release Notification
+
+permissions:
+  contents: read
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  notify:
+    name: Send Slack notification
+    runs-on: ubuntu-latest
+    steps:
+      - name: Prepare message payload
+        id: prepare-message
+        shell: bash
+        run: |
+          RELEASE_NAME="${{ github.event.release.name }}"
+          RELEASE_BODY="${{ github.event.release.body }}"
+          RELEASE_URL="${{ github.event.release.html_url }}"
+          
+          # Handle empty release body
+          if [ -z "$RELEASE_BODY" ]; then
+            RELEASE_BODY="No release notes provided."
+          fi
+          
+          # Escape for JSON: backslashes first, then quotes, then newlines
+          RELEASE_BODY=$(echo "$RELEASE_BODY" | sed 's/\\/\\\\/g' | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')
+          
+          MESSAGE="✅ *SDK Published: ${RELEASE_NAME}*\n\n${RELEASE_BODY}\n\n<${RELEASE_URL}|View Release>"
+
+          echo "payload<<EOF" >> $GITHUB_OUTPUT
+          echo "{\"text\":\"$MESSAGE\"}" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Send Slack notification
+        uses: slackapi/slack-github-action@v1.27.0
+        with:
+          payload: ${{ steps.prepare-message.outputs.payload }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.FACTOPS_PROD_RELEASE_SLACK_URL }}

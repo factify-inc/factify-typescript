@@ -1,0 +1,42 @@
+name: 'Slack SDK Generation Failure Notification'
+description: 'Send Slack notification when SDK generation fails'
+
+inputs:
+  webhook-url:
+    description: 'Slack webhook URL for #prod-release channel'
+    required: true
+  sdk-name:
+    description: 'Name of the SDK (e.g., TypeScript)'
+    required: true
+  workflow-run-url:
+    description: 'URL to the workflow run'
+    required: true
+  commit-sha:
+    description: 'Git commit SHA'
+    required: true
+  repository:
+    description: 'SDK repository (e.g., factify-inc/factify-typescript)'
+    required: true
+  run-number:
+    description: 'GitHub workflow run number'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Prepare failure message payload
+      id: prepare-failure-message
+      shell: bash
+      run: |
+        MESSAGE="❌ *SDK Generation Failed (Run #${{ inputs.run-number }})*\n\n*SDK:* ${{ inputs.sdk-name }}\n*Repository:* <https://github.com/${{ inputs.repository }}|${{ inputs.repository }}>\n*Commit:* <https://github.com/${{ inputs.repository }}/commit/${{ inputs.commit-sha }}|View commit>\n*Workflow Run:* <${{ inputs.workflow-run-url }}|View Run>"
+
+        echo "payload<<EOF" >> $GITHUB_OUTPUT
+        echo "{\"text\":\"$MESSAGE\"}" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+
+    - name: Send failure notification to #prod-release
+      uses: slackapi/slack-github-action@v1.27.0
+      with:
+        payload: ${{ steps.prepare-failure-message.outputs.payload }}
+      env:
+        SLACK_WEBHOOK_URL: ${{ inputs.webhook-url }}
