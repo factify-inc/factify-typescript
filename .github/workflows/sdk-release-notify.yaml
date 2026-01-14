@@ -16,20 +16,12 @@ jobs:
         id: prepare-message
         shell: bash
         run: |
-          RELEASE_NAME="${{ github.event.release.name }}"
-          RELEASE_BODY="${{ github.event.release.body }}"
-          RELEASE_URL="${{ github.event.release.html_url }}"
-          
-          # Handle empty release body
-          if [ -z "$RELEASE_BODY" ]; then
-            RELEASE_BODY="No release notes provided."
-          fi
-          
-          # Build the entire JSON payload using jq to properly escape everything
+          # Read values directly into jq to avoid bash variable assignment issues with newlines
+          # Use jq to read from GitHub context and handle empty values
           PAYLOAD=$(jq -n \
-            --arg name "$RELEASE_NAME" \
-            --arg body "$RELEASE_BODY" \
-            --arg url "$RELEASE_URL" \
+            --arg name "${{ github.event.release.name }}" \
+            --arg body "${{ github.event.release.body || 'No release notes provided.' }}" \
+            --arg url "${{ github.event.release.html_url }}" \
             '{text: "✅ *SDK Published: \($name)*\n\n\($body)\n\n<\($url)|View Release>"}')
 
           echo "payload<<EOF" >> $GITHUB_OUTPUT
