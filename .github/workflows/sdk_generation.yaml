@@ -23,7 +23,6 @@ jobs:
   test-failure:
     name: Simulate failure for testing
     runs-on: ubuntu-latest
-    if: github.event.inputs.test_failure == 'true'
     steps:
       - name: Simulate failure
         run: exit 1
