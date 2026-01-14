@@ -20,10 +20,6 @@ jobs:
           RELEASE_BODY: ${{ github.event.release.body }}
           RELEASE_URL: ${{ github.event.release.html_url }}
         run: |
-          # Use environment variables to safely handle multiline content
-          # Build Block Kit payload with collapsible release notes section
-          # Using context block for release notes to make them more compact
-          # Note: 'text' field is required by Slack webhooks even when using blocks
           PAYLOAD=$(jq -n \
             --arg name "$RELEASE_NAME" \
             --arg body "$RELEASE_BODY" \
@@ -35,8 +31,19 @@ jobs:
                   type: "section",
                   text: {
                     type: "mrkdwn",
-                    text: "✅ *SDK Published: \($name)*\n<\($url)|View Release>"
+                    text: "✅ *SDK Published: \($name)*"
+                  },
+                  accessory: {
+                    type: "button",
+                    text: {
+                      type: "plain_text",
+                      text: "View Release"
+                    },
+                    url: $url
                   }
+                },
+                {
+                  type: "divider"
                 },
                 {
                   type: "section",
@@ -46,13 +53,11 @@ jobs:
                   }
                 },
                 {
-                  type: "context",
-                  elements: [
-                    {
-                      type: "mrkdwn",
-                      text: "\($body)"
-                    }
-                  ]
+                  type: "section",
+                  text: {
+                    type: "mrkdwn",
+                    text: "\($body)"
+                  }
                 }
               ]
             }')
