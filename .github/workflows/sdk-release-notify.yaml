@@ -23,11 +23,13 @@ jobs:
           # Use environment variables to safely handle multiline content
           # Build Block Kit payload with collapsible release notes section
           # Using context block for release notes to make them more compact
+          # Note: 'text' field is required by Slack webhooks even when using blocks
           PAYLOAD=$(jq -n \
             --arg name "$RELEASE_NAME" \
             --arg body "$RELEASE_BODY" \
             --arg url "$RELEASE_URL" \
             '{
+              text: "✅ SDK Published: \($name)",
               blocks: [
                 {
                   type: "section",
