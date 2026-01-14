@@ -8,11 +8,14 @@ inputs:
   sdk-name:
     description: 'Name of the SDK (e.g., TypeScript)'
     required: true
-  repository:
-    description: 'SDK repository (e.g., factify-inc/factify-typescript)'
-    required: true
   workflow-run-url:
     description: 'URL to the workflow run'
+    required: true
+  commit-sha:
+    description: 'Git commit SHA'
+    required: true
+  repository:
+    description: 'SDK repository (e.g., factify-inc/factify-typescript)'
     required: true
   run-number:
     description: 'GitHub workflow run number'
@@ -25,7 +28,7 @@ runs:
       id: prepare-failure-message
       shell: bash
       run: |
-        MESSAGE="❌ *SDK Generation Failed (Run #${{ inputs.run-number }})*\n\n*SDK:* ${{ inputs.sdk-name }}\n*Repository:* <https://github.com/${{ inputs.repository }}|${{ inputs.repository }}>\n*Workflow Run:* <${{ inputs.workflow-run-url }}|View Run>"
+        MESSAGE="❌ *SDK Generation Failed (Run #${{ inputs.run-number }})*\n\n*SDK:* ${{ inputs.sdk-name }}\n*Repository:* <https://github.com/${{ inputs.repository }}|${{ inputs.repository }}>\n*Commit:* <https://github.com/${{ inputs.repository }}/commit/${{ inputs.commit-sha }}|View commit>\n*Workflow Run:* <${{ inputs.workflow-run-url }}|View Run>"
 
         echo "payload<<EOF" >> $GITHUB_OUTPUT
         echo "{\"text\":\"$MESSAGE\"}" >> $GITHUB_OUTPUT
