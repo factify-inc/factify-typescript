@@ -21,12 +21,39 @@ jobs:
           RELEASE_URL: ${{ github.event.release.html_url }}
         run: |
           # Use environment variables to safely handle multiline content
-          # jq's --arg properly escapes all content including newlines
+          # Build Block Kit payload with collapsible release notes section
+          # Using context block for release notes to make them more compact
           PAYLOAD=$(jq -n \
             --arg name "$RELEASE_NAME" \
             --arg body "$RELEASE_BODY" \
             --arg url "$RELEASE_URL" \
-            '{text: "✅ *SDK Published: \($name)*\n\n*Release Notes:*\n\($body)\n\n<\($url)|View Release>"}')
+            '{
+              blocks: [
+                {
+                  type: "section",
+                  text: {
+                    type: "mrkdwn",
+                    text: "✅ *SDK Published: \($name)*\n<\($url)|View Release>"
+                  }
+                },
+                {
+                  type: "section",
+                  text: {
+                    type: "mrkdwn",
+                    text: "*Release Notes:*"
+                  }
+                },
+                {
+                  type: "context",
+                  elements: [
+                    {
+                      type: "mrkdwn",
+                      text: "\($body)"
+                    }
+                  ]
+                }
+              ]
+            }')
 
           echo "payload<<EOF" >> $GITHUB_OUTPUT
           echo "$PAYLOAD" >> $GITHUB_OUTPUT
