@@ -26,6 +26,7 @@ on:
 jobs:
   generate:
     uses: speakeasy-api/sdk-generation-action/.github/workflows/workflow-executor.yaml@v15
+    if: github.event.inputs.test_failure != 'true'
     with:
       force: ${{ github.event.inputs.force || false }}
       mode: direct
@@ -36,11 +37,19 @@ jobs:
       npm_token: ${{ secrets.NPM_TOKEN }}
       speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
 
+  test-failure:
+    name: Simulate failure for testing
+    runs-on: ubuntu-latest
+    if: github.event.inputs.test_failure == 'true'
+    steps:
+      - name: Simulate failure
+        run: exit 1
+
   notify-failure:
     name: Send Slack failure notification
-    needs: generate
+    needs: [generate, test-failure]
     runs-on: ubuntu-latest
-    if: failure() || github.event.inputs.test_failure == 'true'
+    if: failure()
     steps:
       - name: Send Slack failure notification
         uses: ./.github/actions/slack-sdk-failure
