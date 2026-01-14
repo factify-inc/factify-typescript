@@ -17,12 +17,10 @@ jobs:
         shell: bash
         env:
           RELEASE_NAME: ${{ github.event.release.name }}
-          RELEASE_BODY: ${{ github.event.release.body }}
           RELEASE_URL: ${{ github.event.release.html_url }}
         run: |
           PAYLOAD=$(jq -n \
             --arg name "$RELEASE_NAME" \
-            --arg body "$RELEASE_BODY" \
             --arg url "$RELEASE_URL" \
             '{
               text: "✅ SDK Published: \($name)",
@@ -44,21 +42,6 @@ jobs:
                 },
                 {
                   type: "divider"
-                },
-                {
-                  type: "section",
-                  text: {
-                    type: "mrkdwn",
-                    text: "*Release Notes:*"
-                  }
-                },
-                {
-                  type: "section",
-                  text: {
-                    type: "mrkdwn",
-                    text: "\($body)"
-                  },
-                  expand: false
                 }
               ]
             }')
