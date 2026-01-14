@@ -20,14 +20,21 @@ on:
   schedule:
     - cron: 0 0 * * *
 jobs:
+  test-failure:
+    name: Simulate failure for testing
+    runs-on: ubuntu-latest
+    if: github.event.inputs.test_failure == 'true'
+    steps:
+      - name: Simulate failure
+        run: exit 1
   generate:
     uses: speakeasy-api/sdk-generation-action/.github/workflows/workflow-executor.yaml@v15
+    needs: test-failure
     with:
       force: ${{ github.event.inputs.force || false }}
       mode: direct
       set_version: ${{ github.event.inputs.set_version }}
       target: typescript
-      publish_with_provenance: true
     secrets:
       github_access_token: ${{ secrets.SDK_PUBLISH_GH_TOKEN }}
       speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
