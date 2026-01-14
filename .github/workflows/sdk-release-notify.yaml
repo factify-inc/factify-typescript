@@ -25,10 +25,14 @@ jobs:
             RELEASE_BODY="No release notes provided."
           fi
           
-          # Escape for JSON: backslashes first, then quotes, then newlines
-          RELEASE_BODY=$(echo "$RELEASE_BODY" | sed 's/\\/\\\\/g' | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')
+          # Escape for JSON: use jq to properly escape the string
+          ESCAPED_BODY=$(echo "$RELEASE_BODY" | jq -Rs .)
+          # Remove surrounding quotes from jq output
+          ESCAPED_BODY="${ESCAPED_BODY#\"}"
+          ESCAPED_BODY="${ESCAPED_BODY%\"}"
+          RELEASE_BODY="$ESCAPED_BODY"
           
-          MESSAGE="✅ *SDK Published: ${RELEASE_NAME}*\n\n${RELEASE_BODY}\n\n<${RELEASE_URL}|View Release>"
+          MESSAGE="✅ *SDK Published: ${RELEASE_NAME}*\n\n${ESCAPED_BODY}\n\n<${RELEASE_URL}|View Release>"
 
           echo "payload<<EOF" >> $GITHUB_OUTPUT
           echo "{\"text\":\"$MESSAGE\"}" >> $GITHUB_OUTPUT
