@@ -26,7 +26,7 @@ jobs:
             --arg name "$RELEASE_NAME" \
             --arg body "$RELEASE_BODY" \
             --arg url "$RELEASE_URL" \
-            '{text: "✅ *SDK Published: \($name)*\n\n\($body)\n\n<\($url)|View Release>"}')
+            '{text: "✅ *SDK Published: \($name)*\n\n*Release Notes:*\n\($body)\n\n<\($url)|View Release>"}')
 
           echo "payload<<EOF" >> $GITHUB_OUTPUT
           echo "$PAYLOAD" >> $GITHUB_OUTPUT
