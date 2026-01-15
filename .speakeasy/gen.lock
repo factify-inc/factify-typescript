@@ -1,23 +1,23 @@
 lockVersion: 2.0.0
 id: 23af0391-5a58-495c-b992-941b55f41c78
 management:
-  docChecksum: 57d7c4b0aab129c7e14dd2f23060e933
+  docChecksum: 896f0501198378208ee59a436d4cd1dd
   docVersion: 1.0.0
-  speakeasyVersion: 1.685.0
-  generationVersion: 2.794.1
-  releaseVersion: 0.3.11
-  configChecksum: 1aefdd1e91a48e973572a58c7b1a8d47
+  speakeasyVersion: 1.685.3
+  generationVersion: 2.795.8
+  releaseVersion: 0.3.12
+  configChecksum: d9b8d35135d24fd9f8d900b79a154c13
   repoURL: https://github.com/factify-inc/factify-typescript.git
   installationURL: https://github.com/factify-inc/factify-typescript
   published: true
 persistentEdits:
-  generation_id: 6e4e4809-7801-4ea1-8e27-056b079fd63e
-  pristine_commit_hash: fe526090ee3dcc7703f8aba11960f51731076330
-  pristine_tree_hash: 56266e43bb0e8978c06a94f28858cb500eac2776
+  generation_id: 4a26e7c1-18d6-4073-bb14-90886946911d
+  pristine_commit_hash: d1b2ecfa5a8e6cbde5d9bf5ab6bad69d6688958a
+  pristine_tree_hash: 8aeb06e25a4e89f8af4ea1692a86dbf97a74d2a2
 features:
   typescript:
     additionalDependencies: 0.1.0
-    core: 3.26.20
+    core: 3.26.21
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
@@ -410,12 +410,12 @@ trackedFiles:
     pristine_git_object: 766ea5ba4257419f9fca9da9c6ba895ab05a3f8b
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:bafb9808939a317db56b3c7e5e310716902185b7
-    pristine_git_object: ab883cacd6faf79b373b6b34242474bc95ccccb0
+    last_write_checksum: sha1:5b77eb39196e0dc72f32045e946430ef57bc3e4a
+    pristine_git_object: ae7e244eae1d1e89cf0d55b9bff48e91672f7d9e
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:c0a841e48a393c1c4b490f92fa775af1c39e9b0c
-    pristine_git_object: 9263448fddff82c2531772ffcc8cbf7cd302a869
+    last_write_checksum: sha1:86d98114426ba976178767b71ba84044d1d53fed
+    pristine_git_object: 4408203ff7ff27dc71f1d87ea2bd2478c4076030
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:72dd2a6867a44557b35fa72fe5588efc5d08e8e1
@@ -514,8 +514,8 @@ trackedFiles:
     pristine_git_object: 44be0eae8246521b230e8e711a88eff738fc015d
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:d6a3ba7470c7c5bf6a35b321111fe67dd80235a5
-    pristine_git_object: 19cbdbdc8786ebfd94607367d2fce184cb970c7d
+    last_write_checksum: sha1:af2e8ed33a06a8bcb969fa0dbc5bb9f3c2f89a4f
+    pristine_git_object: 95147391417eb857dba7e3918d2390f72c725cb2
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -594,8 +594,8 @@ trackedFiles:
     pristine_git_object: 2ed5b0bdc0715d4396361f078abc2f704859610b
   src/models/components/createorganizationrequest.ts:
     id: 6a6a666a5463
-    last_write_checksum: sha1:bcd896d55bb08ac0101eaf575e312523a169bb56
-    pristine_git_object: 041ac2c951d821cd6c305b54cb1e206a4484feea
+    last_write_checksum: sha1:22d52bf56cf8615dc9bd450142e21bbf8506db56
+    pristine_git_object: 4ec02c2c3bae61f763b52244036d4736cad3ce5b
   src/models/components/createorganizationresponse.ts:
     id: 08d717b0996f
     last_write_checksum: sha1:d195bac38665cad81b826f38353c6c306d782f57
@@ -1151,21 +1151,4 @@ examples:
         "500":
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Typescript SDK Changes:
-  * `factify.apiKeys.list()`: **Added**
-  * `factify.apiKeys.create()`: **Added**
-  * `factify.apiKeys.revoke()`: **Added**
-  * `factify.versions.get()`: **Added**
-  * `factify.versions.update()`: **Added**
-  * `factify.organizations.list()`: **Added**
-  * `factify.organizations.create()`: **Added**
-  * `factify.organizations.get()`: **Added**
-  * `factify.apiKeys.listApiKeys()`: **Deleted** **Breaking** :warning:
-  * `factify.apiKeys.createApiKey()`: **Deleted** **Breaking** :warning:
-  * `factify.apiKeys.revokeApiKey()`: **Deleted** **Breaking** :warning:
-  * `factify.versions.getVersion()`: **Deleted** **Breaking** :warning:
-  * `factify.versions.updateVersion()`: **Deleted** **Breaking** :warning:
-  * `factify.organizations.listOrganizations()`: **Deleted** **Breaking** :warning:
-  * `factify.organizations.createOrganization()`: **Deleted** **Breaking** :warning:
-  * `factify.organizations.getOrganization()`: **Deleted** **Breaking** :warning:
+releaseNotes: "## Typescript SDK Changes:\n* `factify.organizations.create()`: \n  *  `request.ownerUserId` **Changed**\n"

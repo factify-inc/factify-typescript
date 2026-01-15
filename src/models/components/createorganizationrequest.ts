@@ -21,13 +21,13 @@ export type CreateOrganizationRequest = {
    *  Required when the caller is a service account (service accounts cannot own organizations).
    *  Pattern: user_[0-9a-hjkmnp-tv-z]{26}
    */
-  ownerUserId?: string | undefined;
+  ownerUserId?: string | null | undefined;
 };
 
 /** @internal */
 export type CreateOrganizationRequest$Outbound = {
   name: string;
-  owner_user_id?: string | undefined;
+  owner_user_id?: string | null | undefined;
 };
 
 /** @internal */
@@ -37,7 +37,7 @@ export const CreateOrganizationRequest$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     name: z.string(),
-    ownerUserId: z.optional(z.string()),
+    ownerUserId: z.optional(z.nullable(z.string())),
   }),
   z.transform((v) => {
     return remap$(v, {
