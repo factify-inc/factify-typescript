@@ -3,21 +3,21 @@ id: 23af0391-5a58-495c-b992-941b55f41c78
 management:
   docChecksum: 896f0501198378208ee59a436d4cd1dd
   docVersion: 1.0.0
-  speakeasyVersion: 1.685.3
-  generationVersion: 2.795.8
-  releaseVersion: 0.3.12
-  configChecksum: d9b8d35135d24fd9f8d900b79a154c13
+  speakeasyVersion: 1.686.0
+  generationVersion: 2.796.1
+  releaseVersion: 0.3.13
+  configChecksum: a17b868ac92f98cabe90c3d8d9b7d546
   repoURL: https://github.com/factify-inc/factify-typescript.git
   installationURL: https://github.com/factify-inc/factify-typescript
   published: true
 persistentEdits:
-  generation_id: 4a26e7c1-18d6-4073-bb14-90886946911d
-  pristine_commit_hash: d1b2ecfa5a8e6cbde5d9bf5ab6bad69d6688958a
-  pristine_tree_hash: 8aeb06e25a4e89f8af4ea1692a86dbf97a74d2a2
+  generation_id: fd1473a2-1bdf-48c0-bd27-9adad150bea0
+  pristine_commit_hash: 6953372f7c10853820e277e826da25b7195705c6
+  pristine_tree_hash: ce1bcc6679193b459bc87485b29c73e30abb2be5
 features:
   typescript:
     additionalDependencies: 0.1.0
-    core: 3.26.21
+    core: 3.26.22
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
@@ -410,12 +410,12 @@ trackedFiles:
     pristine_git_object: 766ea5ba4257419f9fca9da9c6ba895ab05a3f8b
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:5b77eb39196e0dc72f32045e946430ef57bc3e4a
-    pristine_git_object: ae7e244eae1d1e89cf0d55b9bff48e91672f7d9e
+    last_write_checksum: sha1:f8165a1e0f1330d7d2978cb71fe285da21f6e8a7
+    pristine_git_object: 2e1e156374a80a09b2adfde5550ee11196750d19
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:86d98114426ba976178767b71ba84044d1d53fed
-    pristine_git_object: 4408203ff7ff27dc71f1d87ea2bd2478c4076030
+    last_write_checksum: sha1:2bf324b5292b5a56e1486f81a5ad8295b028626d
+    pristine_git_object: acde61fbd9deefcd9ec990b2f5542e4d3ca57656
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:72dd2a6867a44557b35fa72fe5588efc5d08e8e1
@@ -514,8 +514,8 @@ trackedFiles:
     pristine_git_object: 44be0eae8246521b230e8e711a88eff738fc015d
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:af2e8ed33a06a8bcb969fa0dbc5bb9f3c2f89a4f
-    pristine_git_object: 95147391417eb857dba7e3918d2390f72c725cb2
+    last_write_checksum: sha1:9560d2254ea7b4033a389af7c68cdbda05bb4b54
+    pristine_git_object: e594f2fae04966beca2dea1f3bf6f4bc781f29d2
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -1151,4 +1151,3 @@ examples:
         "500":
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Typescript SDK Changes:\n* `factify.organizations.create()`: \n  *  `request.ownerUserId` **Changed**\n"
