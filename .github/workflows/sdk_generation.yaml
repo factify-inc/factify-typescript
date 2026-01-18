@@ -25,7 +25,7 @@ jobs:
     with:
       force: ${{ github.event.inputs.force || false }}
       mode: direct
-      set_version: ${{ github.event.inputs.set_version }}
+      set_version: ${{ github.event.inputs.set_version || github.event.client_payload.version || '' }}
       target: typescript
     secrets:
       github_access_token: ${{ secrets.SDK_PUBLISH_GH_TOKEN }}
