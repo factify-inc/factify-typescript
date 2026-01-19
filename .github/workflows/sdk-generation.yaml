@@ -18,12 +18,12 @@ on:
   repository_dispatch:
     types: [openapi-update]
 jobs:
-  promote-to-stable:
-    name: Promote RC to Stable
+  prepare-version:
+    name: Prepare SDK Version
     runs-on: ubuntu-latest
     if: |
       github.event_name == 'repository_dispatch' && 
-      github.event.client_payload.release_type == 'stable'
+      github.event.client_payload.release_type != ''
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -34,7 +34,37 @@ jobs:
       - name: Setup Speakeasy CLI
         uses: speakeasy-api/setup-speakeasy@v1
 
+      - name: Prepare version for RC release
+        if: github.event.client_payload.release_type == 'rc'
+        run: |
+          CURRENT_VERSION=$(yq eval '.typescript.version' .speakeasy/gen.yaml 2>/dev/null || echo "0.0.0")
+          
+          # Check if already in RC mode
+          if [[ "$CURRENT_VERSION" =~ -rc\.[0-9]+$ ]]; then
+            echo "Already in RC mode ($CURRENT_VERSION), Speakeasy will auto-increment during generation"
+            exit 0
+          fi
+          
+          # Not in RC mode - bump patch and set to RC format
+          CURRENT_BASE=${CURRENT_VERSION%-rc*}
+          if [[ "$CURRENT_BASE" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+            MAJOR=${BASH_REMATCH[1]}
+            MINOR=${BASH_REMATCH[2]}
+            PATCH=${BASH_REMATCH[3]}
+            NEXT_PATCH=$((PATCH + 1))
+            RC_VERSION="${MAJOR}.${MINOR}.${NEXT_PATCH}-rc.1"
+            echo "Setting RC version: $RC_VERSION"
+            speakeasy bump -v "$RC_VERSION" -t typescript
+            
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add .speakeasy/gen.yaml .speakeasy/gen.lock
+            git commit -m "chore: set SDK version to RC before generation" || echo "No changes to commit"
+            git push
+          fi
+
       - name: Promote RC to stable
+        if: github.event.client_payload.release_type == 'stable'
         run: |
           speakeasy bump graduate -t typescript
           git config user.name "github-actions[bot]"
@@ -44,8 +74,8 @@ jobs:
           git push
 
   generate:
-    needs: [promote-to-stable]
-    if: always() && (needs.promote-to-stable.result == 'success' || needs.promote-to-stable.result == 'skipped')
+    needs: [prepare-version]
+    if: always() && (needs.prepare-version.result == 'success' || needs.prepare-version.result == 'skipped')
     uses: speakeasy-api/sdk-generation-action/.github/workflows/workflow-executor.yaml@v15
     with:
       force: ${{ github.event.inputs.force || false }}
@@ -55,47 +85,6 @@ jobs:
     secrets:
       github_access_token: ${{ secrets.SDK_PUBLISH_GH_TOKEN }}
       speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
-
-  convert-to-rc:
-    name: Convert to RC Version
-    runs-on: ubuntu-latest
-    needs: [generate]
-    if: |
-      always() && 
-      needs.generate.result == 'success' &&
-      github.event_name == 'repository_dispatch' &&
-      github.event.client_payload.release_type == 'rc'
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.SDK_PUBLISH_GH_TOKEN }}
-
-      - name: Setup Speakeasy CLI
-        uses: speakeasy-api/setup-speakeasy@v1
-
-      - name: Convert stable version to RC
-        run: |
-          # Read the version that Speakeasy generated
-          GENERATED_VERSION=$(yq eval '.management.releaseVersion' .speakeasy/gen.lock 2>/dev/null || echo "")
-          
-          # Check if already in RC mode
-          if [[ "$GENERATED_VERSION" =~ -rc\.[0-9]+$ ]]; then
-            echo "Already in RC mode ($GENERATED_VERSION), no conversion needed"
-            exit 0
-          fi
-          
-          # Convert stable version to RC
-          RC_VERSION="${GENERATED_VERSION}-rc.1"
-          echo "Converting $GENERATED_VERSION to $RC_VERSION"
-          speakeasy bump -v "$RC_VERSION" -t typescript
-          
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .speakeasy/gen.yaml .speakeasy/gen.lock
-          git commit -m "chore: convert SDK version to RC" || echo "No changes to commit"
-          git push
 
   notify-failure:
     name: Send Slack failure notification
