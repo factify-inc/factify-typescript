@@ -25,7 +25,7 @@ jobs:
       github.event_name == 'repository_dispatch' && 
       github.event.client_payload.release_type != ''
     outputs:
-      version: ${{ steps.calculate-version.outputs.version }}
+      version: ${{ steps.get-version.outputs.version }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -36,36 +36,35 @@ jobs:
       - name: Setup Speakeasy CLI
         uses: speakeasy-api/setup-speakeasy@v1
 
+      - name: Set version for RC release
+        if: github.event.client_payload.release_type == 'rc'
+        run: |
+          CURRENT_VERSION=$(yq eval '.typescript.version' .speakeasy/gen.yaml 2>/dev/null || echo "0.0.0")
+          
+          if [[ "$CURRENT_VERSION" =~ -rc\.[0-9]+$ ]]; then
+            # Already in RC mode - bump the RC number
+            RC_NUMBER=$(echo "$CURRENT_VERSION" | sed -n 's/.*-rc\.\([0-9]*\)/\1/p')
+            NEXT_RC=$((RC_NUMBER + 1))
+            BASE_VERSION=${CURRENT_VERSION%-rc*}
+            RC_VERSION="${BASE_VERSION}-rc.${NEXT_RC}"
+            speakeasy bump -v "$RC_VERSION" -t typescript
+          else
+            # Not in RC mode - set to <current_version>-rc.1
+            RC_VERSION="${CURRENT_VERSION}-rc.1"
+            speakeasy bump -v "$RC_VERSION" -t typescript
+          fi
+
       - name: Promote RC to stable
         if: github.event.client_payload.release_type == 'stable'
         run: |
           speakeasy bump graduate -t typescript
 
-      - name: Calculate version
-        id: calculate-version
-        env:
-          RELEASE_TYPE: ${{ github.event.client_payload.release_type }}
+      - name: Get version for generation
+        id: get-version
         run: |
-          CURRENT_VERSION=$(yq eval '.typescript.version' .speakeasy/gen.yaml 2>/dev/null || echo "0.0.0")
-          
-          if [[ "$RELEASE_TYPE" == "rc" ]]; then
-            if [[ "$CURRENT_VERSION" =~ -rc\.[0-9]+$ ]]; then
-              # Already in RC mode - bump the RC number
-              RC_NUMBER=$(echo "$CURRENT_VERSION" | sed -n 's/.*-rc\.\([0-9]*\)/\1/p')
-              NEXT_RC=$((RC_NUMBER + 1))
-              BASE_VERSION=${CURRENT_VERSION%-rc*}
-              VERSION="${BASE_VERSION}-rc.${NEXT_RC}"
-            else
-              # Not in RC mode - create <current_version>-rc.1
-              VERSION="${CURRENT_VERSION}-rc.1"
-            fi
-          else
-            # Stable - use the current version (after graduation)
-            VERSION="$CURRENT_VERSION"
-          fi
-          
+          VERSION=$(yq eval '.typescript.version' .speakeasy/gen.yaml 2>/dev/null || echo "")
           echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "Calculated version: $VERSION"
+          echo "Version for generation: $VERSION"
 
   generate:
     needs: [prepare-version]
