@@ -18,17 +18,87 @@ on:
   repository_dispatch:
     types: [openapi-update]
 jobs:
+  calculate-version:
+    name: Calculate SDK Version
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'repository_dispatch' &&
+      github.event.client_payload.release_type != ''
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    # Always succeed even if skipped (for workflow_dispatch compatibility)
+    continue-on-error: true
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Get current version
+        id: current
+        run: |
+          CURRENT_VERSION=$(node -p "require('./package.json').version" 2>/dev/null || echo "0.0.0")
+          echo "current=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+          echo "Current SDK version: $CURRENT_VERSION"
+
+      - name: Calculate version based on release type
+        id: version
+        run: |
+          CURRENT="${{ steps.current.outputs.current }}"
+          RELEASE_TYPE="${{ github.event.client_payload.release_type }}"
+          
+          # Parse version: X.Y.Z or X.Y.Z-rc.N
+          if [[ $CURRENT =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)(-rc\.([0-9]+))?$ ]]; then
+            MAJOR=${BASH_REMATCH[1]}
+            MINOR=${BASH_REMATCH[2]}
+            PATCH=${BASH_REMATCH[3]}
+            RC_NUM=${BASH_REMATCH[5]}
+            
+            if [ "$RELEASE_TYPE" = "rc" ]; then
+              # Calculate RC version
+              if [ -n "$RC_NUM" ]; then
+                # Already an RC, increment RC number
+                NEW_RC=$((RC_NUM + 1))
+                NEW_VERSION="${MAJOR}.${MINOR}.${PATCH}-rc.${NEW_RC}"
+              else
+                # Stable version, create first RC for next patch
+                NEW_PATCH=$((PATCH + 1))
+                NEW_VERSION="${MAJOR}.${MINOR}.${NEW_PATCH}-rc.1"
+              fi
+            elif [ "$RELEASE_TYPE" = "stable" ]; then
+              # Promote RC to stable
+              if [ -n "$RC_NUM" ]; then
+                # RC version, promote to stable (remove RC suffix)
+                NEW_VERSION="${MAJOR}.${MINOR}.${PATCH}"
+              else
+                # Already stable, use as-is
+                NEW_VERSION="${MAJOR}.${MINOR}.${PATCH}"
+              fi
+            else
+              echo "Error: Unknown release_type: $RELEASE_TYPE"
+              exit 1
+            fi
+          else
+            echo "Error: Could not parse version $CURRENT"
+            exit 1
+          fi
+          
+          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "Calculated version: $NEW_VERSION (release_type: $RELEASE_TYPE)"
+
   generate:
-    # Only generate SDK when explicitly triggered with version info
-    # Skip scheduled runs and repository_dispatch without version to prevent accidental stable releases
+    # Only generate SDK when explicitly triggered
+    # For repository_dispatch: require release_type to be set and calculate-version to succeed
+    # For workflow_dispatch: allow manual triggers with optional set_version
     if: |
       github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'repository_dispatch' && github.event.client_payload.version != '')
+      (github.event_name == 'repository_dispatch' && github.event.client_payload.release_type != '')
+    needs: [calculate-version]
     uses: speakeasy-api/sdk-generation-action/.github/workflows/workflow-executor.yaml@v15
     with:
       force: ${{ github.event.inputs.force || false }}
       mode: direct
-      set_version: ${{ github.event.inputs.set_version || github.event.client_payload.version || '' }}
+      set_version: ${{ github.event.inputs.set_version || (needs.calculate-version.outputs.version != '' && needs.calculate-version.outputs.version) || '' }}
       target: typescript
     secrets:
       github_access_token: ${{ secrets.SDK_PUBLISH_GH_TOKEN }}
