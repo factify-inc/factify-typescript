@@ -15,13 +15,6 @@ on:
       set_version:
         description: optionally set a specific SDK version
         type: string
-      release_type:
-        description: 'TESTING ONLY: Simulate repository_dispatch release_type (rc or stable)'
-        type: choice
-        options:
-          - ''
-          - 'rc'
-          - 'stable'
   repository_dispatch:
     types: [openapi-update]
 jobs:
@@ -29,8 +22,8 @@ jobs:
     name: Prepare SDK Version
     runs-on: ubuntu-latest
     if: |
-      (github.event_name == 'repository_dispatch' && github.event.client_payload.release_type != '') ||
-      (github.event_name == 'workflow_dispatch' && github.event.inputs.release_type != '')
+      github.event_name == 'repository_dispatch' && 
+      github.event.client_payload.release_type != ''
     outputs:
       version: ${{ steps.get-version.outputs.version }}
     steps:
@@ -44,11 +37,7 @@ jobs:
         run: curl -fsSL https://go.speakeasy.com/cli-install.sh | sh
 
       - name: Set version for RC release
-        env:
-          RELEASE_TYPE: ${{ github.event.client_payload.release_type || github.event.inputs.release_type }}
-        if: |
-          (github.event.client_payload.release_type == 'rc') ||
-          (github.event.inputs.release_type == 'rc')
+        if: github.event.client_payload.release_type == 'rc'
         run: |
           CURRENT_VERSION=$(yq eval '.typescript.version' .speakeasy/gen.yaml 2>/dev/null)
           if [[ -z "$CURRENT_VERSION" ]]; then
@@ -70,23 +59,16 @@ jobs:
           fi
 
       - name: Promote RC to stable
-        env:
-          RELEASE_TYPE: ${{ github.event.client_payload.release_type || github.event.inputs.release_type }}
-        if: |
-          (github.event.client_payload.release_type == 'stable') ||
-          (github.event.inputs.release_type == 'stable')
+        if: github.event.client_payload.release_type == 'stable'
         run: |
           speakeasy bump graduate -t typescript
 
       - name: Get version for generation
         id: get-version
-        env:
-          RELEASE_TYPE: ${{ github.event.client_payload.release_type || github.event.inputs.release_type }}
         run: |
           VERSION=$(yq eval '.typescript.version' .speakeasy/gen.yaml 2>/dev/null || echo "")
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "Version for generation: $VERSION"
-          echo "Release type: $RELEASE_TYPE"
 
   generate:
     needs: [prepare-version]
