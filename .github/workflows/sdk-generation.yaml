@@ -34,12 +34,16 @@ jobs:
           token: ${{ secrets.SDK_PUBLISH_GH_TOKEN }}
 
       - name: Setup Speakeasy CLI
-        uses: speakeasy-api/setup-speakeasy@v1
+        run: curl -fsSL https://go.speakeasy.com/cli-install.sh | sh
 
       - name: Set version for RC release
         if: github.event.client_payload.release_type == 'rc'
         run: |
-          CURRENT_VERSION=$(yq eval '.typescript.version' .speakeasy/gen.yaml 2>/dev/null || echo "0.0.0")
+          CURRENT_VERSION=$(yq eval '.typescript.version' .speakeasy/gen.yaml 2>/dev/null)
+          if [[ -z "$CURRENT_VERSION" ]]; then
+            echo "Error: Failed to determine current TypeScript SDK version from .speakeasy/gen.yaml"
+            exit 1
+          fi
           
           if [[ "$CURRENT_VERSION" =~ -rc\.[0-9]+$ ]]; then
             # Already in RC mode - bump the RC number
