@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 23af0391-5a58-495c-b992-941b55f41c78
 management:
-  docChecksum: 896f0501198378208ee59a436d4cd1dd
+  docChecksum: 1ddc6ce92d508cbb138d0e55d753a009
   docVersion: 1.0.0
-  speakeasyVersion: 1.686.0
-  generationVersion: 2.796.1
-  releaseVersion: 0.3.13
-  configChecksum: a17b868ac92f98cabe90c3d8d9b7d546
+  speakeasyVersion: 1.695.0
+  generationVersion: 2.799.0
+  releaseVersion: 0.3.13-rc.1
+  configChecksum: ac7743f3d05819f5cc13af0d4e1ef7d1
   repoURL: https://github.com/factify-inc/factify-typescript.git
   installationURL: https://github.com/factify-inc/factify-typescript
   published: true
 persistentEdits:
-  generation_id: fd1473a2-1bdf-48c0-bd27-9adad150bea0
-  pristine_commit_hash: 6953372f7c10853820e277e826da25b7195705c6
-  pristine_tree_hash: ce1bcc6679193b459bc87485b29c73e30abb2be5
+  generation_id: 3528561d-bb4a-4570-ab5a-76d04fa47370
+  pristine_commit_hash: b70fb4885e210e4b94b8f7d01d033266f3659df0
+  pristine_tree_hash: e032d66650990f52572be92477c1e4dac6a40121
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -104,6 +104,10 @@ trackedFiles:
     id: 2ce26e8f2f1d
     last_write_checksum: sha1:af4167c749a58a1c17279388936a8fc4d7573cb7
     pristine_git_object: bae4d4cdf856e5b49484a31c37f719a3807651c4
+  docs/models/components/dailyusage.md:
+    id: f0fa4dc8fbd8
+    last_write_checksum: sha1:0fb6e0dc70c35666509a70fde15059b0b818d331
+    pristine_git_object: c11d737c0a0caca61974315eaff682f2e83169ef
   docs/models/components/document.md:
     id: 73a00acee39f
     last_write_checksum: sha1:d460b0faf78b9d36bd3b855269606f5e450a26c8
@@ -128,10 +132,18 @@ trackedFiles:
     id: 030d7132f935
     last_write_checksum: sha1:2cbee4599852ba779e9cb17ea74d661a60a64ba9
     pristine_git_object: fa425f2624e97d83a3fe80bc667352853cde95ec
+  docs/models/components/getorganizationquotaresponse.md:
+    id: e0d801791477
+    last_write_checksum: sha1:c678b2720e419eddba821d14cd5dc75a629f509e
+    pristine_git_object: 737ab4750be2cf278d643b5e23806de4f4a2b518
   docs/models/components/getorganizationresponse.md:
     id: 0185e6d5b389
     last_write_checksum: sha1:78a3278aac471b92d50dc0c9e7c96b5c803070bc
     pristine_git_object: 3e59c530b3cf74ba45e5125cfb442317ce2c93bb
+  docs/models/components/getusagehistoryresponse.md:
+    id: ac418c9a9e9c
+    last_write_checksum: sha1:9177ae77ec042bce29d237cf712231ec0f924eb8
+    pristine_git_object: 23cc6f038b699dde658fa1cb549b3b1294943ca4
   docs/models/components/httpmetadata.md:
     id: 728948c70168
     last_write_checksum: sha1:7956bde162616b0b61faff2480d9c144f5214967
@@ -160,6 +172,10 @@ trackedFiles:
     id: 288ce68f18e3
     last_write_checksum: sha1:09299c2e4b466e624ffeb613b1b8e847e0f78523
     pristine_git_object: edd732d181f4dc0f2ff048f036dd5a35b165c136
+  docs/models/components/organizationquota.md:
+    id: 7e4536844a57
+    last_write_checksum: sha1:ce095a9c2c097b6ece7f2d60ee665f1442d5a77a
+    pristine_git_object: d00a555d7d130e8c38f6cbaab3051b0b94fbeb93
   docs/models/components/pagination.md:
     id: c63182f7c460
     last_write_checksum: sha1:add082401ee6af13ba552eff29969ebb76d6df89
@@ -172,6 +188,10 @@ trackedFiles:
     id: 1aaf8b2e90b6
     last_write_checksum: sha1:62cb2566372c7cfbf66397adc28b0088b7b2ea01
     pristine_git_object: e621f16870a8e408ce7a0c09f20c6b27c3c89add
+  docs/models/components/quotatier.md:
+    id: a2e3a1e6b753
+    last_write_checksum: sha1:2c86034c71c195b0eb065c3ea28d9841d8364935
+    pristine_git_object: 8e6d226a332d8b31c16ec2289c7c0b0b8894ff28
   docs/models/components/revokeapikeyresponse.md:
     id: 4a7e638a9d80
     last_write_checksum: sha1:8101da5660231e2c21774d1b6f18b1d8900c9c67
@@ -268,6 +288,14 @@ trackedFiles:
     id: ae8156997719
     last_write_checksum: sha1:244d9ef44f559dc757805f9da89372e595ef9c2c
     pristine_git_object: bc7db174648fac506fd1f5397505c9df3fe32293
+  docs/models/operations/getorganizationquotarequest.md:
+    id: 5322762dc76b
+    last_write_checksum: sha1:f77a518fc9c3ac799280906e5f7bb7e9d23eb141
+    pristine_git_object: 40fb478b005a04c5917c4e634db2fa16eb4e12a2
+  docs/models/operations/getorganizationquotaresponse.md:
+    id: 6926a8ccdb00
+    last_write_checksum: sha1:6697ae057a5ab05ee681a4cd931bbcf26b8e3b34
+    pristine_git_object: c5aa424263814df36af42f9052116a817e841a38
   docs/models/operations/getorganizationrequest.md:
     id: c7e05be46ac1
     last_write_checksum: sha1:b255e08b1588026cb3d1c438e1570ec3c8e05e62
@@ -276,6 +304,14 @@ trackedFiles:
     id: bd74c4cb8631
     last_write_checksum: sha1:571280442067f82a2b97e1d8ffd091d55eb85de0
     pristine_git_object: c415365a662e7dd876616efee246fada327df73d
+  docs/models/operations/getusagehistoryrequest.md:
+    id: 22d0b97999e4
+    last_write_checksum: sha1:47753233f8c7c6276788a5d24ca9f9869934585b
+    pristine_git_object: 9d936169b11e114fcfa6d7f0f1ebad7c03327e10
+  docs/models/operations/getusagehistoryresponse.md:
+    id: 88b256ed803e
+    last_write_checksum: sha1:2c1c8ea8616ee3adb92b4f0979e6d8ed194e34c8
+    pristine_git_object: 560f5c5f32154ae1f8a403d10a3565fd38f4f32e
   docs/models/operations/getversionrequest.md:
     id: 03b7b200f992
     last_write_checksum: sha1:1212fb9e78d6aa4b68c48dfd00a444e7a5f89492
@@ -384,6 +420,10 @@ trackedFiles:
     id: 636269b04e57
     last_write_checksum: sha1:37876a89621f8cb33b416397746181188dab8aaf
     pristine_git_object: f2e23baafed1b5e54da5b41c7f8380f87135bd9c
+  docs/sdks/quota/README.md:
+    id: 16000cc5585d
+    last_write_checksum: sha1:b1ea11b3cdae6e16c105a1595993954ef49501c4
+    pristine_git_object: e73f717414063e71dad0a1d3bfecbebe31054301
   docs/sdks/versions/README.md:
     id: 83ec5ed3804d
     last_write_checksum: sha1:109616bb304f4b9b6746e9bb73b98d1671f31775
@@ -410,12 +450,12 @@ trackedFiles:
     pristine_git_object: 766ea5ba4257419f9fca9da9c6ba895ab05a3f8b
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:f8165a1e0f1330d7d2978cb71fe285da21f6e8a7
-    pristine_git_object: 2e1e156374a80a09b2adfde5550ee11196750d19
+    last_write_checksum: sha1:087ebdc77ac3fc721782fb354bbe74757c75ba47
+    pristine_git_object: 074baffd7f91e86af9ad0f26cf94cd57eabe15f8
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:2bf324b5292b5a56e1486f81a5ad8295b028626d
-    pristine_git_object: acde61fbd9deefcd9ec990b2f5542e4d3ca57656
+    last_write_checksum: sha1:d76911977f3dfcb9f4c2d514bbcff8c01e4da2d8
+    pristine_git_object: 88c95fd2e46b80be3a348cbaf8ff68dbcff28350
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:72dd2a6867a44557b35fa72fe5588efc5d08e8e1
@@ -476,6 +516,14 @@ trackedFiles:
     id: 1961a42d4b35
     last_write_checksum: sha1:3480949ea1d3858d5b7c741bf84ade7df3c37731
     pristine_git_object: aeda4c7bca3850bd538a6c64bcfd077de0ca67b9
+  src/funcs/quotaGetOrganizationQuota.ts:
+    id: c9675a440ff9
+    last_write_checksum: sha1:b3a7348a334f59a07920e55bbe0833ff3e453ec2
+    pristine_git_object: 5974dcc71acd483be59588fd443be9b97e696c3a
+  src/funcs/quotaGetUsageHistory.ts:
+    id: 5c31b32eb723
+    last_write_checksum: sha1:de3d953402555e27b717fb38b42015ad6f1e086e
+    pristine_git_object: d642606d6552bb58e1f6071706759f085bd0ccb1
   src/funcs/versionsCreate.ts:
     id: 21b7cdaed201
     last_write_checksum: sha1:6a05cb17f795b894793d81d575e426dc2d99869d
@@ -514,8 +562,8 @@ trackedFiles:
     pristine_git_object: 44be0eae8246521b230e8e711a88eff738fc015d
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:9560d2254ea7b4033a389af7c68cdbda05bb4b54
-    pristine_git_object: e594f2fae04966beca2dea1f3bf6f4bc781f29d2
+    last_write_checksum: sha1:59235ef604a49774e1d7af0963b03aea21dd72a4
+    pristine_git_object: dffd6fe7edc2afe13757aadbac0fb6020915c10c
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -604,6 +652,10 @@ trackedFiles:
     id: 1960c1ecdb0c
     last_write_checksum: sha1:3e1d5b923d16e3cbaa8f475c6eb34fa23318fd70
     pristine_git_object: 634f0ac18ba839b747685ac59cca0dbe2dffe42e
+  src/models/components/dailyusage.ts:
+    id: bc431e3279dc
+    last_write_checksum: sha1:ab662e1a3d38e0e4c28919de75a75237f5adff27
+    pristine_git_object: b91ed61a92d34047d23370d016f0f5461e41278c
   src/models/components/document.ts:
     id: 908fbd640ca2
     last_write_checksum: sha1:86c351119f600c4eee5fc0f1b1d65de8fa01911e
@@ -628,18 +680,26 @@ trackedFiles:
     id: ff0502d1d3ca
     last_write_checksum: sha1:bc674c4946238a8c641eba63bb34faa805d4e60d
     pristine_git_object: 8cf60f7bfb61c22febdac3f1d0ce9f6831ae0a0e
+  src/models/components/getorganizationquotaresponse.ts:
+    id: 2ed8c3c01a36
+    last_write_checksum: sha1:2de8a604f582d52a6872c8380e0eeabb6ffc2feb
+    pristine_git_object: 2b2aafa680daca431f12ce2f4026e78d04c1c20d
   src/models/components/getorganizationresponse.ts:
     id: 5f0b24b570fd
     last_write_checksum: sha1:db766a978d2d0230f937054750ed68adeda7a6fa
     pristine_git_object: 458b0070bdef2e87ea3d3cc35b5555310e4c32c4
+  src/models/components/getusagehistoryresponse.ts:
+    id: b497d982a186
+    last_write_checksum: sha1:67709a50926c9b0476fb71f3ad6c7217b608388b
+    pristine_git_object: fe32492c8d6fae2c45e38e9786ac43f83c361fb1
   src/models/components/httpmetadata.ts:
     id: 5a6897f2bb50
     last_write_checksum: sha1:0ef8a36a53dff4390d62d0c777e3d5a7d246cf2f
     pristine_git_object: 52ea8912b0a1f17b36f54e6bcba97fb6e58b6cb2
   src/models/components/index.ts:
     id: 0aa842dce54d
-    last_write_checksum: sha1:5e9b115465ca2c4eaa99b7500252a25d6bf1f47c
-    pristine_git_object: c57a268a42f1df1a524f37f8dd6df0d2ca856feb
+    last_write_checksum: sha1:764586d3e1998c3f0cc0301af87e3ae2735c2d5d
+    pristine_git_object: 9e07d65db0f48c95452512f25afdfbc089452691
   src/models/components/listapikeysresponse.ts:
     id: a366d37c816c
     last_write_checksum: sha1:1021c1227e06f12213ff3ac4b31d00860620530a
@@ -664,6 +724,10 @@ trackedFiles:
     id: 67dc659ba656
     last_write_checksum: sha1:0f0e701cfcdaacbc17786b89cc6eb111ba280cae
     pristine_git_object: f590e46ff560912068311f6247e5fa68119eeb2a
+  src/models/components/organizationquota.ts:
+    id: 661d827d0ab7
+    last_write_checksum: sha1:1ba0bf493bb08e3e48899f086f39c7ef87b72843
+    pristine_git_object: da972f8036b4740ef6b939771c94ecd7b1d20c17
   src/models/components/pagination.ts:
     id: "251089943250"
     last_write_checksum: sha1:cfdd7f713e8557564ce5485e5b30f85c63633326
@@ -676,6 +740,10 @@ trackedFiles:
     id: 684d4885f374
     last_write_checksum: sha1:a2cab506ad73337ad2677fb386438e0bda5237dc
     pristine_git_object: b20d2857c561b12a3011c660b28ccfb1c81d42cb
+  src/models/components/quotatier.ts:
+    id: 45afcf8af266
+    last_write_checksum: sha1:262de199da3c7d089cd996c3052cedfd4d856e60
+    pristine_git_object: 801a6819d70dc7562ade488560881ed995338826
   src/models/components/revokeapikeyresponse.ts:
     id: 4a48d8068dbd
     last_write_checksum: sha1:bf21f7823fe3ae3b715eb7387a9140cdc564d691
@@ -768,14 +836,22 @@ trackedFiles:
     id: 69c6388d89bb
     last_write_checksum: sha1:8520502dac95e3bdd3e9f1680b4ba7e5984c3d84
     pristine_git_object: e0a3e4a72743097a53d9d59ef8de4cee3ceda5e5
+  src/models/operations/getorganizationquota.ts:
+    id: f3ff3065186f
+    last_write_checksum: sha1:b31737f285b2bd7a98c51b94cbfbdd035bb97e03
+    pristine_git_object: b284348db58164d38a61c42c190b40e1cb9633e2
+  src/models/operations/getusagehistory.ts:
+    id: 13778e3b54c9
+    last_write_checksum: sha1:ee85f7a02c1bb6ebe8071c8bc37b6daabb37fbe4
+    pristine_git_object: c08a77a1e15b9378bee80a2df2df1bb4542c8d44
   src/models/operations/getversion.ts:
     id: 41c649b0a472
     last_write_checksum: sha1:d7ec752e8be948dbd8dad62453290f0b35aa379c
     pristine_git_object: 0eb85822e49ade582c1dc5501bf777c43d179d57
   src/models/operations/index.ts:
     id: 0d9ffaf774d2
-    last_write_checksum: sha1:288b239d933adecd3aca59e465ec796a65dc0599
-    pristine_git_object: 7227dde011b0ecc10beb8d8f7cc10a4aef9558db
+    last_write_checksum: sha1:530e86455a349ca9684298ed0df0f9c6d4b4727a
+    pristine_git_object: f820bbc6331302a921c8cbf452b9c800131c034f
   src/models/operations/listapikeys.ts:
     id: f6a5b994cd87
     last_write_checksum: sha1:6c95f37cf596537a65f943b27818bf154983fec6
@@ -832,10 +908,14 @@ trackedFiles:
     id: 56c143102e2a
     last_write_checksum: sha1:3442acf9ea51dc4b91b0159f52e51e05614260a3
     pristine_git_object: 36e4a2f5d5ad056cfb63bd41b1323a0838f5e4e3
+  src/sdk/quota.ts:
+    id: c5d22c735f1a
+    last_write_checksum: sha1:b9f8220599ba4f2f920f766f4c1a111b1906f508
+    pristine_git_object: 67e323fec78f7c8ae1b37e41b61d44d0a7076584
   src/sdk/sdk.ts:
     id: 784571af2f69
-    last_write_checksum: sha1:02fa13f709e327e2377eec26b64d9c788d113509
-    pristine_git_object: b48470f244521e613bbded8d4039b09ca46c059a
+    last_write_checksum: sha1:6f1429a99d39a453c4094a24d680134b610ef83f
+    pristine_git_object: f91aef2e8633521a895f253e1c84f23e6946bcbf
   src/sdk/versions.ts:
     id: c70305fd6acb
     last_write_checksum: sha1:8b34eb416215b6801e2ce963a256b22dc7d770b1
@@ -909,6 +989,19 @@ examples:
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
         "500":
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+    speakeasy-default-list-documents:
+      parameters:
+        query:
+          page_token: "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0"
+      responses:
+        "200":
+          application/json: {"items": [{"access_level": "private", "created_at": "2024-04-10T01:05:36.575Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "current_version": {"id": "ver_01h2abcd1234efgh5678jkmnpt"}, "description": "Quarterly financial report for Q4 2024", "id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "processing_status": "ready", "title": "Q4 2024 Financial Report", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41"}], "pagination": {"next_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0", "prev_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJwcmV2In0"}}
+        "400":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 256734, "type": "authorization_error"}}
+        "429":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 256734, "type": "authorization_error"}}
+        "500":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 256734, "type": "authorization_error"}}
   createDocument:
     validation_error:
       requestBody:
@@ -920,6 +1013,18 @@ examples:
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
         "500":
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+    speakeasy-default-create-document:
+      requestBody:
+        multipart/form-data: {"payload": "x-file: example.file", "title": "<value>"}
+      responses:
+        "200":
+          application/json: {"document": {"access_level": "private", "created_at": "2024-02-28T19:09:19.845Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "current_version": {"id": "ver_01h2abcd1234efgh5678jkmnpt"}, "description": "Quarterly financial report for Q4 2024", "id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "processing_status": "failed", "title": "Q4 2024 Financial Report", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41"}}
+        "400":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 159870, "type": "authorization_error"}}
+        "429":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 159870, "type": "authorization_error"}}
+        "500":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 159870, "type": "authorization_error"}}
   getDocument:
     validation_error:
       parameters:
@@ -932,6 +1037,19 @@ examples:
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
         "500":
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+    speakeasy-default-get-document:
+      parameters:
+        path:
+          document_id: "<id>"
+      responses:
+        "200":
+          application/json: {"document": {"access_level": "organization", "created_at": "2025-08-28T09:44:27.862Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "current_version": {"id": "ver_01h2abcd1234efgh5678jkmnpt"}, "description": "Quarterly financial report for Q4 2024", "id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "processing_status": "processing", "title": "Q4 2024 Financial Report", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41"}}
+        "400":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 155913, "type": "not_found_error"}}
+        "429":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 155913, "type": "not_found_error"}}
+        "500":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 155913, "type": "not_found_error"}}
   updateDocument:
     validation_error:
       parameters:
@@ -946,6 +1064,21 @@ examples:
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
         "500":
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+    speakeasy-default-update-document:
+      parameters:
+        path:
+          document_id: "<id>"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"document": {"access_level": "public", "created_at": "2024-08-12T11:38:39.237Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "current_version": {"id": "ver_01h2abcd1234efgh5678jkmnpt"}, "description": "Quarterly financial report for Q4 2024", "id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "processing_status": "failed", "title": "Q4 2024 Financial Report", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41"}}
+        "400":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": null, "retry_after": 521859, "type": "not_found_error"}}
+        "429":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": null, "retry_after": 521859, "type": "not_found_error"}}
+        "500":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": null, "retry_after": 521859, "type": "not_found_error"}}
   generateDocumentEntryPage:
     validation_error:
       parameters:
@@ -958,6 +1091,19 @@ examples:
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
         "500":
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+    speakeasy-default-generate-document-entry-page:
+      parameters:
+        path:
+          document_id: "<id>"
+      responses:
+        "200":
+          application/json: {"download_url": "https://storage.factify.com/entry-pages/abc123.pdf?token=xyz"}
+        "400":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 784276, "type": "rate_limit_error"}}
+        "429":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 784276, "type": "rate_limit_error"}}
+        "500":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 784276, "type": "rate_limit_error"}}
   listDocumentPolicies:
     validation_error:
       parameters:
@@ -972,6 +1118,21 @@ examples:
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
         "500":
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+    speakeasy-default-list-document-policies:
+      parameters:
+        path:
+          document_id: "<id>"
+        query:
+          page_token: "eyJpZCI6InBvbF8wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0"
+      responses:
+        "200":
+          application/json: {"items": [{"attached_at": "2025-07-11T12:22:46.808Z", "attached_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "document_id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "policy": {"created_at": "2025-12-15T12:15:25.816Z", "id": "pol_01h2xcejqtf2nbrexx3vqjhp41", "name": "GDPR Compliance Policy"}}], "pagination": {"next_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0", "prev_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJwcmV2In0"}}
+        "400":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 424376, "type": "authentication_error"}}
+        "429":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 424376, "type": "authentication_error"}}
+        "500":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 424376, "type": "authentication_error"}}
   attachDocumentPolicy:
     validation_error:
       parameters:
@@ -986,6 +1147,21 @@ examples:
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
         "500":
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+    speakeasy-default-attach-document-policy:
+      parameters:
+        path:
+          document_id: "<id>"
+      requestBody:
+        application/json: {"policy_id": "<id>"}
+      responses:
+        "200":
+          application/json: {"attached_at": "2026-02-17T07:57:08.704Z", "attached_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "document_id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "policy": {"created_at": "2025-02-20T21:52:12.756Z", "id": "pol_01h2xcejqtf2nbrexx3vqjhp41", "name": "GDPR Compliance Policy"}}
+        "400":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 602258, "type": "rate_limit_error"}}
+        "429":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 602258, "type": "rate_limit_error"}}
+        "500":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 602258, "type": "rate_limit_error"}}
   detachDocumentPolicy:
     validation_error:
       parameters:
@@ -999,6 +1175,20 @@ examples:
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
         "500":
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+    speakeasy-default-detach-document-policy:
+      parameters:
+        path:
+          document_id: "<id>"
+          policy_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 17774, "type": "authorization_error"}}
+        "429":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 17774, "type": "authorization_error"}}
+        "500":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 17774, "type": "authorization_error"}}
   listDocumentVersions:
     validation_error:
       parameters:
@@ -1013,6 +1203,21 @@ examples:
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
         "500":
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+    speakeasy-default-list-document-versions:
+      parameters:
+        path:
+          document_id: "<id>"
+        query:
+          page_token: "eyJpZCI6InZlcl8wMWgyYWJjZDEyMzRlZmdoNTY3OGprbW5wdCIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0"
+      responses:
+        "200":
+          application/json: {"items": [{"created_at": "2026-05-29T06:29:21.750Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "document_id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "id": "ver_01h2abcd1234efgh5678jkmnpt", "processing_status": "ready", "title": "Version 2.0", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41/v/1"}], "pagination": {"next_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0", "prev_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJwcmV2In0"}}
+        "400":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": null, "type": "api_error"}}
+        "429":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": null, "type": "api_error"}}
+        "500":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": null, "type": "api_error"}}
   createDocumentVersion:
     validation_error:
       parameters:
@@ -1027,6 +1232,21 @@ examples:
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
         "500":
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+    speakeasy-default-create-document-version:
+      parameters:
+        path:
+          document_id: "<id>"
+      requestBody:
+        multipart/form-data: {"payload": "x-file: example.file"}
+      responses:
+        "200":
+          application/json: {"created_at": "2024-10-02T02:47:01.599Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "document_id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "id": "ver_01h2abcd1234efgh5678jkmnpt", "processing_status": "ready", "title": "Version 2.0", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41/v/1"}
+        "400":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 935796, "type": "authorization_error"}}
+        "429":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 935796, "type": "authorization_error"}}
+        "500":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 935796, "type": "authorization_error"}}
   getDocumentVersion:
     validation_error:
       parameters:
@@ -1067,6 +1287,19 @@ examples:
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
         "500":
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+    speakeasy-default-list-api-keys:
+      parameters:
+        query:
+          organization_id: "<id>"
+      responses:
+        "200":
+          application/json: {"items": [{"created_at": "2024-09-24T03:59:01.022Z", "id": "key_01jd4h5mck9gq6zrp8bn2t4w3x", "is_active": true, "key_prefix": "ffy_prod_01jd4h5...", "name": "Production", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41"}], "pagination": {"next_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0", "prev_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJwcmV2In0"}}
+        "400":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 940425, "type": "rate_limit_error"}}
+        "429":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 940425, "type": "rate_limit_error"}}
+        "500":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 940425, "type": "rate_limit_error"}}
   createApiKey:
     validation_error:
       requestBody:
@@ -1078,6 +1311,18 @@ examples:
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
         "500":
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+    speakeasy-default-create-api-key:
+      requestBody:
+        application/json: {"name": "<value>", "organization_id": "<id>"}
+      responses:
+        "200":
+          application/json: {"api_key": {"created_at": "2025-10-10T17:58:58.215Z", "id": "key_01jd4h5mck9gq6zrp8bn2t4w3x", "is_active": true, "key_prefix": "ffy_prod_01jd4h5...", "name": "Production", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41"}, "secret": "ffy_prod_01h2xcejqtf2nbrexx3vqjhp41KJ8f3mNpQrStUvWxYz0123456789ABCDEFGHIJKLmNo"}
+        "400":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 147967, "type": "not_found_error"}}
+        "429":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 147967, "type": "not_found_error"}}
+        "500":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 147967, "type": "not_found_error"}}
   revokeApiKey:
     validation_error:
       parameters:
@@ -1092,6 +1337,21 @@ examples:
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
         "500":
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+    speakeasy-default-revoke-api-key:
+      parameters:
+        path:
+          api_key_id: "<id>"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"api_key": {"created_at": "2026-06-24T15:50:14.207Z", "id": "key_01jd4h5mck9gq6zrp8bn2t4w3x", "is_active": false, "key_prefix": "ffy_prod_01jd4h5...", "name": "Production", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41"}}
+        "400":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 922785, "type": "authorization_error"}}
+        "429":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 922785, "type": "authorization_error"}}
+        "500":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 922785, "type": "authorization_error"}}
   getVersion:
     validation_error:
       parameters:
@@ -1104,6 +1364,19 @@ examples:
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
         "500":
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+    speakeasy-default-get-version:
+      parameters:
+        path:
+          version_id: "<id>"
+      responses:
+        "200":
+          application/json: {"created_at": "2024-04-07T22:28:44.078Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "document_id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "id": "ver_01h2abcd1234efgh5678jkmnpt", "processing_status": "processing", "title": "Version 2.0", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41/v/1"}
+        "400":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 728795, "type": "rate_limit_error"}}
+        "429":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 728795, "type": "rate_limit_error"}}
+        "500":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 728795, "type": "rate_limit_error"}}
   updateVersion:
     validation_error:
       parameters:
@@ -1118,6 +1391,21 @@ examples:
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
         "500":
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+    speakeasy-default-update-version:
+      parameters:
+        path:
+          version_id: "<id>"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"created_at": "2026-04-02T18:16:04.278Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "document_id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "id": "ver_01h2abcd1234efgh5678jkmnpt", "processing_status": "ready", "title": "Version 2.0", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41/v/1"}
+        "400":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 754999, "type": "invalid_request_error"}}
+        "429":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 754999, "type": "invalid_request_error"}}
+        "500":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 754999, "type": "invalid_request_error"}}
   listOrganizations:
     validation_error:
       responses:
@@ -1127,6 +1415,16 @@ examples:
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
         "500":
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+    speakeasy-default-list-organizations:
+      responses:
+        "200":
+          application/json: {"items": [{"created_at": "2025-02-19T05:11:59.955Z", "id": "org_01h2xcejqtf2nbrexx3vqjhp41", "name": "Acme Corporation"}], "pagination": {"next_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0", "prev_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJwcmV2In0"}}
+        "400":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 42244, "type": "not_found_error"}}
+        "429":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 42244, "type": "not_found_error"}}
+        "500":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 42244, "type": "not_found_error"}}
   createOrganization:
     validation_error:
       requestBody:
@@ -1138,6 +1436,18 @@ examples:
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
         "500":
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+    speakeasy-default-create-organization:
+      requestBody:
+        application/json: {"name": "<value>"}
+      responses:
+        "200":
+          application/json: {"organization": {"created_at": "2025-03-25T20:24:12.317Z", "id": "org_01h2xcejqtf2nbrexx3vqjhp41", "name": "Acme Corporation"}}
+        "400":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 851294, "type": "authentication_error"}}
+        "429":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 851294, "type": "authentication_error"}}
+        "500":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 851294, "type": "authentication_error"}}
   getOrganization:
     validation_error:
       parameters:
@@ -1150,4 +1460,75 @@ examples:
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
         "500":
           application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+    speakeasy-default-get-organization:
+      parameters:
+        path:
+          organization_id: "<id>"
+      responses:
+        "200":
+          application/json: {"organization": {"created_at": "2025-03-07T23:45:20.495Z", "id": "org_01h2xcejqtf2nbrexx3vqjhp41", "name": "Acme Corporation"}}
+        "400":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 271821, "type": "authorization_error"}}
+        "429":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 271821, "type": "authorization_error"}}
+        "500":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 271821, "type": "authorization_error"}}
+  getOrganizationQuota:
+    validation_error:
+      parameters:
+        query:
+          organization_id: "org_01h2xcejqtf2nbrexx3vqjhp41"
+      responses:
+        "400":
+          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+        "429":
+          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+        "500":
+          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+    speakeasy-default-get-organization-quota:
+      parameters:
+        query:
+          organization_id: "org_01h2xcejqtf2nbrexx3vqjhp41"
+      responses:
+        "200":
+          application/json: {"quota": {"organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41"}}
+        "400":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 465222, "type": "authentication_error"}}
+        "429":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 465222, "type": "authentication_error"}}
+        "500":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 465222, "type": "authentication_error"}}
+  getUsageHistory:
+    validation_error:
+      parameters:
+        query:
+          organization_id: "org_01h2xcejqtf2nbrexx3vqjhp41"
+          start_date: "2026-01-01"
+          end_date: "2026-02-01"
+      responses:
+        "400":
+          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+        "429":
+          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+        "500":
+          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+    speakeasy-default-get-usage-history:
+      parameters:
+        query:
+          organization_id: "org_01h2xcejqtf2nbrexx3vqjhp41"
+          start_date: "2026-01-01"
+          end_date: "2026-02-01"
+      responses:
+        "200":
+          application/json: {"daily_usage": [{"date": "2026-01-15"}], "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41"}
+        "400":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": null, "retry_after": 691002, "type": "rate_limit_error"}}
+        "429":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": null, "retry_after": 691002, "type": "rate_limit_error"}}
+        "500":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": null, "retry_after": 691002, "type": "rate_limit_error"}}
 examplesVersion: 1.0.2
+releaseNotes: |
+  ## Typescript SDK Changes:
+  * `factify.quota.getOrganizationQuota()`: **Added**
+  * `factify.quota.getUsageHistory()`: **Added**

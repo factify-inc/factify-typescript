@@ -1,6 +1,6 @@
 {
   "name": "@factify/sdk",
-  "version": "0.3.13",
+  "version": "0.3.13-rc.1",
   "author": "Factify",
   "type": "module",
   "tshy": {

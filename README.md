@@ -200,6 +200,11 @@ run();
 * [attach](docs/sdks/policies/README.md#attach) - Attach a policy
 * [detach](docs/sdks/policies/README.md#detach) - Detach a policy
 
+### [Quota](docs/sdks/quota/README.md)
+
+* [getOrganizationQuota](docs/sdks/quota/README.md#getorganizationquota) - Get organization quota status
+* [getUsageHistory](docs/sdks/quota/README.md#getusagehistory) - Get usage history
+
 ### [Versions](docs/sdks/versions/README.md)
 
 * [list](docs/sdks/versions/README.md#list) - List document versions
@@ -239,6 +244,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`policiesAttach`](docs/sdks/policies/README.md#attach) - Attach a policy
 - [`policiesDetach`](docs/sdks/policies/README.md#detach) - Detach a policy
 - [`policiesList`](docs/sdks/policies/README.md#list) - List document policies
+- [`quotaGetOrganizationQuota`](docs/sdks/quota/README.md#getorganizationquota) - Get organization quota status
+- [`quotaGetUsageHistory`](docs/sdks/quota/README.md#getusagehistory) - Get usage history
 - [`versionsCreate`](docs/sdks/versions/README.md#create) - Create a new version
 - [`versionsGet`](docs/sdks/versions/README.md#get) - Retrieve a version
 - [`versionsList`](docs/sdks/versions/README.md#list) - List document versions

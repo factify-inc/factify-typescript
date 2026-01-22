@@ -11,6 +11,8 @@ export * from "./detachdocumentpolicy.js";
 export * from "./generatedocumententrypage.js";
 export * from "./getdocument.js";
 export * from "./getorganization.js";
+export * from "./getorganizationquota.js";
+export * from "./getusagehistory.js";
 export * from "./getversion.js";
 export * from "./listapikeys.js";
 export * from "./listdocumentpolicies.js";

@@ -8,6 +8,7 @@ import { Documents } from "./documents.js";
 import { EntryPages } from "./entrypages.js";
 import { Organizations } from "./organizations.js";
 import { Policies } from "./policies.js";
+import { Quota } from "./quota.js";
 import { Versions } from "./versions.js";
 
 export class Factify extends ClientSDK {
@@ -39,5 +40,10 @@ export class Factify extends ClientSDK {
   private _organizations?: Organizations;
   get organizations(): Organizations {
     return (this._organizations ??= new Organizations(this._options));
+  }
+
+  private _quota?: Quota;
+  get quota(): Quota {
+    return (this._quota ??= new Quota(this._options));
   }
 }
