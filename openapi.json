@@ -479,6 +479,27 @@
         "title": "CreateVersionRequest",
         "type": "object"
       },
+      "DailyUsage": {
+        "additionalProperties": false,
+        "description": "DailyUsage represents usage for a single day.",
+        "properties": {
+          "date": {
+            "description": "The date (YYYY-MM-DD format).",
+            "example": "2026-01-15",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "title": "date",
+            "type": "string"
+          },
+          "request_count": {
+            "description": "Request count for this day.",
+            "format": "int32",
+            "title": "request_count",
+            "type": "integer"
+          }
+        },
+        "title": "DailyUsage",
+        "type": "object"
+      },
       "DetachPolicyRequest": {
         "additionalProperties": false,
         "description": "DetachPolicyRequest identifies a policy to detach from a document.",
@@ -730,6 +751,35 @@
         "title": "GetDocumentResponse",
         "type": "object"
       },
+      "GetOrganizationQuotaRequest": {
+        "additionalProperties": false,
+        "description": "GetOrganizationQuotaRequest is a request to get quota status.",
+        "properties": {
+          "organization_id": {
+            "description": "Optional: organization ID to query. If not provided, uses the caller's organization.\n Only admins can query other organizations.",
+            "example": "org_01h2xcejqtf2nbrexx3vqjhp41",
+            "nullable": true,
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "organization_id",
+            "type": "string"
+          }
+        },
+        "title": "GetOrganizationQuotaRequest",
+        "type": "object"
+      },
+      "GetOrganizationQuotaResponse": {
+        "additionalProperties": false,
+        "description": "GetOrganizationQuotaResponse returns the quota status.",
+        "properties": {
+          "quota": {
+            "$ref": "#/components/schemas/OrganizationQuota",
+            "description": "The organization's quota status.",
+            "title": "quota"
+          }
+        },
+        "title": "GetOrganizationQuotaResponse",
+        "type": "object"
+      },
       "GetOrganizationRequest": {
         "additionalProperties": false,
         "description": "GetOrganizationRequest identifies an organization to retrieve.",
@@ -761,6 +811,69 @@
           "organization"
         ],
         "title": "GetOrganizationResponse",
+        "type": "object"
+      },
+      "GetUsageHistoryRequest": {
+        "additionalProperties": false,
+        "description": "GetUsageHistoryRequest is a request to get usage history.\ndate_range_valid // end_date must be after start_date\n",
+        "properties": {
+          "end_date": {
+            "description": "End date for the history (exclusive, YYYY-MM-DD format).",
+            "example": "2026-02-01",
+            "maxLength": 10,
+            "minLength": 10,
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "title": "end_date",
+            "type": "string"
+          },
+          "organization_id": {
+            "description": "Optional: organization ID to query. If not provided, uses the caller's organization.",
+            "example": "org_01h2xcejqtf2nbrexx3vqjhp41",
+            "nullable": true,
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "organization_id",
+            "type": "string"
+          },
+          "start_date": {
+            "description": "Start date for the history (inclusive, YYYY-MM-DD format).",
+            "example": "2026-01-01",
+            "maxLength": 10,
+            "minLength": 10,
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "title": "start_date",
+            "type": "string"
+          }
+        },
+        "title": "GetUsageHistoryRequest",
+        "type": "object"
+      },
+      "GetUsageHistoryResponse": {
+        "additionalProperties": false,
+        "description": "GetUsageHistoryResponse returns usage history.",
+        "properties": {
+          "daily_usage": {
+            "description": "Daily usage records.",
+            "items": {
+              "$ref": "#/components/schemas/DailyUsage"
+            },
+            "title": "daily_usage",
+            "type": "array"
+          },
+          "organization_id": {
+            "description": "The organization ID.",
+            "example": "org_01h2xcejqtf2nbrexx3vqjhp41",
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "organization_id",
+            "type": "string"
+          },
+          "total_requests": {
+            "description": "Total requests in the period.",
+            "format": "int32",
+            "title": "total_requests",
+            "type": "integer"
+          }
+        },
+        "title": "GetUsageHistoryResponse",
         "type": "object"
       },
       "GetVersionRequest": {
@@ -1095,6 +1208,67 @@
         "title": "Organization",
         "type": "object"
       },
+      "OrganizationQuota": {
+        "additionalProperties": false,
+        "description": "OrganizationQuota represents the quota status for an organization.",
+        "properties": {
+          "current_usage": {
+            "description": "Current usage in the billing period.",
+            "format": "int32",
+            "title": "current_usage",
+            "type": "integer"
+          },
+          "effective_limit": {
+            "description": "The effective monthly limit (considers custom_limit if set).",
+            "format": "int32",
+            "title": "effective_limit",
+            "type": "integer"
+          },
+          "is_exceeded": {
+            "description": "Whether quota is exceeded.",
+            "title": "is_exceeded",
+            "type": "boolean"
+          },
+          "organization_id": {
+            "description": "The organization ID.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "example": "org_01h2xcejqtf2nbrexx3vqjhp41",
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "organization_id",
+            "type": "string"
+          },
+          "period_start": {
+            "description": "Start of current billing period.",
+            "format": "date-time",
+            "title": "period_start",
+            "type": "string"
+          },
+          "remaining": {
+            "description": "Remaining requests in the billing period.",
+            "format": "int32",
+            "title": "remaining",
+            "type": "integer"
+          },
+          "reset_at": {
+            "description": "When the quota resets (start of next billing period).",
+            "format": "date-time",
+            "title": "reset_at",
+            "type": "string"
+          },
+          "tier": {
+            "$ref": "#/components/schemas/QuotaTier",
+            "description": "The quota tier (free or custom).",
+            "title": "tier"
+          },
+          "usage_percent": {
+            "description": "Usage as a percentage (0-100+).",
+            "format": "int32",
+            "title": "usage_percent",
+            "type": "integer"
+          }
+        },
+        "title": "OrganizationQuota",
+        "type": "object"
+      },
       "Pagination": {
         "additionalProperties": false,
         "description": "Pagination contains cursor-based pagination metadata.\n Follows Google AIP-158 for pagination field naming.",
@@ -1159,6 +1333,16 @@
           "ready",
           "failed"
         ]
+      },
+      "QuotaTier": {
+        "description": "QuotaTier represents the organization's quota tier.",
+        "enum": [
+          "QUOTA_TIER_UNSPECIFIED",
+          "QUOTA_TIER_FREE",
+          "QUOTA_TIER_CUSTOM"
+        ],
+        "title": "QuotaTier",
+        "type": "string"
       },
       "RevokeApiKeyRequest": {
         "additionalProperties": false,
@@ -2746,6 +2930,156 @@
         ]
       }
     },
+    "/v1beta/quota": {
+      "get": {
+        "description": "Returns the current quota status for an organization including usage, limits, tier, and reset date.",
+        "operationId": "getOrganizationQuota",
+        "parameters": [
+          {
+            "description": "Optional: organization ID to query. If not provided, uses the caller's organization.\n Only admins can query other organizations.",
+            "in": "query",
+            "name": "organization_id",
+            "schema": {
+              "description": "Optional: organization ID to query. If not provided, uses the caller's organization.\n Only admins can query other organizations.",
+              "example": "org_01h2xcejqtf2nbrexx3vqjhp41",
+              "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "organization_id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOrganizationQuotaResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Get organization quota status",
+        "tags": [
+          "Quota"
+        ],
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "getOrganizationQuota",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.quota.getOrganizationQuota({\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          }
+        ]
+      }
+    },
+    "/v1beta/quota/usage": {
+      "get": {
+        "description": "Returns daily usage records for an organization within a specified date range.",
+        "operationId": "getUsageHistory",
+        "parameters": [
+          {
+            "description": "Optional: organization ID to query. If not provided, uses the caller's organization.",
+            "in": "query",
+            "name": "organization_id",
+            "schema": {
+              "description": "Optional: organization ID to query. If not provided, uses the caller's organization.",
+              "example": "org_01h2xcejqtf2nbrexx3vqjhp41",
+              "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "organization_id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Start date for the history (inclusive, YYYY-MM-DD format).",
+            "in": "query",
+            "name": "start_date",
+            "schema": {
+              "description": "Start date for the history (inclusive, YYYY-MM-DD format).",
+              "example": "2026-01-01",
+              "maxLength": 10,
+              "minLength": 10,
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+              "title": "start_date",
+              "type": "string"
+            }
+          },
+          {
+            "description": "End date for the history (exclusive, YYYY-MM-DD format).",
+            "in": "query",
+            "name": "end_date",
+            "schema": {
+              "description": "End date for the history (exclusive, YYYY-MM-DD format).",
+              "example": "2026-02-01",
+              "maxLength": 10,
+              "minLength": 10,
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+              "title": "end_date",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUsageHistoryResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Get usage history",
+        "tags": [
+          "Quota"
+        ],
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "getUsageHistory",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.quota.getUsageHistory({\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n    startDate: \"2026-01-01\",\n    endDate: \"2026-02-01\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          }
+        ]
+      }
+    },
     "/v1beta/versions/{version_id}": {
       "get": {
         "description": "Retrieve a specific version by ID.",
@@ -2928,6 +3262,10 @@
     {
       "description": "Generate and manage API keys for authentication.",
       "name": "API Keys"
+    },
+    {
+      "description": "Query API usage and quota information for your organization.",
+      "name": "Quota"
     },
     {
       "description": "Attach and manage access policies for documents.",
