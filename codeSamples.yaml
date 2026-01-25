@@ -99,18 +99,6 @@ actions:
         - "lang": "typescript"
           "label": "getOrganization"
           "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.get({\n    organizationId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
-  - target: $["paths"]["/v1beta/quota"]["get"]
-    update:
-      "x-codeSamples":
-        - "lang": "typescript"
-          "label": "getOrganizationQuota"
-          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.quota.getOrganizationQuota({\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
-  - target: $["paths"]["/v1beta/quota/usage"]["get"]
-    update:
-      "x-codeSamples":
-        - "lang": "typescript"
-          "label": "getUsageHistory"
-          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.quota.getUsageHistory({\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n    startDate: \"2026-01-01\",\n    endDate: \"2026-02-01\",\n  });\n\n  console.log(result);\n}\n\nrun();"
   - target: $["paths"]["/v1beta/versions/{version_id}"]["get"]
     update:
       "x-codeSamples":
