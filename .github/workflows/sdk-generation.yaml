@@ -53,8 +53,12 @@ jobs:
             RC_VERSION="${BASE_VERSION}-rc.${NEXT_RC}"
             speakeasy bump -v "$RC_VERSION" -t typescript
           else
-            # Not in RC mode - set to <current_version>-rc.1
-            RC_VERSION="${CURRENT_VERSION}-rc.1"
+            # Not in RC mode - bump patch version and set to -rc.1
+            MAJOR=$(echo "$CURRENT_VERSION" | cut -d. -f1)
+            MINOR=$(echo "$CURRENT_VERSION" | cut -d. -f2)
+            PATCH=$(echo "$CURRENT_VERSION" | cut -d. -f3)
+            NEXT_PATCH=$((PATCH + 1))
+            RC_VERSION="${MAJOR}.${MINOR}.${NEXT_PATCH}-rc.1"
             speakeasy bump -v "$RC_VERSION" -t typescript
           fi
 
