@@ -161,6 +161,53 @@
       }
     },
     "schemas": {
+      "AcceptOrganizationInviteRequest": {
+        "additionalProperties": false,
+        "description": "AcceptOrganizationInviteRequest contains the invitation to accept.",
+        "properties": {
+          "invite_id": {
+            "description": "Invitation ID to accept.\n Pattern: inv_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^inv_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "invite_id",
+            "type": "string"
+          },
+          "organization_id": {
+            "description": "Organization the invitation belongs to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "organization_id",
+            "type": "string"
+          },
+          "token": {
+            "description": "The invitation token from the email link.",
+            "maxLength": 128,
+            "title": "token",
+            "type": "string"
+          }
+        },
+        "required": [
+          "organization_id",
+          "invite_id",
+          "token"
+        ],
+        "title": "AcceptOrganizationInviteRequest",
+        "type": "object"
+      },
+      "AcceptOrganizationInviteResponse": {
+        "additionalProperties": false,
+        "description": "AcceptOrganizationInviteResponse contains the organization the user joined.",
+        "properties": {
+          "organization": {
+            "$ref": "#/components/schemas/Organization",
+            "description": "The organization the user is now a member of.",
+            "title": "organization"
+          }
+        },
+        "required": [
+          "organization"
+        ],
+        "title": "AcceptOrganizationInviteResponse",
+        "type": "object"
+      },
       "AccessLevel": {
         "enum": [
           "private",
@@ -388,6 +435,60 @@
           "document"
         ],
         "title": "CreateDocumentResponse",
+        "type": "object"
+      },
+      "CreateOrganizationInviteRequest": {
+        "additionalProperties": false,
+        "description": "CreateOrganizationInviteRequest contains the data needed to create an invitation.",
+        "properties": {
+          "email": {
+            "description": "Email address of the recipient.",
+            "format": "email",
+            "title": "email",
+            "type": "string"
+          },
+          "idempotency_key": {
+            "description": "Optional client-provided idempotency key for safe retries.\n If provided, duplicate requests with the same key within 24 hours\n return the original response without resending the invitation email.\n Recommended format: UUID or org_id + email + timestamp hash.",
+            "maxLength": 255,
+            "nullable": true,
+            "title": "idempotency_key",
+            "type": "string"
+          },
+          "message": {
+            "description": "Optional custom message from the sender (max 2000 bytes to support ~500 multibyte characters).",
+            "maxLength": 2000,
+            "nullable": true,
+            "title": "message",
+            "type": "string"
+          },
+          "organization_id": {
+            "description": "Organization to invite the user to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "organization_id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "organization_id",
+          "email"
+        ],
+        "title": "CreateOrganizationInviteRequest",
+        "type": "object"
+      },
+      "CreateOrganizationInviteResponse": {
+        "additionalProperties": false,
+        "description": "CreateOrganizationInviteResponse contains the created invitation.",
+        "properties": {
+          "invite": {
+            "$ref": "#/components/schemas/OrganizationInvite",
+            "description": "The created (or existing) invitation.",
+            "title": "invite"
+          }
+        },
+        "required": [
+          "invite"
+        ],
+        "title": "CreateOrganizationInviteResponse",
         "type": "object"
       },
       "CreateOrganizationRequest": {
@@ -962,6 +1063,96 @@
         "title": "ListDocumentsResponse",
         "type": "object"
       },
+      "ListOrganizationInvitesRequest": {
+        "additionalProperties": false,
+        "description": "ListOrganizationInvitesRequest specifies filters for listing invitations.\ncreated_time_range // created.after must be before created.before\nexpires_time_range // expires.after must be before expires.before\n",
+        "properties": {
+          "created": {
+            "description": "Filter by creation time range.\n REST: ?created.after=2024-01-01T00:00:00Z\u0026created.before=2024-12-31T23:59:59Z",
+            "format": "date-time",
+            "nullable": true,
+            "title": "created",
+            "type": "string"
+          },
+          "email": {
+            "$ref": "#/components/schemas/StringFilter",
+            "description": "Filter by email address.\n REST: ?email.contains=dwight or ?email.exact=dwight@dundermifflin.com",
+            "nullable": true,
+            "title": "email"
+          },
+          "expires": {
+            "description": "Filter by expiration time range.\n Useful for finding invitations expiring soon (expires.before) or still valid beyond a date (expires.after).\n REST: ?expires.after=2024-01-01T00:00:00Z\u0026expires.before=2024-01-31T23:59:59Z",
+            "format": "date-time",
+            "nullable": true,
+            "title": "expires",
+            "type": "string"
+          },
+          "organization_id": {
+            "description": "Organization to list invitations for.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "organization_id",
+            "type": "string"
+          },
+          "page_size": {
+            "description": "Maximum number of items to return per page (1-100). Default: 50.",
+            "format": "int32",
+            "maximum": 100,
+            "minimum": 1,
+            "nullable": true,
+            "title": "page_size",
+            "type": "integer"
+          },
+          "page_token": {
+            "description": "Opaque pagination token from a previous response.",
+            "title": "page_token",
+            "type": "string"
+          },
+          "sender_id": {
+            "description": "Filter by sender. Only returns invitations sent by this user.\n REST: ?sender_id=user_01h2xcejqtf2nbrexx3vqjhp41\n Pattern: user_[0-9a-hjkmnp-tv-z]{26}",
+            "nullable": true,
+            "pattern": "^user_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "sender_id",
+            "type": "string"
+          },
+          "status": {
+            "description": "Filter by status. If empty, returns all invitations.\n ORGANIZATION_INVITE_STATUS_UNSPECIFIED (0) is not a valid filter value.",
+            "items": {
+              "$ref": "#/components/schemas/OrganizationInviteStatus"
+            },
+            "title": "status",
+            "type": "array"
+          }
+        },
+        "required": [
+          "organization_id"
+        ],
+        "title": "ListOrganizationInvitesRequest",
+        "type": "object"
+      },
+      "ListOrganizationInvitesResponse": {
+        "additionalProperties": false,
+        "description": "ListOrganizationInvitesResponse contains a page of invitations.",
+        "properties": {
+          "items": {
+            "description": "List of invitations.",
+            "items": {
+              "$ref": "#/components/schemas/OrganizationInvite"
+            },
+            "title": "items",
+            "type": "array"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination",
+            "description": "Pagination metadata.",
+            "title": "pagination"
+          }
+        },
+        "required": [
+          "pagination"
+        ],
+        "title": "ListOrganizationInvitesResponse",
+        "type": "object"
+      },
       "ListOrganizationsRequest": {
         "additionalProperties": false,
         "description": "ListOrganizationsRequest specifies pagination for listing organizations.",
@@ -1095,6 +1286,96 @@
         "title": "Organization",
         "type": "object"
       },
+      "OrganizationInvite": {
+        "additionalProperties": false,
+        "description": "OrganizationInvite represents an invitation to join an organization.\naccepted_fields_consistency // accepted_at and accepted_by must both be set or both be unset\n",
+        "properties": {
+          "accepted_at": {
+            "description": "When the invitation was accepted (if accepted).",
+            "format": "date-time",
+            "title": "accepted_at",
+            "type": "string"
+          },
+          "accepted_by": {
+            "$ref": "#/components/schemas/User",
+            "description": "User who accepted the invitation (if accepted).",
+            "title": "accepted_by"
+          },
+          "created_at": {
+            "description": "When the invitation was created.",
+            "format": "date-time",
+            "title": "created_at",
+            "type": "string"
+          },
+          "email": {
+            "description": "Email address of the recipient.",
+            "example": "dwight@dundermifflin.com",
+            "format": "email",
+            "title": "email",
+            "type": "string"
+          },
+          "expires_at": {
+            "description": "When the invitation expires.",
+            "format": "date-time",
+            "title": "expires_at",
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique identifier for the invitation.",
+            "example": "inv_01h2xcejqtf2nbrexx3vqjhp41",
+            "pattern": "^inv_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "id",
+            "type": "string"
+          },
+          "message": {
+            "description": "Custom message from sender to recipient (if provided).\n Max 2000 bytes to support ~500 multibyte characters.",
+            "maxLength": 2000,
+            "nullable": true,
+            "title": "message",
+            "type": "string"
+          },
+          "organization_id": {
+            "description": "Organization the invitation is for.",
+            "example": "org_01h2xcejqtf2nbrexx3vqjhp41",
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "organization_id",
+            "type": "string"
+          },
+          "sender": {
+            "$ref": "#/components/schemas/User",
+            "description": "User who sent the invitation (point-in-time snapshot at creation).",
+            "title": "sender"
+          },
+          "status": {
+            "$ref": "#/components/schemas/OrganizationInviteStatus",
+            "description": "Current status of the invitation.",
+            "title": "status"
+          }
+        },
+        "required": [
+          "id",
+          "organization_id",
+          "email",
+          "status",
+          "sender",
+          "created_at",
+          "expires_at"
+        ],
+        "title": "OrganizationInvite",
+        "type": "object"
+      },
+      "OrganizationInviteStatus": {
+        "description": "OrganizationInviteStatus represents the state of an organization invitation.",
+        "enum": [
+          "ORGANIZATION_INVITE_STATUS_UNSPECIFIED",
+          "ORGANIZATION_INVITE_STATUS_PENDING",
+          "ORGANIZATION_INVITE_STATUS_ACCEPTED",
+          "ORGANIZATION_INVITE_STATUS_EXPIRED",
+          "ORGANIZATION_INVITE_STATUS_REVOKED"
+        ],
+        "title": "OrganizationInviteStatus",
+        "type": "string"
+      },
       "Pagination": {
         "additionalProperties": false,
         "description": "Pagination contains cursor-based pagination metadata.\n Follows Google AIP-158 for pagination field naming.",
@@ -1160,6 +1441,46 @@
           "failed"
         ]
       },
+      "ResendOrganizationInviteRequest": {
+        "additionalProperties": false,
+        "description": "ResendOrganizationInviteRequest identifies an invitation to resend.",
+        "properties": {
+          "invite_id": {
+            "description": "Invitation ID to resend.\n Pattern: inv_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^inv_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "invite_id",
+            "type": "string"
+          },
+          "organization_id": {
+            "description": "Organization the invitation belongs to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "organization_id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "organization_id",
+          "invite_id"
+        ],
+        "title": "ResendOrganizationInviteRequest",
+        "type": "object"
+      },
+      "ResendOrganizationInviteResponse": {
+        "additionalProperties": false,
+        "description": "ResendOrganizationInviteResponse contains the updated invitation.",
+        "properties": {
+          "invite": {
+            "$ref": "#/components/schemas/OrganizationInvite",
+            "description": "The invitation with updated send count and timestamp.",
+            "title": "invite"
+          }
+        },
+        "required": [
+          "invite"
+        ],
+        "title": "ResendOrganizationInviteResponse",
+        "type": "object"
+      },
       "RevokeApiKeyRequest": {
         "additionalProperties": false,
         "description": "RevokeApiKeyRequest identifies an API key to revoke.",
@@ -1199,6 +1520,66 @@
           "api_key"
         ],
         "title": "RevokeApiKeyResponse",
+        "type": "object"
+      },
+      "RevokeOrganizationInviteRequest": {
+        "additionalProperties": false,
+        "description": "RevokeOrganizationInviteRequest identifies an invitation to revoke.",
+        "properties": {
+          "invite_id": {
+            "description": "Invitation ID to revoke.\n Pattern: inv_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^inv_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "invite_id",
+            "type": "string"
+          },
+          "organization_id": {
+            "description": "Organization the invitation belongs to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "organization_id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "organization_id",
+          "invite_id"
+        ],
+        "title": "RevokeOrganizationInviteRequest",
+        "type": "object"
+      },
+      "RevokeOrganizationInviteResponse": {
+        "additionalProperties": false,
+        "description": "RevokeOrganizationInviteResponse contains the revoked invitation.",
+        "properties": {
+          "invite": {
+            "$ref": "#/components/schemas/OrganizationInvite",
+            "description": "The revoked invitation with updated status.",
+            "title": "invite"
+          }
+        },
+        "required": [
+          "invite"
+        ],
+        "title": "RevokeOrganizationInviteResponse",
+        "type": "object"
+      },
+      "StringFilter": {
+        "additionalProperties": false,
+        "description": "StringFilter provides flexible string matching options.\n Used with Vanguard dot notation: ?email.contains=john or ?email.exact=john@example.com\n\n Note on case sensitivity: `contains` is case-insensitive for user-friendly partial\n matching (e.g., finding \"john\" matches \"John.Doe@...\"). `exact` is case-sensitive\n for precise lookups where the caller knows the exact value. For email addresses,\n this matches RFC 5321 behavior where the domain is case-insensitive but local-part\n handling varies by provider.\nmutually_exclusive // only one of contains or exact can be specified\n",
+        "properties": {
+          "contains": {
+            "description": "Case-insensitive substring match.\n REST: ?field.contains=value",
+            "nullable": true,
+            "title": "contains",
+            "type": "string"
+          },
+          "exact": {
+            "description": "Exact match (case-sensitive).\n REST: ?field.exact=value",
+            "nullable": true,
+            "title": "exact",
+            "type": "string"
+          }
+        },
+        "title": "StringFilter",
         "type": "object"
       },
       "TimestampFilter": {
@@ -2746,6 +3127,536 @@
         ]
       }
     },
+    "/v1beta/organizations/{organization_id}/invites": {
+      "get": {
+        "description": "List invitations for an organization. Requires permission to invite organization members.",
+        "operationId": "listOrganizationInvites",
+        "parameters": [
+          {
+            "description": "Organization to list invitations for.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "organization_id",
+            "required": true,
+            "schema": {
+              "description": "Organization to list invitations for.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "organization_id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by status. If empty, returns all invitations.\n ORGANIZATION_INVITE_STATUS_UNSPECIFIED (0) is not a valid filter value.",
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "description": "Filter by status. If empty, returns all invitations.\n ORGANIZATION_INVITE_STATUS_UNSPECIFIED (0) is not a valid filter value.",
+              "items": {
+                "$ref": "#/components/schemas/OrganizationInviteStatus"
+              },
+              "title": "status",
+              "type": "array"
+            }
+          },
+          {
+            "description": "Opaque pagination token from a previous response.",
+            "in": "query",
+            "name": "page_token",
+            "schema": {
+              "description": "Opaque pagination token from a previous response.",
+              "title": "page_token",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Maximum number of items to return per page (1-100). Default: 50.",
+            "in": "query",
+            "name": "page_size",
+            "schema": {
+              "description": "Maximum number of items to return per page (1-100). Default: 50.",
+              "format": "int32",
+              "maximum": 100,
+              "minimum": 1,
+              "title": "page_size",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Case-insensitive substring match.\n REST: ?field.contains=value",
+            "in": "query",
+            "name": "email.contains",
+            "schema": {
+              "description": "Case-insensitive substring match.\n REST: ?field.contains=value",
+              "title": "contains",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Exact match (case-sensitive).\n REST: ?field.exact=value",
+            "in": "query",
+            "name": "email.exact",
+            "schema": {
+              "description": "Exact match (case-sensitive).\n REST: ?field.exact=value",
+              "title": "exact",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by sender. Only returns invitations sent by this user.\n REST: ?sender_id=user_01h2xcejqtf2nbrexx3vqjhp41\n Pattern: user_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "query",
+            "name": "sender_id",
+            "schema": {
+              "description": "Filter by sender. Only returns invitations sent by this user.\n REST: ?sender_id=user_01h2xcejqtf2nbrexx3vqjhp41\n Pattern: user_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^user_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "sender_id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by created.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)",
+            "in": "query",
+            "name": "created.after",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListOrganizationInvitesResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "List organization invitations",
+        "tags": [
+          "Organizations"
+        ],
+        "x-speakeasy-pagination": {
+          "inputs": [
+            {
+              "in": "parameters",
+              "name": "page_token",
+              "type": "cursor"
+            }
+          ],
+          "outputs": {
+            "nextCursor": "$.pagination.next_page_token"
+          },
+          "type": "cursor"
+        },
+        "x-speakeasy-group": "organizations.invites",
+        "x-speakeasy-name-override": "list",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "listOrganizationInvites",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.invites.list({\n    organizationId: \"\u003cid\u003e\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+          }
+        ]
+      },
+      "post": {
+        "description": "Creates an invitation and sends an email to the specified address. Returns FAILED_PRECONDITION if the email belongs to an existing organization member. Idempotency: If a PENDING invitation already exists for this email, the existing invitation is resent (same token, refreshed expiration). Expired or revoked invitations are ignored - a new invitation is created.",
+        "operationId": "createOrganizationInvite",
+        "parameters": [
+          {
+            "description": "Organization to invite the user to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "organization_id",
+            "required": true,
+            "schema": {
+              "description": "Organization to invite the user to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "organization_id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "description": "CreateOrganizationInviteRequest contains the data needed to create an invitation.",
+                "properties": {
+                  "email": {
+                    "description": "Email address of the recipient.",
+                    "format": "email",
+                    "title": "email",
+                    "type": "string"
+                  },
+                  "idempotency_key": {
+                    "description": "Optional client-provided idempotency key for safe retries.\n If provided, duplicate requests with the same key within 24 hours\n return the original response without resending the invitation email.\n Recommended format: UUID or org_id + email + timestamp hash.",
+                    "maxLength": 255,
+                    "nullable": true,
+                    "title": "idempotency_key",
+                    "type": "string"
+                  },
+                  "message": {
+                    "description": "Optional custom message from the sender (max 2000 bytes to support ~500 multibyte characters).",
+                    "maxLength": 2000,
+                    "nullable": true,
+                    "title": "message",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "email"
+                ],
+                "title": "CreateOrganizationInviteRequest",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateOrganizationInviteResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Invite a user to join an organization",
+        "tags": [
+          "Organizations"
+        ],
+        "x-speakeasy-group": "organizations.invites",
+        "x-speakeasy-name-override": "create",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "createOrganizationInvite",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.invites.create({\n    organizationId: \"\u003cid\u003e\",\n    body: {\n      email: \"Willie_Parisian16@hotmail.com\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          }
+        ]
+      }
+    },
+    "/v1beta/organizations/{organization_id}/invites/{invite_id}:accept": {
+      "post": {
+        "description": "Accepts the invitation and adds the authenticated user as a member of the organization. The authenticated user's verified email must match the invitation email (case-insensitive). Returns PERMISSION_DENIED if emails don't match, FAILED_PRECONDITION if the user is already a member, or NOT_FOUND if the invitation is invalid/expired.",
+        "operationId": "acceptOrganizationInvite",
+        "parameters": [
+          {
+            "description": "Organization the invitation belongs to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "organization_id",
+            "required": true,
+            "schema": {
+              "description": "Organization the invitation belongs to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "organization_id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Invitation ID to accept.\n Pattern: inv_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "invite_id",
+            "required": true,
+            "schema": {
+              "description": "Invitation ID to accept.\n Pattern: inv_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^inv_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "invite_id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "description": "AcceptOrganizationInviteRequest contains the invitation to accept.",
+                "properties": {
+                  "token": {
+                    "description": "The invitation token from the email link.",
+                    "maxLength": 128,
+                    "title": "token",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "token"
+                ],
+                "title": "AcceptOrganizationInviteRequest",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AcceptOrganizationInviteResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Accept an invitation",
+        "tags": [
+          "Organizations"
+        ],
+        "x-speakeasy-group": "organizations.invites",
+        "x-speakeasy-name-override": "accept",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "acceptOrganizationInvite",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.invites.accept({\n    organizationId: \"\u003cid\u003e\",\n    inviteId: \"\u003cid\u003e\",\n    body: {\n      token: \"\u003cvalue\u003e\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          }
+        ]
+      }
+    },
+    "/v1beta/organizations/{organization_id}/invites/{invite_id}:resend": {
+      "post": {
+        "description": "Resend an invitation email to the recipient. Useful if the original email was lost or expired. Requires permission to invite organization members.",
+        "operationId": "resendOrganizationInvite",
+        "parameters": [
+          {
+            "description": "Organization the invitation belongs to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "organization_id",
+            "required": true,
+            "schema": {
+              "description": "Organization the invitation belongs to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "organization_id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Invitation ID to resend.\n Pattern: inv_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "invite_id",
+            "required": true,
+            "schema": {
+              "description": "Invitation ID to resend.\n Pattern: inv_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^inv_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "invite_id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "description": "ResendOrganizationInviteRequest identifies an invitation to resend.",
+                "properties": {},
+                "required": [],
+                "title": "ResendOrganizationInviteRequest",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResendOrganizationInviteResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Resend an invitation email",
+        "tags": [
+          "Organizations"
+        ],
+        "x-speakeasy-group": "organizations.invites",
+        "x-speakeasy-name-override": "resend",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "resendOrganizationInvite",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.invites.resend({\n    organizationId: \"\u003cid\u003e\",\n    inviteId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          }
+        ]
+      }
+    },
+    "/v1beta/organizations/{organization_id}/invites/{invite_id}:revoke": {
+      "post": {
+        "description": "Revoke a pending invitation, preventing the recipient from joining. Requires permission to manage organization members.",
+        "operationId": "revokeOrganizationInvite",
+        "parameters": [
+          {
+            "description": "Organization the invitation belongs to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "organization_id",
+            "required": true,
+            "schema": {
+              "description": "Organization the invitation belongs to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "organization_id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Invitation ID to revoke.\n Pattern: inv_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "invite_id",
+            "required": true,
+            "schema": {
+              "description": "Invitation ID to revoke.\n Pattern: inv_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^inv_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "invite_id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "description": "RevokeOrganizationInviteRequest identifies an invitation to revoke.",
+                "properties": {},
+                "required": [],
+                "title": "RevokeOrganizationInviteRequest",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevokeOrganizationInviteResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Revoke an invitation",
+        "tags": [
+          "Organizations"
+        ],
+        "x-speakeasy-group": "organizations.invites",
+        "x-speakeasy-name-override": "revoke",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "revokeOrganizationInvite",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.invites.revoke({\n    organizationId: \"\u003cid\u003e\",\n    inviteId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          }
+        ]
+      }
+    },
     "/v1beta/versions/{version_id}": {
       "get": {
         "description": "Retrieve a specific version by ID.",
@@ -2922,7 +3833,7 @@
       "name": "Versions"
     },
     {
-      "description": "Create and manage organizations.",
+      "description": "Create and manage organizations and member invitations.",
       "name": "Organizations"
     },
     {
