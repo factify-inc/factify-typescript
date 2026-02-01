@@ -2,7 +2,7 @@
 
 ## Overview
 
-Create and manage organizations.
+Create and manage organizations and member invitations.
 
 ### Available Operations
 

@@ -99,6 +99,36 @@ actions:
         - "lang": "typescript"
           "label": "getOrganization"
           "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.get({\n    organizationId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/organizations/{organization_id}/invites"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "listOrganizationInvites"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.invites.list({\n    organizationId: \"<id>\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/organizations/{organization_id}/invites"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "createOrganizationInvite"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.invites.create({\n    organizationId: \"<id>\",\n    body: {\n      email: \"Willie_Parisian16@hotmail.com\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/organizations/{organization_id}/invites/{invite_id}:accept"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "acceptOrganizationInvite"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.invites.accept({\n    organizationId: \"<id>\",\n    inviteId: \"<id>\",\n    body: {\n      token: \"<value>\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/organizations/{organization_id}/invites/{invite_id}:resend"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "resendOrganizationInvite"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.invites.resend({\n    organizationId: \"<id>\",\n    inviteId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/organizations/{organization_id}/invites/{invite_id}:revoke"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "revokeOrganizationInvite"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.invites.revoke({\n    organizationId: \"<id>\",\n    inviteId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
   - target: $["paths"]["/v1beta/versions/{version_id}"]["get"]
     update:
       "x-codeSamples":

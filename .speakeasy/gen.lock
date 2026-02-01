@@ -1,23 +1,23 @@
 lockVersion: 2.0.0
 id: 23af0391-5a58-495c-b992-941b55f41c78
 management:
-  docChecksum: 896f0501198378208ee59a436d4cd1dd
+  docChecksum: 2fd3eeac07025a4dfe5dfd711d5338c7
   docVersion: 1.0.0
-  speakeasyVersion: 1.697.5
-  generationVersion: 2.799.0
-  releaseVersion: 0.3.14-rc.2
-  configChecksum: 3092d644a065c161dfdcda6b4f0e9502
+  speakeasyVersion: 1.700.2
+  generationVersion: 2.801.2
+  releaseVersion: 0.3.14-rc.3
+  configChecksum: f1b9febb73a0ac0dfb67ceed5c6bba0c
   repoURL: https://github.com/factify-inc/factify-typescript.git
   installationURL: https://github.com/factify-inc/factify-typescript
   published: true
 persistentEdits:
-  generation_id: a240603b-d5dd-4398-9ada-c65cd8b52583
-  pristine_commit_hash: 98432ed067a13ecba58082b46bfdd96eb224f83d
-  pristine_tree_hash: 8ddde950ec0260e845f8d1b6f57dbf188918ba25
+  generation_id: 39ad8d8e-bb1a-4261-8d35-1e7c5c083627
+  pristine_commit_hash: 796d5b6468802bce81937d67112f0cc3e150d622
+  pristine_tree_hash: 2e01668099edc1fb32ac3c395e85d598fba02ab2
 features:
   typescript:
     additionalDependencies: 0.1.0
-    core: 3.26.22
+    core: 3.26.23
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
@@ -60,6 +60,10 @@ trackedFiles:
     id: 0ce9707cb848
     last_write_checksum: sha1:bc4454e196fcd219f5a78da690375a884f5ed07b
     pristine_git_object: 08f95f4552349360b2c0b01802aa71ec3a55d2c2
+  docs/models/components/acceptorganizationinviteresponse.md:
+    id: f159fac53975
+    last_write_checksum: sha1:2eee2aebad22ba5d0000358cac8624f0503abd44
+    pristine_git_object: 93b58540d27d7672c0a0ca4d0d349e02699c0de3
   docs/models/components/accesslevel.md:
     id: 3e59708c73df
     last_write_checksum: sha1:411b00bc97307b96940d1706bedf3a7fd284428c
@@ -88,6 +92,10 @@ trackedFiles:
     id: f7331f143170
     last_write_checksum: sha1:81263b19b558c3f269e6f6c131390398d69a567d
     pristine_git_object: 36da239cbdd0576bede352b8672224d9d3295adf
+  docs/models/components/createorganizationinviteresponse.md:
+    id: e50ec130a0fe
+    last_write_checksum: sha1:af6dd5d76def5012105262302061ee26f600b947
+    pristine_git_object: 8c1a0d6b6efbf70bd5695712964bcc25fbc9b0ca
   docs/models/components/createorganizationrequest.md:
     id: 0ceae077b9d1
     last_write_checksum: sha1:5cacc7c7f2039e4c237b85e77c27cc4c27da76bc
@@ -148,6 +156,10 @@ trackedFiles:
     id: 5cbdb17d7113
     last_write_checksum: sha1:c00b18babbcb72801c0560a7e092d4541929022a
     pristine_git_object: bd94150864c31af0283b39feaee257238a7c16ae
+  docs/models/components/listorganizationinvitesresponse.md:
+    id: a307b159743f
+    last_write_checksum: sha1:66c1c2919dedd65dac9af7f39af778ebcf99e965
+    pristine_git_object: c6ace336290ba199b43d77ac7e7302b458dabc47
   docs/models/components/listorganizationsresponse.md:
     id: b950ff70dbff
     last_write_checksum: sha1:ba2ea7f0b40038a6bfe1915bebb2ffa164bd5e8e
@@ -160,6 +172,14 @@ trackedFiles:
     id: 288ce68f18e3
     last_write_checksum: sha1:09299c2e4b466e624ffeb613b1b8e847e0f78523
     pristine_git_object: edd732d181f4dc0f2ff048f036dd5a35b165c136
+  docs/models/components/organizationinvite.md:
+    id: 2dff32cd8d80
+    last_write_checksum: sha1:a664a5bba3bc3255bce5e1e45b3998b3c1e2c7e7
+    pristine_git_object: 9f5cc5f7b738004e4a64a61e3b61c760c8f42d54
+  docs/models/components/organizationinvitestatus.md:
+    id: e023cb490bb7
+    last_write_checksum: sha1:a9e63cb7e3a59bc55dd76f433c53d469907cbb1f
+    pristine_git_object: 82d5795c54432a5efce0d441af5c385b623b639a
   docs/models/components/pagination.md:
     id: c63182f7c460
     last_write_checksum: sha1:add082401ee6af13ba552eff29969ebb76d6df89
@@ -172,10 +192,18 @@ trackedFiles:
     id: 1aaf8b2e90b6
     last_write_checksum: sha1:62cb2566372c7cfbf66397adc28b0088b7b2ea01
     pristine_git_object: e621f16870a8e408ce7a0c09f20c6b27c3c89add
+  docs/models/components/resendorganizationinviteresponse.md:
+    id: 606eb470eee2
+    last_write_checksum: sha1:69b12417d145ffb7cd3de90a76a76bdc60f1ef61
+    pristine_git_object: 0765bebe349a5f58cd64e6649581dd1f00a74d5e
   docs/models/components/revokeapikeyresponse.md:
     id: 4a7e638a9d80
     last_write_checksum: sha1:8101da5660231e2c21774d1b6f18b1d8900c9c67
     pristine_git_object: c926ef4ef093511509184c939fab621dfa7ab8ab
+  docs/models/components/revokeorganizationinviteresponse.md:
+    id: 6aa268d28217
+    last_write_checksum: sha1:27e3a86e3de5dc08db3b8971adfa21c4eb0202d2
+    pristine_git_object: 42275cacc9261b8427e5e907f295c92ecdd1f0e0
   docs/models/components/security.md:
     id: 54906b49ea28
     last_write_checksum: sha1:7e8e2120ff0f6bae8e6283a06001ea0dbfeaa46e
@@ -208,6 +236,18 @@ trackedFiles:
     id: 0fc20860e35e
     last_write_checksum: sha1:826811ac23c80c57c4085353038e57ef5b8ef2e9
     pristine_git_object: 34a1f9936ee2ed0c799db175b5946084efba7bd3
+  docs/models/operations/acceptorganizationinviteacceptorganizationinviterequest.md:
+    id: 4cc9c457097a
+    last_write_checksum: sha1:a8a609a72df1bf50b1903880003a49ef559fd0e8
+    pristine_git_object: f2f669c03e23c1e4527635dac1850e0dd3e4d7d5
+  docs/models/operations/acceptorganizationinviterequest.md:
+    id: 85f33ada8605
+    last_write_checksum: sha1:3443c903052cc449dedb5f0a84bd831484992d8a
+    pristine_git_object: 278fd5da612538c4195edfdd9b37e597c3a5d216
+  docs/models/operations/acceptorganizationinviteresponse.md:
+    id: d05cc5d534cb
+    last_write_checksum: sha1:1ac9a20252523dc9e81e460e66efd0aa609242ef
+    pristine_git_object: dccb52963362cf2e2bf771a3d25de7aa6bd25e31
   docs/models/operations/accesslevel.md:
     id: 4a294fedbfd2
     last_write_checksum: sha1:502a28f36fd4b52837aa03e76118f717242ff49c
@@ -240,6 +280,18 @@ trackedFiles:
     id: 199668f802c2
     last_write_checksum: sha1:0272fa07f3d8fa3ea369a6cd119c61d45fd6ab02
     pristine_git_object: 70d3c29fd59d8743fb1d652c627af017f35b0330
+  docs/models/operations/createorganizationinvitecreateorganizationinviterequest.md:
+    id: 6cd1a2192b42
+    last_write_checksum: sha1:5e73cbfbe3af3a2802a4c00fd8f7ba4172c53b3f
+    pristine_git_object: d38a6b54bd2fc9e5481166983cf1b9ed5b41606d
+  docs/models/operations/createorganizationinviterequest.md:
+    id: 7d9b665f12f3
+    last_write_checksum: sha1:f7ba2433c65c2fbbdb8f0c6624c63a3a6cb75b4e
+    pristine_git_object: dd408745c7da50909f3f312d97473575162023e6
+  docs/models/operations/createorganizationinviteresponse.md:
+    id: 6704a5395929
+    last_write_checksum: sha1:b9d9725c12098e1a4bce823b6917c053abb949a2
+    pristine_git_object: 0c354548bf5844eb913d695c9a48f5e651980e05
   docs/models/operations/createorganizationresponse.md:
     id: 12b317bd216c
     last_write_checksum: sha1:c6babc7641e19deb2875c983615bffef0794ebc0
@@ -316,6 +368,14 @@ trackedFiles:
     id: 78a548cad462
     last_write_checksum: sha1:0d0415a4fd817ed92e15742c31e1e225298a7ff8
     pristine_git_object: 0de829892ec15f36edf89f15fa2ed40087deb87a
+  docs/models/operations/listorganizationinvitesrequest.md:
+    id: 900478ed621b
+    last_write_checksum: sha1:8c90be56eb680050916eee7ca5b5610ed40678f4
+    pristine_git_object: 289bfe5862c5816842e83a3d0a9d65e7047c335c
+  docs/models/operations/listorganizationinvitesresponse.md:
+    id: 7d56cc72a489
+    last_write_checksum: sha1:e8266e4e4dff687668e1225a30dad0cfbd48fdcf
+    pristine_git_object: eab3d223e0e48f30327e30d0ee800d2f64202d52
   docs/models/operations/listorganizationsrequest.md:
     id: 656820540c33
     last_write_checksum: sha1:2da6a7ff4191d57c64d46ac7faf1ff8f8404b65a
@@ -328,6 +388,18 @@ trackedFiles:
     id: 9fbdc887e87b
     last_write_checksum: sha1:503be072f7c833b4cc86baa47b6efbd368456454
     pristine_git_object: fb7ade4c4708088d3d2f73619283ddf63bb26574
+  docs/models/operations/resendorganizationinviterequest.md:
+    id: 1b30e35ea6b1
+    last_write_checksum: sha1:110e4e1d909811956708454e6b7740f4ce952694
+    pristine_git_object: 297bb33e4d7938d853d4e8eb3ea9595ccfa046a8
+  docs/models/operations/resendorganizationinviteresendorganizationinviterequest.md:
+    id: 39dd87b2e3c5
+    last_write_checksum: sha1:7df1a0432da09ad79ae5a4911fb4067a6b09e710
+    pristine_git_object: 1176bf43135208e82259e518f304b1e684c3e45d
+  docs/models/operations/resendorganizationinviteresponse.md:
+    id: 68521e960a11
+    last_write_checksum: sha1:82ae58e0111bad975065c9fd0f01dc3a37e3602f
+    pristine_git_object: 8aac23a35efbc9805788b38e0fc6aeadadc1d130
   docs/models/operations/revokeapikeyrequest.md:
     id: 9751a881d147
     last_write_checksum: sha1:b4f4e3a5bf2520c24af8c8c513c4796f907b2afb
@@ -340,6 +412,18 @@ trackedFiles:
     id: bafd32ebb656
     last_write_checksum: sha1:0ce167a57b78574d9179bc130bea4a4ed8696813
     pristine_git_object: 16b7254773355977c3e02c3588510dd69f2b05f8
+  docs/models/operations/revokeorganizationinviterequest.md:
+    id: 35dc4c81b477
+    last_write_checksum: sha1:c387f3b806902702fe74247516081af7a4c6d893
+    pristine_git_object: f7a10845e027989c91ecb9ed6c904c9188ca24d0
+  docs/models/operations/revokeorganizationinviteresponse.md:
+    id: c903d8ac1236
+    last_write_checksum: sha1:90f8664b105d3b3485db0192b3ab99509d093607
+    pristine_git_object: d74615dd14998154a50b434458da7a358d89a4ba
+  docs/models/operations/revokeorganizationinviterevokeorganizationinviterequest.md:
+    id: 1d688c61326e
+    last_write_checksum: sha1:62dddacade19eaecdef12ec60d5bc5926e4fcd62
+    pristine_git_object: 38ded71e96119b526ce9ca89e3f77117a1de282b
   docs/models/operations/updatedocumentrequest.md:
     id: 0391b2c011ed
     last_write_checksum: sha1:fce91de4b1c493c2d4fc5c184850c09e2e2ae2f9
@@ -376,10 +460,14 @@ trackedFiles:
     id: 7fec98293884
     last_write_checksum: sha1:6be28c644a64fc444c2967aaccc3cda956631340
     pristine_git_object: 533a0587d711b266fec94f0a122ef033c13bc61f
+  docs/sdks/invites/README.md:
+    id: 292e7df78f50
+    last_write_checksum: sha1:fd02610d38113f8f2dc1bd28fe18ad221e85fc63
+    pristine_git_object: f08ea53311d1836dcb8f335cbfc45c886dcde19e
   docs/sdks/organizations/README.md:
     id: 3425667a2db5
-    last_write_checksum: sha1:1a38152fa591c1eeaecadd5216f783c44b4d2f2c
-    pristine_git_object: 9861cb43132f536eeae55d2036724ddc8dcf0be2
+    last_write_checksum: sha1:489961e2572a63a7fa9ae761803286d90e3633a8
+    pristine_git_object: 13bf8bee79a0aa347ae9c83305fdb95c708510b1
   docs/sdks/policies/README.md:
     id: 636269b04e57
     last_write_checksum: sha1:37876a89621f8cb33b416397746181188dab8aaf
@@ -410,12 +498,12 @@ trackedFiles:
     pristine_git_object: 766ea5ba4257419f9fca9da9c6ba895ab05a3f8b
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:b3fce302955d1ea0fbc329345867a22bff630559
-    pristine_git_object: 0e5dd6cccc54cee5ccf4c3bc15278b20c7768b78
+    last_write_checksum: sha1:3f4f0198481965927b933da940f15fd25ab664b4
+    pristine_git_object: 2531de958ae30a2e406432c9f444d0195094badc
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:db05ed6b1c1981eadb30c0b38dd321335f3ac8a2
-    pristine_git_object: d45d7b088d160dddcef60512bcdd4550f973bebe
+    last_write_checksum: sha1:c611a101951d8f45432b22629b392f7e7769edd8
+    pristine_git_object: 596a825f200786f0fb8a5185e3919d5c563348b9
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:72dd2a6867a44557b35fa72fe5588efc5d08e8e1
@@ -460,6 +548,26 @@ trackedFiles:
     id: e6645a077f2f
     last_write_checksum: sha1:372b99926087956e7823d68ddf6851a70a817719
     pristine_git_object: e78a5f7c1993aad96b3a02427c9174200a2d0637
+  src/funcs/organizationsInvitesAccept.ts:
+    id: 73a911d611fb
+    last_write_checksum: sha1:6f06aafaebbde4239b07d74eb01a6d0667c2b1bc
+    pristine_git_object: 80d82d09bb1006b09ad03b42e1f1e51f3704373d
+  src/funcs/organizationsInvitesCreate.ts:
+    id: d1e463d9a2e6
+    last_write_checksum: sha1:3b76eafade14e6a0a8524a2aba05881927ff30a9
+    pristine_git_object: 547d9c4c504255ba2f47611f9301a88dbe49c002
+  src/funcs/organizationsInvitesList.ts:
+    id: fa1310887d34
+    last_write_checksum: sha1:608c6cad31d673619b89fb71ef801fc7b51f35f4
+    pristine_git_object: d05e2b09ffae59d0c5acbc7980543a90c543c6f9
+  src/funcs/organizationsInvitesResend.ts:
+    id: 551d42c15e82
+    last_write_checksum: sha1:0fa574f0d39737a49a73729fcdd255fe5e6ae81c
+    pristine_git_object: 30b6e4dd7b2535b1fbef7e7aed118028dc229808
+  src/funcs/organizationsInvitesRevoke.ts:
+    id: 86f2e3267a2b
+    last_write_checksum: sha1:684f1b0b6eafb4fab05f384f01c40da3aa34e01a
+    pristine_git_object: 1d59da4531fd413d29bf628100b840d407423a39
   src/funcs/organizationsList.ts:
     id: 1f7166ed3198
     last_write_checksum: sha1:ae44d50ac2dee7b4b4b305bb9fc1ef769e1111ae
@@ -514,8 +622,8 @@ trackedFiles:
     pristine_git_object: 44be0eae8246521b230e8e711a88eff738fc015d
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:4399e75d9287227e3b4256b56f491ceb85a2e499
-    pristine_git_object: f023fd1176d636016ab2505e7b2913d26b7f9a6a
+    last_write_checksum: sha1:6e0befc0ae6345d03e99c2f0ca177f3c50e2044e
+    pristine_git_object: 996c82a95faa6db5453f91819789138553797acf
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -568,6 +676,10 @@ trackedFiles:
     id: b0057e24ed76
     last_write_checksum: sha1:d124050c7e755c0cce233b9e029afb584ff65201
     pristine_git_object: f3a8de6c021de59c991707946cd294596cae954d
+  src/models/components/acceptorganizationinviteresponse.ts:
+    id: bca83180f04c
+    last_write_checksum: sha1:6a6ee5f1176572fa4226712a4110334e489e6cc7
+    pristine_git_object: f7e6019169bc1499c8573608a2692d5133bd272e
   src/models/components/accesslevel.ts:
     id: 358d19253fe5
     last_write_checksum: sha1:b7abcd7538d608324a5d88ae033e7bdddeedec64
@@ -592,6 +704,10 @@ trackedFiles:
     id: 84708e409a54
     last_write_checksum: sha1:9ae767c0b0f8bda1e8b803efb8cc58cbefa3d4f8
     pristine_git_object: 2ed5b0bdc0715d4396361f078abc2f704859610b
+  src/models/components/createorganizationinviteresponse.ts:
+    id: f5fe935aba7e
+    last_write_checksum: sha1:8d60cc1e3f59546ec079f6d556e2fa2f79a515b6
+    pristine_git_object: a5fc5c91920598e7dd65c1141045a978e92c89cc
   src/models/components/createorganizationrequest.ts:
     id: 6a6a666a5463
     last_write_checksum: sha1:22d52bf56cf8615dc9bd450142e21bbf8506db56
@@ -638,8 +754,8 @@ trackedFiles:
     pristine_git_object: 52ea8912b0a1f17b36f54e6bcba97fb6e58b6cb2
   src/models/components/index.ts:
     id: 0aa842dce54d
-    last_write_checksum: sha1:5e9b115465ca2c4eaa99b7500252a25d6bf1f47c
-    pristine_git_object: c57a268a42f1df1a524f37f8dd6df0d2ca856feb
+    last_write_checksum: sha1:88b380cb7a79e2433872dd179d11ce07a5f5b238
+    pristine_git_object: 6820a0256a0ba2b44f8f863cf6df9f527dff5823
   src/models/components/listapikeysresponse.ts:
     id: a366d37c816c
     last_write_checksum: sha1:1021c1227e06f12213ff3ac4b31d00860620530a
@@ -652,6 +768,10 @@ trackedFiles:
     id: 65580de12ccd
     last_write_checksum: sha1:7bd0e98557205b6f5678cbd2634385a02e91a42c
     pristine_git_object: b94a8b4b53e3593748731673b5beabc58a4164d3
+  src/models/components/listorganizationinvitesresponse.ts:
+    id: c7223e449736
+    last_write_checksum: sha1:eb256c595acdd4cd17a1070917d91302f9090a90
+    pristine_git_object: 963c6789c0fcce5c4ae1d291e3fdf6c4244b13ad
   src/models/components/listorganizationsresponse.ts:
     id: 1e00d716ccf6
     last_write_checksum: sha1:1f588e9b01ab9d8b2e4dc2591a5e7c9bbae2ddd7
@@ -664,6 +784,14 @@ trackedFiles:
     id: 67dc659ba656
     last_write_checksum: sha1:0f0e701cfcdaacbc17786b89cc6eb111ba280cae
     pristine_git_object: f590e46ff560912068311f6247e5fa68119eeb2a
+  src/models/components/organizationinvite.ts:
+    id: 2abd92e5004f
+    last_write_checksum: sha1:2dde6ec7f610e161fb9bd062a4c37eb53c270fd7
+    pristine_git_object: a33b1ba85df6596719bb3a7514a7e3131d2c1789
+  src/models/components/organizationinvitestatus.ts:
+    id: 05d16e7ce14b
+    last_write_checksum: sha1:37b7dacd7093207551614d79c00413581e71dda4
+    pristine_git_object: 63168e666106a5a499a70256c3970e2518d31919
   src/models/components/pagination.ts:
     id: "251089943250"
     last_write_checksum: sha1:cfdd7f713e8557564ce5485e5b30f85c63633326
@@ -676,10 +804,18 @@ trackedFiles:
     id: 684d4885f374
     last_write_checksum: sha1:a2cab506ad73337ad2677fb386438e0bda5237dc
     pristine_git_object: b20d2857c561b12a3011c660b28ccfb1c81d42cb
+  src/models/components/resendorganizationinviteresponse.ts:
+    id: 5ce7d7e607d3
+    last_write_checksum: sha1:cbf4a2e0261fd2254b54dc20bd1969632eb3731a
+    pristine_git_object: 891188f22eea385980f8ebabba51a3fa558c37e2
   src/models/components/revokeapikeyresponse.ts:
     id: 4a48d8068dbd
     last_write_checksum: sha1:bf21f7823fe3ae3b715eb7387a9140cdc564d691
     pristine_git_object: b0430c5b71f34fa6671d7d0f4f6ec730c42d5e64
+  src/models/components/revokeorganizationinviteresponse.ts:
+    id: 872c5e82f470
+    last_write_checksum: sha1:75c630a3f4a75a2be243f3785c0f93ca93b5baaa
+    pristine_git_object: 31e6f5d664b3befb81531363b19d503b73f021a1
   src/models/components/security.ts:
     id: 472dde81bb1c
     last_write_checksum: sha1:d9e1c9387ccc02dd0ccc7c1a44a0ec1219914dd4
@@ -732,6 +868,10 @@ trackedFiles:
     id: fb6b2b49c445
     last_write_checksum: sha1:92771987c251f02fd86cfd824a3be709cd3c2837
     pristine_git_object: db00022e05d55600252f401eb0e6ab46278e0b07
+  src/models/operations/acceptorganizationinvite.ts:
+    id: 08490edcc63a
+    last_write_checksum: sha1:e5fecb7b155b27068b54dcdf06c67794aa5e3a0a
+    pristine_git_object: 29cb4cfa679d80e28867b2a62edc5a91a9a82567
   src/models/operations/attachdocumentpolicy.ts:
     id: 01e136600489
     last_write_checksum: sha1:06982a2ebe42a9360a1dccf8c92eff88ae825b93
@@ -752,6 +892,10 @@ trackedFiles:
     id: 120d7493206d
     last_write_checksum: sha1:99aae273574858f15158bff1a3dcb661615f88ea
     pristine_git_object: 50aaa650ce9d9b115d2f49945c235bae5159414a
+  src/models/operations/createorganizationinvite.ts:
+    id: 49a74e1bcf8c
+    last_write_checksum: sha1:e8700129527aa26897366459f3c45310e58b4864
+    pristine_git_object: a820f743d4efb88a099e7f19186b1188dcdfbba3
   src/models/operations/detachdocumentpolicy.ts:
     id: 18ee46b79daf
     last_write_checksum: sha1:2fe2368dccb324e5590a8d223f84b357b812b603
@@ -774,8 +918,8 @@ trackedFiles:
     pristine_git_object: 0eb85822e49ade582c1dc5501bf777c43d179d57
   src/models/operations/index.ts:
     id: 0d9ffaf774d2
-    last_write_checksum: sha1:288b239d933adecd3aca59e465ec796a65dc0599
-    pristine_git_object: 7227dde011b0ecc10beb8d8f7cc10a4aef9558db
+    last_write_checksum: sha1:c52e6e83872face8affd9128ff1f7ac06300c248
+    pristine_git_object: 6efd97debc1ec63d1195ff06584f78464c25fd11
   src/models/operations/listapikeys.ts:
     id: f6a5b994cd87
     last_write_checksum: sha1:6c95f37cf596537a65f943b27818bf154983fec6
@@ -792,14 +936,26 @@ trackedFiles:
     id: 77bde9e60b0f
     last_write_checksum: sha1:23c207cc39218963384fddc68573b901914b0ac4
     pristine_git_object: a10721562ea128cc1438d6325e3dd9431c58b8f7
+  src/models/operations/listorganizationinvites.ts:
+    id: 17b3fdced466
+    last_write_checksum: sha1:dcbfc71af5c2bf2e8e11e2593af712d197cd85e3
+    pristine_git_object: d51af283a8b62b46eafedf267ee5fe54aec740eb
   src/models/operations/listorganizations.ts:
     id: 2bdfb282944e
     last_write_checksum: sha1:a9255f9943271b98d222af57d68cd13dd72eafe2
     pristine_git_object: 6c7a1fefde690da2c8f7faa08e44aa3543df2182
+  src/models/operations/resendorganizationinvite.ts:
+    id: 4736c3ad6efb
+    last_write_checksum: sha1:802f761474dca1edbb293250ea65df3046d3f15d
+    pristine_git_object: bfba1ef9aafbdfa8f9c41b4a1a961af7b4d1202a
   src/models/operations/revokeapikey.ts:
     id: a50bffb0aa79
     last_write_checksum: sha1:fd1abb9a23ebefa635aece985b8217e3025e3441
     pristine_git_object: 8e04a556cb67863216f7101a9b28ea86f2c71c4e
+  src/models/operations/revokeorganizationinvite.ts:
+    id: 49f0466416f3
+    last_write_checksum: sha1:0d63ec46ea5a680dbdbb86469b79108f39c00456
+    pristine_git_object: a23be67cb6e6090abe02f0b55618aca64b650e3f
   src/models/operations/updatedocument.ts:
     id: 9529e1d725bf
     last_write_checksum: sha1:cefbc35d50fb5e8ea3bf10c2c861ff1fc03c2a34
@@ -824,10 +980,14 @@ trackedFiles:
     id: a857902a703f
     last_write_checksum: sha1:ed6d64f2a6135349aa8498b8d8cff9ba85c7fb8f
     pristine_git_object: ecac2264817bb369ff2dbf0f0e9029807e67ff77
+  src/sdk/invites.ts:
+    id: 6f3521380bb1
+    last_write_checksum: sha1:1c8891c52e7718fa341a3af1c503438dab36625f
+    pristine_git_object: 8846bb7a93791acc22ad27df41c529e3824ae852
   src/sdk/organizations.ts:
     id: 727404ccd4e9
-    last_write_checksum: sha1:6122d55c03f59c0ba148065e0732d4140b5edafb
-    pristine_git_object: 4a81215f298902df077afec8c14c4481e4ef476e
+    last_write_checksum: sha1:a063455e3b6b920954ea3a9ec22112db8a8bd0ad
+    pristine_git_object: 807b00c3168f31abdd2154c5e6d2464112b54f61
   src/sdk/policies.ts:
     id: 56c143102e2a
     last_write_checksum: sha1:3442acf9ea51dc4b91b0159f52e51e05614260a3
@@ -1447,8 +1607,158 @@ examples:
           application/json: {"error": {"code": "<value>", "message": "<value>", "param": null, "retry_after": 691002, "type": "rate_limit_error"}}
         "500":
           application/json: {"error": {"code": "<value>", "message": "<value>", "param": null, "retry_after": 691002, "type": "rate_limit_error"}}
+  listOrganizationInvites:
+    validation_error:
+      parameters:
+        path:
+          organization_id: "<id>"
+      responses:
+        "400":
+          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+        "429":
+          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+        "500":
+          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+    speakeasy-default-list-organization-invites:
+      parameters:
+        path:
+          organization_id: "<id>"
+      responses:
+        "200":
+          application/json: {"items": [{"accepted_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "created_at": "2025-10-27T07:43:49.957Z", "email": "dwight@dundermifflin.com", "expires_at": "2025-12-01T10:42:58.059Z", "id": "inv_01h2xcejqtf2nbrexx3vqjhp41", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41", "sender": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "status": "ORGANIZATION_INVITE_STATUS_ACCEPTED"}], "pagination": {"next_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0", "prev_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJwcmV2In0"}}
+        "400":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 89862, "type": "api_error"}}
+        "429":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 89862, "type": "api_error"}}
+        "500":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 89862, "type": "api_error"}}
+  createOrganizationInvite:
+    validation_error:
+      parameters:
+        path:
+          organization_id: "<id>"
+      requestBody:
+        application/json: {"email": "Willie_Parisian16@hotmail.com"}
+      responses:
+        "400":
+          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+        "429":
+          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+        "500":
+          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+    speakeasy-default-create-organization-invite:
+      parameters:
+        path:
+          organization_id: "<id>"
+      requestBody:
+        application/json: {"email": "Willie_Parisian16@hotmail.com"}
+      responses:
+        "200":
+          application/json: {"invite": {"accepted_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "created_at": "2025-07-26T07:49:48.068Z", "email": "dwight@dundermifflin.com", "expires_at": "2026-01-04T12:23:16.764Z", "id": "inv_01h2xcejqtf2nbrexx3vqjhp41", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41", "sender": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "status": "ORGANIZATION_INVITE_STATUS_ACCEPTED"}}
+        "400":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": null, "retry_after": 9747, "type": "invalid_request_error"}}
+        "429":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": null, "retry_after": 9747, "type": "invalid_request_error"}}
+        "500":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": null, "retry_after": 9747, "type": "invalid_request_error"}}
+  acceptOrganizationInvite:
+    validation_error:
+      parameters:
+        path:
+          organization_id: "<id>"
+          invite_id: "<id>"
+      requestBody:
+        application/json: {"token": "<value>"}
+      responses:
+        "400":
+          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+        "429":
+          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+        "500":
+          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+    speakeasy-default-accept-organization-invite:
+      parameters:
+        path:
+          organization_id: "<id>"
+          invite_id: "<id>"
+      requestBody:
+        application/json: {"token": "<value>"}
+      responses:
+        "200":
+          application/json: {"organization": {"created_at": "2026-08-24T11:58:03.251Z", "id": "org_01h2xcejqtf2nbrexx3vqjhp41", "name": "Acme Corporation"}}
+        "400":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": null, "type": "authentication_error"}}
+        "429":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": null, "type": "authentication_error"}}
+        "500":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": null, "type": "authentication_error"}}
+  resendOrganizationInvite:
+    validation_error:
+      parameters:
+        path:
+          organization_id: "<id>"
+          invite_id: "<id>"
+      requestBody:
+        application/json: {}
+      responses:
+        "400":
+          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+        "429":
+          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+        "500":
+          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+    speakeasy-default-resend-organization-invite:
+      parameters:
+        path:
+          organization_id: "<id>"
+          invite_id: "<id>"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"invite": {"accepted_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "created_at": "2026-03-26T20:10:39.093Z", "email": "dwight@dundermifflin.com", "expires_at": "2026-01-04T23:55:34.416Z", "id": "inv_01h2xcejqtf2nbrexx3vqjhp41", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41", "sender": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "status": "ORGANIZATION_INVITE_STATUS_EXPIRED"}}
+        "400":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": null, "retry_after": 440301, "type": "authentication_error"}}
+        "429":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": null, "retry_after": 440301, "type": "authentication_error"}}
+        "500":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": null, "retry_after": 440301, "type": "authentication_error"}}
+  revokeOrganizationInvite:
+    validation_error:
+      parameters:
+        path:
+          organization_id: "<id>"
+          invite_id: "<id>"
+      requestBody:
+        application/json: {}
+      responses:
+        "400":
+          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+        "429":
+          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+        "500":
+          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+    speakeasy-default-revoke-organization-invite:
+      parameters:
+        path:
+          organization_id: "<id>"
+          invite_id: "<id>"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"invite": {"accepted_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "created_at": "2025-02-05T03:30:38.591Z", "email": "dwight@dundermifflin.com", "expires_at": "2024-08-08T12:50:51.355Z", "id": "inv_01h2xcejqtf2nbrexx3vqjhp41", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41", "sender": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "status": "ORGANIZATION_INVITE_STATUS_PENDING"}}
+        "400":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 3333, "type": "authorization_error"}}
+        "429":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 3333, "type": "authorization_error"}}
+        "500":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 3333, "type": "authorization_error"}}
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Typescript SDK Changes:
-  * `factify.quota.getOrganizationQuota()`: **Deleted** **Breaking** :warning:
-  * `factify.quota.getUsageHistory()`: **Deleted** **Breaking** :warning:
+  * `factify.organizations.invites.list()`: **Added**
+  * `factify.organizations.invites.create()`: **Added**
+  * `factify.organizations.invites.accept()`: **Added**
+  * `factify.organizations.invites.resend()`: **Added**
+  * `factify.organizations.invites.revoke()`: **Added**

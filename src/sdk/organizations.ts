@@ -10,8 +10,14 @@ import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 import { PageIterator, unwrapResultIterator } from "../types/operations.js";
+import { Invites } from "./invites.js";
 
 export class Organizations extends ClientSDK {
+  private _invites?: Invites;
+  get invites(): Invites {
+    return (this._invites ??= new Invites(this._options));
+  }
+
   /**
    * List organizations
    *

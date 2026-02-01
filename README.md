@@ -194,6 +194,14 @@ run();
 * [create](docs/sdks/organizations/README.md#create) - Create an organization
 * [get](docs/sdks/organizations/README.md#get) - Retrieve an organization
 
+### [Organizations.Invites](docs/sdks/invites/README.md)
+
+* [list](docs/sdks/invites/README.md#list) - List organization invitations
+* [create](docs/sdks/invites/README.md#create) - Invite a user to join an organization
+* [accept](docs/sdks/invites/README.md#accept) - Accept an invitation
+* [resend](docs/sdks/invites/README.md#resend) - Resend an invitation email
+* [revoke](docs/sdks/invites/README.md#revoke) - Revoke an invitation
+
 ### [Policies](docs/sdks/policies/README.md)
 
 * [list](docs/sdks/policies/README.md#list) - List document policies
@@ -235,6 +243,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`entryPagesGenerate`](docs/sdks/entrypages/README.md#generate) - Generate entry page
 - [`organizationsCreate`](docs/sdks/organizations/README.md#create) - Create an organization
 - [`organizationsGet`](docs/sdks/organizations/README.md#get) - Retrieve an organization
+- [`organizationsInvitesAccept`](docs/sdks/invites/README.md#accept) - Accept an invitation
+- [`organizationsInvitesCreate`](docs/sdks/invites/README.md#create) - Invite a user to join an organization
+- [`organizationsInvitesList`](docs/sdks/invites/README.md#list) - List organization invitations
+- [`organizationsInvitesResend`](docs/sdks/invites/README.md#resend) - Resend an invitation email
+- [`organizationsInvitesRevoke`](docs/sdks/invites/README.md#revoke) - Revoke an invitation
 - [`organizationsList`](docs/sdks/organizations/README.md#list) - List organizations
 - [`policiesAttach`](docs/sdks/policies/README.md#attach) - Attach a policy
 - [`policiesDetach`](docs/sdks/policies/README.md#detach) - Detach a policy
