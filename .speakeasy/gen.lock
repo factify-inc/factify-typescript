@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 23af0391-5a58-495c-b992-941b55f41c78
 management:
-  docChecksum: 2fd3eeac07025a4dfe5dfd711d5338c7
+  docChecksum: 3b9e0f59863757b3f92be55c85ef21c9
   docVersion: 1.0.0
   speakeasyVersion: 1.700.2
   generationVersion: 2.801.2
-  releaseVersion: 0.3.14-rc.3
-  configChecksum: f1b9febb73a0ac0dfb67ceed5c6bba0c
+  releaseVersion: 0.3.14-rc.4
+  configChecksum: 7c4c5623470f52bb4cb974f615f5935c
   repoURL: https://github.com/factify-inc/factify-typescript.git
   installationURL: https://github.com/factify-inc/factify-typescript
   published: true
 persistentEdits:
-  generation_id: 39ad8d8e-bb1a-4261-8d35-1e7c5c083627
-  pristine_commit_hash: 796d5b6468802bce81937d67112f0cc3e150d622
-  pristine_tree_hash: 2e01668099edc1fb32ac3c395e85d598fba02ab2
+  generation_id: 49a45c2b-94a8-446d-b059-4affae68276c
+  pristine_commit_hash: 86b2da2ce2ddd31caaa0b30d7d2b4d80f86072f2
+  pristine_tree_hash: 7a616bd7e68bbfc1c7778608020759ff4c05101a
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -21,6 +21,7 @@ features:
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
+    examples: 2.82.4
     globalSecurity: 2.82.14
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
@@ -46,16 +47,16 @@ trackedFiles:
     pristine_git_object: cf98a6bf092538eb10ff0edc915102682ce9a6e6
   FUNCTIONS.md:
     id: 21b9df02aaeb
-    last_write_checksum: sha1:f0d8d51b0af5e447c91d682a21dc339cf18bbae2
-    pristine_git_object: 843da4154b8d8ac3f62f5008f43d9b68ceeea9d4
+    last_write_checksum: sha1:9d038a8eaefe2a31e656f9a0d96fcf8ba47db9f7
+    pristine_git_object: 69d82d3d693b28023cbc54e6863cea50a01fa66c
   RUNTIMES.md:
     id: 620c490847b6
     last_write_checksum: sha1:e45b854f02c357cbcfdb8c3663000e8339e16505
     pristine_git_object: 27731c3b5ace66bedc454ed5acbe15075aacd3dc
   USAGE.md:
     id: 3aed33ce6e6f
-    last_write_checksum: sha1:9752b37e24038b9a8894dc13c4f1151eb0958b69
-    pristine_git_object: af41331545bb1e56192684d645c03197a1132112
+    last_write_checksum: sha1:94e12e82e8e18d01ab98c4c4fbf803e2e62bceeb
+    pristine_git_object: 7f05f247405b4d1af6b38aec4bd53a46a5331696
   docs/lib/utils/retryconfig.md:
     id: 0ce9707cb848
     last_write_checksum: sha1:bc4454e196fcd219f5a78da690375a884f5ed07b
@@ -106,8 +107,8 @@ trackedFiles:
     pristine_git_object: 70e82524c929587f94666d6256dc8a69a2d52cf4
   docs/models/components/createversionrequest.md:
     id: 7f1576930587
-    last_write_checksum: sha1:339b27f0679979cbb7597a0f75ee6e8e28bc1f92
-    pristine_git_object: 8387820a8c803ae8ab64cdf81dec3581fbf51483
+    last_write_checksum: sha1:8252cdb0daf6469c2d98c6fc7c30042b0011696e
+    pristine_git_object: ab9a3b9fa61960bba9b2cf1a513928f53a42029f
   docs/models/components/createversionrequestpayload.md:
     id: 2ce26e8f2f1d
     last_write_checksum: sha1:af4167c749a58a1c17279388936a8fc4d7573cb7
@@ -488,22 +489,22 @@ trackedFiles:
     id: 9d0f69d6e677
     last_write_checksum: sha1:3a1b72e31272fc2d061f8db5958de5849e99dc09
     pristine_git_object: c4f3cb04df89895418e1fa9c7705e6edd90f3a38
-  examples/apiKeysList.example.ts:
-    id: 1ae904a56ea6
-    last_write_checksum: sha1:092bb0bbf433f5f17d60d9a47300cdfcf0956071
-    pristine_git_object: dd72eab619deb7f560def1d8a642a714ee447b48
+  examples/documentsList.example.ts:
+    id: b26b2f44b00b
+    last_write_checksum: sha1:8e04e3df6d78765e987cd768c04c84f4741d2e13
+    pristine_git_object: 054c2da42de382d490fcbc0335ff4b90d472a177
   examples/package.json:
     id: c1d7b0ec8e7e
     last_write_checksum: sha1:f91dededfb03997ddec6e1904f61e14bd854cbb7
     pristine_git_object: 766ea5ba4257419f9fca9da9c6ba895ab05a3f8b
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:3f4f0198481965927b933da940f15fd25ab664b4
-    pristine_git_object: 2531de958ae30a2e406432c9f444d0195094badc
+    last_write_checksum: sha1:400038627fac5d343e2887bc15f49b76add94f0e
+    pristine_git_object: e8bd15f1fb93cd73d902ff14a30ee89a1d8cb8d8
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:c611a101951d8f45432b22629b392f7e7769edd8
-    pristine_git_object: 596a825f200786f0fb8a5185e3919d5c563348b9
+    last_write_checksum: sha1:fe3a63888b4514debc229e264ddc710fcc6b9081
+    pristine_git_object: ebe9d5ddbda59bf7d3d48178d2f9d76117ae0224
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:72dd2a6867a44557b35fa72fe5588efc5d08e8e1
@@ -586,8 +587,8 @@ trackedFiles:
     pristine_git_object: aeda4c7bca3850bd538a6c64bcfd077de0ca67b9
   src/funcs/versionsCreate.ts:
     id: 21b7cdaed201
-    last_write_checksum: sha1:6a05cb17f795b894793d81d575e426dc2d99869d
-    pristine_git_object: 352ef306a91de04938ca22067f312e0f5f7ba759
+    last_write_checksum: sha1:b0ead7eeb88bef23ad08f50cfd388c86c9c727a2
+    pristine_git_object: 3a3eadf3b52a51d125334d7a2cb6d5190848022c
   src/funcs/versionsGet.ts:
     id: db5697b9312c
     last_write_checksum: sha1:8d93c5796b952c4f16f1bbade939417a055aa571
@@ -622,8 +623,8 @@ trackedFiles:
     pristine_git_object: 44be0eae8246521b230e8e711a88eff738fc015d
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:6e0befc0ae6345d03e99c2f0ca177f3c50e2044e
-    pristine_git_object: 996c82a95faa6db5453f91819789138553797acf
+    last_write_checksum: sha1:dc98e8094faea53df6d9eb51da5cc20e0b028549
+    pristine_git_object: 676a77d93c74d96f40246712b630c28a70d31fce
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -718,8 +719,8 @@ trackedFiles:
     pristine_git_object: 5eef664be6b57d41bf9a21f537711b513f0a006a
   src/models/components/createversionrequest.ts:
     id: 1960c1ecdb0c
-    last_write_checksum: sha1:3e1d5b923d16e3cbaa8f475c6eb34fa23318fd70
-    pristine_git_object: 634f0ac18ba839b747685ac59cca0dbe2dffe42e
+    last_write_checksum: sha1:c3449c67b0aeb68c9a8aa72227921917f8bffeb2
+    pristine_git_object: c77a5e66cd2fa03bbd7e03aa2a2d24e8c242278f
   src/models/components/document.ts:
     id: 908fbd640ca2
     last_write_checksum: sha1:86c351119f600c4eee5fc0f1b1d65de8fa01911e
@@ -1755,10 +1756,4 @@ examples:
         "500":
           application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 3333, "type": "authorization_error"}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Typescript SDK Changes:
-  * `factify.organizations.invites.list()`: **Added**
-  * `factify.organizations.invites.create()`: **Added**
-  * `factify.organizations.invites.accept()`: **Added**
-  * `factify.organizations.invites.resend()`: **Added**
-  * `factify.organizations.invites.revoke()`: **Added**
+releaseNotes: "## Typescript SDK Changes:\n* `factify.versions.create()`: \n  *  `request.body.documentId` **Removed** **Breaking** ⚠️\n"

@@ -7,8 +7,9 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.apiKeys.list({
-    organizationId: "<id>",
+  const result = await factify.documents.list({
+    pageToken:
+      "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0",
   });
 
   for await (const page of result) {

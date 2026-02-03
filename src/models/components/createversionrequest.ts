@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v4-mini";
-import { remap as remap$ } from "../../lib/primitives.js";
 import { blobLikeSchema } from "../../types/blobs.js";
 
 export type CreateVersionRequestPayload = {
@@ -19,13 +18,6 @@ export type CreateVersionRequest = {
    * Description of changes in this version.
    */
   description?: string | null | undefined;
-  /**
-   * Document ID to create version for.
-   *
-   * @remarks
-   *  Pattern: doc_[0-9a-hjkmnp-tv-z]{26}
-   */
-  documentId?: string | undefined;
   /**
    * PDF file for new version
    */
@@ -69,7 +61,6 @@ export function createVersionRequestPayloadToJSON(
 /** @internal */
 export type CreateVersionRequest$Outbound = {
   description?: string | null | undefined;
-  document_id?: string | undefined;
   payload: CreateVersionRequestPayload$Outbound | Blob;
   title?: string | null | undefined;
 };
@@ -78,22 +69,14 @@ export type CreateVersionRequest$Outbound = {
 export const CreateVersionRequest$outboundSchema: z.ZodMiniType<
   CreateVersionRequest$Outbound,
   CreateVersionRequest
-> = z.pipe(
-  z.object({
-    description: z.optional(z.nullable(z.string())),
-    documentId: z.optional(z.string()),
-    payload: z.union([
-      z.lazy(() => CreateVersionRequestPayload$outboundSchema),
-      blobLikeSchema,
-    ]),
-    title: z.optional(z.nullable(z.string())),
-  }),
-  z.transform((v) => {
-    return remap$(v, {
-      documentId: "document_id",
-    });
-  }),
-);
+> = z.object({
+  description: z.optional(z.nullable(z.string())),
+  payload: z.union([
+    z.lazy(() => CreateVersionRequestPayload$outboundSchema),
+    blobLikeSchema,
+  ]),
+  title: z.optional(z.nullable(z.string())),
+});
 
 export function createVersionRequestToJSON(
   createVersionRequest: CreateVersionRequest,

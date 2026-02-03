@@ -20,7 +20,7 @@ specific category of applications.
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { apiKeysList } from "@factify/sdk/funcs/apiKeysList.js";
+import { documentsList } from "@factify/sdk/funcs/documentsList.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -29,8 +29,8 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await apiKeysList(factify, {
-    organizationId: "<id>",
+  const res = await documentsList(factify, {
+    pageToken: "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -38,7 +38,7 @@ async function run() {
     console.log(page);
   }
   } else {
-    console.log("apiKeysList failed:", res.error);
+    console.log("documentsList failed:", res.error);
   }
 }
 

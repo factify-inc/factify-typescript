@@ -121,9 +121,6 @@ async function $do(
   if (payload.body.description !== undefined) {
     appendForm(body, "description", payload.body.description);
   }
-  if (payload.body.document_id !== undefined) {
-    appendForm(body, "document_id", payload.body.document_id);
-  }
   if (payload.body.title !== undefined) {
     appendForm(body, "title", payload.body.title);
   }
