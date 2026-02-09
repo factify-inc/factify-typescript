@@ -15,8 +15,9 @@ export type CreateApiKeyResponse = {
   /**
    * Success
    */
-  createApiKeyResponse?: components.CreateApiKeyResponse | undefined;
-  headers: { [k: string]: Array<string> };
+  factifyApiV1betaCreateApiKeyResponse?:
+    | components.FactifyApiV1betaCreateApiKeyResponse
+    | undefined;
 };
 
 /** @internal */
@@ -26,16 +27,15 @@ export const CreateApiKeyResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    CreateApiKeyResponse: types.optional(
-      components.CreateApiKeyResponse$inboundSchema,
+    "factify.api.v1beta.CreateApiKeyResponse": types.optional(
+      components.FactifyApiV1betaCreateApiKeyResponse$inboundSchema,
     ),
-    Headers: z._default(z.record(z.string(), z.array(z.string())), {}),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "CreateApiKeyResponse": "createApiKeyResponse",
-      "Headers": "headers",
+      "factify.api.v1beta.CreateApiKeyResponse":
+        "factifyApiV1betaCreateApiKeyResponse",
     });
   }),
 );

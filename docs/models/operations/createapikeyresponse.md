@@ -5,26 +5,12 @@
 ```typescript
 import { CreateApiKeyResponse } from "@factify/sdk/models/operations";
 
-let value: CreateApiKeyResponse = {
-  headers: {
-    "key": [
-      "<value 1>",
-      "<value 2>",
-      "<value 3>",
-    ],
-    "key1": [],
-    "key2": [
-      "<value 1>",
-      "<value 2>",
-    ],
-  },
-};
+let value: CreateApiKeyResponse = {};
 ```
 
 ## Fields
 
-| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
-| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `httpMeta`                                                                         | [components.HTTPMetadata](../../models/components/httpmetadata.md)                 | :heavy_check_mark:                                                                 | N/A                                                                                |
-| `createApiKeyResponse`                                                             | [components.CreateApiKeyResponse](../../models/components/createapikeyresponse.md) | :heavy_minus_sign:                                                                 | Success                                                                            |
-| `headers`                                                                          | Record<string, *string*[]>                                                         | :heavy_check_mark:                                                                 | N/A                                                                                |
+| Field                                                                                                              | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `httpMeta`                                                                                                         | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                                 | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
+| `factifyApiV1betaCreateApiKeyResponse`                                                                             | [components.FactifyApiV1betaCreateApiKeyResponse](../../models/components/factifyapiv1betacreateapikeyresponse.md) | :heavy_minus_sign:                                                                                                 | Success                                                                                                            |

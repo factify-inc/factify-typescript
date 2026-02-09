@@ -37,10 +37,9 @@ export type ListDocumentPoliciesResponse = {
   /**
    * Success
    */
-  listDocumentPoliciesResponse?:
-    | components.ListDocumentPoliciesResponse
+  factifyApiV1betaListDocumentPoliciesResponse?:
+    | components.FactifyApiV1betaListDocumentPoliciesResponse
     | undefined;
-  headers: { [k: string]: Array<string> };
 };
 
 /** @internal */
@@ -86,16 +85,15 @@ export const ListDocumentPoliciesResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    ListDocumentPoliciesResponse: types.optional(
-      components.ListDocumentPoliciesResponse$inboundSchema,
+    "factify.api.v1beta.ListDocumentPoliciesResponse": types.optional(
+      components.FactifyApiV1betaListDocumentPoliciesResponse$inboundSchema,
     ),
-    Headers: z._default(z.record(z.string(), z.array(z.string())), {}),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "ListDocumentPoliciesResponse": "listDocumentPoliciesResponse",
-      "Headers": "headers",
+      "factify.api.v1beta.ListDocumentPoliciesResponse":
+        "factifyApiV1betaListDocumentPoliciesResponse",
     });
   }),
 );

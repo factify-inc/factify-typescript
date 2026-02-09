@@ -5,21 +5,12 @@
 ```typescript
 import { GetOrganizationResponse } from "@factify/sdk/models/operations";
 
-let value: GetOrganizationResponse = {
-  headers: {
-    "key": [
-      "<value 1>",
-      "<value 2>",
-    ],
-    "key1": [],
-  },
-};
+let value: GetOrganizationResponse = {};
 ```
 
 ## Fields
 
-| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `httpMeta`                                                                               | [components.HTTPMetadata](../../models/components/httpmetadata.md)                       | :heavy_check_mark:                                                                       | N/A                                                                                      |
-| `getOrganizationResponse`                                                                | [components.GetOrganizationResponse](../../models/components/getorganizationresponse.md) | :heavy_minus_sign:                                                                       | Success                                                                                  |
-| `headers`                                                                                | Record<string, *string*[]>                                                               | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| Field                                                                                                                    | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `httpMeta`                                                                                                               | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                                       | :heavy_check_mark:                                                                                                       | N/A                                                                                                                      |
+| `factifyApiV1betaGetOrganizationResponse`                                                                                | [components.FactifyApiV1betaGetOrganizationResponse](../../models/components/factifyapiv1betagetorganizationresponse.md) | :heavy_minus_sign:                                                                                                       | Success                                                                                                                  |

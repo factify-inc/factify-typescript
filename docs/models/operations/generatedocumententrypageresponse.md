@@ -5,17 +5,12 @@
 ```typescript
 import { GenerateDocumentEntryPageResponse } from "@factify/sdk/models/operations";
 
-let value: GenerateDocumentEntryPageResponse = {
-  headers: {
-    "key": [],
-  },
-};
+let value: GenerateDocumentEntryPageResponse = {};
 ```
 
 ## Fields
 
-| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `httpMeta`                                                                                   | [components.HTTPMetadata](../../models/components/httpmetadata.md)                           | :heavy_check_mark:                                                                           | N/A                                                                                          |
-| `generateEntryPageResponse`                                                                  | [components.GenerateEntryPageResponse](../../models/components/generateentrypageresponse.md) | :heavy_minus_sign:                                                                           | Success                                                                                      |
-| `headers`                                                                                    | Record<string, *string*[]>                                                                   | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| Field                                                                                                                        | Type                                                                                                                         | Required                                                                                                                     | Description                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `httpMeta`                                                                                                                   | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                                           | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
+| `factifyApiV1betaGenerateEntryPageResponse`                                                                                  | [components.FactifyApiV1betaGenerateEntryPageResponse](../../models/components/factifyapiv1betagenerateentrypageresponse.md) | :heavy_minus_sign:                                                                                                           | Success                                                                                                                      |

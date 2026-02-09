@@ -15,13 +15,20 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type UpdateDocumentUpdateDocumentRequest = {
   /**
-   * New description (max 2000 characters).
+   * Document ID to update.
+   *
+   * @remarks
+   *  Pattern: doc_[0-9a-hjkmnp-tv-z]{26}
    */
-  description?: string | null | undefined;
+  documentId?: string | undefined;
   /**
    * New title (1-255 characters).
    */
   title?: string | null | undefined;
+  /**
+   * New description (max 2000 characters).
+   */
+  description?: string | null | undefined;
 };
 
 export type UpdateDocumentRequest = {
@@ -40,24 +47,34 @@ export type UpdateDocumentResponse = {
   /**
    * Success
    */
-  updateDocumentResponse?: components.UpdateDocumentResponse | undefined;
-  headers: { [k: string]: Array<string> };
+  factifyApiV1betaUpdateDocumentResponse?:
+    | components.FactifyApiV1betaUpdateDocumentResponse
+    | undefined;
 };
 
 /** @internal */
 export type UpdateDocumentUpdateDocumentRequest$Outbound = {
-  description?: string | null | undefined;
+  document_id?: string | undefined;
   title?: string | null | undefined;
+  description?: string | null | undefined;
 };
 
 /** @internal */
 export const UpdateDocumentUpdateDocumentRequest$outboundSchema: z.ZodMiniType<
   UpdateDocumentUpdateDocumentRequest$Outbound,
   UpdateDocumentUpdateDocumentRequest
-> = z.object({
-  description: z.optional(z.nullable(z.string())),
-  title: z.optional(z.nullable(z.string())),
-});
+> = z.pipe(
+  z.object({
+    documentId: z.optional(z.string()),
+    title: z.optional(z.nullable(z.string())),
+    description: z.optional(z.nullable(z.string())),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      documentId: "document_id",
+    });
+  }),
+);
 
 export function updateDocumentUpdateDocumentRequestToJSON(
   updateDocumentUpdateDocumentRequest: UpdateDocumentUpdateDocumentRequest,
@@ -106,16 +123,15 @@ export const UpdateDocumentResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    UpdateDocumentResponse: types.optional(
-      components.UpdateDocumentResponse$inboundSchema,
+    "factify.api.v1beta.UpdateDocumentResponse": types.optional(
+      components.FactifyApiV1betaUpdateDocumentResponse$inboundSchema,
     ),
-    Headers: z._default(z.record(z.string(), z.array(z.string())), {}),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "UpdateDocumentResponse": "updateDocumentResponse",
-      "Headers": "headers",
+      "factify.api.v1beta.UpdateDocumentResponse":
+        "factifyApiV1betaUpdateDocumentResponse",
     });
   }),
 );

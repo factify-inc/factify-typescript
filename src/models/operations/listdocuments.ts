@@ -5,37 +5,20 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Access level
+ * Represents seconds of UTC time since Unix epoch
+ *
+ * @remarks
+ *  1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to
+ *  9999-12-31T23:59:59Z inclusive.
  */
-export const AccessLevel = {
-  Private: "private",
-  Organization: "organization",
-  Public: "public",
-} as const;
-/**
- * Access level
- */
-export type AccessLevel = ClosedEnum<typeof AccessLevel>;
-
-/**
- * Processing status
- */
-export const ProcessingStatus = {
-  Processing: "processing",
-  Ready: "ready",
-  Failed: "failed",
-} as const;
-/**
- * Processing status
- */
-export type ProcessingStatus = ClosedEnum<typeof ProcessingStatus>;
+export type ListDocumentsSeconds = number | string;
 
 export type ListDocumentsRequest = {
   /**
@@ -51,21 +34,48 @@ export type ListDocumentsRequest = {
    */
   pageSize?: number | undefined;
   /**
-   * Filter by creator ID(s). Returns documents matching ANY of the specified IDs.
+   * Represents seconds of UTC time since Unix epoch
+   *
+   * @remarks
+   *  1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to
+   *  9999-12-31T23:59:59Z inclusive.
    */
-  createdById?: Array<string> | undefined;
+  createdAfterSeconds?: number | string | undefined;
+  /**
+   * Non-negative fractions of a second at nanosecond resolution. Negative
+   *
+   * @remarks
+   *  second values with fractions must still have non-negative nanos values
+   *  that count forward in time. Must be from 0 to 999,999,999
+   *  inclusive.
+   */
+  createdAfterNanos?: number | undefined;
+  /**
+   * Filter by creator ID(s) (user or service account). Returns documents matching ANY of the specified IDs.
+   *
+   * @remarks
+   *  Accepts single value or comma-separated list.
+   *  REST: ?created_by_id=user_01h2xcejqtf2nbrexx3vqjhp41 or ?created_by_id=user_xxx,svc_yyy
+   */
+  createdById?: string | undefined;
   /**
    * Filter by access level(s). Returns documents matching ANY of the specified levels.
+   *
+   * @remarks
+   *  Accepts single value or comma-separated list.
+   *  REST: ?access_level=private or ?access_level=private,organization
+   *  Accepts clean enum names (case-insensitive): "private", "organization", "public"
    */
-  accessLevel?: Array<AccessLevel> | undefined;
+  accessLevel?: string | undefined;
   /**
    * Filter by processing status(es). Returns documents matching ANY of the specified statuses.
+   *
+   * @remarks
+   *  Accepts single value or comma-separated list.
+   *  REST: ?processing_status=ready or ?processing_status=processing,ready,failed
+   *  Accepts clean enum names (case-insensitive): "processing", "ready", "failed"
    */
-  processingStatus?: Array<ProcessingStatus> | undefined;
-  /**
-   * Filter by created.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)
-   */
-  createdAfter?: Date | undefined;
+  processingStatus?: string | undefined;
 };
 
 export type ListDocumentsResponse = {
@@ -73,27 +83,37 @@ export type ListDocumentsResponse = {
   /**
    * Success
    */
-  listDocumentsResponse?: components.ListDocumentsResponse | undefined;
-  headers: { [k: string]: Array<string> };
+  factifyApiV1betaListDocumentsResponse?:
+    | components.FactifyApiV1betaListDocumentsResponse
+    | undefined;
 };
 
 /** @internal */
-export const AccessLevel$outboundSchema: z.ZodMiniEnum<typeof AccessLevel> = z
-  .enum(AccessLevel);
+export type ListDocumentsSeconds$Outbound = number | string;
 
 /** @internal */
-export const ProcessingStatus$outboundSchema: z.ZodMiniEnum<
-  typeof ProcessingStatus
-> = z.enum(ProcessingStatus);
+export const ListDocumentsSeconds$outboundSchema: z.ZodMiniType<
+  ListDocumentsSeconds$Outbound,
+  ListDocumentsSeconds
+> = smartUnion([z.int(), z.string()]);
+
+export function listDocumentsSecondsToJSON(
+  listDocumentsSeconds: ListDocumentsSeconds,
+): string {
+  return JSON.stringify(
+    ListDocumentsSeconds$outboundSchema.parse(listDocumentsSeconds),
+  );
+}
 
 /** @internal */
 export type ListDocumentsRequest$Outbound = {
   page_token?: string | undefined;
   page_size?: number | undefined;
-  created_by_id?: Array<string> | undefined;
-  access_level?: Array<string> | undefined;
-  processing_status?: Array<string> | undefined;
-  "created.after"?: string | undefined;
+  "created.after.seconds"?: number | string | undefined;
+  "created.after.nanos"?: number | undefined;
+  created_by_id?: string | undefined;
+  access_level?: string | undefined;
+  processing_status?: string | undefined;
 };
 
 /** @internal */
@@ -104,21 +124,21 @@ export const ListDocumentsRequest$outboundSchema: z.ZodMiniType<
   z.object({
     pageToken: z.optional(z.string()),
     pageSize: z.optional(z.int()),
-    createdById: z.optional(z.array(z.string())),
-    accessLevel: z.optional(z.array(AccessLevel$outboundSchema)),
-    processingStatus: z.optional(z.array(ProcessingStatus$outboundSchema)),
-    createdAfter: z.optional(
-      z.pipe(z.date(), z.transform(v => v.toISOString())),
-    ),
+    createdAfterSeconds: z.optional(smartUnion([z.int(), z.string()])),
+    createdAfterNanos: z.optional(z.int()),
+    createdById: z.optional(z.string()),
+    accessLevel: z.optional(z.string()),
+    processingStatus: z.optional(z.string()),
   }),
   z.transform((v) => {
     return remap$(v, {
       pageToken: "page_token",
       pageSize: "page_size",
+      createdAfterSeconds: "created.after.seconds",
+      createdAfterNanos: "created.after.nanos",
       createdById: "created_by_id",
       accessLevel: "access_level",
       processingStatus: "processing_status",
-      createdAfter: "created.after",
     });
   }),
 );
@@ -138,16 +158,15 @@ export const ListDocumentsResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    ListDocumentsResponse: types.optional(
-      components.ListDocumentsResponse$inboundSchema,
+    "factify.api.v1beta.ListDocumentsResponse": types.optional(
+      components.FactifyApiV1betaListDocumentsResponse$inboundSchema,
     ),
-    Headers: z._default(z.record(z.string(), z.array(z.string())), {}),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "ListDocumentsResponse": "listDocumentsResponse",
-      "Headers": "headers",
+      "factify.api.v1beta.ListDocumentsResponse":
+        "factifyApiV1betaListDocumentsResponse",
     });
   }),
 );

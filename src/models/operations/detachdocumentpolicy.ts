@@ -32,8 +32,7 @@ export type DetachDocumentPolicyResponse = {
   /**
    * Success
    */
-  empty?: components.Empty | undefined;
-  headers: { [k: string]: Array<string> };
+  googleProtobufEmpty?: components.GoogleProtobufEmpty | undefined;
 };
 
 /** @internal */
@@ -76,14 +75,14 @@ export const DetachDocumentPolicyResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    Empty: types.optional(components.Empty$inboundSchema),
-    Headers: z._default(z.record(z.string(), z.array(z.string())), {}),
+    "google.protobuf.Empty": types.optional(
+      components.GoogleProtobufEmpty$inboundSchema,
+    ),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Empty": "empty",
-      "Headers": "headers",
+      "google.protobuf.Empty": "googleProtobufEmpty",
     });
   }),
 );

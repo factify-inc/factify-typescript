@@ -18,7 +18,7 @@ export type CreateDocumentVersionRequest = {
    *  Pattern: doc_[0-9a-hjkmnp-tv-z]{26}
    */
   documentId: string;
-  body: components.CreateVersionRequest;
+  body: components.FactifyApiV1betaCreateVersionRequest;
 };
 
 export type CreateDocumentVersionResponse = {
@@ -26,14 +26,13 @@ export type CreateDocumentVersionResponse = {
   /**
    * Success
    */
-  version?: components.Version | undefined;
-  headers: { [k: string]: Array<string> };
+  factifyApiV1betaVersion?: components.FactifyApiV1betaVersion | undefined;
 };
 
 /** @internal */
 export type CreateDocumentVersionRequest$Outbound = {
   document_id: string;
-  body: components.CreateVersionRequest$Outbound;
+  body: components.FactifyApiV1betaCreateVersionRequest$Outbound;
 };
 
 /** @internal */
@@ -43,7 +42,7 @@ export const CreateDocumentVersionRequest$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     documentId: z.string(),
-    body: components.CreateVersionRequest$outboundSchema,
+    body: components.FactifyApiV1betaCreateVersionRequest$outboundSchema,
   }),
   z.transform((v) => {
     return remap$(v, {
@@ -69,14 +68,14 @@ export const CreateDocumentVersionResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    Version: types.optional(components.Version$inboundSchema),
-    Headers: z._default(z.record(z.string(), z.array(z.string())), {}),
+    "factify.api.v1beta.Version": types.optional(
+      components.FactifyApiV1betaVersion$inboundSchema,
+    ),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Version": "version",
-      "Headers": "headers",
+      "factify.api.v1beta.Version": "factifyApiV1betaVersion",
     });
   }),
 );

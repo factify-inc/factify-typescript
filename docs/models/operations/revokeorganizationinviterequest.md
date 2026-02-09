@@ -8,7 +8,10 @@ import { RevokeOrganizationInviteRequest } from "@factify/sdk/models/operations"
 let value: RevokeOrganizationInviteRequest = {
   organizationId: "<id>",
   inviteId: "<id>",
-  body: {},
+  body: {
+    organizationId: "<id>",
+    inviteId: "<id>",
+  },
 };
 ```
 

@@ -16,4 +16,5 @@ let value: AttachPolicyRequest = {
 
 | Field                                                     | Type                                                      | Required                                                  | Description                                               |
 | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
+| `documentId`                                              | *string*                                                  | :heavy_minus_sign:                                        | Document ID.<br/> Pattern: doc_[0-9a-hjkmnp-tv-z]{26}     |
 | `policyId`                                                | *string*                                                  | :heavy_check_mark:                                        | Policy ID to attach.<br/> Pattern: pol_[0-9a-hjkmnp-tv-z]{26} |

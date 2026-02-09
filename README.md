@@ -52,7 +52,6 @@ Factify uses conventional HTTP status codes and returns structured error respons
   * [Authentication](#authentication-1)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Standalone functions](#standalone-functions)
-  * [Pagination](#pagination)
   * [File uploads](#file-uploads)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
@@ -117,14 +116,11 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.documents.list({
-    pageToken:
-      "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0",
+  const result = await factify.apiKeys.listApiKeys({
+    organizationId: "<id>",
   });
 
-  for await (const page of result) {
-    console.log(page);
-  }
+  console.log(result);
 }
 
 run();
@@ -152,13 +148,11 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.apiKeys.list({
+  const result = await factify.apiKeys.listApiKeys({
     organizationId: "<id>",
   });
 
-  for await (const page of result) {
-    console.log(page);
-  }
+  console.log(result);
 }
 
 run();
@@ -174,47 +168,65 @@ run();
 
 ### [APIKeys](docs/sdks/apikeys/README.md)
 
-* [list](docs/sdks/apikeys/README.md#list) - List API keys
-* [create](docs/sdks/apikeys/README.md#create) - Create an API key
-* [revoke](docs/sdks/apikeys/README.md#revoke) - Revoke an API key
+* [listApiKeys](docs/sdks/apikeys/README.md#listapikeys) - List API keys
+* [createApiKey](docs/sdks/apikeys/README.md#createapikey) - Create an API key
+* [revokeApiKey](docs/sdks/apikeys/README.md#revokeapikey) - Revoke an API key
 
-### [Documents](docs/sdks/documents/README.md)
+### [DocumentService](docs/sdks/documentservice/README.md)
 
-* [list](docs/sdks/documents/README.md#list) - List documents
-* [create](docs/sdks/documents/README.md#create) - Create a document
-* [get](docs/sdks/documents/README.md#get) - Retrieve a document
-* [update](docs/sdks/documents/README.md#update) - Update a document
+* [listDocuments](docs/sdks/documentservice/README.md#listdocuments) - List documents
+* [createDocument](docs/sdks/documentservice/README.md#createdocument) - Create a document
+* [getDocument](docs/sdks/documentservice/README.md#getdocument) - Retrieve a document
+* [updateDocument](docs/sdks/documentservice/README.md#updatedocument) - Update a document
 
-### [EntryPages](docs/sdks/entrypages/README.md)
+### [EntryPageService](docs/sdks/entrypageservice/README.md)
 
-* [generate](docs/sdks/entrypages/README.md#generate) - Generate entry page
+* [generateDocumentEntryPage](docs/sdks/entrypageservice/README.md#generatedocumententrypage) - Generate entry page
+
+### [IdentityService](docs/sdks/identityservice/README.md)
+
+* [listApiKeys](docs/sdks/identityservice/README.md#listapikeys) - List API keys
+* [createApiKey](docs/sdks/identityservice/README.md#createapikey) - Create an API key
+* [revokeApiKey](docs/sdks/identityservice/README.md#revokeapikey) - Revoke an API key
 
 ### [Organizations](docs/sdks/organizations/README.md)
 
-* [list](docs/sdks/organizations/README.md#list) - List organizations
-* [create](docs/sdks/organizations/README.md#create) - Create an organization
-* [get](docs/sdks/organizations/README.md#get) - Retrieve an organization
+* [listOrganizations](docs/sdks/organizations/README.md#listorganizations) - List organizations
+* [createOrganization](docs/sdks/organizations/README.md#createorganization) - Create an organization
+* [getOrganization](docs/sdks/organizations/README.md#getorganization) - Retrieve an organization
+* [listOrganizationInvites](docs/sdks/organizations/README.md#listorganizationinvites) - List organization invitations
+* [createOrganizationInvite](docs/sdks/organizations/README.md#createorganizationinvite) - Invite a user to join an organization
+* [acceptOrganizationInvite](docs/sdks/organizations/README.md#acceptorganizationinvite) - Accept an invitation
+* [resendOrganizationInvite](docs/sdks/organizations/README.md#resendorganizationinvite) - Resend an invitation email
+* [revokeOrganizationInvite](docs/sdks/organizations/README.md#revokeorganizationinvite) - Revoke an invitation
 
-### [Organizations.Invites](docs/sdks/invites/README.md)
+### [OrganizationService](docs/sdks/organizationservice/README.md)
 
-* [list](docs/sdks/invites/README.md#list) - List organization invitations
-* [create](docs/sdks/invites/README.md#create) - Invite a user to join an organization
-* [accept](docs/sdks/invites/README.md#accept) - Accept an invitation
-* [resend](docs/sdks/invites/README.md#resend) - Resend an invitation email
-* [revoke](docs/sdks/invites/README.md#revoke) - Revoke an invitation
+* [listOrganizations](docs/sdks/organizationservice/README.md#listorganizations) - List organizations
+* [createOrganization](docs/sdks/organizationservice/README.md#createorganization) - Create an organization
+* [getOrganization](docs/sdks/organizationservice/README.md#getorganization) - Retrieve an organization
+* [listOrganizationInvites](docs/sdks/organizationservice/README.md#listorganizationinvites) - List organization invitations
+* [createOrganizationInvite](docs/sdks/organizationservice/README.md#createorganizationinvite) - Invite a user to join an organization
+* [acceptOrganizationInvite](docs/sdks/organizationservice/README.md#acceptorganizationinvite) - Accept an invitation
+* [resendOrganizationInvite](docs/sdks/organizationservice/README.md#resendorganizationinvite) - Resend an invitation email
+* [revokeOrganizationInvite](docs/sdks/organizationservice/README.md#revokeorganizationinvite) - Revoke an invitation
 
-### [Policies](docs/sdks/policies/README.md)
+### [PolicyService](docs/sdks/policyservice/README.md)
 
-* [list](docs/sdks/policies/README.md#list) - List document policies
-* [attach](docs/sdks/policies/README.md#attach) - Attach a policy
-* [detach](docs/sdks/policies/README.md#detach) - Detach a policy
+* [listDocumentPolicies](docs/sdks/policyservice/README.md#listdocumentpolicies) - List document policies
+* [attachDocumentPolicy](docs/sdks/policyservice/README.md#attachdocumentpolicy) - Attach a policy
+* [detachDocumentPolicy](docs/sdks/policyservice/README.md#detachdocumentpolicy) - Detach a policy
 
-### [Versions](docs/sdks/versions/README.md)
+### [SharingAndDistribution](docs/sdks/sharinganddistribution/README.md)
 
-* [list](docs/sdks/versions/README.md#list) - List document versions
-* [create](docs/sdks/versions/README.md#create) - Create a new version
-* [get](docs/sdks/versions/README.md#get) - Retrieve a version
-* [update](docs/sdks/versions/README.md#update) - Update a version
+* [generateDocumentEntryPage](docs/sdks/sharinganddistribution/README.md#generatedocumententrypage) - Generate entry page
+
+### [VersionService](docs/sdks/versionservice/README.md)
+
+* [listDocumentVersions](docs/sdks/versionservice/README.md#listdocumentversions) - List document versions
+* [createDocumentVersion](docs/sdks/versionservice/README.md#createdocumentversion) - Create a new version
+* [getVersion](docs/sdks/versionservice/README.md#getversion) - Retrieve a version
+* [updateVersion](docs/sdks/versionservice/README.md#updateversion) - Update a version
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -234,66 +246,44 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <summary>Available standalone functions</summary>
 
-- [`apiKeysCreate`](docs/sdks/apikeys/README.md#create) - Create an API key
-- [`apiKeysList`](docs/sdks/apikeys/README.md#list) - List API keys
-- [`apiKeysRevoke`](docs/sdks/apikeys/README.md#revoke) - Revoke an API key
-- [`documentsCreate`](docs/sdks/documents/README.md#create) - Create a document
-- [`documentsGet`](docs/sdks/documents/README.md#get) - Retrieve a document
-- [`documentsList`](docs/sdks/documents/README.md#list) - List documents
-- [`documentsUpdate`](docs/sdks/documents/README.md#update) - Update a document
-- [`entryPagesGenerate`](docs/sdks/entrypages/README.md#generate) - Generate entry page
-- [`organizationsCreate`](docs/sdks/organizations/README.md#create) - Create an organization
-- [`organizationsGet`](docs/sdks/organizations/README.md#get) - Retrieve an organization
-- [`organizationsInvitesAccept`](docs/sdks/invites/README.md#accept) - Accept an invitation
-- [`organizationsInvitesCreate`](docs/sdks/invites/README.md#create) - Invite a user to join an organization
-- [`organizationsInvitesList`](docs/sdks/invites/README.md#list) - List organization invitations
-- [`organizationsInvitesResend`](docs/sdks/invites/README.md#resend) - Resend an invitation email
-- [`organizationsInvitesRevoke`](docs/sdks/invites/README.md#revoke) - Revoke an invitation
-- [`organizationsList`](docs/sdks/organizations/README.md#list) - List organizations
-- [`policiesAttach`](docs/sdks/policies/README.md#attach) - Attach a policy
-- [`policiesDetach`](docs/sdks/policies/README.md#detach) - Detach a policy
-- [`policiesList`](docs/sdks/policies/README.md#list) - List document policies
-- [`versionsCreate`](docs/sdks/versions/README.md#create) - Create a new version
-- [`versionsGet`](docs/sdks/versions/README.md#get) - Retrieve a version
-- [`versionsList`](docs/sdks/versions/README.md#list) - List document versions
-- [`versionsUpdate`](docs/sdks/versions/README.md#update) - Update a version
+- [`apiKeysCreateAPIKey`](docs/sdks/apikeys/README.md#createapikey) - Create an API key
+- [`apiKeysCreateAPIKey`](docs/sdks/identityservice/README.md#createapikey) - Create an API key
+- [`apiKeysListAPIKeys`](docs/sdks/apikeys/README.md#listapikeys) - List API keys
+- [`apiKeysListAPIKeys`](docs/sdks/identityservice/README.md#listapikeys) - List API keys
+- [`apiKeysRevokeAPIKey`](docs/sdks/apikeys/README.md#revokeapikey) - Revoke an API key
+- [`apiKeysRevokeAPIKey`](docs/sdks/identityservice/README.md#revokeapikey) - Revoke an API key
+- [`documentServiceCreateDocument`](docs/sdks/documentservice/README.md#createdocument) - Create a document
+- [`documentServiceGetDocument`](docs/sdks/documentservice/README.md#getdocument) - Retrieve a document
+- [`documentServiceListDocuments`](docs/sdks/documentservice/README.md#listdocuments) - List documents
+- [`documentServiceUpdateDocument`](docs/sdks/documentservice/README.md#updatedocument) - Update a document
+- [`organizationsAcceptOrganizationInvite`](docs/sdks/organizations/README.md#acceptorganizationinvite) - Accept an invitation
+- [`organizationsAcceptOrganizationInvite`](docs/sdks/organizationservice/README.md#acceptorganizationinvite) - Accept an invitation
+- [`organizationsCreateOrganization`](docs/sdks/organizations/README.md#createorganization) - Create an organization
+- [`organizationsCreateOrganization`](docs/sdks/organizationservice/README.md#createorganization) - Create an organization
+- [`organizationsCreateOrganizationInvite`](docs/sdks/organizations/README.md#createorganizationinvite) - Invite a user to join an organization
+- [`organizationsCreateOrganizationInvite`](docs/sdks/organizationservice/README.md#createorganizationinvite) - Invite a user to join an organization
+- [`organizationsGetOrganization`](docs/sdks/organizations/README.md#getorganization) - Retrieve an organization
+- [`organizationsGetOrganization`](docs/sdks/organizationservice/README.md#getorganization) - Retrieve an organization
+- [`organizationsListOrganizationInvites`](docs/sdks/organizations/README.md#listorganizationinvites) - List organization invitations
+- [`organizationsListOrganizationInvites`](docs/sdks/organizationservice/README.md#listorganizationinvites) - List organization invitations
+- [`organizationsListOrganizations`](docs/sdks/organizations/README.md#listorganizations) - List organizations
+- [`organizationsListOrganizations`](docs/sdks/organizationservice/README.md#listorganizations) - List organizations
+- [`organizationsResendOrganizationInvite`](docs/sdks/organizations/README.md#resendorganizationinvite) - Resend an invitation email
+- [`organizationsResendOrganizationInvite`](docs/sdks/organizationservice/README.md#resendorganizationinvite) - Resend an invitation email
+- [`organizationsRevokeOrganizationInvite`](docs/sdks/organizations/README.md#revokeorganizationinvite) - Revoke an invitation
+- [`organizationsRevokeOrganizationInvite`](docs/sdks/organizationservice/README.md#revokeorganizationinvite) - Revoke an invitation
+- [`policyServiceAttachDocumentPolicy`](docs/sdks/policyservice/README.md#attachdocumentpolicy) - Attach a policy
+- [`policyServiceDetachDocumentPolicy`](docs/sdks/policyservice/README.md#detachdocumentpolicy) - Detach a policy
+- [`policyServiceListDocumentPolicies`](docs/sdks/policyservice/README.md#listdocumentpolicies) - List document policies
+- [`sharingAndDistributionGenerateDocumentEntryPage`](docs/sdks/entrypageservice/README.md#generatedocumententrypage) - Generate entry page
+- [`sharingAndDistributionGenerateDocumentEntryPage`](docs/sdks/sharinganddistribution/README.md#generatedocumententrypage) - Generate entry page
+- [`versionServiceCreateDocumentVersion`](docs/sdks/versionservice/README.md#createdocumentversion) - Create a new version
+- [`versionServiceGetVersion`](docs/sdks/versionservice/README.md#getversion) - Retrieve a version
+- [`versionServiceListDocumentVersions`](docs/sdks/versionservice/README.md#listdocumentversions) - List document versions
+- [`versionServiceUpdateVersion`](docs/sdks/versionservice/README.md#updateversion) - Update a version
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
-
-<!-- Start Pagination [pagination] -->
-## Pagination
-
-Some of the endpoints in this SDK support pagination. To use pagination, you
-make your SDK calls as usual, but the returned response object will also be an
-async iterable that can be consumed using the [`for await...of`][for-await-of]
-syntax.
-
-[for-await-of]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of
-
-Here's an example of one such pagination call:
-
-```typescript
-import { Factify } from "@factify/sdk";
-
-const factify = new Factify({
-  bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
-});
-
-async function run() {
-  const result = await factify.apiKeys.list({
-    organizationId: "<id>",
-  });
-
-  for await (const page of result) {
-    console.log(page);
-  }
-}
-
-run();
-
-```
-<!-- End Pagination [pagination] -->
 
 <!-- Start File uploads [file-upload] -->
 ## File uploads
@@ -318,7 +308,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.documents.create({
+  const result = await factify.documentService.createDocument({
     payload: await openAsBlob("example.file"),
     title: "<value>",
   });
@@ -345,7 +335,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.apiKeys.list({
+  const result = await factify.apiKeys.listApiKeys({
     organizationId: "<id>",
   }, {
     retries: {
@@ -360,9 +350,7 @@ async function run() {
     },
   });
 
-  for await (const page of result) {
-    console.log(page);
-  }
+  console.log(result);
 }
 
 run();
@@ -388,13 +376,11 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.apiKeys.list({
+  const result = await factify.apiKeys.listApiKeys({
     organizationId: "<id>",
   });
 
-  for await (const page of result) {
-    console.log(page);
-  }
+  console.log(result);
 }
 
 run();
@@ -407,12 +393,11 @@ run();
 
 [`FactifyError`](./src/models/errors/factifyerror.ts) is the base class for all HTTP error responses. It has the following properties:
 
-| Property                  | Type       | Description                                                                             |
-| ------------------------- | ---------- | --------------------------------------------------------------------------------------- |
-| `error.message`           | `string`   | Error message                                                                           |
-| `error.httpMeta.response` | `Response` | HTTP response. Access to headers and more.                                              |
-| `error.httpMeta.request`  | `Request`  | HTTP request. Access to headers and more.                                               |
-| `error.data$`             |            | Optional. Some errors may contain structured data. [See Error Classes](#error-classes). |
+| Property                  | Type       | Description                                |
+| ------------------------- | ---------- | ------------------------------------------ |
+| `error.message`           | `string`   | Error message                              |
+| `error.httpMeta.response` | `Response` | HTTP response. Access to headers and more. |
+| `error.httpMeta.request`  | `Request`  | HTTP request. Access to headers and more.  |
 
 ### Example
 ```typescript
@@ -425,26 +410,17 @@ const factify = new Factify({
 
 async function run() {
   try {
-    const result = await factify.apiKeys.list({
+    const result = await factify.apiKeys.listApiKeys({
       organizationId: "<id>",
     });
 
-    for await (const page of result) {
-      console.log(page);
-    }
+    console.log(result);
   } catch (error) {
-    // The base class for HTTP error responses
     if (error instanceof errors.FactifyError) {
       console.log(error.message);
       console.log(error.httpMeta.response.status);
       console.log(error.httpMeta.response.headers);
       console.log(error.httpMeta.request);
-
-      // Depending on the method different errors may be thrown
-      if (error instanceof errors.ErrorT) {
-        console.log(error.data$.error); // components.ErrorT
-        console.log(error.data$.httpMeta); // components.HTTPMetadata
-      }
     }
   }
 }
@@ -454,9 +430,8 @@ run();
 ```
 
 ### Error Classes
-**Primary errors:**
+**Primary error:**
 * [`FactifyError`](./src/models/errors/factifyerror.ts): The base class for HTTP error responses.
-  * [`ErrorT`](./src/models/errors/errort.ts): Invalid request parameters.
 
 <details><summary>Less common errors (6)</summary>
 
@@ -499,13 +474,11 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.apiKeys.list({
+  const result = await factify.apiKeys.listApiKeys({
     organizationId: "<id>",
   });
 
-  for await (const page of result) {
-    console.log(page);
-  }
+  console.log(result);
 }
 
 run();
@@ -524,13 +497,11 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.apiKeys.list({
+  const result = await factify.apiKeys.listApiKeys({
     organizationId: "<id>",
   });
 
-  for await (const page of result) {
-    console.log(page);
-  }
+  console.log(result);
 }
 
 run();

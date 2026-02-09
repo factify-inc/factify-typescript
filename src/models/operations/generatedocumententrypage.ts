@@ -25,8 +25,9 @@ export type GenerateDocumentEntryPageResponse = {
   /**
    * Success
    */
-  generateEntryPageResponse?: components.GenerateEntryPageResponse | undefined;
-  headers: { [k: string]: Array<string> };
+  factifyApiV1betaGenerateEntryPageResponse?:
+    | components.FactifyApiV1betaGenerateEntryPageResponse
+    | undefined;
 };
 
 /** @internal */
@@ -66,16 +67,15 @@ export const GenerateDocumentEntryPageResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    GenerateEntryPageResponse: types.optional(
-      components.GenerateEntryPageResponse$inboundSchema,
+    "factify.api.v1beta.GenerateEntryPageResponse": types.optional(
+      components.FactifyApiV1betaGenerateEntryPageResponse$inboundSchema,
     ),
-    Headers: z._default(z.record(z.string(), z.array(z.string())), {}),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "GenerateEntryPageResponse": "generateEntryPageResponse",
-      "Headers": "headers",
+      "factify.api.v1beta.GenerateEntryPageResponse":
+        "factifyApiV1betaGenerateEntryPageResponse",
     });
   }),
 );

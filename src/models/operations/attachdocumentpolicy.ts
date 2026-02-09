@@ -15,6 +15,13 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type AttachPolicyRequest = {
   /**
+   * Document ID.
+   *
+   * @remarks
+   *  Pattern: doc_[0-9a-hjkmnp-tv-z]{26}
+   */
+  documentId?: string | undefined;
+  /**
    * Policy ID to attach.
    *
    * @remarks
@@ -39,12 +46,14 @@ export type AttachDocumentPolicyResponse = {
   /**
    * Success
    */
-  documentPolicy?: components.DocumentPolicy | undefined;
-  headers: { [k: string]: Array<string> };
+  factifyApiV1betaDocumentPolicy?:
+    | components.FactifyApiV1betaDocumentPolicy
+    | undefined;
 };
 
 /** @internal */
 export type AttachPolicyRequest$Outbound = {
+  document_id?: string | undefined;
   policy_id: string;
 };
 
@@ -54,10 +63,12 @@ export const AttachPolicyRequest$outboundSchema: z.ZodMiniType<
   AttachPolicyRequest
 > = z.pipe(
   z.object({
+    documentId: z.optional(z.string()),
     policyId: z.string(),
   }),
   z.transform((v) => {
     return remap$(v, {
+      documentId: "document_id",
       policyId: "policy_id",
     });
   }),
@@ -110,14 +121,14 @@ export const AttachDocumentPolicyResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    DocumentPolicy: types.optional(components.DocumentPolicy$inboundSchema),
-    Headers: z._default(z.record(z.string(), z.array(z.string())), {}),
+    "factify.api.v1beta.DocumentPolicy": types.optional(
+      components.FactifyApiV1betaDocumentPolicy$inboundSchema,
+    ),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "DocumentPolicy": "documentPolicy",
-      "Headers": "headers",
+      "factify.api.v1beta.DocumentPolicy": "factifyApiV1betaDocumentPolicy",
     });
   }),
 );

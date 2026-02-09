@@ -26,8 +26,9 @@ export type ListOrganizationsResponse = {
   /**
    * Success
    */
-  listOrganizationsResponse?: components.ListOrganizationsResponse | undefined;
-  headers: { [k: string]: Array<string> };
+  factifyApiV1betaListOrganizationsResponse?:
+    | components.FactifyApiV1betaListOrganizationsResponse
+    | undefined;
 };
 
 /** @internal */
@@ -68,16 +69,15 @@ export const ListOrganizationsResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    ListOrganizationsResponse: types.optional(
-      components.ListOrganizationsResponse$inboundSchema,
+    "factify.api.v1beta.ListOrganizationsResponse": types.optional(
+      components.FactifyApiV1betaListOrganizationsResponse$inboundSchema,
     ),
-    Headers: z._default(z.record(z.string(), z.array(z.string())), {}),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "ListOrganizationsResponse": "listOrganizationsResponse",
-      "Headers": "headers",
+      "factify.api.v1beta.ListOrganizationsResponse":
+        "factifyApiV1betaListOrganizationsResponse",
     });
   }),
 );

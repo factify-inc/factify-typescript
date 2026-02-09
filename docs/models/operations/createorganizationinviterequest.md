@@ -8,6 +8,7 @@ import { CreateOrganizationInviteRequest } from "@factify/sdk/models/operations"
 let value: CreateOrganizationInviteRequest = {
   organizationId: "<id>",
   body: {
+    organizationId: "<id>",
     email: "Florence2@hotmail.com",
   },
 };

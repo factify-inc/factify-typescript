@@ -11,9 +11,16 @@ import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * AcceptOrganizationInviteRequest contains the invitation to accept.
+ * AcceptOrganizationInviteRequest contains the token to accept an invitation.
  */
 export type AcceptOrganizationInviteAcceptOrganizationInviteRequest = {
+  /**
+   * Organization the invitation belongs to (for validation).
+   *
+   * @remarks
+   *  Pattern: org_[0-9a-hjkmnp-tv-z]{26}
+   */
+  organizationId: string;
   /**
    * The invitation token from the email link.
    */
@@ -22,19 +29,12 @@ export type AcceptOrganizationInviteAcceptOrganizationInviteRequest = {
 
 export type AcceptOrganizationInviteRequest = {
   /**
-   * Organization the invitation belongs to.
+   * Organization the invitation belongs to (for validation).
    *
    * @remarks
    *  Pattern: org_[0-9a-hjkmnp-tv-z]{26}
    */
   organizationId: string;
-  /**
-   * Invitation ID to accept.
-   *
-   * @remarks
-   *  Pattern: inv_[0-9a-hjkmnp-tv-z]{26}
-   */
-  inviteId: string;
   body: AcceptOrganizationInviteAcceptOrganizationInviteRequest;
 };
 
@@ -43,14 +43,14 @@ export type AcceptOrganizationInviteResponse = {
   /**
    * Success
    */
-  acceptOrganizationInviteResponse?:
-    | components.AcceptOrganizationInviteResponse
+  factifyApiV1betaAcceptOrganizationInviteResponse?:
+    | components.FactifyApiV1betaAcceptOrganizationInviteResponse
     | undefined;
-  headers: { [k: string]: Array<string> };
 };
 
 /** @internal */
 export type AcceptOrganizationInviteAcceptOrganizationInviteRequest$Outbound = {
+  organization_id: string;
   token: string;
 };
 
@@ -59,9 +59,17 @@ export const AcceptOrganizationInviteAcceptOrganizationInviteRequest$outboundSch
   z.ZodMiniType<
     AcceptOrganizationInviteAcceptOrganizationInviteRequest$Outbound,
     AcceptOrganizationInviteAcceptOrganizationInviteRequest
-  > = z.object({
-    token: z.string(),
-  });
+  > = z.pipe(
+    z.object({
+      organizationId: z.string(),
+      token: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        organizationId: "organization_id",
+      });
+    }),
+  );
 
 export function acceptOrganizationInviteAcceptOrganizationInviteRequestToJSON(
   acceptOrganizationInviteAcceptOrganizationInviteRequest:
@@ -76,7 +84,6 @@ export function acceptOrganizationInviteAcceptOrganizationInviteRequestToJSON(
 /** @internal */
 export type AcceptOrganizationInviteRequest$Outbound = {
   organization_id: string;
-  invite_id: string;
   body: AcceptOrganizationInviteAcceptOrganizationInviteRequest$Outbound;
 };
 
@@ -87,7 +94,6 @@ export const AcceptOrganizationInviteRequest$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     organizationId: z.string(),
-    inviteId: z.string(),
     body: z.lazy(() =>
       AcceptOrganizationInviteAcceptOrganizationInviteRequest$outboundSchema
     ),
@@ -95,7 +101,6 @@ export const AcceptOrganizationInviteRequest$outboundSchema: z.ZodMiniType<
   z.transform((v) => {
     return remap$(v, {
       organizationId: "organization_id",
-      inviteId: "invite_id",
     });
   }),
 );
@@ -117,16 +122,15 @@ export const AcceptOrganizationInviteResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    AcceptOrganizationInviteResponse: types.optional(
-      components.AcceptOrganizationInviteResponse$inboundSchema,
+    "factify.api.v1beta.AcceptOrganizationInviteResponse": types.optional(
+      components.FactifyApiV1betaAcceptOrganizationInviteResponse$inboundSchema,
     ),
-    Headers: z._default(z.record(z.string(), z.array(z.string())), {}),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "AcceptOrganizationInviteResponse": "acceptOrganizationInviteResponse",
-      "Headers": "headers",
+      "factify.api.v1beta.AcceptOrganizationInviteResponse":
+        "factifyApiV1betaAcceptOrganizationInviteResponse",
     });
   }),
 );

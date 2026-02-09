@@ -15,8 +15,9 @@ export type CreateDocumentResponse = {
   /**
    * Success
    */
-  createDocumentResponse?: components.CreateDocumentResponse | undefined;
-  headers: { [k: string]: Array<string> };
+  factifyApiV1betaCreateDocumentResponse?:
+    | components.FactifyApiV1betaCreateDocumentResponse
+    | undefined;
 };
 
 /** @internal */
@@ -26,16 +27,15 @@ export const CreateDocumentResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    CreateDocumentResponse: types.optional(
-      components.CreateDocumentResponse$inboundSchema,
+    "factify.api.v1beta.CreateDocumentResponse": types.optional(
+      components.FactifyApiV1betaCreateDocumentResponse$inboundSchema,
     ),
-    Headers: z._default(z.record(z.string(), z.array(z.string())), {}),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "CreateDocumentResponse": "createDocumentResponse",
-      "Headers": "headers",
+      "factify.api.v1beta.CreateDocumentResponse":
+        "factifyApiV1betaCreateDocumentResponse",
     });
   }),
 );

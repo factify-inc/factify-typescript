@@ -13,7 +13,22 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * ResendOrganizationInviteRequest identifies an invitation to resend.
  */
-export type ResendOrganizationInviteResendOrganizationInviteRequest = {};
+export type ResendOrganizationInviteResendOrganizationInviteRequest = {
+  /**
+   * Organization the invitation belongs to.
+   *
+   * @remarks
+   *  Pattern: org_[0-9a-hjkmnp-tv-z]{26}
+   */
+  organizationId: string;
+  /**
+   * Invitation ID to resend.
+   *
+   * @remarks
+   *  Pattern: inv_[0-9a-hjkmnp-tv-z]{26}
+   */
+  inviteId: string;
+};
 
 export type ResendOrganizationInviteRequest = {
   /**
@@ -38,22 +53,34 @@ export type ResendOrganizationInviteResponse = {
   /**
    * Success
    */
-  resendOrganizationInviteResponse?:
-    | components.ResendOrganizationInviteResponse
+  factifyApiV1betaResendOrganizationInviteResponse?:
+    | components.FactifyApiV1betaResendOrganizationInviteResponse
     | undefined;
-  headers: { [k: string]: Array<string> };
 };
 
 /** @internal */
-export type ResendOrganizationInviteResendOrganizationInviteRequest$Outbound =
-  {};
+export type ResendOrganizationInviteResendOrganizationInviteRequest$Outbound = {
+  organization_id: string;
+  invite_id: string;
+};
 
 /** @internal */
 export const ResendOrganizationInviteResendOrganizationInviteRequest$outboundSchema:
   z.ZodMiniType<
     ResendOrganizationInviteResendOrganizationInviteRequest$Outbound,
     ResendOrganizationInviteResendOrganizationInviteRequest
-  > = z.object({});
+  > = z.pipe(
+    z.object({
+      organizationId: z.string(),
+      inviteId: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        organizationId: "organization_id",
+        inviteId: "invite_id",
+      });
+    }),
+  );
 
 export function resendOrganizationInviteResendOrganizationInviteRequestToJSON(
   resendOrganizationInviteResendOrganizationInviteRequest:
@@ -109,16 +136,15 @@ export const ResendOrganizationInviteResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    ResendOrganizationInviteResponse: types.optional(
-      components.ResendOrganizationInviteResponse$inboundSchema,
+    "factify.api.v1beta.ResendOrganizationInviteResponse": types.optional(
+      components.FactifyApiV1betaResendOrganizationInviteResponse$inboundSchema,
     ),
-    Headers: z._default(z.record(z.string(), z.array(z.string())), {}),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "ResendOrganizationInviteResponse": "resendOrganizationInviteResponse",
-      "Headers": "headers",
+      "factify.api.v1beta.ResendOrganizationInviteResponse":
+        "factifyApiV1betaResendOrganizationInviteResponse",
     });
   }),
 );

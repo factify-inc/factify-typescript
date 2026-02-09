@@ -15,6 +15,13 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type RevokeApiKeyRevokeApiKeyRequest = {
   /**
+   * API key ID to revoke.
+   *
+   * @remarks
+   *  Pattern: key_[0-9a-hjkmnp-tv-z]{26}
+   */
+  apiKeyId: string;
+  /**
    * Optional reason for revocation (for audit purposes).
    *
    * @remarks
@@ -39,12 +46,14 @@ export type RevokeApiKeyResponse = {
   /**
    * Success
    */
-  revokeApiKeyResponse?: components.RevokeApiKeyResponse | undefined;
-  headers: { [k: string]: Array<string> };
+  factifyApiV1betaRevokeApiKeyResponse?:
+    | components.FactifyApiV1betaRevokeApiKeyResponse
+    | undefined;
 };
 
 /** @internal */
 export type RevokeApiKeyRevokeApiKeyRequest$Outbound = {
+  api_key_id: string;
   reason?: string | null | undefined;
 };
 
@@ -52,9 +61,17 @@ export type RevokeApiKeyRevokeApiKeyRequest$Outbound = {
 export const RevokeApiKeyRevokeApiKeyRequest$outboundSchema: z.ZodMiniType<
   RevokeApiKeyRevokeApiKeyRequest$Outbound,
   RevokeApiKeyRevokeApiKeyRequest
-> = z.object({
-  reason: z.optional(z.nullable(z.string())),
-});
+> = z.pipe(
+  z.object({
+    apiKeyId: z.string(),
+    reason: z.optional(z.nullable(z.string())),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyId: "api_key_id",
+    });
+  }),
+);
 
 export function revokeApiKeyRevokeApiKeyRequestToJSON(
   revokeApiKeyRevokeApiKeyRequest: RevokeApiKeyRevokeApiKeyRequest,
@@ -103,16 +120,15 @@ export const RevokeApiKeyResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    RevokeApiKeyResponse: types.optional(
-      components.RevokeApiKeyResponse$inboundSchema,
+    "factify.api.v1beta.RevokeApiKeyResponse": types.optional(
+      components.FactifyApiV1betaRevokeApiKeyResponse$inboundSchema,
     ),
-    Headers: z._default(z.record(z.string(), z.array(z.string())), {}),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "RevokeApiKeyResponse": "revokeApiKeyResponse",
-      "Headers": "headers",
+      "factify.api.v1beta.RevokeApiKeyResponse":
+        "factifyApiV1betaRevokeApiKeyResponse",
     });
   }),
 );

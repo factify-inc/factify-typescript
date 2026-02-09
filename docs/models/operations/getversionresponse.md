@@ -5,19 +5,12 @@
 ```typescript
 import { GetVersionResponse } from "@factify/sdk/models/operations";
 
-let value: GetVersionResponse = {
-  headers: {
-    "key": [
-      "<value 1>",
-    ],
-  },
-};
+let value: GetVersionResponse = {};
 ```
 
 ## Fields
 
-| Field                                                              | Type                                                               | Required                                                           | Description                                                        |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| `httpMeta`                                                         | [components.HTTPMetadata](../../models/components/httpmetadata.md) | :heavy_check_mark:                                                 | N/A                                                                |
-| `version`                                                          | [components.Version](../../models/components/version.md)           | :heavy_minus_sign:                                                 | Success                                                            |
-| `headers`                                                          | Record<string, *string*[]>                                         | :heavy_check_mark:                                                 | N/A                                                                |
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `httpMeta`                                                                               | [components.HTTPMetadata](../../models/components/httpmetadata.md)                       | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `factifyApiV1betaVersion`                                                                | [components.FactifyApiV1betaVersion](../../models/components/factifyapiv1betaversion.md) | :heavy_minus_sign:                                                                       | Success                                                                                  |
