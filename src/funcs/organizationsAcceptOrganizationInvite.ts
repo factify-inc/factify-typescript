@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
@@ -38,6 +39,7 @@ export function organizationsAcceptOrganizationInvite(
 ): APIPromise<
   Result<
     operations.AcceptOrganizationInviteResponse,
+    | errors.ErrorT
     | FactifyError
     | ResponseValidationError
     | ConnectionError
@@ -63,6 +65,7 @@ async function $do(
   [
     Result<
       operations.AcceptOrganizationInviteResponse,
+      | errors.ErrorT
       | FactifyError
       | ResponseValidationError
       | ConnectionError
@@ -139,7 +142,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["4XX", "5XX"],
+    errorCodes: ["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -154,6 +157,7 @@ async function $do(
 
   const [result] = await M.match<
     operations.AcceptOrganizationInviteResponse,
+    | errors.ErrorT
     | FactifyError
     | ResponseValidationError
     | ConnectionError
@@ -164,8 +168,11 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, operations.AcceptOrganizationInviteResponse$inboundSchema, {
-      key: "factify.api.v1beta.AcceptOrganizationInviteResponse",
+      key: "AcceptOrganizationInviteResponse",
     }),
+    M.jsonErr([400, 401, 403, 404], errors.ErrorT$inboundSchema),
+    M.jsonErr(429, errors.ErrorT$inboundSchema, { hdrs: true }),
+    M.jsonErr(500, errors.ErrorT$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

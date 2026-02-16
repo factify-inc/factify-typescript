@@ -37,9 +37,7 @@ export type ListDocumentVersionsResponse = {
   /**
    * Success
    */
-  factifyApiV1betaListVersionsResponse?:
-    | components.FactifyApiV1betaListVersionsResponse
-    | undefined;
+  listVersionsResponse?: components.ListVersionsResponse | undefined;
 };
 
 /** @internal */
@@ -85,15 +83,14 @@ export const ListDocumentVersionsResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    "factify.api.v1beta.ListVersionsResponse": types.optional(
-      components.FactifyApiV1betaListVersionsResponse$inboundSchema,
+    ListVersionsResponse: types.optional(
+      components.ListVersionsResponse$inboundSchema,
     ),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "factify.api.v1beta.ListVersionsResponse":
-        "factifyApiV1betaListVersionsResponse",
+      "ListVersionsResponse": "listVersionsResponse",
     });
   }),
 );

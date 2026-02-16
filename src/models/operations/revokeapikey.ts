@@ -15,13 +15,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type RevokeApiKeyRevokeApiKeyRequest = {
   /**
-   * API key ID to revoke.
-   *
-   * @remarks
-   *  Pattern: key_[0-9a-hjkmnp-tv-z]{26}
-   */
-  apiKeyId: string;
-  /**
    * Optional reason for revocation (for audit purposes).
    *
    * @remarks
@@ -46,14 +39,11 @@ export type RevokeApiKeyResponse = {
   /**
    * Success
    */
-  factifyApiV1betaRevokeApiKeyResponse?:
-    | components.FactifyApiV1betaRevokeApiKeyResponse
-    | undefined;
+  revokeApiKeyResponse?: components.RevokeApiKeyResponse | undefined;
 };
 
 /** @internal */
 export type RevokeApiKeyRevokeApiKeyRequest$Outbound = {
-  api_key_id: string;
   reason?: string | null | undefined;
 };
 
@@ -61,17 +51,9 @@ export type RevokeApiKeyRevokeApiKeyRequest$Outbound = {
 export const RevokeApiKeyRevokeApiKeyRequest$outboundSchema: z.ZodMiniType<
   RevokeApiKeyRevokeApiKeyRequest$Outbound,
   RevokeApiKeyRevokeApiKeyRequest
-> = z.pipe(
-  z.object({
-    apiKeyId: z.string(),
-    reason: z.optional(z.nullable(z.string())),
-  }),
-  z.transform((v) => {
-    return remap$(v, {
-      apiKeyId: "api_key_id",
-    });
-  }),
-);
+> = z.object({
+  reason: z.optional(z.nullable(z.string())),
+});
 
 export function revokeApiKeyRevokeApiKeyRequestToJSON(
   revokeApiKeyRevokeApiKeyRequest: RevokeApiKeyRevokeApiKeyRequest,
@@ -120,15 +102,14 @@ export const RevokeApiKeyResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    "factify.api.v1beta.RevokeApiKeyResponse": types.optional(
-      components.FactifyApiV1betaRevokeApiKeyResponse$inboundSchema,
+    RevokeApiKeyResponse: types.optional(
+      components.RevokeApiKeyResponse$inboundSchema,
     ),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "factify.api.v1beta.RevokeApiKeyResponse":
-        "factifyApiV1betaRevokeApiKeyResponse",
+      "RevokeApiKeyResponse": "revokeApiKeyResponse",
     });
   }),
 );

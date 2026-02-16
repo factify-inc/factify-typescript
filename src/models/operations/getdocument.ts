@@ -25,9 +25,7 @@ export type GetDocumentResponse = {
   /**
    * Success
    */
-  factifyApiV1betaGetDocumentResponse?:
-    | components.FactifyApiV1betaGetDocumentResponse
-    | undefined;
+  getDocumentResponse?: components.GetDocumentResponse | undefined;
 };
 
 /** @internal */
@@ -65,15 +63,14 @@ export const GetDocumentResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    "factify.api.v1beta.GetDocumentResponse": types.optional(
-      components.FactifyApiV1betaGetDocumentResponse$inboundSchema,
+    GetDocumentResponse: types.optional(
+      components.GetDocumentResponse$inboundSchema,
     ),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "factify.api.v1beta.GetDocumentResponse":
-        "factifyApiV1betaGetDocumentResponse",
+      "GetDocumentResponse": "getDocumentResponse",
     });
   }),
 );

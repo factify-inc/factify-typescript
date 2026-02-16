@@ -7,9 +7,7 @@ import { RevokeApiKeyRequest } from "@factify/sdk/models/operations";
 
 let value: RevokeApiKeyRequest = {
   apiKeyId: "<id>",
-  body: {
-    apiKeyId: "<id>",
-  },
+  body: {},
 };
 ```
 

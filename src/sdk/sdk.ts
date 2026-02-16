@@ -4,51 +4,43 @@
 
 import { ClientSDK } from "../lib/sdks.js";
 import { APIKeys } from "./apikeys.js";
-import { DocumentService } from "./documentservice.js";
-import { EntryPageService } from "./entrypageservice.js";
-import { IdentityService } from "./identityservice.js";
+import { Documents } from "./documents.js";
+import { EntryPages } from "./entrypages.js";
 import { Organizations } from "./organizations.js";
-import { OrganizationService } from "./organizationservice.js";
-import { PolicyService } from "./policyservice.js";
-import { SharingAndDistribution } from "./sharinganddistribution.js";
-import { VersionService } from "./versionservice.js";
+import { Policies } from "./policies.js";
+import { Quota } from "./quota.js";
+import { Quotas } from "./quotas.js";
+import { Versions } from "./versions.js";
 
 export class Factify extends ClientSDK {
+  private _quotas?: Quotas;
+  get quotas(): Quotas {
+    return (this._quotas ??= new Quotas(this._options));
+  }
+
   private _apiKeys?: APIKeys;
   get apiKeys(): APIKeys {
     return (this._apiKeys ??= new APIKeys(this._options));
   }
 
-  private _identityService?: IdentityService;
-  get identityService(): IdentityService {
-    return (this._identityService ??= new IdentityService(this._options));
+  private _documents?: Documents;
+  get documents(): Documents {
+    return (this._documents ??= new Documents(this._options));
   }
 
-  private _documentService?: DocumentService;
-  get documentService(): DocumentService {
-    return (this._documentService ??= new DocumentService(this._options));
+  private _entryPages?: EntryPages;
+  get entryPages(): EntryPages {
+    return (this._entryPages ??= new EntryPages(this._options));
   }
 
-  private _sharingAndDistribution?: SharingAndDistribution;
-  get sharingAndDistribution(): SharingAndDistribution {
-    return (this._sharingAndDistribution ??= new SharingAndDistribution(
-      this._options,
-    ));
+  private _policies?: Policies;
+  get policies(): Policies {
+    return (this._policies ??= new Policies(this._options));
   }
 
-  private _entryPageService?: EntryPageService;
-  get entryPageService(): EntryPageService {
-    return (this._entryPageService ??= new EntryPageService(this._options));
-  }
-
-  private _policyService?: PolicyService;
-  get policyService(): PolicyService {
-    return (this._policyService ??= new PolicyService(this._options));
-  }
-
-  private _versionService?: VersionService;
-  get versionService(): VersionService {
-    return (this._versionService ??= new VersionService(this._options));
+  private _versions?: Versions;
+  get versions(): Versions {
+    return (this._versions ??= new Versions(this._options));
   }
 
   private _organizations?: Organizations;
@@ -56,10 +48,8 @@ export class Factify extends ClientSDK {
     return (this._organizations ??= new Organizations(this._options));
   }
 
-  private _organizationService?: OrganizationService;
-  get organizationService(): OrganizationService {
-    return (this._organizationService ??= new OrganizationService(
-      this._options,
-    ));
+  private _quota?: Quota;
+  get quota(): Quota {
+    return (this._quota ??= new Quota(this._options));
   }
 }

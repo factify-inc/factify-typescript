@@ -3,30 +3,37 @@
  */
 
 import { organizationsAcceptOrganizationInvite } from "../funcs/organizationsAcceptOrganizationInvite.js";
-import { organizationsCreateOrganization } from "../funcs/organizationsCreateOrganization.js";
-import { organizationsCreateOrganizationInvite } from "../funcs/organizationsCreateOrganizationInvite.js";
-import { organizationsGetOrganization } from "../funcs/organizationsGetOrganization.js";
-import { organizationsListOrganizationInvites } from "../funcs/organizationsListOrganizationInvites.js";
-import { organizationsListOrganizations } from "../funcs/organizationsListOrganizations.js";
+import { organizationsCreate } from "../funcs/organizationsCreate.js";
+import { organizationsGet } from "../funcs/organizationsGet.js";
+import { organizationsList } from "../funcs/organizationsList.js";
 import { organizationsResendOrganizationInvite } from "../funcs/organizationsResendOrganizationInvite.js";
 import { organizationsRevokeOrganizationInvite } from "../funcs/organizationsRevokeOrganizationInvite.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
+import { PageIterator, unwrapResultIterator } from "../types/operations.js";
+import { Invites } from "./invites.js";
 
 export class Organizations extends ClientSDK {
+  private _invites?: Invites;
+  get invites(): Invites {
+    return (this._invites ??= new Invites(this._options));
+  }
+
   /**
    * List organizations
    *
    * @remarks
    * List organizations the caller has access to.
    */
-  async listOrganizations(
+  async list(
     request?: operations.ListOrganizationsRequest | undefined,
     options?: RequestOptions,
-  ): Promise<operations.ListOrganizationsResponse> {
-    return unwrapAsync(organizationsListOrganizations(
+  ): Promise<
+    PageIterator<operations.ListOrganizationsResponse, { cursor: string }>
+  > {
+    return unwrapResultIterator(organizationsList(
       this,
       request,
       options,
@@ -39,11 +46,11 @@ export class Organizations extends ClientSDK {
    * @remarks
    * Creates a new organization. The authenticated user becomes the organization owner.
    */
-  async createOrganization(
-    request: components.FactifyApiV1betaCreateOrganizationRequest,
+  async create(
+    request: components.CreateOrganizationRequest,
     options?: RequestOptions,
   ): Promise<operations.CreateOrganizationResponse> {
-    return unwrapAsync(organizationsCreateOrganization(
+    return unwrapAsync(organizationsCreate(
       this,
       request,
       options,
@@ -56,45 +63,11 @@ export class Organizations extends ClientSDK {
    * @remarks
    * Retrieve an organization by ID.
    */
-  async getOrganization(
+  async get(
     request: operations.GetOrganizationRequest,
     options?: RequestOptions,
   ): Promise<operations.GetOrganizationResponse> {
-    return unwrapAsync(organizationsGetOrganization(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * List organization invitations
-   *
-   * @remarks
-   * List invitations for an organization. Requires permission to invite organization members.
-   */
-  async listOrganizationInvites(
-    request: operations.ListOrganizationInvitesRequest,
-    options?: RequestOptions,
-  ): Promise<operations.ListOrganizationInvitesResponse> {
-    return unwrapAsync(organizationsListOrganizationInvites(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Invite a user to join an organization
-   *
-   * @remarks
-   * Creates an invitation and sends an email to the specified address. Returns FAILED_PRECONDITION if the email belongs to an existing organization member. Idempotency: If a PENDING invitation already exists for this email, the existing invitation is resent with a new token and refreshed expiration. Expired or revoked invitations are ignored - a new invitation is created.
-   */
-  async createOrganizationInvite(
-    request: operations.CreateOrganizationInviteRequest,
-    options?: RequestOptions,
-  ): Promise<operations.CreateOrganizationInviteResponse> {
-    return unwrapAsync(organizationsCreateOrganizationInvite(
+    return unwrapAsync(organizationsGet(
       this,
       request,
       options,

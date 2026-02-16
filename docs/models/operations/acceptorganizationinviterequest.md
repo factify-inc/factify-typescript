@@ -8,7 +8,6 @@ import { AcceptOrganizationInviteRequest } from "@factify/sdk/models/operations"
 let value: AcceptOrganizationInviteRequest = {
   organizationId: "<id>",
   body: {
-    organizationId: "<id>",
     token: "<value>",
   },
 };

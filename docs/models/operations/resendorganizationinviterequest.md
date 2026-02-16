@@ -8,10 +8,7 @@ import { ResendOrganizationInviteRequest } from "@factify/sdk/models/operations"
 let value: ResendOrganizationInviteRequest = {
   organizationId: "<id>",
   inviteId: "<id>",
-  body: {
-    organizationId: "<id>",
-    inviteId: "<id>",
-  },
+  body: {},
 };
 ```
 

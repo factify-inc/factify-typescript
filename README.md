@@ -52,6 +52,7 @@ Factify uses conventional HTTP status codes and returns structured error respons
   * [Authentication](#authentication-1)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Standalone functions](#standalone-functions)
+  * [Pagination](#pagination)
   * [File uploads](#file-uploads)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
@@ -116,11 +117,14 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.apiKeys.listApiKeys({
-    organizationId: "<id>",
+  const result = await factify.documents.list({
+    pageToken:
+      "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -148,8 +152,9 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.apiKeys.listApiKeys({
-    organizationId: "<id>",
+  const result = await factify.quotas.quotaServiceDeleteOrganizationQuota({
+    connectProtocolVersion: 1,
+    body: {},
   });
 
   console.log(result);
@@ -168,65 +173,60 @@ run();
 
 ### [APIKeys](docs/sdks/apikeys/README.md)
 
-* [listApiKeys](docs/sdks/apikeys/README.md#listapikeys) - List API keys
-* [createApiKey](docs/sdks/apikeys/README.md#createapikey) - Create an API key
-* [revokeApiKey](docs/sdks/apikeys/README.md#revokeapikey) - Revoke an API key
+* [list](docs/sdks/apikeys/README.md#list) - List API keys
+* [create](docs/sdks/apikeys/README.md#create) - Create an API key
+* [revoke](docs/sdks/apikeys/README.md#revoke) - Revoke an API key
 
-### [DocumentService](docs/sdks/documentservice/README.md)
+### [Documents](docs/sdks/documents/README.md)
 
-* [listDocuments](docs/sdks/documentservice/README.md#listdocuments) - List documents
-* [createDocument](docs/sdks/documentservice/README.md#createdocument) - Create a document
-* [getDocument](docs/sdks/documentservice/README.md#getdocument) - Retrieve a document
-* [updateDocument](docs/sdks/documentservice/README.md#updatedocument) - Update a document
+* [list](docs/sdks/documents/README.md#list) - List documents
+* [create](docs/sdks/documents/README.md#create) - Create a document
+* [get](docs/sdks/documents/README.md#get) - Retrieve a document
+* [update](docs/sdks/documents/README.md#update) - Update a document
 
-### [EntryPageService](docs/sdks/entrypageservice/README.md)
+### [EntryPages](docs/sdks/entrypages/README.md)
 
-* [generateDocumentEntryPage](docs/sdks/entrypageservice/README.md#generatedocumententrypage) - Generate entry page
-
-### [IdentityService](docs/sdks/identityservice/README.md)
-
-* [listApiKeys](docs/sdks/identityservice/README.md#listapikeys) - List API keys
-* [createApiKey](docs/sdks/identityservice/README.md#createapikey) - Create an API key
-* [revokeApiKey](docs/sdks/identityservice/README.md#revokeapikey) - Revoke an API key
+* [generate](docs/sdks/entrypages/README.md#generate) - Generate entry page
 
 ### [Organizations](docs/sdks/organizations/README.md)
 
-* [listOrganizations](docs/sdks/organizations/README.md#listorganizations) - List organizations
-* [createOrganization](docs/sdks/organizations/README.md#createorganization) - Create an organization
-* [getOrganization](docs/sdks/organizations/README.md#getorganization) - Retrieve an organization
-* [listOrganizationInvites](docs/sdks/organizations/README.md#listorganizationinvites) - List organization invitations
-* [createOrganizationInvite](docs/sdks/organizations/README.md#createorganizationinvite) - Invite a user to join an organization
+* [list](docs/sdks/organizations/README.md#list) - List organizations
+* [create](docs/sdks/organizations/README.md#create) - Create an organization
+* [get](docs/sdks/organizations/README.md#get) - Retrieve an organization
 * [acceptOrganizationInvite](docs/sdks/organizations/README.md#acceptorganizationinvite) - Accept an invitation
 * [resendOrganizationInvite](docs/sdks/organizations/README.md#resendorganizationinvite) - Resend an invitation email
 * [revokeOrganizationInvite](docs/sdks/organizations/README.md#revokeorganizationinvite) - Revoke an invitation
 
-### [OrganizationService](docs/sdks/organizationservice/README.md)
+### [Organizations.Invites](docs/sdks/invites/README.md)
 
-* [listOrganizations](docs/sdks/organizationservice/README.md#listorganizations) - List organizations
-* [createOrganization](docs/sdks/organizationservice/README.md#createorganization) - Create an organization
-* [getOrganization](docs/sdks/organizationservice/README.md#getorganization) - Retrieve an organization
-* [listOrganizationInvites](docs/sdks/organizationservice/README.md#listorganizationinvites) - List organization invitations
-* [createOrganizationInvite](docs/sdks/organizationservice/README.md#createorganizationinvite) - Invite a user to join an organization
-* [acceptOrganizationInvite](docs/sdks/organizationservice/README.md#acceptorganizationinvite) - Accept an invitation
-* [resendOrganizationInvite](docs/sdks/organizationservice/README.md#resendorganizationinvite) - Resend an invitation email
-* [revokeOrganizationInvite](docs/sdks/organizationservice/README.md#revokeorganizationinvite) - Revoke an invitation
+* [list](docs/sdks/invites/README.md#list) - List organization invitations
+* [create](docs/sdks/invites/README.md#create) - Invite a user to join an organization
 
-### [PolicyService](docs/sdks/policyservice/README.md)
+### [Policies](docs/sdks/policies/README.md)
 
-* [listDocumentPolicies](docs/sdks/policyservice/README.md#listdocumentpolicies) - List document policies
-* [attachDocumentPolicy](docs/sdks/policyservice/README.md#attachdocumentpolicy) - Attach a policy
-* [detachDocumentPolicy](docs/sdks/policyservice/README.md#detachdocumentpolicy) - Detach a policy
+* [list](docs/sdks/policies/README.md#list) - List document policies
+* [attach](docs/sdks/policies/README.md#attach) - Attach a policy
+* [detach](docs/sdks/policies/README.md#detach) - Detach a policy
 
-### [SharingAndDistribution](docs/sdks/sharinganddistribution/README.md)
+### [Quota](docs/sdks/quota/README.md)
 
-* [generateDocumentEntryPage](docs/sdks/sharinganddistribution/README.md#generatedocumententrypage) - Generate entry page
+* [getOrganizationQuota](docs/sdks/quota/README.md#getorganizationquota) - Get organization quota status
+* [listAPIKeyQuotas](docs/sdks/quota/README.md#listapikeyquotas) - List API key quotas
+* [deleteAPIKeyQuota](docs/sdks/quota/README.md#deleteapikeyquota) - Delete API key quota
+* [setAPIKeyQuota](docs/sdks/quota/README.md#setapikeyquota) - Set API key quota
+* [getUsageHistory](docs/sdks/quota/README.md#getusagehistory) - Get usage history
 
-### [VersionService](docs/sdks/versionservice/README.md)
+### [Quotas](docs/sdks/quotas/README.md)
 
-* [listDocumentVersions](docs/sdks/versionservice/README.md#listdocumentversions) - List document versions
-* [createDocumentVersion](docs/sdks/versionservice/README.md#createdocumentversion) - Create a new version
-* [getVersion](docs/sdks/versionservice/README.md#getversion) - Retrieve a version
-* [updateVersion](docs/sdks/versionservice/README.md#updateversion) - Update a version
+* [quotaServiceDeleteOrganizationQuota](docs/sdks/quotas/README.md#quotaservicedeleteorganizationquota) - DeleteOrganizationQuota removes quota configuration for an organization.  The organization will fall back to default free tier limits.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
+* [quotaServiceSetOrganizationQuota](docs/sdks/quotas/README.md#quotaservicesetorganizationquota) - SetOrganizationQuota creates or updates quota configuration for an organization.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
+
+### [Versions](docs/sdks/versions/README.md)
+
+* [list](docs/sdks/versions/README.md#list) - List document versions
+* [create](docs/sdks/versions/README.md#create) - Create a new version
+* [get](docs/sdks/versions/README.md#get) - Retrieve a version
+* [update](docs/sdks/versions/README.md#update) - Update a version
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -246,44 +246,73 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <summary>Available standalone functions</summary>
 
-- [`apiKeysCreateAPIKey`](docs/sdks/apikeys/README.md#createapikey) - Create an API key
-- [`apiKeysCreateAPIKey`](docs/sdks/identityservice/README.md#createapikey) - Create an API key
-- [`apiKeysListAPIKeys`](docs/sdks/apikeys/README.md#listapikeys) - List API keys
-- [`apiKeysListAPIKeys`](docs/sdks/identityservice/README.md#listapikeys) - List API keys
-- [`apiKeysRevokeAPIKey`](docs/sdks/apikeys/README.md#revokeapikey) - Revoke an API key
-- [`apiKeysRevokeAPIKey`](docs/sdks/identityservice/README.md#revokeapikey) - Revoke an API key
-- [`documentServiceCreateDocument`](docs/sdks/documentservice/README.md#createdocument) - Create a document
-- [`documentServiceGetDocument`](docs/sdks/documentservice/README.md#getdocument) - Retrieve a document
-- [`documentServiceListDocuments`](docs/sdks/documentservice/README.md#listdocuments) - List documents
-- [`documentServiceUpdateDocument`](docs/sdks/documentservice/README.md#updatedocument) - Update a document
+- [`apiKeysCreate`](docs/sdks/apikeys/README.md#create) - Create an API key
+- [`apiKeysList`](docs/sdks/apikeys/README.md#list) - List API keys
+- [`apiKeysRevoke`](docs/sdks/apikeys/README.md#revoke) - Revoke an API key
+- [`documentsCreate`](docs/sdks/documents/README.md#create) - Create a document
+- [`documentsGet`](docs/sdks/documents/README.md#get) - Retrieve a document
+- [`documentsList`](docs/sdks/documents/README.md#list) - List documents
+- [`documentsUpdate`](docs/sdks/documents/README.md#update) - Update a document
+- [`entryPagesGenerate`](docs/sdks/entrypages/README.md#generate) - Generate entry page
 - [`organizationsAcceptOrganizationInvite`](docs/sdks/organizations/README.md#acceptorganizationinvite) - Accept an invitation
-- [`organizationsAcceptOrganizationInvite`](docs/sdks/organizationservice/README.md#acceptorganizationinvite) - Accept an invitation
-- [`organizationsCreateOrganization`](docs/sdks/organizations/README.md#createorganization) - Create an organization
-- [`organizationsCreateOrganization`](docs/sdks/organizationservice/README.md#createorganization) - Create an organization
-- [`organizationsCreateOrganizationInvite`](docs/sdks/organizations/README.md#createorganizationinvite) - Invite a user to join an organization
-- [`organizationsCreateOrganizationInvite`](docs/sdks/organizationservice/README.md#createorganizationinvite) - Invite a user to join an organization
-- [`organizationsGetOrganization`](docs/sdks/organizations/README.md#getorganization) - Retrieve an organization
-- [`organizationsGetOrganization`](docs/sdks/organizationservice/README.md#getorganization) - Retrieve an organization
-- [`organizationsListOrganizationInvites`](docs/sdks/organizations/README.md#listorganizationinvites) - List organization invitations
-- [`organizationsListOrganizationInvites`](docs/sdks/organizationservice/README.md#listorganizationinvites) - List organization invitations
-- [`organizationsListOrganizations`](docs/sdks/organizations/README.md#listorganizations) - List organizations
-- [`organizationsListOrganizations`](docs/sdks/organizationservice/README.md#listorganizations) - List organizations
+- [`organizationsCreate`](docs/sdks/organizations/README.md#create) - Create an organization
+- [`organizationsGet`](docs/sdks/organizations/README.md#get) - Retrieve an organization
+- [`organizationsInvitesCreate`](docs/sdks/invites/README.md#create) - Invite a user to join an organization
+- [`organizationsInvitesList`](docs/sdks/invites/README.md#list) - List organization invitations
+- [`organizationsList`](docs/sdks/organizations/README.md#list) - List organizations
 - [`organizationsResendOrganizationInvite`](docs/sdks/organizations/README.md#resendorganizationinvite) - Resend an invitation email
-- [`organizationsResendOrganizationInvite`](docs/sdks/organizationservice/README.md#resendorganizationinvite) - Resend an invitation email
 - [`organizationsRevokeOrganizationInvite`](docs/sdks/organizations/README.md#revokeorganizationinvite) - Revoke an invitation
-- [`organizationsRevokeOrganizationInvite`](docs/sdks/organizationservice/README.md#revokeorganizationinvite) - Revoke an invitation
-- [`policyServiceAttachDocumentPolicy`](docs/sdks/policyservice/README.md#attachdocumentpolicy) - Attach a policy
-- [`policyServiceDetachDocumentPolicy`](docs/sdks/policyservice/README.md#detachdocumentpolicy) - Detach a policy
-- [`policyServiceListDocumentPolicies`](docs/sdks/policyservice/README.md#listdocumentpolicies) - List document policies
-- [`sharingAndDistributionGenerateDocumentEntryPage`](docs/sdks/entrypageservice/README.md#generatedocumententrypage) - Generate entry page
-- [`sharingAndDistributionGenerateDocumentEntryPage`](docs/sdks/sharinganddistribution/README.md#generatedocumententrypage) - Generate entry page
-- [`versionServiceCreateDocumentVersion`](docs/sdks/versionservice/README.md#createdocumentversion) - Create a new version
-- [`versionServiceGetVersion`](docs/sdks/versionservice/README.md#getversion) - Retrieve a version
-- [`versionServiceListDocumentVersions`](docs/sdks/versionservice/README.md#listdocumentversions) - List document versions
-- [`versionServiceUpdateVersion`](docs/sdks/versionservice/README.md#updateversion) - Update a version
+- [`policiesAttach`](docs/sdks/policies/README.md#attach) - Attach a policy
+- [`policiesDetach`](docs/sdks/policies/README.md#detach) - Detach a policy
+- [`policiesList`](docs/sdks/policies/README.md#list) - List document policies
+- [`quotaDeleteAPIKeyQuota`](docs/sdks/quota/README.md#deleteapikeyquota) - Delete API key quota
+- [`quotaGetOrganizationQuota`](docs/sdks/quota/README.md#getorganizationquota) - Get organization quota status
+- [`quotaGetUsageHistory`](docs/sdks/quota/README.md#getusagehistory) - Get usage history
+- [`quotaListAPIKeyQuotas`](docs/sdks/quota/README.md#listapikeyquotas) - List API key quotas
+- [`quotaSetAPIKeyQuota`](docs/sdks/quota/README.md#setapikeyquota) - Set API key quota
+- [`quotasQuotaServiceDeleteOrganizationQuota`](docs/sdks/quotas/README.md#quotaservicedeleteorganizationquota) - DeleteOrganizationQuota removes quota configuration for an organization.  The organization will fall back to default free tier limits.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
+- [`quotasQuotaServiceSetOrganizationQuota`](docs/sdks/quotas/README.md#quotaservicesetorganizationquota) - SetOrganizationQuota creates or updates quota configuration for an organization.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
+- [`versionsCreate`](docs/sdks/versions/README.md#create) - Create a new version
+- [`versionsGet`](docs/sdks/versions/README.md#get) - Retrieve a version
+- [`versionsList`](docs/sdks/versions/README.md#list) - List document versions
+- [`versionsUpdate`](docs/sdks/versions/README.md#update) - Update a version
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
+
+<!-- Start Pagination [pagination] -->
+## Pagination
+
+Some of the endpoints in this SDK support pagination. To use pagination, you
+make your SDK calls as usual, but the returned response object will also be an
+async iterable that can be consumed using the [`for await...of`][for-await-of]
+syntax.
+
+[for-await-of]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of
+
+Here's an example of one such pagination call:
+
+```typescript
+import { Factify } from "@factify/sdk";
+
+const factify = new Factify({
+  bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+async function run() {
+  const result = await factify.apiKeys.list({
+    organizationId: "<id>",
+  });
+
+  for await (const page of result) {
+    console.log(page);
+  }
+}
+
+run();
+
+```
+<!-- End Pagination [pagination] -->
 
 <!-- Start File uploads [file-upload] -->
 ## File uploads
@@ -308,7 +337,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.documentService.createDocument({
+  const result = await factify.documents.create({
     payload: await openAsBlob("example.file"),
     title: "<value>",
   });
@@ -335,8 +364,9 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.apiKeys.listApiKeys({
-    organizationId: "<id>",
+  const result = await factify.quotas.quotaServiceDeleteOrganizationQuota({
+    connectProtocolVersion: 1,
+    body: {},
   }, {
     retries: {
       strategy: "backoff",
@@ -376,8 +406,9 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.apiKeys.listApiKeys({
-    organizationId: "<id>",
+  const result = await factify.quotas.quotaServiceDeleteOrganizationQuota({
+    connectProtocolVersion: 1,
+    body: {},
   });
 
   console.log(result);
@@ -393,11 +424,12 @@ run();
 
 [`FactifyError`](./src/models/errors/factifyerror.ts) is the base class for all HTTP error responses. It has the following properties:
 
-| Property                  | Type       | Description                                |
-| ------------------------- | ---------- | ------------------------------------------ |
-| `error.message`           | `string`   | Error message                              |
-| `error.httpMeta.response` | `Response` | HTTP response. Access to headers and more. |
-| `error.httpMeta.request`  | `Request`  | HTTP request. Access to headers and more.  |
+| Property                  | Type       | Description                                                                             |
+| ------------------------- | ---------- | --------------------------------------------------------------------------------------- |
+| `error.message`           | `string`   | Error message                                                                           |
+| `error.httpMeta.response` | `Response` | HTTP response. Access to headers and more.                                              |
+| `error.httpMeta.request`  | `Request`  | HTTP request. Access to headers and more.                                               |
+| `error.data$`             |            | Optional. Some errors may contain structured data. [See Error Classes](#error-classes). |
 
 ### Example
 ```typescript
@@ -410,17 +442,25 @@ const factify = new Factify({
 
 async function run() {
   try {
-    const result = await factify.apiKeys.listApiKeys({
-      organizationId: "<id>",
+    const result = await factify.quotas.quotaServiceDeleteOrganizationQuota({
+      connectProtocolVersion: 1,
+      body: {},
     });
 
     console.log(result);
   } catch (error) {
+    // The base class for HTTP error responses
     if (error instanceof errors.FactifyError) {
       console.log(error.message);
       console.log(error.httpMeta.response.status);
       console.log(error.httpMeta.response.headers);
       console.log(error.httpMeta.request);
+
+      // Depending on the method different errors may be thrown
+      if (error instanceof errors.ErrorT) {
+        console.log(error.data$.error); // components.ErrorT
+        console.log(error.data$.httpMeta); // components.HTTPMetadata
+      }
     }
   }
 }
@@ -430,8 +470,9 @@ run();
 ```
 
 ### Error Classes
-**Primary error:**
+**Primary errors:**
 * [`FactifyError`](./src/models/errors/factifyerror.ts): The base class for HTTP error responses.
+  * [`ErrorT`](./src/models/errors/errort.ts): Invalid request parameters.
 
 <details><summary>Less common errors (6)</summary>
 
@@ -474,8 +515,9 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.apiKeys.listApiKeys({
-    organizationId: "<id>",
+  const result = await factify.quotas.quotaServiceDeleteOrganizationQuota({
+    connectProtocolVersion: 1,
+    body: {},
   });
 
   console.log(result);
@@ -497,8 +539,9 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.apiKeys.listApiKeys({
-    organizationId: "<id>",
+  const result = await factify.quotas.quotaServiceDeleteOrganizationQuota({
+    connectProtocolVersion: 1,
+    body: {},
   });
 
   console.log(result);
@@ -522,19 +565,23 @@ The `HTTPClient` constructor takes an optional `fetcher` argument that can be
 used to integrate a third-party HTTP client or when writing tests to mock out
 the HTTP client and feed in fixtures.
 
-The following example shows how to use the `"beforeRequest"` hook to to add a
-custom header and a timeout to requests and how to use the `"requestError"` hook
-to log errors:
+The following example shows how to:
+- route requests through a proxy server using [undici](https://www.npmjs.com/package/undici)'s ProxyAgent
+- use the `"beforeRequest"` hook to add a custom header and a timeout to requests
+- use the `"requestError"` hook to log errors
 
 ```typescript
 import { Factify } from "@factify/sdk";
+import { ProxyAgent } from "undici";
 import { HTTPClient } from "@factify/sdk/lib/http";
 
+const dispatcher = new ProxyAgent("http://proxy.example.com:8080");
+
 const httpClient = new HTTPClient({
-  // fetcher takes a function that has the same signature as native `fetch`.
-  fetcher: (request) => {
-    return fetch(request);
-  }
+  // 'fetcher' takes a function that has the same signature as native 'fetch'.
+  fetcher: (input, init) =>
+    // 'dispatcher' is specific to undici and not part of the standard Fetch API.
+    fetch(input, { ...init, dispatcher } as RequestInit),
 });
 
 httpClient.addHook("beforeRequest", (request) => {

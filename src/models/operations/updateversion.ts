@@ -15,20 +15,13 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type UpdateVersionUpdateVersionRequest = {
   /**
-   * Version ID to update.
-   *
-   * @remarks
-   *  Pattern: ver_[0-9a-hjkmnp-tv-z]{26}
+   * New description.
    */
-  versionId?: string | undefined;
+  description?: string | null | undefined;
   /**
    * New title (max 255 characters).
    */
   title?: string | null | undefined;
-  /**
-   * New description.
-   */
-  description?: string | null | undefined;
 };
 
 export type UpdateVersionRequest = {
@@ -47,32 +40,23 @@ export type UpdateVersionResponse = {
   /**
    * Success
    */
-  factifyApiV1betaVersion?: components.FactifyApiV1betaVersion | undefined;
+  version?: components.Version | undefined;
 };
 
 /** @internal */
 export type UpdateVersionUpdateVersionRequest$Outbound = {
-  version_id?: string | undefined;
-  title?: string | null | undefined;
   description?: string | null | undefined;
+  title?: string | null | undefined;
 };
 
 /** @internal */
 export const UpdateVersionUpdateVersionRequest$outboundSchema: z.ZodMiniType<
   UpdateVersionUpdateVersionRequest$Outbound,
   UpdateVersionUpdateVersionRequest
-> = z.pipe(
-  z.object({
-    versionId: z.optional(z.string()),
-    title: z.optional(z.nullable(z.string())),
-    description: z.optional(z.nullable(z.string())),
-  }),
-  z.transform((v) => {
-    return remap$(v, {
-      versionId: "version_id",
-    });
-  }),
-);
+> = z.object({
+  description: z.optional(z.nullable(z.string())),
+  title: z.optional(z.nullable(z.string())),
+});
 
 export function updateVersionUpdateVersionRequestToJSON(
   updateVersionUpdateVersionRequest: UpdateVersionUpdateVersionRequest,
@@ -121,14 +105,12 @@ export const UpdateVersionResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    "factify.api.v1beta.Version": types.optional(
-      components.FactifyApiV1betaVersion$inboundSchema,
-    ),
+    Version: types.optional(components.Version$inboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "factify.api.v1beta.Version": "factifyApiV1betaVersion",
+      "Version": "version",
     });
   }),
 );

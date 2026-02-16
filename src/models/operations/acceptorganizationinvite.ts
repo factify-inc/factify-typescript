@@ -15,13 +15,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type AcceptOrganizationInviteAcceptOrganizationInviteRequest = {
   /**
-   * Organization the invitation belongs to (for validation).
-   *
-   * @remarks
-   *  Pattern: org_[0-9a-hjkmnp-tv-z]{26}
-   */
-  organizationId: string;
-  /**
    * The invitation token from the email link.
    */
   token: string;
@@ -43,14 +36,13 @@ export type AcceptOrganizationInviteResponse = {
   /**
    * Success
    */
-  factifyApiV1betaAcceptOrganizationInviteResponse?:
-    | components.FactifyApiV1betaAcceptOrganizationInviteResponse
+  acceptOrganizationInviteResponse?:
+    | components.AcceptOrganizationInviteResponse
     | undefined;
 };
 
 /** @internal */
 export type AcceptOrganizationInviteAcceptOrganizationInviteRequest$Outbound = {
-  organization_id: string;
   token: string;
 };
 
@@ -59,17 +51,9 @@ export const AcceptOrganizationInviteAcceptOrganizationInviteRequest$outboundSch
   z.ZodMiniType<
     AcceptOrganizationInviteAcceptOrganizationInviteRequest$Outbound,
     AcceptOrganizationInviteAcceptOrganizationInviteRequest
-  > = z.pipe(
-    z.object({
-      organizationId: z.string(),
-      token: z.string(),
-    }),
-    z.transform((v) => {
-      return remap$(v, {
-        organizationId: "organization_id",
-      });
-    }),
-  );
+  > = z.object({
+    token: z.string(),
+  });
 
 export function acceptOrganizationInviteAcceptOrganizationInviteRequestToJSON(
   acceptOrganizationInviteAcceptOrganizationInviteRequest:
@@ -122,15 +106,14 @@ export const AcceptOrganizationInviteResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    "factify.api.v1beta.AcceptOrganizationInviteResponse": types.optional(
-      components.FactifyApiV1betaAcceptOrganizationInviteResponse$inboundSchema,
+    AcceptOrganizationInviteResponse: types.optional(
+      components.AcceptOrganizationInviteResponse$inboundSchema,
     ),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "factify.api.v1beta.AcceptOrganizationInviteResponse":
-        "factifyApiV1betaAcceptOrganizationInviteResponse",
+      "AcceptOrganizationInviteResponse": "acceptOrganizationInviteResponse",
     });
   }),
 );

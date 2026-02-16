@@ -15,20 +15,9 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type CreateOrganizationInviteCreateOrganizationInviteRequest = {
   /**
-   * Organization to invite the user to.
-   *
-   * @remarks
-   *  Pattern: org_[0-9a-hjkmnp-tv-z]{26}
-   */
-  organizationId: string;
-  /**
    * Email address of the recipient.
    */
   email: string;
-  /**
-   * Optional custom message from the sender (max 2000 bytes to support ~500 multibyte characters).
-   */
-  message?: string | null | undefined;
   /**
    * Reserved for future use. Currently, idempotency is based on email matching:
    *
@@ -37,6 +26,10 @@ export type CreateOrganizationInviteCreateOrganizationInviteRequest = {
    *  that invitation is resent rather than creating a duplicate.
    */
   idempotencyKey?: string | null | undefined;
+  /**
+   * Optional custom message from the sender (max 2000 bytes to support ~500 multibyte characters).
+   */
+  message?: string | null | undefined;
 };
 
 export type CreateOrganizationInviteRequest = {
@@ -55,17 +48,16 @@ export type CreateOrganizationInviteResponse = {
   /**
    * Success
    */
-  factifyApiV1betaCreateOrganizationInviteResponse?:
-    | components.FactifyApiV1betaCreateOrganizationInviteResponse
+  createOrganizationInviteResponse?:
+    | components.CreateOrganizationInviteResponse
     | undefined;
 };
 
 /** @internal */
 export type CreateOrganizationInviteCreateOrganizationInviteRequest$Outbound = {
-  organization_id: string;
   email: string;
-  message?: string | null | undefined;
   idempotency_key?: string | null | undefined;
+  message?: string | null | undefined;
 };
 
 /** @internal */
@@ -75,14 +67,12 @@ export const CreateOrganizationInviteCreateOrganizationInviteRequest$outboundSch
     CreateOrganizationInviteCreateOrganizationInviteRequest
   > = z.pipe(
     z.object({
-      organizationId: z.string(),
       email: z.string(),
-      message: z.optional(z.nullable(z.string())),
       idempotencyKey: z.optional(z.nullable(z.string())),
+      message: z.optional(z.nullable(z.string())),
     }),
     z.transform((v) => {
       return remap$(v, {
-        organizationId: "organization_id",
         idempotencyKey: "idempotency_key",
       });
     }),
@@ -139,15 +129,14 @@ export const CreateOrganizationInviteResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    "factify.api.v1beta.CreateOrganizationInviteResponse": types.optional(
-      components.FactifyApiV1betaCreateOrganizationInviteResponse$inboundSchema,
+    CreateOrganizationInviteResponse: types.optional(
+      components.CreateOrganizationInviteResponse$inboundSchema,
     ),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "factify.api.v1beta.CreateOrganizationInviteResponse":
-        "factifyApiV1betaCreateOrganizationInviteResponse",
+      "CreateOrganizationInviteResponse": "createOrganizationInviteResponse",
     });
   }),
 );

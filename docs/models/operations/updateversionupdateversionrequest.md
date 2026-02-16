@@ -12,8 +12,7 @@ let value: UpdateVersionUpdateVersionRequest = {};
 
 ## Fields
 
-| Field                                                      | Type                                                       | Required                                                   | Description                                                |
-| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
-| `versionId`                                                | *string*                                                   | :heavy_minus_sign:                                         | Version ID to update.<br/> Pattern: ver_[0-9a-hjkmnp-tv-z]{26} |
-| `title`                                                    | *string*                                                   | :heavy_minus_sign:                                         | New title (max 255 characters).                            |
-| `description`                                              | *string*                                                   | :heavy_minus_sign:                                         | New description.                                           |
+| Field                           | Type                            | Required                        | Description                     |
+| ------------------------------- | ------------------------------- | ------------------------------- | ------------------------------- |
+| `description`                   | *string*                        | :heavy_minus_sign:              | New description.                |
+| `title`                         | *string*                        | :heavy_minus_sign:              | New title (max 255 characters). |

@@ -25,7 +25,7 @@ export type GetVersionResponse = {
   /**
    * Success
    */
-  factifyApiV1betaVersion?: components.FactifyApiV1betaVersion | undefined;
+  version?: components.Version | undefined;
 };
 
 /** @internal */
@@ -63,14 +63,12 @@ export const GetVersionResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    "factify.api.v1beta.Version": types.optional(
-      components.FactifyApiV1betaVersion$inboundSchema,
-    ),
+    Version: types.optional(components.Version$inboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "factify.api.v1beta.Version": "factifyApiV1betaVersion",
+      "Version": "version",
     });
   }),
 );

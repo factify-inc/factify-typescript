@@ -7,18 +7,8 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import { smartUnion } from "../../types/smartUnion.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-/**
- * Represents seconds of UTC time since Unix epoch
- *
- * @remarks
- *  1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to
- *  9999-12-31T23:59:59Z inclusive.
- */
-export type ListOrganizationInvitesSeconds = number | string;
 
 export type ListOrganizationInvitesRequest = {
   /**
@@ -34,9 +24,7 @@ export type ListOrganizationInvitesRequest = {
    * @remarks
    *  ORGANIZATION_INVITE_STATUS_UNSPECIFIED (0) is not a valid filter value.
    */
-  status?:
-    | Array<components.FactifyApiV1betaOrganizationInviteStatus>
-    | undefined;
+  status?: Array<components.OrganizationInviteStatus> | undefined;
   /**
    * Opaque pagination token from a previous response.
    */
@@ -68,22 +56,9 @@ export type ListOrganizationInvitesRequest = {
    */
   senderId?: string | undefined;
   /**
-   * Represents seconds of UTC time since Unix epoch
-   *
-   * @remarks
-   *  1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to
-   *  9999-12-31T23:59:59Z inclusive.
+   * Filter by created.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)
    */
-  createdAfterSeconds?: number | string | undefined;
-  /**
-   * Non-negative fractions of a second at nanosecond resolution. Negative
-   *
-   * @remarks
-   *  second values with fractions must still have non-negative nanos values
-   *  that count forward in time. Must be from 0 to 999,999,999
-   *  inclusive.
-   */
-  createdAfterNanos?: number | undefined;
+  createdAfter?: Date | undefined;
 };
 
 export type ListOrganizationInvitesResponse = {
@@ -91,29 +66,10 @@ export type ListOrganizationInvitesResponse = {
   /**
    * Success
    */
-  factifyApiV1betaListOrganizationInvitesResponse?:
-    | components.FactifyApiV1betaListOrganizationInvitesResponse
+  listOrganizationInvitesResponse?:
+    | components.ListOrganizationInvitesResponse
     | undefined;
 };
-
-/** @internal */
-export type ListOrganizationInvitesSeconds$Outbound = number | string;
-
-/** @internal */
-export const ListOrganizationInvitesSeconds$outboundSchema: z.ZodMiniType<
-  ListOrganizationInvitesSeconds$Outbound,
-  ListOrganizationInvitesSeconds
-> = smartUnion([z.int(), z.string()]);
-
-export function listOrganizationInvitesSecondsToJSON(
-  listOrganizationInvitesSeconds: ListOrganizationInvitesSeconds,
-): string {
-  return JSON.stringify(
-    ListOrganizationInvitesSeconds$outboundSchema.parse(
-      listOrganizationInvitesSeconds,
-    ),
-  );
-}
 
 /** @internal */
 export type ListOrganizationInvitesRequest$Outbound = {
@@ -124,8 +80,7 @@ export type ListOrganizationInvitesRequest$Outbound = {
   "email.contains"?: string | undefined;
   "email.exact"?: string | undefined;
   sender_id?: string | undefined;
-  "created.after.seconds"?: number | string | undefined;
-  "created.after.nanos"?: number | undefined;
+  "created.after"?: string | undefined;
 };
 
 /** @internal */
@@ -136,17 +91,16 @@ export const ListOrganizationInvitesRequest$outboundSchema: z.ZodMiniType<
   z.object({
     organizationId: z.string(),
     status: z.optional(
-      z.array(
-        components.FactifyApiV1betaOrganizationInviteStatus$outboundSchema,
-      ),
+      z.array(components.OrganizationInviteStatus$outboundSchema),
     ),
     pageToken: z.optional(z.string()),
     pageSize: z.optional(z.int()),
     emailContains: z.optional(z.string()),
     emailExact: z.optional(z.string()),
     senderId: z.optional(z.string()),
-    createdAfterSeconds: z.optional(smartUnion([z.int(), z.string()])),
-    createdAfterNanos: z.optional(z.int()),
+    createdAfter: z.optional(
+      z.pipe(z.date(), z.transform(v => v.toISOString())),
+    ),
   }),
   z.transform((v) => {
     return remap$(v, {
@@ -156,8 +110,7 @@ export const ListOrganizationInvitesRequest$outboundSchema: z.ZodMiniType<
       emailContains: "email.contains",
       emailExact: "email.exact",
       senderId: "sender_id",
-      createdAfterSeconds: "created.after.seconds",
-      createdAfterNanos: "created.after.nanos",
+      createdAfter: "created.after",
     });
   }),
 );
@@ -179,15 +132,14 @@ export const ListOrganizationInvitesResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    "factify.api.v1beta.ListOrganizationInvitesResponse": types.optional(
-      components.FactifyApiV1betaListOrganizationInvitesResponse$inboundSchema,
+    ListOrganizationInvitesResponse: types.optional(
+      components.ListOrganizationInvitesResponse$inboundSchema,
     ),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "factify.api.v1beta.ListOrganizationInvitesResponse":
-        "factifyApiV1betaListOrganizationInvitesResponse",
+      "ListOrganizationInvitesResponse": "listOrganizationInvitesResponse",
     });
   }),
 );

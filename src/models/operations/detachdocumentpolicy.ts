@@ -32,7 +32,7 @@ export type DetachDocumentPolicyResponse = {
   /**
    * Success
    */
-  googleProtobufEmpty?: components.GoogleProtobufEmpty | undefined;
+  empty?: components.Empty | undefined;
 };
 
 /** @internal */
@@ -75,14 +75,12 @@ export const DetachDocumentPolicyResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    "google.protobuf.Empty": types.optional(
-      components.GoogleProtobufEmpty$inboundSchema,
-    ),
+    Empty: types.optional(components.Empty$inboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "google.protobuf.Empty": "googleProtobufEmpty",
+      "Empty": "empty",
     });
   }),
 );

@@ -25,9 +25,7 @@ export type GetOrganizationResponse = {
   /**
    * Success
    */
-  factifyApiV1betaGetOrganizationResponse?:
-    | components.FactifyApiV1betaGetOrganizationResponse
-    | undefined;
+  getOrganizationResponse?: components.GetOrganizationResponse | undefined;
 };
 
 /** @internal */
@@ -65,15 +63,14 @@ export const GetOrganizationResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    "factify.api.v1beta.GetOrganizationResponse": types.optional(
-      components.FactifyApiV1betaGetOrganizationResponse$inboundSchema,
+    GetOrganizationResponse: types.optional(
+      components.GetOrganizationResponse$inboundSchema,
     ),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "factify.api.v1beta.GetOrganizationResponse":
-        "factifyApiV1betaGetOrganizationResponse",
+      "GetOrganizationResponse": "getOrganizationResponse",
     });
   }),
 );

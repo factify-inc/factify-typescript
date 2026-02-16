@@ -6,11 +6,11 @@ Generate and manage API keys for authentication.
 
 ### Available Operations
 
-* [listApiKeys](#listapikeys) - List API keys
-* [createApiKey](#createapikey) - Create an API key
-* [revokeApiKey](#revokeapikey) - Revoke an API key
+* [list](#list) - List API keys
+* [create](#create) - Create an API key
+* [revoke](#revoke) - Revoke an API key
 
-## listApiKeys
+## list
 
 Lists API keys for an organization.
 
@@ -25,11 +25,13 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.apiKeys.listApiKeys({
+  const result = await factify.apiKeys.list({
     organizationId: "<id>",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -41,7 +43,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { apiKeysListAPIKeys } from "@factify/sdk/funcs/apiKeysListAPIKeys.js";
+import { apiKeysList } from "@factify/sdk/funcs/apiKeysList.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -50,14 +52,16 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await apiKeysListAPIKeys(factify, {
+  const res = await apiKeysList(factify, {
     organizationId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
-    console.log("apiKeysListAPIKeys failed:", res.error);
+    console.log("apiKeysList failed:", res.error);
   }
 }
 
@@ -81,9 +85,12 @@ run();
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
+| errors.ErrorT              | 400, 401, 403, 404         | application/json           |
+| errors.ErrorT              | 429                        | application/json           |
+| errors.ErrorT              | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## createApiKey
+## create
 
 Creates a new API key for the specified organization. The secret is only returned once in the response and cannot be retrieved later.
 
@@ -98,9 +105,9 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.apiKeys.createApiKey({
-    organizationId: "<id>",
+  const result = await factify.apiKeys.create({
     name: "<value>",
+    organizationId: "<id>",
   });
 
   console.log(result);
@@ -115,7 +122,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { apiKeysCreateAPIKey } from "@factify/sdk/funcs/apiKeysCreateAPIKey.js";
+import { apiKeysCreate } from "@factify/sdk/funcs/apiKeysCreate.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -124,15 +131,15 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await apiKeysCreateAPIKey(factify, {
-    organizationId: "<id>",
+  const res = await apiKeysCreate(factify, {
     name: "<value>",
+    organizationId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("apiKeysCreateAPIKey failed:", res.error);
+    console.log("apiKeysCreate failed:", res.error);
   }
 }
 
@@ -143,7 +150,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [components.FactifyApiV1betaCreateApiKeyRequest](../../models/components/factifyapiv1betacreateapikeyrequest.md)                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [components.CreateApiKeyRequest](../../models/components/createapikeyrequest.md)                                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -156,9 +163,12 @@ run();
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
+| errors.ErrorT              | 400, 401, 403, 404         | application/json           |
+| errors.ErrorT              | 429                        | application/json           |
+| errors.ErrorT              | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## revokeApiKey
+## revoke
 
 Revokes an API key, immediately preventing it from being used for authentication.
 
@@ -173,11 +183,9 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.apiKeys.revokeApiKey({
+  const result = await factify.apiKeys.revoke({
     apiKeyId: "<id>",
-    body: {
-      apiKeyId: "<id>",
-    },
+    body: {},
   });
 
   console.log(result);
@@ -192,7 +200,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { apiKeysRevokeAPIKey } from "@factify/sdk/funcs/apiKeysRevokeAPIKey.js";
+import { apiKeysRevoke } from "@factify/sdk/funcs/apiKeysRevoke.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -201,17 +209,15 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await apiKeysRevokeAPIKey(factify, {
+  const res = await apiKeysRevoke(factify, {
     apiKeyId: "<id>",
-    body: {
-      apiKeyId: "<id>",
-    },
+    body: {},
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("apiKeysRevokeAPIKey failed:", res.error);
+    console.log("apiKeysRevoke failed:", res.error);
   }
 }
 
@@ -235,4 +241,7 @@ run();
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
+| errors.ErrorT              | 400, 401, 403, 404         | application/json           |
+| errors.ErrorT              | 429                        | application/json           |
+| errors.ErrorT              | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
