@@ -208,18 +208,18 @@ run();
 * [attach](docs/sdks/policies/README.md#attach) - Attach a policy
 * [detach](docs/sdks/policies/README.md#detach) - Detach a policy
 
-### [Quota](docs/sdks/quota/README.md)
-
-* [getOrganizationQuota](docs/sdks/quota/README.md#getorganizationquota) - Get organization quota status
-* [listAPIKeyQuotas](docs/sdks/quota/README.md#listapikeyquotas) - List API key quotas
-* [deleteAPIKeyQuota](docs/sdks/quota/README.md#deleteapikeyquota) - Delete API key quota
-* [setAPIKeyQuota](docs/sdks/quota/README.md#setapikeyquota) - Set API key quota
-* [getUsageHistory](docs/sdks/quota/README.md#getusagehistory) - Get usage history
-
 ### [Quotas](docs/sdks/quotas/README.md)
 
 * [quotaServiceDeleteOrganizationQuota](docs/sdks/quotas/README.md#quotaservicedeleteorganizationquota) - DeleteOrganizationQuota removes quota configuration for an organization.  The organization will fall back to default free tier limits.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
 * [quotaServiceSetOrganizationQuota](docs/sdks/quotas/README.md#quotaservicesetorganizationquota) - SetOrganizationQuota creates or updates quota configuration for an organization.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
+
+### [Usage](docs/sdks/usage/README.md)
+
+* [getOrganizationQuota](docs/sdks/usage/README.md#getorganizationquota) - Get organization quota status
+* [listAPIKeyQuotas](docs/sdks/usage/README.md#listapikeyquotas) - List API key quotas
+* [deleteAPIKeyQuota](docs/sdks/usage/README.md#deleteapikeyquota) - Delete API key quota
+* [setAPIKeyQuota](docs/sdks/usage/README.md#setapikeyquota) - Set API key quota
+* [getUsageHistory](docs/sdks/usage/README.md#getusagehistory) - Get usage history
 
 ### [Versions](docs/sdks/versions/README.md)
 
@@ -265,13 +265,13 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`policiesAttach`](docs/sdks/policies/README.md#attach) - Attach a policy
 - [`policiesDetach`](docs/sdks/policies/README.md#detach) - Detach a policy
 - [`policiesList`](docs/sdks/policies/README.md#list) - List document policies
-- [`quotaDeleteAPIKeyQuota`](docs/sdks/quota/README.md#deleteapikeyquota) - Delete API key quota
-- [`quotaGetOrganizationQuota`](docs/sdks/quota/README.md#getorganizationquota) - Get organization quota status
-- [`quotaGetUsageHistory`](docs/sdks/quota/README.md#getusagehistory) - Get usage history
-- [`quotaListAPIKeyQuotas`](docs/sdks/quota/README.md#listapikeyquotas) - List API key quotas
-- [`quotaSetAPIKeyQuota`](docs/sdks/quota/README.md#setapikeyquota) - Set API key quota
 - [`quotasQuotaServiceDeleteOrganizationQuota`](docs/sdks/quotas/README.md#quotaservicedeleteorganizationquota) - DeleteOrganizationQuota removes quota configuration for an organization.  The organization will fall back to default free tier limits.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
 - [`quotasQuotaServiceSetOrganizationQuota`](docs/sdks/quotas/README.md#quotaservicesetorganizationquota) - SetOrganizationQuota creates or updates quota configuration for an organization.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
+- [`usageDeleteAPIKeyQuota`](docs/sdks/usage/README.md#deleteapikeyquota) - Delete API key quota
+- [`usageGetOrganizationQuota`](docs/sdks/usage/README.md#getorganizationquota) - Get organization quota status
+- [`usageGetUsageHistory`](docs/sdks/usage/README.md#getusagehistory) - Get usage history
+- [`usageListAPIKeyQuotas`](docs/sdks/usage/README.md#listapikeyquotas) - List API key quotas
+- [`usageSetAPIKeyQuota`](docs/sdks/usage/README.md#setapikeyquota) - Set API key quota
 - [`versionsCreate`](docs/sdks/versions/README.md#create) - Create a new version
 - [`versionsGet`](docs/sdks/versions/README.md#get) - Retrieve a version
 - [`versionsList`](docs/sdks/versions/README.md#list) - List document versions

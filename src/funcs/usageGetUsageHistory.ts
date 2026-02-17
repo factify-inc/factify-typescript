@@ -4,7 +4,7 @@
 
 import * as z from "zod/v4-mini";
 import { FactifyCore } from "../core.js";
-import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { encodeFormQuery } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -27,18 +27,18 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Set API key quota
+ * Get usage history
  *
  * @remarks
- * Creates or updates a per-key quota limit. The key will be enforced independently of the organization quota.
+ * Returns daily usage records for an organization within a specified date range.
  */
-export function quotaSetAPIKeyQuota(
+export function usageGetUsageHistory(
   client: FactifyCore,
-  request: operations.SetAPIKeyQuotaRequest,
+  request?: operations.GetUsageHistoryRequest | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.SetAPIKeyQuotaResponse,
+    operations.GetUsageHistoryResponse,
     | errors.ErrorT
     | FactifyError
     | ResponseValidationError
@@ -59,12 +59,12 @@ export function quotaSetAPIKeyQuota(
 
 async function $do(
   client: FactifyCore,
-  request: operations.SetAPIKeyQuotaRequest,
+  request?: operations.GetUsageHistoryRequest | undefined,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.SetAPIKeyQuotaResponse,
+      operations.GetUsageHistoryResponse,
       | errors.ErrorT
       | FactifyError
       | ResponseValidationError
@@ -80,26 +80,27 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => z.parse(operations.SetAPIKeyQuotaRequest$outboundSchema, value),
+    (value) =>
+      z.parse(
+        z.optional(operations.GetUsageHistoryRequest$outboundSchema),
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.body, { explode: true });
+  const body = null;
 
-  const pathParams = {
-    api_key_id: encodeSimple("api_key_id", payload.api_key_id, {
-      explode: false,
-      charEncoding: "percent",
-    }),
-  };
+  const path = pathToFunc("/v1beta/quota/usage")();
 
-  const path = pathToFunc("/v1beta/quota/keys/{api_key_id}")(pathParams);
+  const query = encodeFormQuery({
+    "date.after": payload?.["date.after"],
+    "organization_id": payload?.organization_id,
+  });
 
   const headers = new Headers(compactMap({
-    "Content-Type": "application/json",
     Accept: "application/json",
   }));
 
@@ -110,7 +111,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "setAPIKeyQuota",
+    operationID: "getUsageHistory",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -124,10 +125,11 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "PUT",
+    method: "GET",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
+    query: query,
     body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
@@ -153,7 +155,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.SetAPIKeyQuotaResponse,
+    operations.GetUsageHistoryResponse,
     | errors.ErrorT
     | FactifyError
     | ResponseValidationError
@@ -164,8 +166,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.SetAPIKeyQuotaResponse$inboundSchema, {
-      key: "SetAPIKeyQuotaResponse",
+    M.json(200, operations.GetUsageHistoryResponse$inboundSchema, {
+      key: "GetUsageHistoryResponse",
     }),
     M.jsonErr([400, 401, 403, 404], errors.ErrorT$inboundSchema),
     M.jsonErr(429, errors.ErrorT$inboundSchema, { hdrs: true }),

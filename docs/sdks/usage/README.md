@@ -1,4 +1,4 @@
-# Quota
+# Usage
 
 ## Overview
 
@@ -27,7 +27,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.quota.getOrganizationQuota({
+  const result = await factify.usage.getOrganizationQuota({
     organizationId: "org_01h2xcejqtf2nbrexx3vqjhp41",
   });
 
@@ -43,7 +43,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { quotaGetOrganizationQuota } from "@factify/sdk/funcs/quotaGetOrganizationQuota.js";
+import { usageGetOrganizationQuota } from "@factify/sdk/funcs/usageGetOrganizationQuota.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -52,14 +52,14 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await quotaGetOrganizationQuota(factify, {
+  const res = await usageGetOrganizationQuota(factify, {
     organizationId: "org_01h2xcejqtf2nbrexx3vqjhp41",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("quotaGetOrganizationQuota failed:", res.error);
+    console.log("usageGetOrganizationQuota failed:", res.error);
   }
 }
 
@@ -103,7 +103,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.quota.listAPIKeyQuotas({
+  const result = await factify.usage.listAPIKeyQuotas({
     organizationId: "org_01h2xcejqtf2nbrexx3vqjhp41",
   });
 
@@ -119,7 +119,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { quotaListAPIKeyQuotas } from "@factify/sdk/funcs/quotaListAPIKeyQuotas.js";
+import { usageListAPIKeyQuotas } from "@factify/sdk/funcs/usageListAPIKeyQuotas.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -128,14 +128,14 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await quotaListAPIKeyQuotas(factify, {
+  const res = await usageListAPIKeyQuotas(factify, {
     organizationId: "org_01h2xcejqtf2nbrexx3vqjhp41",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("quotaListAPIKeyQuotas failed:", res.error);
+    console.log("usageListAPIKeyQuotas failed:", res.error);
   }
 }
 
@@ -179,7 +179,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.quota.deleteAPIKeyQuota({
+  const result = await factify.usage.deleteAPIKeyQuota({
     apiKeyId: "<id>",
     organizationId: "org_01h2xcejqtf2nbrexx3vqjhp41",
   });
@@ -196,7 +196,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { quotaDeleteAPIKeyQuota } from "@factify/sdk/funcs/quotaDeleteAPIKeyQuota.js";
+import { usageDeleteAPIKeyQuota } from "@factify/sdk/funcs/usageDeleteAPIKeyQuota.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -205,7 +205,7 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await quotaDeleteAPIKeyQuota(factify, {
+  const res = await usageDeleteAPIKeyQuota(factify, {
     apiKeyId: "<id>",
     organizationId: "org_01h2xcejqtf2nbrexx3vqjhp41",
   });
@@ -213,7 +213,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("quotaDeleteAPIKeyQuota failed:", res.error);
+    console.log("usageDeleteAPIKeyQuota failed:", res.error);
   }
 }
 
@@ -257,7 +257,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.quota.setAPIKeyQuota({
+  const result = await factify.usage.setAPIKeyQuota({
     apiKeyId: "<id>",
     body: {
       organizationId: "org_01h2xcejqtf2nbrexx3vqjhp41",
@@ -276,7 +276,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { quotaSetAPIKeyQuota } from "@factify/sdk/funcs/quotaSetAPIKeyQuota.js";
+import { usageSetAPIKeyQuota } from "@factify/sdk/funcs/usageSetAPIKeyQuota.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -285,7 +285,7 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await quotaSetAPIKeyQuota(factify, {
+  const res = await usageSetAPIKeyQuota(factify, {
     apiKeyId: "<id>",
     body: {
       organizationId: "org_01h2xcejqtf2nbrexx3vqjhp41",
@@ -295,7 +295,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("quotaSetAPIKeyQuota failed:", res.error);
+    console.log("usageSetAPIKeyQuota failed:", res.error);
   }
 }
 
@@ -339,7 +339,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.quota.getUsageHistory({
+  const result = await factify.usage.getUsageHistory({
     organizationId: "org_01h2xcejqtf2nbrexx3vqjhp41",
   });
 
@@ -355,7 +355,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { quotaGetUsageHistory } from "@factify/sdk/funcs/quotaGetUsageHistory.js";
+import { usageGetUsageHistory } from "@factify/sdk/funcs/usageGetUsageHistory.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -364,14 +364,14 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await quotaGetUsageHistory(factify, {
+  const res = await usageGetUsageHistory(factify, {
     organizationId: "org_01h2xcejqtf2nbrexx3vqjhp41",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("quotaGetUsageHistory failed:", res.error);
+    console.log("usageGetUsageHistory failed:", res.error);
   }
 }
 

@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 23af0391-5a58-495c-b992-941b55f41c78
 management:
-  docChecksum: 5f441858d5a7cab1e28fe41d0c42d7b4
+  docChecksum: b072938232f4985183d8c05028b761fa
   docVersion: 1.0.0
-  speakeasyVersion: 1.718.0
-  generationVersion: 2.824.1
-  releaseVersion: 0.3.14-rc.6
-  configChecksum: 3d21d85a148ccc4b4b4b0e6c230528bc
+  speakeasyVersion: 1.720.0
+  generationVersion: 2.827.0
+  releaseVersion: 0.3.14-rc.7
+  configChecksum: 829cd6bb9bc4a6bdffce3d9f1d6d30a6
   repoURL: https://github.com/factify-inc/factify-typescript.git
   installationURL: https://github.com/factify-inc/factify-typescript
   published: true
 persistentEdits:
-  generation_id: 7894c89f-1f6a-4ecf-89e6-f59ee12a137a
-  pristine_commit_hash: 91753a3dceff57b57814ff4218dfbec781c77f7c
-  pristine_tree_hash: 4e72c300f07bc5859e2fdfc45e99343d2978157a
+  generation_id: ef562e1d-4c3a-4abb-8666-2ced8de5d219
+  pristine_commit_hash: 037e65edd97cc0fbed1ddc1eafde1ecde548654d
+  pristine_tree_hash: 1de09b86d0784df8ef7547b7730a69be811418be
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -608,14 +608,14 @@ trackedFiles:
     id: 636269b04e57
     last_write_checksum: sha1:cea5c5c33568b4fcc9f3a23c7f179176c19b9066
     pristine_git_object: aa85895c104b5acb72f8cd902fa078988ef7a086
-  docs/sdks/quota/README.md:
-    id: 16000cc5585d
-    last_write_checksum: sha1:984d0106435e9e968a0143114dec84636e747413
-    pristine_git_object: 10c0fda73a937c775e7c4bb5280a926ec08f6d59
   docs/sdks/quotas/README.md:
     id: 688e75141996
     last_write_checksum: sha1:0997dabab4423c7ac923c85d8570901ce2c1d5dd
     pristine_git_object: cdb53e83ad90b2440b8e14487ac0cd4ad2bcd7f2
+  docs/sdks/usage/README.md:
+    id: 631af2d7ce26
+    last_write_checksum: sha1:d01c4c2b291a79d8096b2778e0037f72adcc2345
+    pristine_git_object: cff74beffa8159028754bd768581663e01b797e0
   docs/sdks/versions/README.md:
     id: 83ec5ed3804d
     last_write_checksum: sha1:ae9470ce87161d04051f3758256a3804b628b440
@@ -642,12 +642,12 @@ trackedFiles:
     pristine_git_object: 766ea5ba4257419f9fca9da9c6ba895ab05a3f8b
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:66652c55915743f8784aed6dc8affe91c30450b8
-    pristine_git_object: 2b869d966f305370cb83b7ec88ae2ddbc7088e3a
+    last_write_checksum: sha1:772ebd2cc8ad004a41cc0a3bcf38e9126376ae3d
+    pristine_git_object: 16683bd567a32103840b045f5fb1e4ce66e0d6be
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:66582496fb6d79e67d33f7e386e8b845cd9af7f7
-    pristine_git_object: d2646203796aa19fa4ba8b1415238ff8956fba04
+    last_write_checksum: sha1:9300528437d7c79ec4e76ea765a68b4f9a51d224
+    pristine_git_object: d260cf38db8cfc6d4b81382f62ce4da83c017c3d
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:72dd2a6867a44557b35fa72fe5588efc5d08e8e1
@@ -728,26 +728,6 @@ trackedFiles:
     id: 1961a42d4b35
     last_write_checksum: sha1:3480949ea1d3858d5b7c741bf84ade7df3c37731
     pristine_git_object: aeda4c7bca3850bd538a6c64bcfd077de0ca67b9
-  src/funcs/quotaDeleteAPIKeyQuota.ts:
-    id: 19942bf91e3b
-    last_write_checksum: sha1:d4f7cd28c9444ecf46ddb3a4f9247707b1b66dd9
-    pristine_git_object: f955786a668d79cd71a624c4f4496a80e3ad9c1a
-  src/funcs/quotaGetOrganizationQuota.ts:
-    id: c9675a440ff9
-    last_write_checksum: sha1:b3a7348a334f59a07920e55bbe0833ff3e453ec2
-    pristine_git_object: 5974dcc71acd483be59588fd443be9b97e696c3a
-  src/funcs/quotaGetUsageHistory.ts:
-    id: 5c31b32eb723
-    last_write_checksum: sha1:27c5623f628c27b4b0dbe4a82d90f86b76176553
-    pristine_git_object: d4b1292b2ae15698fd558f4e14097792c14e91ad
-  src/funcs/quotaListAPIKeyQuotas.ts:
-    id: d321edc74887
-    last_write_checksum: sha1:a8b734cb746799a51f8bfa2d79e859a12f7e49b6
-    pristine_git_object: 081ab0bb706e0f636c89fccb57b5fe2c36e4be7b
-  src/funcs/quotaSetAPIKeyQuota.ts:
-    id: bef8f08140e3
-    last_write_checksum: sha1:d8e512136a2206b964b459ea9f2fcfdb932023e6
-    pristine_git_object: 2807ae0caa0986f42b2081d6710950b992ba8f0a
   src/funcs/quotasQuotaServiceDeleteOrganizationQuota.ts:
     id: c66f2e3fd2e2
     last_write_checksum: sha1:4f41e0848d6692db98e9c04163ea1635554f7bb6
@@ -756,6 +736,26 @@ trackedFiles:
     id: 3ab0793069fe
     last_write_checksum: sha1:918eda4b894092814107802a5ff33df998b275ec
     pristine_git_object: e79daec059437ce21ba3be906193a9e945a8fd5f
+  src/funcs/usageDeleteAPIKeyQuota.ts:
+    id: 9dd72e3d9fa6
+    last_write_checksum: sha1:524fcf5075063b09e9a9c8dcd0fed05d4d6ff995
+    pristine_git_object: e60e601d1635a296edc8985c26a5dbfef3a6ff97
+  src/funcs/usageGetOrganizationQuota.ts:
+    id: 08dd4e479516
+    last_write_checksum: sha1:9764249dc2dd61d6b4a42ccb39d2e83cadc3dded
+    pristine_git_object: a69855f7a6cb98ff015c3a3c4ebc2d62d3c90ea0
+  src/funcs/usageGetUsageHistory.ts:
+    id: 0c35d45e2b37
+    last_write_checksum: sha1:2bc9b16293327bc32a8a4573188b08bd59837317
+    pristine_git_object: 650b08ac22b46a87481287e9053eaab84a1ddd41
+  src/funcs/usageListAPIKeyQuotas.ts:
+    id: 37d1ea016053
+    last_write_checksum: sha1:866fa292825b580c47699d2fc524d09c9d73aa05
+    pristine_git_object: fd4f3503057a2bca34496a1413fb580494ebca9e
+  src/funcs/usageSetAPIKeyQuota.ts:
+    id: 78a8fa01dc69
+    last_write_checksum: sha1:c1671758d434e82ecc25d1d2faac12882230bf4a
+    pristine_git_object: 0d1d9296ca235acd48d7bb0bb2511b2d4959a9c3
   src/funcs/versionsCreate.ts:
     id: 21b7cdaed201
     last_write_checksum: sha1:b0ead7eeb88bef23ad08f50cfd388c86c9c727a2
@@ -794,8 +794,8 @@ trackedFiles:
     pristine_git_object: 44be0eae8246521b230e8e711a88eff738fc015d
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:7a4a089a611a5a478fa7e8155a014910306a9864
-    pristine_git_object: 868462bff9d96a0e1545791fa11f9dfd247eb897
+    last_write_checksum: sha1:d365f14a909a0ccba57e6bff2510a816dfca84ee
+    pristine_git_object: 297cf86f197e6b0db2031f49c520fc3f8785a333
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -1256,18 +1256,18 @@ trackedFiles:
     id: 56c143102e2a
     last_write_checksum: sha1:3442acf9ea51dc4b91b0159f52e51e05614260a3
     pristine_git_object: 36e4a2f5d5ad056cfb63bd41b1323a0838f5e4e3
-  src/sdk/quota.ts:
-    id: c5d22c735f1a
-    last_write_checksum: sha1:dd3b6aceee4c1d9d31a5a35258c54b8798fa17a5
-    pristine_git_object: c500a16e1138c3a6780b4e6b46396b22dc02ce28
   src/sdk/quotas.ts:
     id: 2cf61d15ac06
     last_write_checksum: sha1:164a6a6d573e3211ce37873ce2020e8778594a3c
     pristine_git_object: fc72881d7932c87a8aa053ce5ce978f07d9eb75f
   src/sdk/sdk.ts:
     id: 784571af2f69
-    last_write_checksum: sha1:a44d34d2e25d9abfd09a34a780487322f2c6f68d
-    pristine_git_object: cd58e2629c80d035852b9a9b655923b116862f90
+    last_write_checksum: sha1:210d42d7443db29a86b08401603cf24bdd067b61
+    pristine_git_object: 21631296ce21d0cd9c1fe571e7fb583b7a9c2778
+  src/sdk/usage.ts:
+    id: e4cbe77b260e
+    last_write_checksum: sha1:16bf8ae1fe6b9f50e53c5c4ac90458d4671f07c8
+    pristine_git_object: 3c9f1ef9d6f7b6ec343442e9031673c63f520d61
   src/sdk/versions.ts:
     id: c70305fd6acb
     last_write_checksum: sha1:8b34eb416215b6801e2ce963a256b22dc7d770b1
@@ -2172,4 +2172,15 @@ examples:
         "500":
           application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 393625, "type": "authentication_error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Typescript SDK Changes:\n* `factify.organizations.acceptOrganizationInvite()`: \n  *  `request.body.organizationId` **Removed** (Breaking ⚠️)\n  *  `error` **Changed**\n* `factify.organizations.resendOrganizationInvite()`: \n  *  `request.body` **Changed** (Breaking ⚠️)\n  *  `error` **Changed**\n* `factify.organizations.revokeOrganizationInvite()`: \n  *  `request.body` **Changed** (Breaking ⚠️)\n  *  `error` **Changed**\n* `factify.quotas.quotaServiceDeleteOrganizationQuota()`: **Added**\n* `factify.quotas.quotaServiceSetOrganizationQuota()`: **Added**\n* `factify.apiKeys.list()`: **Added**\n* `factify.apiKeys.create()`: **Added**\n* `factify.apiKeys.revoke()`: **Added**\n* `factify.documents.list()`: **Added**\n* `factify.documents.create()`: **Added**\n* `factify.documents.get()`: **Added**\n* `factify.documents.update()`: **Added**\n* `factify.entryPages.generate()`: **Added**\n* `factify.policies.list()`: **Added**\n* `factify.policies.attach()`: **Added**\n* `factify.policies.detach()`: **Added**\n* `factify.versions.list()`: **Added**\n* `factify.versions.create()`: **Added**\n* `factify.versions.get()`: **Added**\n* `factify.versions.update()`: **Added**\n* `factify.organizations.list()`: **Added**\n* `factify.organizations.create()`: **Added**\n* `factify.organizations.get()`: **Added**\n* `factify.organizations.invites.list()`: **Added**\n* `factify.organizations.invites.create()`: **Added**\n* `factify.quota.getOrganizationQuota()`: **Added**\n* `factify.quota.listApiKeyQuotas()`: **Added**\n* `factify.quota.deleteApiKeyQuota()`: **Added**\n* `factify.quota.setApiKeyQuota()`: **Added**\n* `factify.quota.getUsageHistory()`: **Added**\n* `factify.apiKeys.listApiKeys()`: **Removed** (Breaking ⚠️)\n* `factify.apiKeys.createApiKey()`: **Removed** (Breaking ⚠️)\n* `factify.apiKeys.revokeApiKey()`: **Removed** (Breaking ⚠️)\n* `factify.identityService.listApiKeys()`: **Removed** (Breaking ⚠️)\n* `factify.identityService.createApiKey()`: **Removed** (Breaking ⚠️)\n* `factify.identityService.revokeApiKey()`: **Removed** (Breaking ⚠️)\n* `factify.documentService.listDocuments()`: **Removed** (Breaking ⚠️)\n* `factify.documentService.createDocument()`: **Removed** (Breaking ⚠️)\n* `factify.documentService.getDocument()`: **Removed** (Breaking ⚠️)\n* `factify.documentService.updateDocument()`: **Removed** (Breaking ⚠️)\n* `factify.sharing&Distribution.generateDocumentEntryPage()`: **Removed** (Breaking ⚠️)\n* `factify.entryPageService.generateDocumentEntryPage()`: **Removed** (Breaking ⚠️)\n* `factify.policyService.listDocumentPolicies()`: **Removed** (Breaking ⚠️)\n* `factify.policyService.attachDocumentPolicy()`: **Removed** (Breaking ⚠️)\n* `factify.policyService.detachDocumentPolicy()`: **Removed** (Breaking ⚠️)\n* `factify.versionService.listDocumentVersions()`: **Removed** (Breaking ⚠️)\n* `factify.versionService.createDocumentVersion()`: **Removed** (Breaking ⚠️)\n* `factify.versionService.getVersion()`: **Removed** (Breaking ⚠️)\n* `factify.versionService.updateVersion()`: **Removed** (Breaking ⚠️)\n* `factify.organizations.listOrganizations()`: **Removed** (Breaking ⚠️)\n* `factify.organizations.createOrganization()`: **Removed** (Breaking ⚠️)\n* `factify.organizations.getOrganization()`: **Removed** (Breaking ⚠️)\n* `factify.organizations.listOrganizationInvites()`: **Removed** (Breaking ⚠️)\n* `factify.organizations.createOrganizationInvite()`: **Removed** (Breaking ⚠️)\n* `factify.organizationService.listOrganizations()`: **Removed** (Breaking ⚠️)\n* `factify.organizationService.createOrganization()`: **Removed** (Breaking ⚠️)\n* `factify.organizationService.getOrganization()`: **Removed** (Breaking ⚠️)\n* `factify.organizationService.listOrganizationInvites()`: **Removed** (Breaking ⚠️)\n* `factify.organizationService.createOrganizationInvite()`: **Removed** (Breaking ⚠️)\n* `factify.organizationService.acceptOrganizationInvite()`: **Removed** (Breaking ⚠️)\n* `factify.organizationService.resendOrganizationInvite()`: **Removed** (Breaking ⚠️)\n* `factify.organizationService.revokeOrganizationInvite()`: **Removed** (Breaking ⚠️)\n"
+releaseNotes: |
+  ## Typescript SDK Changes:
+  * `factify.usage.getOrganizationQuota()`: **Added**
+  * `factify.usage.listApiKeyQuotas()`: **Added**
+  * `factify.usage.deleteApiKeyQuota()`: **Added**
+  * `factify.usage.setApiKeyQuota()`: **Added**
+  * `factify.usage.getUsageHistory()`: **Added**
+  * `factify.quota.getOrganizationQuota()`: **Removed** (Breaking ⚠️)
+  * `factify.quota.listApiKeyQuotas()`: **Removed** (Breaking ⚠️)
+  * `factify.quota.deleteApiKeyQuota()`: **Removed** (Breaking ⚠️)
+  * `factify.quota.setApiKeyQuota()`: **Removed** (Breaking ⚠️)
+  * `factify.quota.getUsageHistory()`: **Removed** (Breaking ⚠️)

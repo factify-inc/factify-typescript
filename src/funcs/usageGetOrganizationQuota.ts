@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Returns the current quota status for an organization including usage, limits, tier, and reset date.
  */
-export function quotaGetOrganizationQuota(
+export function usageGetOrganizationQuota(
   client: FactifyCore,
   request?: operations.GetOrganizationQuotaRequest | undefined,
   options?: RequestOptions,

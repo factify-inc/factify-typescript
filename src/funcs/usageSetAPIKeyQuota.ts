@@ -4,7 +4,7 @@
 
 import * as z from "zod/v4-mini";
 import { FactifyCore } from "../core.js";
-import { encodeFormQuery } from "../lib/encodings.js";
+import { encodeJSON, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -27,18 +27,18 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List API key quotas
+ * Set API key quota
  *
  * @remarks
- * Returns all per-key quota configurations and current usage for an organization.
+ * Creates or updates a per-key quota limit. The key will be enforced independently of the organization quota.
  */
-export function quotaListAPIKeyQuotas(
+export function usageSetAPIKeyQuota(
   client: FactifyCore,
-  request?: operations.ListAPIKeyQuotasRequest | undefined,
+  request: operations.SetAPIKeyQuotaRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.ListAPIKeyQuotasResponse,
+    operations.SetAPIKeyQuotaResponse,
     | errors.ErrorT
     | FactifyError
     | ResponseValidationError
@@ -59,12 +59,12 @@ export function quotaListAPIKeyQuotas(
 
 async function $do(
   client: FactifyCore,
-  request?: operations.ListAPIKeyQuotasRequest | undefined,
+  request: operations.SetAPIKeyQuotaRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.ListAPIKeyQuotasResponse,
+      operations.SetAPIKeyQuotaResponse,
       | errors.ErrorT
       | FactifyError
       | ResponseValidationError
@@ -80,26 +80,26 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      z.parse(
-        z.optional(operations.ListAPIKeyQuotasRequest$outboundSchema),
-        value,
-      ),
+    (value) => z.parse(operations.SetAPIKeyQuotaRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = null;
+  const body = encodeJSON("body", payload.body, { explode: true });
 
-  const path = pathToFunc("/v1beta/quota/keys")();
+  const pathParams = {
+    api_key_id: encodeSimple("api_key_id", payload.api_key_id, {
+      explode: false,
+      charEncoding: "percent",
+    }),
+  };
 
-  const query = encodeFormQuery({
-    "organization_id": payload?.organization_id,
-  });
+  const path = pathToFunc("/v1beta/quota/keys/{api_key_id}")(pathParams);
 
   const headers = new Headers(compactMap({
+    "Content-Type": "application/json",
     Accept: "application/json",
   }));
 
@@ -110,7 +110,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "listAPIKeyQuotas",
+    operationID: "setAPIKeyQuota",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -124,11 +124,10 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "GET",
+    method: "PUT",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
-    query: query,
     body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
@@ -154,7 +153,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.ListAPIKeyQuotasResponse,
+    operations.SetAPIKeyQuotaResponse,
     | errors.ErrorT
     | FactifyError
     | ResponseValidationError
@@ -165,8 +164,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.ListAPIKeyQuotasResponse$inboundSchema, {
-      key: "ListAPIKeyQuotasResponse",
+    M.json(200, operations.SetAPIKeyQuotaResponse$inboundSchema, {
+      key: "SetAPIKeyQuotaResponse",
     }),
     M.jsonErr([400, 401, 403, 404], errors.ErrorT$inboundSchema),
     M.jsonErr(429, errors.ErrorT$inboundSchema, { hdrs: true }),
