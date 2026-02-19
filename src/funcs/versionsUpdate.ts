@@ -39,7 +39,7 @@ export function versionsUpdate(
 ): APIPromise<
   Result<
     operations.UpdateVersionResponse,
-    | errors.ErrorT
+    | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
     | ConnectionError
@@ -65,7 +65,7 @@ async function $do(
   [
     Result<
       operations.UpdateVersionResponse,
-      | errors.ErrorT
+      | errors.ErrorResponse
       | FactifyError
       | ResponseValidationError
       | ConnectionError
@@ -154,7 +154,7 @@ async function $do(
 
   const [result] = await M.match<
     operations.UpdateVersionResponse,
-    | errors.ErrorT
+    | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
     | ConnectionError
@@ -167,9 +167,9 @@ async function $do(
     M.json(200, operations.UpdateVersionResponse$inboundSchema, {
       key: "Version",
     }),
-    M.jsonErr([400, 401, 403, 404], errors.ErrorT$inboundSchema),
-    M.jsonErr(429, errors.ErrorT$inboundSchema, { hdrs: true }),
-    M.jsonErr(500, errors.ErrorT$inboundSchema),
+    M.jsonErr([400, 401, 403, 404], errors.ErrorResponse$inboundSchema),
+    M.jsonErr(429, errors.ErrorResponse$inboundSchema, { hdrs: true }),
+    M.jsonErr(500, errors.ErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

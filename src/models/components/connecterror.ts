@@ -20,7 +20,7 @@ import {
 /**
  * The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
  */
-export const Code = {
+export const ConnectErrorCode = {
   Canceled: "canceled",
   Unknown: "unknown",
   InvalidArgument: "invalid_argument",
@@ -41,7 +41,7 @@ export const Code = {
 /**
  * The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
  */
-export type Code = OpenEnum<typeof Code>;
+export type ConnectErrorCode = OpenEnum<typeof ConnectErrorCode>;
 
 /**
  * Error type returned by Connect: https://connectrpc.com/docs/go/errors/#http-representation
@@ -50,7 +50,7 @@ export type ConnectError = {
   /**
    * The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
    */
-  code?: Code | undefined;
+  code?: ConnectErrorCode | undefined;
   /**
    * A list of messages that carry the error details. There is no limit on the number of messages.
    */
@@ -63,15 +63,17 @@ export type ConnectError = {
 };
 
 /** @internal */
-export const Code$inboundSchema: z.ZodMiniType<Code, unknown> = openEnums
-  .inboundSchema(Code);
+export const ConnectErrorCode$inboundSchema: z.ZodMiniType<
+  ConnectErrorCode,
+  unknown
+> = openEnums.inboundSchema(ConnectErrorCode);
 
 /** @internal */
 export const ConnectError$inboundSchema: z.ZodMiniType<ConnectError, unknown> =
   collectExtraKeys$(
     z.catchall(
       z.object({
-        code: types.optional(Code$inboundSchema),
+        code: types.optional(ConnectErrorCode$inboundSchema),
         details: types.optional(z.array(ConnectErrorDetailsAny$inboundSchema)),
         message: types.optional(types.string()),
       }),

@@ -25,16 +25,20 @@ Authorization: Bearer ffy...
 
 ## Errors
 
-Factify uses conventional HTTP status codes and returns structured error responses:
+Factify uses conventional HTTP status codes and returns structured error responses
+using the [ConnectRPC error format](https://connectrpc.com/docs/protocol#error-codes):
 
 ```json
 {
-  "error": {
-    "type": "invalid_request_error",
-    "message": "Document title cannot be empty",
-    "param": "title",
-    "code": "missing_required_field"
-  }
+  "code": "invalid_argument",
+  "message": "limit must be positive",
+  "details": [
+    {
+      "reason": "invalid_field_value",
+      "request_id": "req_01arwx4k8xrgqskvxq69gdn019",
+      "param": "limit"
+    }
+  ]
 }
 ```
 <!-- End Summary [summary] -->
@@ -457,8 +461,10 @@ async function run() {
       console.log(error.httpMeta.request);
 
       // Depending on the method different errors may be thrown
-      if (error instanceof errors.ErrorT) {
-        console.log(error.data$.error); // components.ErrorT
+      if (error instanceof errors.ErrorResponse) {
+        console.log(error.data$.code); // components.ErrorResponseCode
+        console.log(error.data$.details); // ErrorDetail[]
+        console.log(error.data$.message); // string
         console.log(error.data$.httpMeta); // components.HTTPMetadata
       }
     }
@@ -472,7 +478,7 @@ run();
 ### Error Classes
 **Primary errors:**
 * [`FactifyError`](./src/models/errors/factifyerror.ts): The base class for HTTP error responses.
-  * [`ErrorT`](./src/models/errors/errort.ts): Invalid request parameters.
+  * [`ErrorResponse`](./src/models/errors/errorresponse.ts): Invalid request parameters.
 
 <details><summary>Less common errors (6)</summary>
 

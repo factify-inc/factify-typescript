@@ -1,13 +1,13 @@
-# Code
+# ConnectErrorCode
 
 The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
 
 ## Example Usage
 
 ```typescript
-import { Code } from "@factify/sdk/models/components";
+import { ConnectErrorCode } from "@factify/sdk/models/components";
 
-let value: Code = "not_found";
+let value: ConnectErrorCode = "not_found";
 ```
 
 ## Values

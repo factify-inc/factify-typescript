@@ -88,9 +88,9 @@ run();
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| errors.ErrorT              | 400, 401, 403, 404         | application/json           |
-| errors.ErrorT              | 429                        | application/json           |
-| errors.ErrorT              | 500                        | application/json           |
+| errors.ErrorResponse       | 400, 401, 403, 404         | application/json           |
+| errors.ErrorResponse       | 429                        | application/json           |
+| errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
 ## create
@@ -172,9 +172,9 @@ run();
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| errors.ErrorT              | 400, 401, 403, 404         | application/json           |
-| errors.ErrorT              | 429                        | application/json           |
-| errors.ErrorT              | 500                        | application/json           |
+| errors.ErrorResponse       | 400, 401, 403, 404         | application/json           |
+| errors.ErrorResponse       | 429                        | application/json           |
+| errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
 ## get
@@ -248,9 +248,9 @@ run();
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| errors.ErrorT              | 400, 401, 403, 404         | application/json           |
-| errors.ErrorT              | 429                        | application/json           |
-| errors.ErrorT              | 500                        | application/json           |
+| errors.ErrorResponse       | 400, 401, 403, 404         | application/json           |
+| errors.ErrorResponse       | 429                        | application/json           |
+| errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
 ## update
@@ -326,7 +326,7 @@ run();
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| errors.ErrorT              | 400, 401, 403, 404         | application/json           |
-| errors.ErrorT              | 429                        | application/json           |
-| errors.ErrorT              | 500                        | application/json           |
+| errors.ErrorResponse       | 400, 401, 403, 404         | application/json           |
+| errors.ErrorResponse       | 429                        | application/json           |
+| errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |

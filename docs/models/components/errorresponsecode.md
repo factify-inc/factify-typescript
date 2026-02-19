@@ -1,0 +1,31 @@
+# ErrorResponseCode
+
+ConnectRPC error code. Maps to HTTP status codes:
+- invalid_argument, failed_precondition -> 400
+- unauthenticated -> 401
+- permission_denied -> 403
+- not_found -> 404
+- already_exists -> 409
+- resource_exhausted -> 429
+- deadline_exceeded -> 408
+- canceled -> 499
+- internal, unknown -> 500 (unknown may appear as 400 for malformed JSON requests)
+- unimplemented -> 501
+- unavailable -> 503
+
+
+## Example Usage
+
+```typescript
+import { ErrorResponseCode } from "@factify/sdk/models/components";
+
+let value: ErrorResponseCode = "canceled";
+```
+
+## Values
+
+This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
+
+```typescript
+"unknown" | "invalid_argument" | "unauthenticated" | "permission_denied" | "not_found" | "already_exists" | "resource_exhausted" | "failed_precondition" | "internal" | "unavailable" | "unimplemented" | "canceled" | "deadline_exceeded" | Unrecognized<string>
+```

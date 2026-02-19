@@ -47,7 +47,7 @@ export function apiKeysList(
   PageIterator<
     Result<
       operations.ListApiKeysResponse,
-      | errors.ErrorT
+      | errors.ErrorResponse
       | FactifyError
       | ResponseValidationError
       | ConnectionError
@@ -76,7 +76,7 @@ async function $do(
     PageIterator<
       Result<
         operations.ListApiKeysResponse,
-        | errors.ErrorT
+        | errors.ErrorResponse
         | FactifyError
         | ResponseValidationError
         | ConnectionError
@@ -167,7 +167,7 @@ async function $do(
 
   const [result, raw] = await M.match<
     operations.ListApiKeysResponse,
-    | errors.ErrorT
+    | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
     | ConnectionError
@@ -180,9 +180,9 @@ async function $do(
     M.json(200, operations.ListApiKeysResponse$inboundSchema, {
       key: "ListApiKeysResponse",
     }),
-    M.jsonErr([400, 401, 403, 404], errors.ErrorT$inboundSchema),
-    M.jsonErr(429, errors.ErrorT$inboundSchema, { hdrs: true }),
-    M.jsonErr(500, errors.ErrorT$inboundSchema),
+    M.jsonErr([400, 401, 403, 404], errors.ErrorResponse$inboundSchema),
+    M.jsonErr(429, errors.ErrorResponse$inboundSchema, { hdrs: true }),
+    M.jsonErr(500, errors.ErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
@@ -200,7 +200,7 @@ async function $do(
     next: Paginator<
       Result<
         operations.ListApiKeysResponse,
-        | errors.ErrorT
+        | errors.ErrorResponse
         | FactifyError
         | ResponseValidationError
         | ConnectionError
