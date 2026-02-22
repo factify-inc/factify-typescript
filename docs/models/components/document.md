@@ -22,7 +22,7 @@ let value: Document = {
   id: "doc_01h2xcejqtf2nbrexx3vqjhp41",
   processingStatus: "failed",
   title: "Q4 2024 Financial Report",
-  url: "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41",
+  url: "https://app.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41",
 };
 ```
 
@@ -38,4 +38,4 @@ let value: Document = {
 | `id`                                                                                          | *string*                                                                                      | :heavy_check_mark:                                                                            | Unique ID for the document.<br/> Pattern: doc_[0-9a-hjkmnp-tv-z]{26}                          | doc_01h2xcejqtf2nbrexx3vqjhp41                                                                |
 | `processingStatus`                                                                            | [components.ProcessingStatus](../../models/components/processingstatus.md)                    | :heavy_check_mark:                                                                            | N/A                                                                                           |                                                                                               |
 | `title`                                                                                       | *string*                                                                                      | :heavy_check_mark:                                                                            | Document title.                                                                               | Q4 2024 Financial Report                                                                      |
-| `url`                                                                                         | *string*                                                                                      | :heavy_check_mark:                                                                            | URL for accessing the document on Factify.                                                    | https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41                                            |
+| `url`                                                                                         | *string*                                                                                      | :heavy_check_mark:                                                                            | URL for accessing the document on Factify.                                                    | https://app.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41                                          |

@@ -1,25 +1,25 @@
 lockVersion: 2.0.0
 id: 23af0391-5a58-495c-b992-941b55f41c78
 management:
-  docChecksum: e6fb0caf530230c261870c8156e6bd62
+  docChecksum: d8c68e90577373e6ee4cdfaf94c7658b
   docVersion: 1.0.0
-  speakeasyVersion: 1.722.6
-  generationVersion: 2.832.6
-  releaseVersion: 0.3.14-rc.8
-  configChecksum: 977021f37bac0917ce0068816ffc1603
+  speakeasyVersion: 1.723.0
+  generationVersion: 2.835.2
+  releaseVersion: 0.3.14-rc.9
+  configChecksum: ffcee7c5bf54e18f08c78661e747e827
   repoURL: https://github.com/factify-inc/factify-typescript.git
   installationURL: https://github.com/factify-inc/factify-typescript
   published: true
 persistentEdits:
-  generation_id: bd1ff5e4-5db8-41d9-a896-3dd7bf4004e2
-  pristine_commit_hash: 0ca6eb4d6ff169ab839e8af78e40aaa716b3696a
-  pristine_tree_hash: 83656b42721d0beb2cf26288937c2be898b8815b
+  generation_id: 62d56719-73c7-4386-8fce-d31e481178ed
+  pristine_commit_hash: 7e68da06356209747a895e51bc45191dbb27efde
+  pristine_tree_hash: 00d635120377d5843fe7666206fe83ab8a3cbc7c
 features:
   typescript:
     additionalDependencies: 0.1.0
     additionalProperties: 0.1.3
     constsAndDefaults: 0.1.13
-    core: 3.26.28
+    core: 3.26.31
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
@@ -31,7 +31,7 @@ features:
     groups: 2.81.3
     inputOutputModels: 2.82.1
     methodArguments: 0.1.2
-    nameOverrides: 2.81.2
+    nameOverrides: 2.81.4
     nullables: 0.1.1
     pagination: 2.83.0
     responseFormat: 0.3.0
@@ -110,8 +110,8 @@ trackedFiles:
     pristine_git_object: 6c9409bffae7695e0d26e95d11617ab98edbf077
   docs/models/components/createdocumentresponse.md:
     id: f7331f143170
-    last_write_checksum: sha1:81263b19b558c3f269e6f6c131390398d69a567d
-    pristine_git_object: 36da239cbdd0576bede352b8672224d9d3295adf
+    last_write_checksum: sha1:a035d545023fc95ceb6987ec9f23c556c3cd81e9
+    pristine_git_object: 71fb90a9dd5d48901c713f8d6248adecf3827e8f
   docs/models/components/createorganizationinviteresponse.md:
     id: e50ec130a0fe
     last_write_checksum: sha1:3484b6e87df0d9610afc090f2ee09087cfafe1d6
@@ -154,8 +154,8 @@ trackedFiles:
     pristine_git_object: 6ed189eb7685da55c0dbf50655131fed796cb756
   docs/models/components/document.md:
     id: 73a00acee39f
-    last_write_checksum: sha1:d460b0faf78b9d36bd3b855269606f5e450a26c8
-    pristine_git_object: 7d2769892354b1031bd7bd6bd352014a9551ecf4
+    last_write_checksum: sha1:61f54f5a400e87d70623eb4d21c98046bd405759
+    pristine_git_object: 7abda18fac4fc3de1b6b3feb83f82a7ef4fa535c
   docs/models/components/documentpolicy.md:
     id: 61c94be1981b
     last_write_checksum: sha1:6de78ecb5d716852ce034f795e2791bdac7e13fa
@@ -178,8 +178,8 @@ trackedFiles:
     pristine_git_object: 73b38e7fa6830eaae4cb980adae3918eeeb7fa61
   docs/models/components/getdocumentresponse.md:
     id: 030d7132f935
-    last_write_checksum: sha1:2cbee4599852ba779e9cb17ea74d661a60a64ba9
-    pristine_git_object: fa425f2624e97d83a3fe80bc667352853cde95ec
+    last_write_checksum: sha1:59de4797edcd79bc4f1ec22e32d1c14aaa1f6d5a
+    pristine_git_object: cfc27851ad44433f528c939cbd613011121cd3ab
   docs/models/components/getorganizationquotaresponse.md:
     id: e0d801791477
     last_write_checksum: sha1:c678b2720e419eddba821d14cd5dc75a629f509e
@@ -210,8 +210,8 @@ trackedFiles:
     pristine_git_object: d2d97ce48a2567b7fb47ead056c3b7f73e1b488a
   docs/models/components/listdocumentsresponse.md:
     id: 5cbdb17d7113
-    last_write_checksum: sha1:c00b18babbcb72801c0560a7e092d4541929022a
-    pristine_git_object: bd94150864c31af0283b39feaee257238a7c16ae
+    last_write_checksum: sha1:a266cef034548f44af9ef4b0f80299bc0e618916
+    pristine_git_object: 3b03a012bb65c88a95133807d13302adecce6783
   docs/models/components/listorganizationinvitesresponse.md:
     id: a307b159743f
     last_write_checksum: sha1:bc05c9046e65df6eb3d7f5e100cbdf74cbb5f967
@@ -222,8 +222,8 @@ trackedFiles:
     pristine_git_object: 998b45a0dd3987eb57622401597e4213912dcbad
   docs/models/components/listversionsresponse.md:
     id: f82b651e7159
-    last_write_checksum: sha1:13edc0fd68f1b5a493eefd73cb763291b3be72cf
-    pristine_git_object: da8e1bd69920e9cf5290c0632429bbde57d700ae
+    last_write_checksum: sha1:563cc120244ff5d246c16f17000504aef40b881b
+    pristine_git_object: 3a653bc17b013e197d111f47d4d88bf833a87f77
   docs/models/components/organization.md:
     id: 288ce68f18e3
     last_write_checksum: sha1:09299c2e4b466e624ffeb613b1b8e847e0f78523
@@ -294,8 +294,8 @@ trackedFiles:
     pristine_git_object: 48bf93e3d118ed706b7acd6a0958c813d0bc6e88
   docs/models/components/updatedocumentresponse.md:
     id: 90a43889a9d1
-    last_write_checksum: sha1:c3c5b6cf841f7dec7aec6dbe05c91faee6428428
-    pristine_git_object: 859d37fe453c525e322708872315e9f8606ae23e
+    last_write_checksum: sha1:c805d9fde8b20e4778e15e9751e8b1a0d9378b10
+    pristine_git_object: a5d9fafd645366e3cedd024373c8bfce770c8f6f
   docs/models/components/user.md:
     id: 9615438c874c
     last_write_checksum: sha1:50f2f8405cecf393f10112e8a82ec8c168680c00
@@ -306,8 +306,8 @@ trackedFiles:
     pristine_git_object: f0c56d485bbbc496d61d3d9490c4744b1814879c
   docs/models/components/version.md:
     id: 2dfdc559e77f
-    last_write_checksum: sha1:407fab5dc806f5928710494039234baf332f632a
-    pristine_git_object: ab7da7f977b3bb775fa60e489404c632a40a30a0
+    last_write_checksum: sha1:e0c886c65834bd37b80b3d85d39895a79bdb5754
+    pristine_git_object: d278291bcc8dc41585b5d76be049eb35697dd182
   docs/models/components/versionref.md:
     id: ea11855d9b38
     last_write_checksum: sha1:44d5f79cc8720f4fa29d4c7d717e7dc3acca9eef
@@ -646,12 +646,12 @@ trackedFiles:
     pristine_git_object: 766ea5ba4257419f9fca9da9c6ba895ab05a3f8b
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:2d627eb8813903f9bd1218a221382526b3767da9
-    pristine_git_object: 4c89813912646091be72a4f30148bdb93e6632d3
+    last_write_checksum: sha1:b31dea7cec919e0158fd65b5f9e92a90f4bc905e
+    pristine_git_object: 9858a543e427524e2ee74bd2f3b93bd9f93971c1
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:c9ba254b85284876f6eaea07a1b25642275f5036
-    pristine_git_object: 8cff292814dde60bf2737e5871ad9364cd25990c
+    last_write_checksum: sha1:a50825da09c663259f0cafdd8d0c727d4f9c57ce
+    pristine_git_object: 93ed29403389e6e778eb5b6d3cb11868870711a3
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:72dd2a6867a44557b35fa72fe5588efc5d08e8e1
@@ -798,8 +798,8 @@ trackedFiles:
     pristine_git_object: 44be0eae8246521b230e8e711a88eff738fc015d
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:187fc4239b1eb004f433521072e9040e75cede82
-    pristine_git_object: 048cc13a56ea535a8ddab74df3096cb4102f8737
+    last_write_checksum: sha1:de894b3146375ffec33bd65edb5c6dc63ae4a756
+    pristine_git_object: 088337d725e825050bc6d59ed1ee8398ff10591d
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -2180,35 +2180,3 @@ examples:
         "500":
           application/json: {"code": "unimplemented", "message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Typescript SDK Changes:
-  * `factify.quotas.quotaServiceDeleteOrganizationQuota()`:  `error` **Changed** (Breaking ⚠️)
-  * `factify.quotas.quotaServiceSetOrganizationQuota()`:  `error` **Changed** (Breaking ⚠️)
-  * `factify.apiKeys.list()`:  `error` **Changed** (Breaking ⚠️)
-  * `factify.apiKeys.create()`:  `error` **Changed** (Breaking ⚠️)
-  * `factify.apiKeys.revoke()`:  `error` **Changed** (Breaking ⚠️)
-  * `factify.documents.list()`:  `error` **Changed** (Breaking ⚠️)
-  * `factify.documents.create()`:  `error` **Changed** (Breaking ⚠️)
-  * `factify.documents.get()`:  `error` **Changed** (Breaking ⚠️)
-  * `factify.documents.update()`:  `error` **Changed** (Breaking ⚠️)
-  * `factify.entryPages.generate()`:  `error` **Changed** (Breaking ⚠️)
-  * `factify.policies.list()`:  `error` **Changed** (Breaking ⚠️)
-  * `factify.policies.attach()`:  `error` **Changed** (Breaking ⚠️)
-  * `factify.policies.detach()`:  `error` **Changed** (Breaking ⚠️)
-  * `factify.versions.list()`:  `error` **Changed** (Breaking ⚠️)
-  * `factify.versions.create()`:  `error` **Changed** (Breaking ⚠️)
-  * `factify.versions.get()`:  `error` **Changed** (Breaking ⚠️)
-  * `factify.versions.update()`:  `error` **Changed** (Breaking ⚠️)
-  * `factify.organizations.list()`:  `error` **Changed** (Breaking ⚠️)
-  * `factify.organizations.create()`:  `error` **Changed** (Breaking ⚠️)
-  * `factify.organizations.get()`:  `error` **Changed** (Breaking ⚠️)
-  * `factify.organizations.acceptOrganizationInvite()`:  `error` **Changed** (Breaking ⚠️)
-  * `factify.organizations.resendOrganizationInvite()`:  `error` **Changed** (Breaking ⚠️)
-  * `factify.organizations.revokeOrganizationInvite()`:  `error` **Changed** (Breaking ⚠️)
-  * `factify.organizations.invites.list()`:  `error` **Changed** (Breaking ⚠️)
-  * `factify.organizations.invites.create()`:  `error` **Changed** (Breaking ⚠️)
-  * `factify.usage.getOrganizationQuota()`:  `error` **Changed** (Breaking ⚠️)
-  * `factify.usage.listApiKeyQuotas()`:  `error` **Changed** (Breaking ⚠️)
-  * `factify.usage.deleteApiKeyQuota()`:  `error` **Changed** (Breaking ⚠️)
-  * `factify.usage.setApiKeyQuota()`:  `error` **Changed** (Breaking ⚠️)
-  * `factify.usage.getUsageHistory()`:  `error` **Changed** (Breaking ⚠️)

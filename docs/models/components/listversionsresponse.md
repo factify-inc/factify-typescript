@@ -20,7 +20,7 @@ let value: ListVersionsResponse = {
       id: "ver_01h2abcd1234efgh5678jkmnpt",
       processingStatus: "ready",
       title: "Version 2.0",
-      url: "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41/v/1",
+      url: "https://app.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41/v/1",
     },
   ],
   pagination: {

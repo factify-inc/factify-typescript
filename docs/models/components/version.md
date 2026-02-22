@@ -18,7 +18,7 @@ let value: Version = {
   id: "ver_01h2abcd1234efgh5678jkmnpt",
   processingStatus: "failed",
   title: "Version 2.0",
-  url: "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41/v/1",
+  url: "https://app.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41/v/1",
 };
 ```
 
@@ -33,4 +33,4 @@ let value: Version = {
 | `id`                                                                                          | *string*                                                                                      | :heavy_check_mark:                                                                            | Unique ID for the version.<br/> Pattern: ver_[0-9a-hjkmnp-tv-z]{26}                           | ver_01h2abcd1234efgh5678jkmnpt                                                                |
 | `processingStatus`                                                                            | [components.ProcessingStatus](../../models/components/processingstatus.md)                    | :heavy_check_mark:                                                                            | N/A                                                                                           |                                                                                               |
 | `title`                                                                                       | *string*                                                                                      | :heavy_minus_sign:                                                                            | Optional version title.                                                                       | Version 2.0                                                                                   |
-| `url`                                                                                         | *string*                                                                                      | :heavy_check_mark:                                                                            | URL for accessing this version on Factify.                                                    | https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41/v/1                                        |
+| `url`                                                                                         | *string*                                                                                      | :heavy_check_mark:                                                                            | URL for accessing this version on Factify.                                                    | https://app.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41/v/1                                      |

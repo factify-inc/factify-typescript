@@ -24,7 +24,7 @@ let value: ListDocumentsResponse = {
       id: "doc_01h2xcejqtf2nbrexx3vqjhp41",
       processingStatus: "ready",
       title: "Q4 2024 Financial Report",
-      url: "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41",
+      url: "https://app.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41",
     },
   ],
   pagination: {
