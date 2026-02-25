@@ -25,7 +25,7 @@ let value: ListOrganizationInvitesResponse = {
         name: "John Doe",
         type: "user_account",
       },
-      status: "ORGANIZATION_INVITE_STATUS_REVOKED",
+      status: "revoked",
     },
   ],
   pagination: {

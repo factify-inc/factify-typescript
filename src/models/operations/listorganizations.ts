@@ -19,6 +19,14 @@ export type ListOrganizationsRequest = {
    * Maximum number of items to return per page (1-100). Default: 50.
    */
   pageSize?: number | undefined;
+  /**
+   * Filter by the caller's role in the organization.
+   *
+   * @remarks
+   *  If omitted or empty, returns all organizations the caller can view (no filtering).
+   *  REST: ?role=admin or ?role=admin&role=owner
+   */
+  role?: Array<components.OrganizationRole> | undefined;
 };
 
 export type ListOrganizationsResponse = {
@@ -33,6 +41,7 @@ export type ListOrganizationsResponse = {
 export type ListOrganizationsRequest$Outbound = {
   page_token?: string | undefined;
   page_size?: number | undefined;
+  role?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -43,6 +52,7 @@ export const ListOrganizationsRequest$outboundSchema: z.ZodMiniType<
   z.object({
     pageToken: z.optional(z.string()),
     pageSize: z.optional(z.int()),
+    role: z.optional(z.array(components.OrganizationRole$outboundSchema)),
   }),
   z.transform((v) => {
     return remap$(v, {

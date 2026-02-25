@@ -235,7 +235,7 @@ async function $do(
       documentsList(
         client,
         {
-          ...request,
+          ...request!,
           pageToken: nextCursor,
         },
         options,

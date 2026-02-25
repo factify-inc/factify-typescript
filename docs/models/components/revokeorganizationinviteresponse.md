@@ -24,7 +24,7 @@ let value: RevokeOrganizationInviteResponse = {
       name: "John Doe",
       type: "user_account",
     },
-    status: "ORGANIZATION_INVITE_STATUS_EXPIRED",
+    status: "revoked",
   },
 };
 ```

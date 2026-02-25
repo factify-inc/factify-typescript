@@ -19,10 +19,11 @@ export type ListOrganizationInvitesRequest = {
    */
   organizationId: string;
   /**
-   * Filter by status. If empty, returns all invitations.
+   * Filter by invitation status.
    *
    * @remarks
-   *  ORGANIZATION_INVITE_STATUS_UNSPECIFIED (0) is not a valid filter value.
+   *  If empty, returns all invitations.
+   *  REST: ?status=pending or ?status=pending&status=expired
    */
   status?: Array<components.OrganizationInviteStatus> | undefined;
   /**

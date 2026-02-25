@@ -60,9 +60,6 @@ export type OrganizationInvite = {
    * User represents a user or service account.
    */
   sender: User;
-  /**
-   * OrganizationInviteStatus represents the state of an organization invitation.
-   */
   status: OrganizationInviteStatus;
 };
 

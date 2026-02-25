@@ -111,6 +111,7 @@ async function $do(
   const query = encodeFormQuery({
     "page_size": payload?.page_size,
     "page_token": payload?.page_token,
+    "role": payload?.role,
   });
 
   const headers = new Headers(compactMap({
@@ -227,7 +228,7 @@ async function $do(
       organizationsList(
         client,
         {
-          ...request,
+          ...request!,
           pageToken: nextCursor,
         },
         options,

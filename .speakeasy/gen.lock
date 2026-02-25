@@ -1,39 +1,39 @@
 lockVersion: 2.0.0
 id: 23af0391-5a58-495c-b992-941b55f41c78
 management:
-  docChecksum: d8c68e90577373e6ee4cdfaf94c7658b
+  docChecksum: dbbfe0453b3955b2f2bfa0fce52489fc
   docVersion: 1.0.0
-  speakeasyVersion: 1.723.0
-  generationVersion: 2.835.2
-  releaseVersion: 0.3.14-rc.9
-  configChecksum: ffcee7c5bf54e18f08c78661e747e827
+  speakeasyVersion: 1.729.0
+  generationVersion: 2.841.0
+  releaseVersion: 0.3.14-rc.10
+  configChecksum: 0da04f880e06700a8969f2473c5344fa
   repoURL: https://github.com/factify-inc/factify-typescript.git
   installationURL: https://github.com/factify-inc/factify-typescript
   published: true
 persistentEdits:
-  generation_id: 62d56719-73c7-4386-8fce-d31e481178ed
-  pristine_commit_hash: 7e68da06356209747a895e51bc45191dbb27efde
-  pristine_tree_hash: 00d635120377d5843fe7666206fe83ab8a3cbc7c
+  generation_id: 0e825dae-64c8-41a5-b9c3-496b4efdf936
+  pristine_commit_hash: b77ccfbad036e67834e2865122834c942d4168cb
+  pristine_tree_hash: 6736aaa3151660a425b1eb3516e251fcfdfb018a
 features:
   typescript:
     additionalDependencies: 0.1.0
     additionalProperties: 0.1.3
-    constsAndDefaults: 0.1.13
-    core: 3.26.31
+    constsAndDefaults: 0.1.14
+    core: 3.26.34
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
     examples: 2.82.4
     globalSecurity: 2.82.15
     globalSecurityCallbacks: 0.1.0
-    globalSecurityFlattening: 0.1.0
+    globalSecurityFlattening: 0.1.1
     globalServerURLs: 2.83.0
     groups: 2.81.3
     inputOutputModels: 2.82.1
     methodArguments: 0.1.2
     nameOverrides: 2.81.4
     nullables: 0.1.1
-    pagination: 2.83.0
+    pagination: 2.83.2
     responseFormat: 0.3.0
     retries: 2.83.0
     sdkHooks: 0.4.0
@@ -46,8 +46,8 @@ trackedFiles:
     pristine_git_object: 113eead5093c17d43a46159132885318f281a68a
   .npmignore:
     id: aa70c1f807c3
-    last_write_checksum: sha1:3d5eb92f81539175db1ff0280e0aefbdd701f200
-    pristine_git_object: cf98a6bf092538eb10ff0edc915102682ce9a6e6
+    last_write_checksum: sha1:425e91786e3b6cddd2b364bf3f9f9cd38e3c3e1a
+    pristine_git_object: 134e78a629b846b88e408199011801852bacc600
   FUNCTIONS.md:
     id: 21b9df02aaeb
     last_write_checksum: sha1:9d038a8eaefe2a31e656f9a0d96fcf8ba47db9f7
@@ -114,8 +114,8 @@ trackedFiles:
     pristine_git_object: 71fb90a9dd5d48901c713f8d6248adecf3827e8f
   docs/models/components/createorganizationinviteresponse.md:
     id: e50ec130a0fe
-    last_write_checksum: sha1:3484b6e87df0d9610afc090f2ee09087cfafe1d6
-    pristine_git_object: ac8e24177c8cc3f46d10b224c6a7394cb31bc006
+    last_write_checksum: sha1:cfe4567d3fc75175e314eeb76bf13b47828397c4
+    pristine_git_object: 0af9342f15e79c450f82359ddcf13b4070bbb5c8
   docs/models/components/createorganizationrequest.md:
     id: 0ceae077b9d1
     last_write_checksum: sha1:5cacc7c7f2039e4c237b85e77c27cc4c27da76bc
@@ -214,8 +214,8 @@ trackedFiles:
     pristine_git_object: 3b03a012bb65c88a95133807d13302adecce6783
   docs/models/components/listorganizationinvitesresponse.md:
     id: a307b159743f
-    last_write_checksum: sha1:bc05c9046e65df6eb3d7f5e100cbdf74cbb5f967
-    pristine_git_object: 5a0fa6464583eefbc884d29ca4218075f3c57b6c
+    last_write_checksum: sha1:65fa0bfca165fb81d419c2f62223663e5583b9c9
+    pristine_git_object: 968c7da59432d01c03010646cc79794436a1cc4c
   docs/models/components/listorganizationsresponse.md:
     id: b950ff70dbff
     last_write_checksum: sha1:ba2ea7f0b40038a6bfe1915bebb2ffa164bd5e8e
@@ -230,12 +230,12 @@ trackedFiles:
     pristine_git_object: edd732d181f4dc0f2ff048f036dd5a35b165c136
   docs/models/components/organizationinvite.md:
     id: 2dff32cd8d80
-    last_write_checksum: sha1:6a795c691550cc5f44134fb3496c8487dbd39453
-    pristine_git_object: ff52b658a3d174e87b5d9a23e221488e1bd8020e
+    last_write_checksum: sha1:ec351a0603105661d31bf70bdb4aa34ccb2e26d4
+    pristine_git_object: 03cf471b787b47512aff4bd143c242c33259857a
   docs/models/components/organizationinvitestatus.md:
     id: e023cb490bb7
-    last_write_checksum: sha1:a9e63cb7e3a59bc55dd76f433c53d469907cbb1f
-    pristine_git_object: 82d5795c54432a5efce0d441af5c385b623b639a
+    last_write_checksum: sha1:b3104ce49aa02fc8844249e48e2a9514aba9b63e
+    pristine_git_object: 7e694a30737c77164686e7a29feca02a4f4b597f
   docs/models/components/organizationquota.md:
     id: 7e4536844a57
     last_write_checksum: sha1:072e4072abcb61f85344ff4006066c5e6fc1948f
@@ -244,6 +244,10 @@ trackedFiles:
     id: 338f0f06c02d
     last_write_checksum: sha1:2af667b6638fd08ce9b9ec17135c54996a62f9ea
     pristine_git_object: fbc03ec6637163efaf4645c95fd5381bb21ae341
+  docs/models/components/organizationrole.md:
+    id: e0ad6fdd1f5b
+    last_write_checksum: sha1:03af99810d8d104ba7117274811fcb56a551b809
+    pristine_git_object: 58bcb78347902e729c0f705665a8348eec913dd3
   docs/models/components/pagination.md:
     id: c63182f7c460
     last_write_checksum: sha1:add082401ee6af13ba552eff29969ebb76d6df89
@@ -266,16 +270,16 @@ trackedFiles:
     pristine_git_object: c201938510d9905c0ae8482a2fe96e35f0714d6e
   docs/models/components/resendorganizationinviteresponse.md:
     id: 606eb470eee2
-    last_write_checksum: sha1:817c0f78fa4b3078671c8e2a51a7eb9797b1905e
-    pristine_git_object: bfdcb998a3775184bd18726eb7f0cd1b53235d86
+    last_write_checksum: sha1:6eddd984a368fbe6a72f11beba830ddac27f4539
+    pristine_git_object: 05bdceac8a8fa7c9866cf7199f1dcb526f5d404d
   docs/models/components/revokeapikeyresponse.md:
     id: 4a7e638a9d80
     last_write_checksum: sha1:8101da5660231e2c21774d1b6f18b1d8900c9c67
     pristine_git_object: c926ef4ef093511509184c939fab621dfa7ab8ab
   docs/models/components/revokeorganizationinviteresponse.md:
     id: 6aa268d28217
-    last_write_checksum: sha1:142a85fe8049167b3289baa4c947044d9f372022
-    pristine_git_object: 62fc522716bb253ddc7a65c435faabd463985c5f
+    last_write_checksum: sha1:b7535fe738d1653e14c67d8a5abe40b3bb5c78a7
+    pristine_git_object: 30483f1cdded1b54773557d569d954442e9b9824
   docs/models/components/security.md:
     id: 54906b49ea28
     last_write_checksum: sha1:7e8e2120ff0f6bae8e6283a06001ea0dbfeaa46e
@@ -482,16 +486,16 @@ trackedFiles:
     pristine_git_object: 0977b2bfa396441c1aa7afa2b7ffa1db7093e205
   docs/models/operations/listorganizationinvitesrequest.md:
     id: 900478ed621b
-    last_write_checksum: sha1:8c90be56eb680050916eee7ca5b5610ed40678f4
-    pristine_git_object: 289bfe5862c5816842e83a3d0a9d65e7047c335c
+    last_write_checksum: sha1:f3e7f4fcc8adc1ffb769633e0532c16104473b39
+    pristine_git_object: 8d2ad73a92930a8468e201461255be8f8d99069b
   docs/models/operations/listorganizationinvitesresponse.md:
     id: 7d56cc72a489
     last_write_checksum: sha1:d7fd1a05650838fd31e4a27b3c4260c948507c03
     pristine_git_object: 3cbb84b72cdc657a883e6a0d965186ac731ee432
   docs/models/operations/listorganizationsrequest.md:
     id: 656820540c33
-    last_write_checksum: sha1:2da6a7ff4191d57c64d46ac7faf1ff8f8404b65a
-    pristine_git_object: 31377f0b8ccbf464f3ff9d3c2d1d7d36c86d7cff
+    last_write_checksum: sha1:151005e42c48b188d3b1c55a566ed19f0f3c4ade
+    pristine_git_object: 63d03d9bbcd46308b694fff61fe79a14f5f74973
   docs/models/operations/listorganizationsresponse.md:
     id: c32888db1e5d
     last_write_checksum: sha1:c4f99e637477511257f7dfd2f3e72a653ea785fd
@@ -646,12 +650,12 @@ trackedFiles:
     pristine_git_object: 766ea5ba4257419f9fca9da9c6ba895ab05a3f8b
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:b31dea7cec919e0158fd65b5f9e92a90f4bc905e
-    pristine_git_object: 9858a543e427524e2ee74bd2f3b93bd9f93971c1
+    last_write_checksum: sha1:05308c5c5de2ccba0ab61b7e61929923c5e5921b
+    pristine_git_object: fe16e20831f197edc5852ed2d4acebb6523740aa
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:a50825da09c663259f0cafdd8d0c727d4f9c57ce
-    pristine_git_object: 93ed29403389e6e778eb5b6d3cb11868870711a3
+    last_write_checksum: sha1:82e722cc4c7a04a13285959d1d147d0bf1a677af
+    pristine_git_object: 508ac570d137d7027df5683c5ea6a384ddaa4d5a
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:72dd2a6867a44557b35fa72fe5588efc5d08e8e1
@@ -678,8 +682,8 @@ trackedFiles:
     pristine_git_object: ddc600cefe4f810694c71151a4476c1381bb6caa
   src/funcs/documentsList.ts:
     id: f2d6920c437a
-    last_write_checksum: sha1:ba182e0cfd80e2ba9dff52274e64975ea69a1ea6
-    pristine_git_object: f001e5668a1251f807cdb354e103ca2898eab7cf
+    last_write_checksum: sha1:6b112faf72dee9eae7e12486104496e3209536fb
+    pristine_git_object: 1c87ae60aa066a80274bf1602e7639cec22798e3
   src/funcs/documentsUpdate.ts:
     id: 188f0e66ba2a
     last_write_checksum: sha1:56e7d348b10a305d395408196b31bfb72d40a89d
@@ -710,8 +714,8 @@ trackedFiles:
     pristine_git_object: e1ac81a2e2f8269f29b0a35ff0d9bfca92c1a6f3
   src/funcs/organizationsList.ts:
     id: 1f7166ed3198
-    last_write_checksum: sha1:436871c0d9f2cf8dc9099f7259aabdf2dd68b027
-    pristine_git_object: 3b208c7951bc291f59ae93c108f9f0675283a815
+    last_write_checksum: sha1:6313ac71edea24659985b2a6f06ab4da4ca26e89
+    pristine_git_object: 4187dccc76b2914cd3a2943c7138510d46c3ac0d
   src/funcs/organizationsResendOrganizationInvite.ts:
     id: 9c8e73db743b
     last_write_checksum: sha1:83526919660b81c330df96e921afb3a562bf3fbe
@@ -798,8 +802,8 @@ trackedFiles:
     pristine_git_object: 44be0eae8246521b230e8e711a88eff738fc015d
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:de894b3146375ffec33bd65edb5c6dc63ae4a756
-    pristine_git_object: 088337d725e825050bc6d59ed1ee8398ff10591d
+    last_write_checksum: sha1:429a399c38fd893cbdc9182b83424da5a9385a5f
+    pristine_git_object: 84277b065728f31a2960f77540a180a0d8f4ced5
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -970,8 +974,8 @@ trackedFiles:
     pristine_git_object: 52ea8912b0a1f17b36f54e6bcba97fb6e58b6cb2
   src/models/components/index.ts:
     id: 0aa842dce54d
-    last_write_checksum: sha1:498ad8c92cc114abf37f34d2d691b42efc5ea524
-    pristine_git_object: 41f20976e78ca92448fe785b3a91f3586d7fc4c0
+    last_write_checksum: sha1:f6bc5b297a5f14c7c93f292af202d37b8ef2221b
+    pristine_git_object: b7ee2765f79dd41178c06af5beba35d65c6fe924
   src/models/components/listapikeyquotasresponse.ts:
     id: 4b49aeabc2d7
     last_write_checksum: sha1:01d450b0863f68eb878e59798846269895c30e75
@@ -1006,12 +1010,12 @@ trackedFiles:
     pristine_git_object: f590e46ff560912068311f6247e5fa68119eeb2a
   src/models/components/organizationinvite.ts:
     id: 2abd92e5004f
-    last_write_checksum: sha1:2dde6ec7f610e161fb9bd062a4c37eb53c270fd7
-    pristine_git_object: a33b1ba85df6596719bb3a7514a7e3131d2c1789
+    last_write_checksum: sha1:be44653a40bf59e2beb0385e423ffd5a7665f1a8
+    pristine_git_object: f5df087bf2984c9b058a4a8e8d4e899b8ac92ecc
   src/models/components/organizationinvitestatus.ts:
     id: 05d16e7ce14b
-    last_write_checksum: sha1:37b7dacd7093207551614d79c00413581e71dda4
-    pristine_git_object: 63168e666106a5a499a70256c3970e2518d31919
+    last_write_checksum: sha1:733892b3dde3215ac0001bc34b5337ac23013a45
+    pristine_git_object: c58f69c5a3e1f6b233406f085cf71b2417278001
   src/models/components/organizationquota.ts:
     id: 661d827d0ab7
     last_write_checksum: sha1:d543afac4deebd852293fa7a2a11f5832791f13f
@@ -1020,6 +1024,10 @@ trackedFiles:
     id: 25941888e694
     last_write_checksum: sha1:d2af0217ec4d0397324f2017a527b79b9e85c155
     pristine_git_object: 06c0be9f148c3a49b82e3050d4ff7c4504164a5f
+  src/models/components/organizationrole.ts:
+    id: 01dc89404e59
+    last_write_checksum: sha1:5799a4223c51533b6917473891d0cd94ad955b84
+    pristine_git_object: 266e27a8dd3bec79ea538d9ef8005764fb39903d
   src/models/components/pagination.ts:
     id: "251089943250"
     last_write_checksum: sha1:cfdd7f713e8557564ce5485e5b30f85c63633326
@@ -1198,12 +1206,12 @@ trackedFiles:
     pristine_git_object: 82b2fa1c3c9cb60c07fb794d0e42d06fd19a37fb
   src/models/operations/listorganizationinvites.ts:
     id: 17b3fdced466
-    last_write_checksum: sha1:755f0b3a03a30329a78fc5e59d044f2214ece62c
-    pristine_git_object: 325122b06a5980ba8b6c4edbcfe74f9804d98cb8
+    last_write_checksum: sha1:4eca3eaad9c54c3da2268fd4eb3c8e0417b85e9e
+    pristine_git_object: 49412d907114e5f91647f6e449d2adb308d27db3
   src/models/operations/listorganizations.ts:
     id: 2bdfb282944e
-    last_write_checksum: sha1:f48724fdac99c371f8c060c96ce184c369eeb992
-    pristine_git_object: 945f38b40dceb8d5fde55292830027fecbcdd6d5
+    last_write_checksum: sha1:47902b3cde720f9986385694936a015ec9121899
+    pristine_git_object: 261f2ec2835c2583e7fb5a35fa842da13e22980e
   src/models/operations/quotaservicedeleteorganizationquota.ts:
     id: b8111116d4fd
     last_write_checksum: sha1:2f558245815f5385c772f243c0ca1f70d9c56e33
@@ -1905,7 +1913,7 @@ examples:
           organization_id: "<id>"
       responses:
         "200":
-          application/json: {"items": [{"accepted_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "created_at": "2025-10-27T07:43:49.957Z", "email": "dwight@dundermifflin.com", "expires_at": "2025-12-01T10:42:58.059Z", "id": "inv_01h2xcejqtf2nbrexx3vqjhp41", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41", "sender": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "status": "ORGANIZATION_INVITE_STATUS_ACCEPTED"}], "pagination": {"next_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0", "prev_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJwcmV2In0"}}
+          application/json: {"items": [{"accepted_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "created_at": "2025-10-27T07:43:49.957Z", "email": "dwight@dundermifflin.com", "expires_at": "2025-12-01T10:42:58.059Z", "id": "inv_01h2xcejqtf2nbrexx3vqjhp41", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41", "sender": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "status": "pending"}], "pagination": {"next_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0", "prev_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJwcmV2In0"}}
         "400":
           application/json: {"code": "unknown", "message": "<value>"}
         "429":
@@ -1934,7 +1942,7 @@ examples:
         application/json: {"email": "Willie_Parisian16@hotmail.com"}
       responses:
         "200":
-          application/json: {"invite": {"accepted_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "created_at": "2025-07-26T07:49:48.068Z", "email": "dwight@dundermifflin.com", "expires_at": "2026-01-04T12:23:16.764Z", "id": "inv_01h2xcejqtf2nbrexx3vqjhp41", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41", "sender": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "status": "ORGANIZATION_INVITE_STATUS_ACCEPTED"}}
+          application/json: {"invite": {"accepted_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "created_at": "2025-07-26T07:49:48.068Z", "email": "dwight@dundermifflin.com", "expires_at": "2026-01-04T12:23:16.764Z", "id": "inv_01h2xcejqtf2nbrexx3vqjhp41", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41", "sender": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "status": "revoked"}}
         "400":
           application/json: {"code": "deadline_exceeded", "message": "<value>"}
         "429":
@@ -1996,7 +2004,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"invite": {"accepted_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "created_at": "2026-03-26T20:10:39.093Z", "email": "dwight@dundermifflin.com", "expires_at": "2026-01-04T23:55:34.416Z", "id": "inv_01h2xcejqtf2nbrexx3vqjhp41", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41", "sender": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "status": "ORGANIZATION_INVITE_STATUS_EXPIRED"}}
+          application/json: {"invite": {"accepted_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "created_at": "2026-03-26T20:10:39.093Z", "email": "dwight@dundermifflin.com", "expires_at": "2026-01-04T23:55:34.416Z", "id": "inv_01h2xcejqtf2nbrexx3vqjhp41", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41", "sender": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "status": "pending"}}
         "400":
           application/json: {"code": "invalid_argument", "message": "<value>"}
         "429":
@@ -2027,7 +2035,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"invite": {"accepted_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "created_at": "2025-02-05T03:30:38.591Z", "email": "dwight@dundermifflin.com", "expires_at": "2024-08-08T12:50:51.355Z", "id": "inv_01h2xcejqtf2nbrexx3vqjhp41", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41", "sender": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "status": "ORGANIZATION_INVITE_STATUS_PENDING"}}
+          application/json: {"invite": {"accepted_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "created_at": "2025-02-05T03:30:38.591Z", "email": "dwight@dundermifflin.com", "expires_at": "2024-08-08T12:50:51.355Z", "id": "inv_01h2xcejqtf2nbrexx3vqjhp41", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41", "sender": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "status": "revoked"}}
         "400":
           application/json: {"code": "unavailable", "message": "<value>"}
         "429":
@@ -2180,3 +2188,4 @@ examples:
         "500":
           application/json: {"code": "unimplemented", "message": "<value>"}
 examplesVersion: 1.0.2
+releaseNotes: "## Typescript SDK Changes:\n* `factify.organizations.resendOrganizationInvite()`:  `response.invite.status` **Changed** (Breaking ⚠️)\n* `factify.organizations.revokeOrganizationInvite()`:  `response.invite.status` **Changed** (Breaking ⚠️)\n* `factify.organizations.invites.list()`: \n  *  `request.status` **Changed** (Breaking ⚠️)\n  *  `response.items[].status` **Changed** (Breaking ⚠️)\n* `factify.organizations.invites.create()`:  `response.invite.status` **Changed** (Breaking ⚠️)\n* `factify.organizations.list()`: \n  *  `request.role` **Added**\n"

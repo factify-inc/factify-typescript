@@ -6,19 +6,12 @@ import * as z from "zod/v4-mini";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
-/**
- * OrganizationInviteStatus represents the state of an organization invitation.
- */
 export const OrganizationInviteStatus = {
-  OrganizationInviteStatusUnspecified: "ORGANIZATION_INVITE_STATUS_UNSPECIFIED",
-  OrganizationInviteStatusPending: "ORGANIZATION_INVITE_STATUS_PENDING",
-  OrganizationInviteStatusAccepted: "ORGANIZATION_INVITE_STATUS_ACCEPTED",
-  OrganizationInviteStatusExpired: "ORGANIZATION_INVITE_STATUS_EXPIRED",
-  OrganizationInviteStatusRevoked: "ORGANIZATION_INVITE_STATUS_REVOKED",
+  Pending: "pending",
+  Accepted: "accepted",
+  Expired: "expired",
+  Revoked: "revoked",
 } as const;
-/**
- * OrganizationInviteStatus represents the state of an organization invitation.
- */
 export type OrganizationInviteStatus = OpenEnum<
   typeof OrganizationInviteStatus
 >;

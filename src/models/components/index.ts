@@ -43,6 +43,7 @@ export * from "./organizationinvite.js";
 export * from "./organizationinvitestatus.js";
 export * from "./organizationquota.js";
 export * from "./organizationquotaconfig.js";
+export * from "./organizationrole.js";
 export * from "./pagination.js";
 export * from "./policy.js";
 export * from "./processingstatus.js";
