@@ -200,6 +200,9 @@ run();
 * [acceptOrganizationInvite](docs/sdks/organizations/README.md#acceptorganizationinvite) - Accept an invitation
 * [resendOrganizationInvite](docs/sdks/organizations/README.md#resendorganizationinvite) - Resend an invitation email
 * [revokeOrganizationInvite](docs/sdks/organizations/README.md#revokeorganizationinvite) - Revoke an invitation
+* [listOrganizationMembers](docs/sdks/organizations/README.md#listorganizationmembers) - List organization members
+* [removeOrganizationMember](docs/sdks/organizations/README.md#removeorganizationmember) - Remove an organization member
+* [updateOrganizationMember](docs/sdks/organizations/README.md#updateorganizationmember) - Update an organization member
 
 ### [Organizations.Invites](docs/sdks/invites/README.md)
 
@@ -264,8 +267,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`organizationsInvitesCreate`](docs/sdks/invites/README.md#create) - Invite a user to join an organization
 - [`organizationsInvitesList`](docs/sdks/invites/README.md#list) - List organization invitations
 - [`organizationsList`](docs/sdks/organizations/README.md#list) - List organizations
+- [`organizationsListOrganizationMembers`](docs/sdks/organizations/README.md#listorganizationmembers) - List organization members
+- [`organizationsRemoveOrganizationMember`](docs/sdks/organizations/README.md#removeorganizationmember) - Remove an organization member
 - [`organizationsResendOrganizationInvite`](docs/sdks/organizations/README.md#resendorganizationinvite) - Resend an invitation email
 - [`organizationsRevokeOrganizationInvite`](docs/sdks/organizations/README.md#revokeorganizationinvite) - Revoke an invitation
+- [`organizationsUpdateOrganizationMember`](docs/sdks/organizations/README.md#updateorganizationmember) - Update an organization member
 - [`policiesAttach`](docs/sdks/policies/README.md#attach) - Attach a policy
 - [`policiesDetach`](docs/sdks/policies/README.md#detach) - Detach a policy
 - [`policiesList`](docs/sdks/policies/README.md#list) - List document policies

@@ -6,8 +6,11 @@ import { organizationsAcceptOrganizationInvite } from "../funcs/organizationsAcc
 import { organizationsCreate } from "../funcs/organizationsCreate.js";
 import { organizationsGet } from "../funcs/organizationsGet.js";
 import { organizationsList } from "../funcs/organizationsList.js";
+import { organizationsListOrganizationMembers } from "../funcs/organizationsListOrganizationMembers.js";
+import { organizationsRemoveOrganizationMember } from "../funcs/organizationsRemoveOrganizationMember.js";
 import { organizationsResendOrganizationInvite } from "../funcs/organizationsResendOrganizationInvite.js";
 import { organizationsRevokeOrganizationInvite } from "../funcs/organizationsRevokeOrganizationInvite.js";
+import { organizationsUpdateOrganizationMember } from "../funcs/organizationsUpdateOrganizationMember.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
@@ -119,6 +122,59 @@ export class Organizations extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.RevokeOrganizationInviteResponse> {
     return unwrapAsync(organizationsRevokeOrganizationInvite(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List organization members
+   *
+   * @remarks
+   * List members of an organization. Requires organization membership.
+   */
+  async listOrganizationMembers(
+    request: operations.ListOrganizationMembersRequest,
+    options?: RequestOptions,
+  ): Promise<
+    PageIterator<operations.ListOrganizationMembersResponse, { cursor: string }>
+  > {
+    return unwrapResultIterator(organizationsListOrganizationMembers(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Remove an organization member
+   *
+   * @remarks
+   * Remove a member from an organization. Requires manage permission, or the member can remove themselves. The organization owner cannot be removed.
+   */
+  async removeOrganizationMember(
+    request: operations.RemoveOrganizationMemberRequest,
+    options?: RequestOptions,
+  ): Promise<operations.RemoveOrganizationMemberResponse> {
+    return unwrapAsync(organizationsRemoveOrganizationMember(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update an organization member
+   *
+   * @remarks
+   * Update a member's role within an organization. Requires manage permission (owner or admin). The organization owner's role cannot be changed.
+   */
+  async updateOrganizationMember(
+    request: operations.UpdateOrganizationMemberRequest,
+    options?: RequestOptions,
+  ): Promise<operations.UpdateOrganizationMemberResponse> {
+    return unwrapAsync(organizationsUpdateOrganizationMember(
       this,
       request,
       options,

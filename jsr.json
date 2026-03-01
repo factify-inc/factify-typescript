@@ -2,7 +2,7 @@
 
 {
   "name": "@factify/sdk",
-  "version": "0.3.14-rc.10",
+  "version": "0.3.14-rc.11",
   "exports": {
     ".": "./src/index.ts",    
     "./models/errors": "./src/models/errors/index.ts",    
