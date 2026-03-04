@@ -48,3 +48,4 @@ dist-ssr/
 *.swo
 *~
 .DS_Store
+.worktrees/
