@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 23af0391-5a58-495c-b992-941b55f41c78
 management:
-  docChecksum: 3878171ffe504261945ad930d811f9d9
+  docChecksum: 4d7c2cbdc682139ac11c63eede89d6fd
   docVersion: 1.0.0
-  speakeasyVersion: 1.741.0
-  generationVersion: 2.849.2
-  releaseVersion: 0.3.14-rc.12
-  configChecksum: c314b976408bfbaf21d3218812faa133
+  speakeasyVersion: 1.741.2
+  generationVersion: 2.849.3
+  releaseVersion: 0.3.14-rc.13
+  configChecksum: b7da890cdf99cd7ca02e9bc0280483c0
   repoURL: https://github.com/factify-inc/factify-typescript.git
   installationURL: https://github.com/factify-inc/factify-typescript
   published: true
 persistentEdits:
-  generation_id: 3cbc95f2-eb00-4050-b7ee-5e6330612e3c
-  pristine_commit_hash: 3c349f368f099d312f28583d8765cc39d1fc0eb0
-  pristine_tree_hash: 8a956c17bb52331380e0b7b78c80ca2960fa7bd8
+  generation_id: 987fe9fe-83ce-4771-9555-6cf0f2023855
+  pristine_commit_hash: 2efd3899f4bef8ab21747d7d0797b767142dc6f7
+  pristine_tree_hash: f422e9841471392c33f447a429775f90986af9d9
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -694,12 +694,12 @@ trackedFiles:
     pristine_git_object: 766ea5ba4257419f9fca9da9c6ba895ab05a3f8b
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:69f61ae66f2d4513a5445e69c3be02e157277d13
-    pristine_git_object: f44957fef28e72a230e10877bb04ddae8aa449a8
+    last_write_checksum: sha1:0b23f049dc174612894bb2b661f9af789e90cbd5
+    pristine_git_object: daa70f6e1de311be3ae4a15de05e427ad104b431
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:290ad85666503170645971673594bb0edff33976
-    pristine_git_object: ada361c61f6570eb78d507463aa296c60e508acf
+    last_write_checksum: sha1:ef66797fd22d4f67cf75ffb285307c6a716b79a9
+    pristine_git_object: e74dbd2d9a79f2ae6fd6e8cca35780c2e47c3909
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:72dd2a6867a44557b35fa72fe5588efc5d08e8e1
@@ -858,8 +858,8 @@ trackedFiles:
     pristine_git_object: 44be0eae8246521b230e8e711a88eff738fc015d
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:a6c4427d85459dbe7f4004af214177c3fe7cae7b
-    pristine_git_object: a4bd157df194b825f6757d077d8c1c7b77414e9b
+    last_write_checksum: sha1:8daa244e2bc358e3fe2fb4579a8b149c00fb95d7
+    pristine_git_object: ddae743477685b760c4d0cb1833bb5e38011759a
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -2355,4 +2355,3 @@ examples:
         "500":
           application/json: {"code": "not_found", "message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: "## Typescript SDK Changes:\n* `factify.quotas.quotaServiceSetOrganizationQuota()`: \n  *  `request.body.tier` **Changed** (Breaking ⚠️)\n  *  `response.quota.tier` **Changed** (Breaking ⚠️)\n* `factify.usage.getOrganizationQuota()`:  `response.quota.tier` **Changed** (Breaking ⚠️)\n"
