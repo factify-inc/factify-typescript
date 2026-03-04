@@ -15,7 +15,7 @@ export type CreateDocumentResponse = {
   /**
    * Success
    */
-  createDocumentResponse?: components.CreateDocumentResponse | undefined;
+  result?: components.CreateDocumentResponse | undefined;
 };
 
 /** @internal */
@@ -25,14 +25,14 @@ export const CreateDocumentResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    CreateDocumentResponse: types.optional(
+    Result: types.optional(
       components.CreateDocumentResponse$inboundSchema,
     ),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "CreateDocumentResponse": "createDocumentResponse",
+      "Result": "result",
     });
   }),
 );

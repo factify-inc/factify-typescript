@@ -15,7 +15,7 @@ export type CreateApiKeyResponse = {
   /**
    * Success
    */
-  createApiKeyResponse?: components.CreateApiKeyResponse | undefined;
+  result?: components.CreateApiKeyResponse | undefined;
 };
 
 /** @internal */
@@ -25,14 +25,14 @@ export const CreateApiKeyResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    CreateApiKeyResponse: types.optional(
+    Result: types.optional(
       components.CreateApiKeyResponse$inboundSchema,
     ),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "CreateApiKeyResponse": "createApiKeyResponse",
+      "Result": "result",
     });
   }),
 );

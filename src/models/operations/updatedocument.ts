@@ -40,7 +40,7 @@ export type UpdateDocumentResponse = {
   /**
    * Success
    */
-  updateDocumentResponse?: components.UpdateDocumentResponse | undefined;
+  result?: components.UpdateDocumentResponse | undefined;
 };
 
 /** @internal */
@@ -105,14 +105,14 @@ export const UpdateDocumentResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    UpdateDocumentResponse: types.optional(
+    Result: types.optional(
       components.UpdateDocumentResponse$inboundSchema,
     ),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "UpdateDocumentResponse": "updateDocumentResponse",
+      "Result": "result",
     });
   }),
 );

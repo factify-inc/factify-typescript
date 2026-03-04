@@ -85,14 +85,14 @@ export const ListDocumentPoliciesResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    ListDocumentPoliciesResponse: types.optional(
+    Result: types.optional(
       components.ListDocumentPoliciesResponse$inboundSchema,
     ),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "ListDocumentPoliciesResponse": "listDocumentPoliciesResponse",
+      "Result": "result",
     });
   }),
 );

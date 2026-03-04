@@ -39,7 +39,7 @@ export type AttachDocumentPolicyResponse = {
   /**
    * Success
    */
-  documentPolicy?: components.DocumentPolicy | undefined;
+  result?: components.DocumentPolicy | undefined;
 };
 
 /** @internal */
@@ -109,12 +109,12 @@ export const AttachDocumentPolicyResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    DocumentPolicy: types.optional(components.DocumentPolicy$inboundSchema),
+    Result: types.optional(components.DocumentPolicy$inboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "DocumentPolicy": "documentPolicy",
+      "Result": "result",
     });
   }),
 );

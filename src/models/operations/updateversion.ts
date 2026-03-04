@@ -40,7 +40,7 @@ export type UpdateVersionResponse = {
   /**
    * Success
    */
-  version?: components.Version | undefined;
+  result?: components.Version | undefined;
 };
 
 /** @internal */
@@ -105,12 +105,12 @@ export const UpdateVersionResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    Version: types.optional(components.Version$inboundSchema),
+    Result: types.optional(components.Version$inboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Version": "version",
+      "Result": "result",
     });
   }),
 );

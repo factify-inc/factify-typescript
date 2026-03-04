@@ -27,14 +27,14 @@ export const CreateOrganizationResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    CreateOrganizationResponse: types.optional(
+    Result: types.optional(
       components.CreateOrganizationResponse$inboundSchema,
     ),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "CreateOrganizationResponse": "createOrganizationResponse",
+      "Result": "result",
     });
   }),
 );

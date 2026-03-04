@@ -25,7 +25,7 @@ export type GenerateDocumentEntryPageResponse = {
   /**
    * Success
    */
-  generateEntryPageResponse?: components.GenerateEntryPageResponse | undefined;
+  result?: components.GenerateEntryPageResponse | undefined;
 };
 
 /** @internal */
@@ -65,14 +65,14 @@ export const GenerateDocumentEntryPageResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    GenerateEntryPageResponse: types.optional(
+    Result: types.optional(
       components.GenerateEntryPageResponse$inboundSchema,
     ),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "GenerateEntryPageResponse": "generateEntryPageResponse",
+      "Result": "result",
     });
   }),
 );

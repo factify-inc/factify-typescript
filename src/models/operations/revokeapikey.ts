@@ -39,7 +39,7 @@ export type RevokeApiKeyResponse = {
   /**
    * Success
    */
-  revokeApiKeyResponse?: components.RevokeApiKeyResponse | undefined;
+  result?: components.RevokeApiKeyResponse | undefined;
 };
 
 /** @internal */
@@ -102,14 +102,14 @@ export const RevokeApiKeyResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    RevokeApiKeyResponse: types.optional(
+    Result: types.optional(
       components.RevokeApiKeyResponse$inboundSchema,
     ),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "RevokeApiKeyResponse": "revokeApiKeyResponse",
+      "Result": "result",
     });
   }),
 );

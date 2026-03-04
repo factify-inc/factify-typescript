@@ -73,7 +73,7 @@ export type ListDocumentsResponse = {
   /**
    * Success
    */
-  listDocumentsResponse?: components.ListDocumentsResponse | undefined;
+  result?: components.ListDocumentsResponse | undefined;
 };
 
 /** @internal */
@@ -137,14 +137,14 @@ export const ListDocumentsResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    ListDocumentsResponse: types.optional(
+    Result: types.optional(
       components.ListDocumentsResponse$inboundSchema,
     ),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "ListDocumentsResponse": "listDocumentsResponse",
+      "Result": "result",
     });
   }),
 );

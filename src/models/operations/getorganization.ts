@@ -25,7 +25,7 @@ export type GetOrganizationResponse = {
   /**
    * Success
    */
-  getOrganizationResponse?: components.GetOrganizationResponse | undefined;
+  result?: components.GetOrganizationResponse | undefined;
 };
 
 /** @internal */
@@ -63,14 +63,14 @@ export const GetOrganizationResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    GetOrganizationResponse: types.optional(
+    Result: types.optional(
       components.GetOrganizationResponse$inboundSchema,
     ),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "GetOrganizationResponse": "getOrganizationResponse",
+      "Result": "result",
     });
   }),
 );

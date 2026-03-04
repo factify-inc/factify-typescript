@@ -32,7 +32,7 @@ export type DetachDocumentPolicyResponse = {
   /**
    * Success
    */
-  empty?: components.Empty | undefined;
+  result?: components.Empty | undefined;
 };
 
 /** @internal */
@@ -75,12 +75,12 @@ export const DetachDocumentPolicyResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     HttpMeta: components.HTTPMetadata$inboundSchema,
-    Empty: types.optional(components.Empty$inboundSchema),
+    Result: types.optional(components.Empty$inboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {
       "HttpMeta": "httpMeta",
-      "Empty": "empty",
+      "Result": "result",
     });
   }),
 );
