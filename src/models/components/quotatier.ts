@@ -6,17 +6,10 @@ import * as z from "zod/v4-mini";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
-/**
- * QuotaTier represents the organization's quota tier.
- */
 export const QuotaTier = {
-  QuotaTierUnspecified: "QUOTA_TIER_UNSPECIFIED",
-  QuotaTierFree: "QUOTA_TIER_FREE",
-  QuotaTierCustom: "QUOTA_TIER_CUSTOM",
+  Free: "free",
+  Custom: "custom",
 } as const;
-/**
- * QuotaTier represents the organization's quota tier.
- */
 export type QuotaTier = OpenEnum<typeof QuotaTier>;
 
 /** @internal */

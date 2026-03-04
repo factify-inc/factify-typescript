@@ -30,9 +30,6 @@ export type OrganizationQuotaConfig = {
    * The organization ID.
    */
   organizationId?: string | undefined;
-  /**
-   * QuotaTier represents the organization's quota tier.
-   */
   tier?: QuotaTier | undefined;
   /**
    * When the configuration was last updated.

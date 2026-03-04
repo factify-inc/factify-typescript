@@ -21,9 +21,6 @@ export type SetOrganizationQuotaRequest = {
    * The organization ID (required).
    */
   organizationId?: string | undefined;
-  /**
-   * QuotaTier represents the organization's quota tier.
-   */
   tier?: QuotaTier | undefined;
 };
 

@@ -20,11 +20,11 @@ ConnectRPC error code. Maps to HTTP status codes:
 import { ErrorResponseCode } from "@factify/sdk/models/components";
 
 let value: ErrorResponseCode = "canceled";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
-
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
 "unknown" | "invalid_argument" | "unauthenticated" | "permission_denied" | "not_found" | "already_exists" | "resource_exhausted" | "failed_precondition" | "internal" | "unavailable" | "unimplemented" | "canceled" | "deadline_exceeded" | Unrecognized<string>

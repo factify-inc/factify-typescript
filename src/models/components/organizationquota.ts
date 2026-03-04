@@ -45,9 +45,6 @@ export type OrganizationQuota = {
    * When the quota resets (start of next billing period).
    */
   resetAt?: Date | undefined;
-  /**
-   * QuotaTier represents the organization's quota tier.
-   */
   tier?: QuotaTier | undefined;
   /**
    * Usage as a percentage (0-100+).

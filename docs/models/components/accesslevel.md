@@ -6,11 +6,11 @@
 import { AccessLevel } from "@factify/sdk/models/components";
 
 let value: AccessLevel = "private";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
-
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
 "private" | "organization" | "public" | Unrecognized<string>
