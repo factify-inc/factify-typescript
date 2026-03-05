@@ -5,37 +5,10 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-/**
- * Access level
- */
-export const AccessLevel = {
-  Private: "private",
-  Organization: "organization",
-  Public: "public",
-} as const;
-/**
- * Access level
- */
-export type AccessLevel = ClosedEnum<typeof AccessLevel>;
-
-/**
- * Processing status
- */
-export const ProcessingStatus = {
-  Processing: "processing",
-  Ready: "ready",
-  Failed: "failed",
-} as const;
-/**
- * Processing status
- */
-export type ProcessingStatus = ClosedEnum<typeof ProcessingStatus>;
 
 export type ListDocumentsRequest = {
   /**
@@ -51,17 +24,26 @@ export type ListDocumentsRequest = {
    */
   pageSize?: number | undefined;
   /**
-   * Filter by creator ID(s). Returns documents matching ANY of the specified IDs.
+   * Filter by creator ID(s) (user or bot). Returns documents matching ANY of the specified IDs.
+   *
+   * @remarks
+   *  REST: ?created_by_id=user_01h2xcejqtf2nbrexx3vqjhp41 or ?created_by_id=user_xxx&created_by_id=bot_yyy
    */
   createdById?: Array<string> | undefined;
   /**
    * Filter by access level(s). Returns documents matching ANY of the specified levels.
+   *
+   * @remarks
+   *  REST: ?access_level=private or ?access_level=private&access_level=organization
    */
-  accessLevel?: Array<AccessLevel> | undefined;
+  accessLevel?: Array<components.AccessLevel> | undefined;
   /**
    * Filter by processing status(es). Returns documents matching ANY of the specified statuses.
+   *
+   * @remarks
+   *  REST: ?processing_status=ready or ?processing_status=processing&processing_status=ready
    */
-  processingStatus?: Array<ProcessingStatus> | undefined;
+  processingStatus?: Array<components.ProcessingStatus> | undefined;
   /**
    * Filter by created.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)
    */
@@ -75,15 +57,6 @@ export type ListDocumentsResponse = {
    */
   listDocumentsResponse?: components.ListDocumentsResponse | undefined;
 };
-
-/** @internal */
-export const AccessLevel$outboundSchema: z.ZodMiniEnum<typeof AccessLevel> = z
-  .enum(AccessLevel);
-
-/** @internal */
-export const ProcessingStatus$outboundSchema: z.ZodMiniEnum<
-  typeof ProcessingStatus
-> = z.enum(ProcessingStatus);
 
 /** @internal */
 export type ListDocumentsRequest$Outbound = {
@@ -104,8 +77,10 @@ export const ListDocumentsRequest$outboundSchema: z.ZodMiniType<
     pageToken: z.optional(z.string()),
     pageSize: z.optional(z.int()),
     createdById: z.optional(z.array(z.string())),
-    accessLevel: z.optional(z.array(AccessLevel$outboundSchema)),
-    processingStatus: z.optional(z.array(ProcessingStatus$outboundSchema)),
+    accessLevel: z.optional(z.array(components.AccessLevel$outboundSchema)),
+    processingStatus: z.optional(
+      z.array(components.ProcessingStatus$outboundSchema),
+    ),
     createdAfter: z.optional(
       z.pipe(z.date(), z.transform(v => v.toISOString())),
     ),
