@@ -19,16 +19,15 @@ import { User, User$inboundSchema } from "./user.js";
  */
 export type OrganizationMember = {
   /**
-   * Email address of the member.
-   */
-  email: string;
-  /**
    * When the member joined the organization.
    */
   joinedAt: Date;
   role: OrganizationRole;
   /**
-   * User represents a user or service account.
+   * User represents a human user account.
+   *
+   * @remarks
+   *  Returned by GetUser (endpoint deferred).
    */
   user: User;
 };
@@ -39,7 +38,6 @@ export const OrganizationMember$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    email: types.string(),
     joined_at: types.date(),
     role: OrganizationRole$inboundSchema,
     user: User$inboundSchema,

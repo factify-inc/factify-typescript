@@ -9,13 +9,12 @@ import { AddOrganizationMemberResponse } from "@factify/sdk/models/components";
 
 let value: AddOrganizationMemberResponse = {
   member: {
-    email: "Wilma_Beer36@gmail.com",
-    joinedAt: new Date("2026-05-07T13:49:08.685Z"),
-    role: "admin",
+    joinedAt: new Date("2024-03-31T16:00:44.354Z"),
+    role: "member",
     user: {
+      email: "Sid75@gmail.com",
       id: "user_01h2xcejqtf2nbrexx3vqjhp41",
-      name: "John Doe",
-      type: "user_account",
+      name: "<value>",
     },
   },
 };

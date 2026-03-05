@@ -13,7 +13,7 @@ import {
   ProcessingStatus,
   ProcessingStatus$inboundSchema,
 } from "./processingstatus.js";
-import { User, User$inboundSchema } from "./user.js";
+import { Subject, Subject$inboundSchema } from "./subject.js";
 import { VersionRef, VersionRef$inboundSchema } from "./versionref.js";
 
 /**
@@ -26,9 +26,14 @@ export type Document = {
    */
   createdAt: Date;
   /**
-   * User represents a user or service account.
+   * Subject is a lightweight reference to either a user or a bot.
+   *
+   * @remarks
+   *  Used in embedded fields like created_by.
+   *  For full details, call GetUser or GetBot with the subject's id.
+   * subject_type_matches_id_prefix // id prefix must match type (user_ for user, bot_ for bot)
    */
-  createdBy: User;
+  createdBy: Subject;
   /**
    * VersionRef is a lightweight reference to a version.
    */
@@ -60,7 +65,7 @@ export const Document$inboundSchema: z.ZodMiniType<Document, unknown> = z.pipe(
   z.object({
     access_level: AccessLevel$inboundSchema,
     created_at: types.date(),
-    created_by: User$inboundSchema,
+    created_by: Subject$inboundSchema,
     current_version: types.optional(VersionRef$inboundSchema),
     description: z.optional(z.nullable(types.string())),
     id: types.string(),

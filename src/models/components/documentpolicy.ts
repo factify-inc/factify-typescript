@@ -9,7 +9,6 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Policy, Policy$inboundSchema } from "./policy.js";
-import { User, User$inboundSchema } from "./user.js";
 
 /**
  * DocumentPolicy represents a policy attached to a document.
@@ -19,10 +18,6 @@ export type DocumentPolicy = {
    * Timestamp when policy was attached.
    */
   attachedAt: Date;
-  /**
-   * User represents a user or service account.
-   */
-  attachedBy: User;
   /**
    * Document ID this policy is attached to.
    *
@@ -43,14 +38,12 @@ export const DocumentPolicy$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     attached_at: types.date(),
-    attached_by: User$inboundSchema,
     document_id: types.string(),
     policy: Policy$inboundSchema,
   }),
   z.transform((v) => {
     return remap$(v, {
       "attached_at": "attachedAt",
-      "attached_by": "attachedBy",
       "document_id": "documentId",
     });
   }),

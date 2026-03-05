@@ -7,31 +7,27 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import { UserType, UserType$inboundSchema } from "./usertype.js";
 
 /**
- * User represents a user or service account.
+ * User represents a human user account.
+ *
+ * @remarks
+ *  Returned by GetUser (endpoint deferred).
  */
 export type User = {
-  /**
-   * Unique ID for the user or service account.
-   *
-   * @remarks
-   *  Pattern: user_[0-9a-hjkmnp-tv-z]{26} for users, svc_[0-9a-hjkmnp-tv-z]{26} for service accounts
-   */
+  email: string;
   id: string;
   /**
-   * Display name of the user or service account.
+   * Display name of the user.
    */
   name: string;
-  type: UserType;
 };
 
 /** @internal */
 export const User$inboundSchema: z.ZodMiniType<User, unknown> = z.object({
+  email: types.string(),
   id: types.string(),
   name: types.string(),
-  type: UserType$inboundSchema,
 });
 
 export function userFromJSON(

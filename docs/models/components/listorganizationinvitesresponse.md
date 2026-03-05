@@ -11,9 +11,9 @@ let value: ListOrganizationInvitesResponse = {
   items: [
     {
       acceptedBy: {
+        email: "Emmanuelle_Halvorson36@gmail.com",
         id: "user_01h2xcejqtf2nbrexx3vqjhp41",
-        name: "John Doe",
-        type: "user_account",
+        name: "<value>",
       },
       createdAt: new Date("2024-11-12T18:50:30.225Z"),
       email: "dwight@dundermifflin.com",
@@ -21,9 +21,9 @@ let value: ListOrganizationInvitesResponse = {
       id: "inv_01h2xcejqtf2nbrexx3vqjhp41",
       organizationId: "org_01h2xcejqtf2nbrexx3vqjhp41",
       sender: {
+        email: "Haskell45@yahoo.com",
         id: "user_01h2xcejqtf2nbrexx3vqjhp41",
-        name: "John Doe",
-        type: "user_account",
+        name: "<value>",
       },
       status: "revoked",
     },

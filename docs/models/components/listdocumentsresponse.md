@@ -14,8 +14,8 @@ let value: ListDocumentsResponse = {
       createdAt: new Date("2024-02-18T08:27:31.876Z"),
       createdBy: {
         id: "user_01h2xcejqtf2nbrexx3vqjhp41",
-        name: "John Doe",
-        type: "service_account",
+        name: "<value>",
+        type: "bot",
       },
       currentVersion: {
         id: "ver_01h2abcd1234efgh5678jkmnpt",

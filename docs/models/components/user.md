@@ -1,6 +1,7 @@
 # User
 
-User represents a user or service account.
+User represents a human user account.
+ Returned by GetUser (endpoint deferred).
 
 ## Example Usage
 
@@ -8,16 +9,16 @@ User represents a user or service account.
 import { User } from "@factify/sdk/models/components";
 
 let value: User = {
+  email: "Carissa_Lehner@yahoo.com",
   id: "user_01h2xcejqtf2nbrexx3vqjhp41",
-  name: "John Doe",
-  type: "service_account",
+  name: "<value>",
 };
 ```
 
 ## Fields
 
-| Field                                                                                                                                       | Type                                                                                                                                        | Required                                                                                                                                    | Description                                                                                                                                 | Example                                                                                                                                     |
-| ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `id`                                                                                                                                        | *string*                                                                                                                                    | :heavy_check_mark:                                                                                                                          | Unique ID for the user or service account.<br/> Pattern: user_[0-9a-hjkmnp-tv-z]{26} for users, svc_[0-9a-hjkmnp-tv-z]{26} for service accounts | user_01h2xcejqtf2nbrexx3vqjhp41                                                                                                             |
-| `name`                                                                                                                                      | *string*                                                                                                                                    | :heavy_check_mark:                                                                                                                          | Display name of the user or service account.                                                                                                | John Doe                                                                                                                                    |
-| `type`                                                                                                                                      | [components.UserType](../../models/components/usertype.md)                                                                                  | :heavy_check_mark:                                                                                                                          | N/A                                                                                                                                         |                                                                                                                                             |
+| Field                           | Type                            | Required                        | Description                     | Example                         |
+| ------------------------------- | ------------------------------- | ------------------------------- | ------------------------------- | ------------------------------- |
+| `email`                         | *string*                        | :heavy_check_mark:              | N/A                             |                                 |
+| `id`                            | *string*                        | :heavy_check_mark:              | N/A                             | user_01h2xcejqtf2nbrexx3vqjhp41 |
+| `name`                          | *string*                        | :heavy_check_mark:              | Display name of the user.       |                                 |

@@ -11,14 +11,9 @@ let value: ListDocumentPoliciesResponse = {
   items: [
     {
       attachedAt: new Date("2025-08-20T16:52:51.173Z"),
-      attachedBy: {
-        id: "user_01h2xcejqtf2nbrexx3vqjhp41",
-        name: "John Doe",
-        type: "user_account",
-      },
       documentId: "doc_01h2xcejqtf2nbrexx3vqjhp41",
       policy: {
-        createdAt: new Date("2024-07-13T05:30:11.999Z"),
+        createdAt: new Date("2025-04-04T15:39:28.718Z"),
         id: "pol_01h2xcejqtf2nbrexx3vqjhp41",
         name: "GDPR Compliance Policy",
       },

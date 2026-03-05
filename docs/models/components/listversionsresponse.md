@@ -13,8 +13,8 @@ let value: ListVersionsResponse = {
       createdAt: new Date("2025-03-31T04:52:07.922Z"),
       createdBy: {
         id: "user_01h2xcejqtf2nbrexx3vqjhp41",
-        name: "John Doe",
-        type: "service_account",
+        name: "<value>",
+        type: "bot",
       },
       documentId: "doc_01h2xcejqtf2nbrexx3vqjhp41",
       id: "ver_01h2abcd1234efgh5678jkmnpt",

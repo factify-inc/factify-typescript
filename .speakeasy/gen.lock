@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 23af0391-5a58-495c-b992-941b55f41c78
 management:
-  docChecksum: 0e2762bbdd031597a3d34bee72a4ab60
+  docChecksum: dbf0866c886887b1a14b0e9f337d7924
   docVersion: 1.0.0
-  speakeasyVersion: 1.741.5
-  generationVersion: 2.849.7
-  releaseVersion: 0.3.14-rc.14
-  configChecksum: 9203ce66d801996e131f318c24b24fad
+  speakeasyVersion: 1.741.6
+  generationVersion: 2.849.8
+  releaseVersion: 0.3.14-rc.15
+  configChecksum: f6830081aa782cbb5dca251fdb7d91c0
   repoURL: https://github.com/factify-inc/factify-typescript.git
   installationURL: https://github.com/factify-inc/factify-typescript
   published: true
 persistentEdits:
-  generation_id: 9e70426e-cdb4-44ce-bd4c-bf0b9d22c6b0
-  pristine_commit_hash: b810ced356dbd396ec94477bf6f15edd2a28a4e0
-  pristine_tree_hash: baf203d151520e20a32321ad8c2e86e05fa390bc
+  generation_id: 26f1e207-d524-4a72-b4ba-a38ebb3e5b48
+  pristine_commit_hash: 2add68cef4de35d39d3a1e4b9126d5fa6491dc0a
+  pristine_tree_hash: 5316cbd98813b7b00c3a90db6a3d466356a9fead
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -74,8 +74,8 @@ trackedFiles:
     pristine_git_object: 93bc4b4f1e9353542c7f1e8554a517bd3fde0d2e
   docs/models/components/addorganizationmemberresponse.md:
     id: 6429ffbf774d
-    last_write_checksum: sha1:7f19af6a53ff30b8c7635bfb5cd0611418df7a20
-    pristine_git_object: 281a1882fb5e3cb8d0dce8d1d1675e1c3be6e276
+    last_write_checksum: sha1:a1303393e91a28219c23926ffd9e604ccf509e80
+    pristine_git_object: cbf3488188e477b70f446a3bef2fb8529841dd3b
   docs/models/components/apikey.md:
     id: d9ee76dadf23
     last_write_checksum: sha1:1190a05f761dfafe2b64cf85b298e08f3f848ba6
@@ -114,12 +114,12 @@ trackedFiles:
     pristine_git_object: 6c9409bffae7695e0d26e95d11617ab98edbf077
   docs/models/components/createdocumentresponse.md:
     id: f7331f143170
-    last_write_checksum: sha1:a035d545023fc95ceb6987ec9f23c556c3cd81e9
-    pristine_git_object: 71fb90a9dd5d48901c713f8d6248adecf3827e8f
+    last_write_checksum: sha1:837c09fbedc0ac612521ca7d1ba59fbcad6b569d
+    pristine_git_object: cbde84f3923b5cf86d1a0721dd699f23f236e6ef
   docs/models/components/createorganizationinviteresponse.md:
     id: e50ec130a0fe
-    last_write_checksum: sha1:cfe4567d3fc75175e314eeb76bf13b47828397c4
-    pristine_git_object: 0af9342f15e79c450f82359ddcf13b4070bbb5c8
+    last_write_checksum: sha1:ce83603cd3ae4f2490d8b682fe4ff7f11802a69e
+    pristine_git_object: 72cb69cd9e604c812823a87e272466951c56b615
   docs/models/components/createorganizationrequest.md:
     id: 0ceae077b9d1
     last_write_checksum: sha1:5cacc7c7f2039e4c237b85e77c27cc4c27da76bc
@@ -158,12 +158,12 @@ trackedFiles:
     pristine_git_object: 6ed189eb7685da55c0dbf50655131fed796cb756
   docs/models/components/document.md:
     id: 73a00acee39f
-    last_write_checksum: sha1:61f54f5a400e87d70623eb4d21c98046bd405759
-    pristine_git_object: 7abda18fac4fc3de1b6b3feb83f82a7ef4fa535c
+    last_write_checksum: sha1:beba8fae43e3835ba3bcb6eeed7c259093bc5577
+    pristine_git_object: 918413418ff895c3d04f77faed538ec972750005
   docs/models/components/documentpolicy.md:
     id: 61c94be1981b
-    last_write_checksum: sha1:6de78ecb5d716852ce034f795e2791bdac7e13fa
-    pristine_git_object: 3fd3e54bb3caf507702cec90ca3acd7af2cf9439
+    last_write_checksum: sha1:d7a2f6e6eeed58c5e64aceeb4db99ba4b4953f32
+    pristine_git_object: 480e5755b21cc519b17be84c451a8d5926ab3f36
   docs/models/components/empty.md:
     id: 77cd7ab1faf6
     last_write_checksum: sha1:fd9f7990adcd0534bc97cbdb71a2d07aaaf29e0a
@@ -182,8 +182,8 @@ trackedFiles:
     pristine_git_object: 73b38e7fa6830eaae4cb980adae3918eeeb7fa61
   docs/models/components/getdocumentresponse.md:
     id: 030d7132f935
-    last_write_checksum: sha1:59de4797edcd79bc4f1ec22e32d1c14aaa1f6d5a
-    pristine_git_object: cfc27851ad44433f528c939cbd613011121cd3ab
+    last_write_checksum: sha1:b17d3efee8be6e010ea32161e1d5ac6a5938652b
+    pristine_git_object: 6709d5ce16ec0a4799217af573c8a4098287d0d8
   docs/models/components/getorganizationquotaresponse.md:
     id: e0d801791477
     last_write_checksum: sha1:c678b2720e419eddba821d14cd5dc75a629f509e
@@ -210,44 +210,44 @@ trackedFiles:
     pristine_git_object: e0cf7f283b2a8f983d0d447cdcdb632409e67933
   docs/models/components/listdocumentpoliciesresponse.md:
     id: de6bc85fb505
-    last_write_checksum: sha1:3e516bbbc0dbbf248f7b8a78435733ab07b9bca2
-    pristine_git_object: d2d97ce48a2567b7fb47ead056c3b7f73e1b488a
+    last_write_checksum: sha1:2be329d1609045531050f98a362b24bfcbe6f6f2
+    pristine_git_object: 393a7708a49c352850727a542e94f617b50857ac
   docs/models/components/listdocumentsresponse.md:
     id: 5cbdb17d7113
-    last_write_checksum: sha1:a266cef034548f44af9ef4b0f80299bc0e618916
-    pristine_git_object: 3b03a012bb65c88a95133807d13302adecce6783
+    last_write_checksum: sha1:20e7e942a1bbc90b67f1e210a3adbbf1aef2bd68
+    pristine_git_object: c52e35c62f72402ff7b1d2a89a1fac88358faae1
   docs/models/components/listorganizationinvitesresponse.md:
     id: a307b159743f
-    last_write_checksum: sha1:65fa0bfca165fb81d419c2f62223663e5583b9c9
-    pristine_git_object: 968c7da59432d01c03010646cc79794436a1cc4c
+    last_write_checksum: sha1:9fcf16661d2825abfeb38696a5a0eded2e36efa2
+    pristine_git_object: cc21d61949a49d6788f4823f9f247b104f878082
   docs/models/components/listorganizationmembersresponse.md:
     id: d8cd90cae705
-    last_write_checksum: sha1:ec9a068eceee5d0256a436fb5b415087f37c29bc
-    pristine_git_object: 7bdbf97ff86a0595194cbd383c7add8b6458882a
+    last_write_checksum: sha1:853f57876f7527daee7bcd63d5abd82e82b5936e
+    pristine_git_object: 097e6eaedda7163b236f905dada4f524190e55c0
   docs/models/components/listorganizationsresponse.md:
     id: b950ff70dbff
     last_write_checksum: sha1:ba2ea7f0b40038a6bfe1915bebb2ffa164bd5e8e
     pristine_git_object: 998b45a0dd3987eb57622401597e4213912dcbad
   docs/models/components/listversionsresponse.md:
     id: f82b651e7159
-    last_write_checksum: sha1:563cc120244ff5d246c16f17000504aef40b881b
-    pristine_git_object: 3a653bc17b013e197d111f47d4d88bf833a87f77
+    last_write_checksum: sha1:82adb48aa312bb8920bff6cecb1b9127f9907127
+    pristine_git_object: 780495278735f5c345afc1532348e354bc21d220
   docs/models/components/organization.md:
     id: 288ce68f18e3
     last_write_checksum: sha1:09299c2e4b466e624ffeb613b1b8e847e0f78523
     pristine_git_object: edd732d181f4dc0f2ff048f036dd5a35b165c136
   docs/models/components/organizationinvite.md:
     id: 2dff32cd8d80
-    last_write_checksum: sha1:ec351a0603105661d31bf70bdb4aa34ccb2e26d4
-    pristine_git_object: 03cf471b787b47512aff4bd143c242c33259857a
+    last_write_checksum: sha1:49ab768dd4de04b47b3de47bb979b3c39a91f344
+    pristine_git_object: aee64fca4687c18577e3abfad7e6ab8db3514d39
   docs/models/components/organizationinvitestatus.md:
     id: e023cb490bb7
     last_write_checksum: sha1:7e6b434de7f7c54510c9608abf08da2ddebc42c8
     pristine_git_object: e3616882f3cd599bb74703bd7bec68624a7fd0f9
   docs/models/components/organizationmember.md:
     id: 89524b608bc4
-    last_write_checksum: sha1:05457e45f30b0d5a1a6f749493804d21ca9ea2ce
-    pristine_git_object: 9413c429c515a505637dca70c1e1c7d2e9634254
+    last_write_checksum: sha1:56f3ef646cabb039dceee3bf76758f50fb43950f
+    pristine_git_object: 0b9ecd7acdf4d7392b998cde4814af457939cb2a
   docs/models/components/organizationquota.md:
     id: 7e4536844a57
     last_write_checksum: sha1:c03c48e21c5ecc9db30fd6dae0a55ac698138697
@@ -286,16 +286,16 @@ trackedFiles:
     pristine_git_object: 05df2bc6b1ac418a4cfa699412200cb0227088ef
   docs/models/components/resendorganizationinviteresponse.md:
     id: 606eb470eee2
-    last_write_checksum: sha1:6eddd984a368fbe6a72f11beba830ddac27f4539
-    pristine_git_object: 05bdceac8a8fa7c9866cf7199f1dcb526f5d404d
+    last_write_checksum: sha1:6d17e3c57a5af3f41b47ba89b383062af95a4085
+    pristine_git_object: 31fbcc0a519937570535e30e449db183b619c2e5
   docs/models/components/revokeapikeyresponse.md:
     id: 4a7e638a9d80
     last_write_checksum: sha1:8101da5660231e2c21774d1b6f18b1d8900c9c67
     pristine_git_object: c926ef4ef093511509184c939fab621dfa7ab8ab
   docs/models/components/revokeorganizationinviteresponse.md:
     id: 6aa268d28217
-    last_write_checksum: sha1:b7535fe738d1653e14c67d8a5abe40b3bb5c78a7
-    pristine_git_object: 30483f1cdded1b54773557d569d954442e9b9824
+    last_write_checksum: sha1:3d42e02044e04eb4ddcf4df36b8d44dd3401b8bf
+    pristine_git_object: 1119dfd2730e98622752d392a75001c3231c8869
   docs/models/components/security.md:
     id: 54906b49ea28
     last_write_checksum: sha1:7e8e2120ff0f6bae8e6283a06001ea0dbfeaa46e
@@ -312,26 +312,30 @@ trackedFiles:
     id: 9f538d41e324
     last_write_checksum: sha1:4b95ba8939d600d2ee6f43b98c3e0140f7b032ea
     pristine_git_object: 48bf93e3d118ed706b7acd6a0958c813d0bc6e88
+  docs/models/components/subject.md:
+    id: e70acee9923e
+    last_write_checksum: sha1:b594ff3a70ccb6a1804f0c1fdc14d5006e4d0cfb
+    pristine_git_object: 0a86a4dfd6ad13825d70bb95855b431882e78425
+  docs/models/components/subjecttype.md:
+    id: 682d3935a1d9
+    last_write_checksum: sha1:8d7a98d12db892468aee8bbe1dd09b2a528da220
+    pristine_git_object: 6453a71fbd7e1b8ebad153d172cde982620a0029
   docs/models/components/updatedocumentresponse.md:
     id: 90a43889a9d1
-    last_write_checksum: sha1:c805d9fde8b20e4778e15e9751e8b1a0d9378b10
-    pristine_git_object: a5d9fafd645366e3cedd024373c8bfce770c8f6f
+    last_write_checksum: sha1:c056d013898af28e9b643901b690a41c7d585278
+    pristine_git_object: d4e6ae7921eca1f977d0c013c820aeca767f814d
   docs/models/components/updateorganizationmemberresponse.md:
     id: 02e0d49c0418
-    last_write_checksum: sha1:1fe0288d496040d74e2241c3b29bb86cd5f31ef6
-    pristine_git_object: 4c576de3acbf2114caa43689fda95f9d16ebef9d
+    last_write_checksum: sha1:a0c54e9035234fe5cf9cbeca3482d5c931fe9e4d
+    pristine_git_object: acfa1ad769af6464b6ccba34749f31ed9eda4c30
   docs/models/components/user.md:
     id: 9615438c874c
-    last_write_checksum: sha1:50f2f8405cecf393f10112e8a82ec8c168680c00
-    pristine_git_object: c7a3f5c5673c766fd3c5327b0a6ab849bdd7d82d
-  docs/models/components/usertype.md:
-    id: 1d95742cf544
-    last_write_checksum: sha1:cc27d7dc449e6ec837968957c1a44af99cee3421
-    pristine_git_object: 9ecbb25dc4ebdabc90569cc21aa734830c45f930
+    last_write_checksum: sha1:465a0cf68278b67714ac4f6050a7532bc3b77e90
+    pristine_git_object: 5bb7b46ab4e2c060f742510e1a667d792d6209c3
   docs/models/components/version.md:
     id: 2dfdc559e77f
-    last_write_checksum: sha1:e0c886c65834bd37b80b3d85d39895a79bdb5754
-    pristine_git_object: d278291bcc8dc41585b5d76be049eb35697dd182
+    last_write_checksum: sha1:a21dbc4c49d525cd3fdcf37090274da6ca19b8d5
+    pristine_git_object: 355e0b0e7a12b58c6c22dee4882fce31ec90f603
   docs/models/components/versionref.md:
     id: ea11855d9b38
     last_write_checksum: sha1:44d5f79cc8720f4fa29d4c7d717e7dc3acca9eef
@@ -710,12 +714,12 @@ trackedFiles:
     pristine_git_object: 766ea5ba4257419f9fca9da9c6ba895ab05a3f8b
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:c77c08931d0dd702c9bbe85a3ae14477e89223cc
-    pristine_git_object: 11ac007f9122031cca1a9af23257ae593b5b1e37
+    last_write_checksum: sha1:a50c984edf526ec872ffdf49f65892aaa8019dc0
+    pristine_git_object: 0492a0fbc408414441cc3ee43c5d595415b84cda
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:7c68fea9bc2b8ba20a5a19e92a5ce5046f2a49f3
-    pristine_git_object: a894c1177b97339870700a0d96bc7dcd9fd2bf91
+    last_write_checksum: sha1:112b858c04085eff55ec669d4190eaa180e9b00a
+    pristine_git_object: 1bd57d2727916507b5627c89bb729b7ecd77cfd2
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:72dd2a6867a44557b35fa72fe5588efc5d08e8e1
@@ -878,8 +882,8 @@ trackedFiles:
     pristine_git_object: 44be0eae8246521b230e8e711a88eff738fc015d
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:8d0b139721c1f0c9f7126e21068ddf45b6023601
-    pristine_git_object: 9f4106566c99d587401cf2a9eb97049d20ac9732
+    last_write_checksum: sha1:8f6c484b95abdee047f14a77ff9f3ff70a65572c
+    pristine_git_object: 03336bf84964d1332ef2d06120dac2470df35aa9
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -1010,12 +1014,12 @@ trackedFiles:
     pristine_git_object: 6404076e0774a42f3919b5a965466eb81715a780
   src/models/components/document.ts:
     id: 908fbd640ca2
-    last_write_checksum: sha1:86c351119f600c4eee5fc0f1b1d65de8fa01911e
-    pristine_git_object: 3265b8a7de29b9c74badb2aa3b52c51e1e4d3c20
+    last_write_checksum: sha1:69172703e04ecd521107d351f75a0ecb3dc67502
+    pristine_git_object: 9a37edb13f0b013ccb65944a811a7ca3c1176f9e
   src/models/components/documentpolicy.ts:
     id: 9c239bbea58c
-    last_write_checksum: sha1:72f38c67aeb43a468dd0bd68797d946a5158eeb8
-    pristine_git_object: d093d51eeed3375dd369120e038d4669d08c9932
+    last_write_checksum: sha1:e0ceda424fdc71560367ef055ffc819401f5f9ad
+    pristine_git_object: 394348bbc59430ebafdcaaeb6429269f77b3b463
   src/models/components/empty.ts:
     id: 367fd7db07b5
     last_write_checksum: sha1:673cef3a8e2131b4d8ab4fc386c98cde5b78e901
@@ -1054,8 +1058,8 @@ trackedFiles:
     pristine_git_object: 52ea8912b0a1f17b36f54e6bcba97fb6e58b6cb2
   src/models/components/index.ts:
     id: 0aa842dce54d
-    last_write_checksum: sha1:0d08ce4c16460af1275f95616bcaf41add09e01b
-    pristine_git_object: 9ed5fd3287669cae40d86634271641a6e032ed4c
+    last_write_checksum: sha1:d69371214cef7d913fe383e7ea57ca584b6404f7
+    pristine_git_object: c367d0db305f6962e619df3114525e3c94f32b5e
   src/models/components/listapikeyquotasresponse.ts:
     id: 4b49aeabc2d7
     last_write_checksum: sha1:01d450b0863f68eb878e59798846269895c30e75
@@ -1094,16 +1098,16 @@ trackedFiles:
     pristine_git_object: f590e46ff560912068311f6247e5fa68119eeb2a
   src/models/components/organizationinvite.ts:
     id: 2abd92e5004f
-    last_write_checksum: sha1:be44653a40bf59e2beb0385e423ffd5a7665f1a8
-    pristine_git_object: f5df087bf2984c9b058a4a8e8d4e899b8ac92ecc
+    last_write_checksum: sha1:e270fd030fac998252ea4adbcb23878f89f8e2ee
+    pristine_git_object: 4edfbe09263896aa9c92f45c2d16bcee1fdd1d66
   src/models/components/organizationinvitestatus.ts:
     id: 05d16e7ce14b
     last_write_checksum: sha1:733892b3dde3215ac0001bc34b5337ac23013a45
     pristine_git_object: c58f69c5a3e1f6b233406f085cf71b2417278001
   src/models/components/organizationmember.ts:
     id: 4f986b386a88
-    last_write_checksum: sha1:a79d9b8e3a204633a50a285a9ccccd9c8f7462c4
-    pristine_git_object: 732ddc62207300cbdddf7f320543461be9629724
+    last_write_checksum: sha1:162dc8db3f041133f3066cef4a3d7ed7df4b9a03
+    pristine_git_object: bccbf76ef5c9b81ea13c7832b3b84c5b9f0e838e
   src/models/components/organizationquota.ts:
     id: 661d827d0ab7
     last_write_checksum: sha1:1e22f2d116ea2055dd7f0a9dd0e8ce3ffd3c6866
@@ -1164,6 +1168,14 @@ trackedFiles:
     id: 10cd6f6e82a6
     last_write_checksum: sha1:70bcc4ee60e54cfc9908c5498bc53b063d808c21
     pristine_git_object: 9e6cae2776619a1ef18194da05a3cd0dd90cdd19
+  src/models/components/subject.ts:
+    id: a4d24b21e838
+    last_write_checksum: sha1:7d0a972e3698587b3ecf63c37ea24c64dd09cc7d
+    pristine_git_object: 8f7e9261a5db57cb316e5aaf0514e0fb6cd451e7
+  src/models/components/subjecttype.ts:
+    id: 0a4a3b3dc0da
+    last_write_checksum: sha1:3533888a1d6bbc063e8843c403d745b95203a5c7
+    pristine_git_object: 3792d052ded21c65b700aaaea57024fb7649ba56
   src/models/components/updatedocumentresponse.ts:
     id: ab877c600dd0
     last_write_checksum: sha1:242e5183437502ffc3296d8852372098c43ec799
@@ -1174,16 +1186,12 @@ trackedFiles:
     pristine_git_object: 5237cf1baa1dd7f772889d0d293f13bb841ae4b6
   src/models/components/user.ts:
     id: d5d9f526a022
-    last_write_checksum: sha1:72dcee86e8e28f4ad446871fa2401b9a45f4db3d
-    pristine_git_object: 13a7c5d5dcc98fff31545fc2ce396e97b9fe23b8
-  src/models/components/usertype.ts:
-    id: 0577c6acf743
-    last_write_checksum: sha1:440260a7b03e3437bd96d4d2eb406aae4cb2f648
-    pristine_git_object: db40b19f688b7b82d50575313a8d6419ccfc68e8
+    last_write_checksum: sha1:4e57b78e7cf8f2062ed215a29842e159bb0430f5
+    pristine_git_object: ef9307a4250d36f368a076305be738000df09575
   src/models/components/version.ts:
     id: f401c06db217
-    last_write_checksum: sha1:cf22cdfc620f403d93c817f5419d7eaada616556
-    pristine_git_object: 5d83a778f39e96b42a3f006d458b668a8a7a276c
+    last_write_checksum: sha1:40ee43782c37fa3123a17660cd00b1a76d7c31b5
+    pristine_git_object: 807e8e2ab9b592bea4a03e0a77f810d9594b5bd4
   src/models/components/versionref.ts:
     id: 5cdf7325a6fa
     last_write_checksum: sha1:352392f590ae9c0a1fa27b9c6bfa2a401e63ce74
@@ -1475,7 +1483,7 @@ examples:
           page_token: "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0"
       responses:
         "200":
-          application/json: {"items": [{"access_level": "private", "created_at": "2024-04-10T01:05:36.575Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "current_version": {"id": "ver_01h2abcd1234efgh5678jkmnpt"}, "description": "Quarterly financial report for Q4 2024", "id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "processing_status": "ready", "title": "Q4 2024 Financial Report", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41"}], "pagination": {"next_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0", "prev_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJwcmV2In0"}}
+          application/json: {"items": [{"access_level": "private", "created_at": "2024-04-10T01:05:36.575Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user"}, "current_version": {"id": "ver_01h2abcd1234efgh5678jkmnpt"}, "description": "Quarterly financial report for Q4 2024", "id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "processing_status": "ready", "title": "Q4 2024 Financial Report", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41"}], "pagination": {"next_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0", "prev_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJwcmV2In0"}}
         "400":
           application/json: {"code": "permission_denied", "message": "<value>"}
         "429":
@@ -1498,7 +1506,7 @@ examples:
         multipart/form-data: {"payload": "x-file: example.file", "title": "<value>"}
       responses:
         "200":
-          application/json: {"document": {"access_level": "private", "created_at": "2024-02-28T19:09:19.845Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "current_version": {"id": "ver_01h2abcd1234efgh5678jkmnpt"}, "description": "Quarterly financial report for Q4 2024", "id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "processing_status": "failed", "title": "Q4 2024 Financial Report", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41"}}
+          application/json: {"document": {"access_level": "private", "created_at": "2024-02-28T19:09:19.845Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user"}, "current_version": {"id": "ver_01h2abcd1234efgh5678jkmnpt"}, "description": "Quarterly financial report for Q4 2024", "id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "processing_status": "failed", "title": "Q4 2024 Financial Report", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41"}}
         "400":
           application/json: {"code": "unknown", "message": "<value>"}
         "429":
@@ -1523,7 +1531,7 @@ examples:
           document_id: "<id>"
       responses:
         "200":
-          application/json: {"document": {"access_level": "organization", "created_at": "2025-08-28T09:44:27.862Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "current_version": {"id": "ver_01h2abcd1234efgh5678jkmnpt"}, "description": "Quarterly financial report for Q4 2024", "id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "processing_status": "processing", "title": "Q4 2024 Financial Report", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41"}}
+          application/json: {"document": {"access_level": "organization", "created_at": "2025-08-28T09:44:27.862Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "bot"}, "current_version": {"id": "ver_01h2abcd1234efgh5678jkmnpt"}, "description": "Quarterly financial report for Q4 2024", "id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "processing_status": "processing", "title": "Q4 2024 Financial Report", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41"}}
         "400":
           application/json: {"code": "resource_exhausted", "message": "<value>"}
         "429":
@@ -1552,7 +1560,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"document": {"access_level": "public", "created_at": "2024-08-12T11:38:39.237Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "current_version": {"id": "ver_01h2abcd1234efgh5678jkmnpt"}, "description": "Quarterly financial report for Q4 2024", "id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "processing_status": "failed", "title": "Q4 2024 Financial Report", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41"}}
+          application/json: {"document": {"access_level": "public", "created_at": "2024-08-12T11:38:39.237Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "bot"}, "current_version": {"id": "ver_01h2abcd1234efgh5678jkmnpt"}, "description": "Quarterly financial report for Q4 2024", "id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "processing_status": "failed", "title": "Q4 2024 Financial Report", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41"}}
         "400":
           application/json: {"code": "unimplemented", "message": "<value>"}
         "429":
@@ -1606,7 +1614,7 @@ examples:
           page_token: "eyJpZCI6InBvbF8wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0"
       responses:
         "200":
-          application/json: {"items": [{"attached_at": "2025-07-11T12:22:46.808Z", "attached_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "document_id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "policy": {"created_at": "2025-12-15T12:15:25.816Z", "id": "pol_01h2xcejqtf2nbrexx3vqjhp41", "name": "GDPR Compliance Policy"}}], "pagination": {"next_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0", "prev_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJwcmV2In0"}}
+          application/json: {"items": [{"attached_at": "2025-07-11T12:22:46.808Z", "document_id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "policy": {"created_at": "2025-12-15T12:15:25.816Z", "id": "pol_01h2xcejqtf2nbrexx3vqjhp41", "name": "GDPR Compliance Policy"}}], "pagination": {"next_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0", "prev_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJwcmV2In0"}}
         "400":
           application/json: {"code": "resource_exhausted", "message": "<value>"}
         "429":
@@ -1635,7 +1643,7 @@ examples:
         application/json: {"policy_id": "<id>"}
       responses:
         "200":
-          application/json: {"attached_at": "2026-02-17T07:57:08.704Z", "attached_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "document_id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "policy": {"created_at": "2025-02-20T21:52:12.756Z", "id": "pol_01h2xcejqtf2nbrexx3vqjhp41", "name": "GDPR Compliance Policy"}}
+          application/json: {"attached_at": "2026-02-17T07:57:08.704Z", "document_id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "policy": {"created_at": "2025-02-20T21:52:12.756Z", "id": "pol_01h2xcejqtf2nbrexx3vqjhp41", "name": "GDPR Compliance Policy"}}
         "400":
           application/json: {"code": "unavailable", "message": "<value>"}
         "429":
@@ -1691,7 +1699,7 @@ examples:
           page_token: "eyJpZCI6InZlcl8wMWgyYWJjZDEyMzRlZmdoNTY3OGprbW5wdCIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0"
       responses:
         "200":
-          application/json: {"items": [{"created_at": "2026-05-29T06:29:21.750Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "document_id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "id": "ver_01h2abcd1234efgh5678jkmnpt", "processing_status": "ready", "title": "Version 2.0", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41/v/1"}], "pagination": {"next_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0", "prev_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJwcmV2In0"}}
+          application/json: {"items": [{"created_at": "2026-05-29T06:29:21.750Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "bot"}, "document_id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "id": "ver_01h2abcd1234efgh5678jkmnpt", "processing_status": "ready", "title": "Version 2.0", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41/v/1"}], "pagination": {"next_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0", "prev_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJwcmV2In0"}}
         "400":
           application/json: {"code": "unimplemented", "message": "<value>"}
         "429":
@@ -1720,7 +1728,7 @@ examples:
         multipart/form-data: {"payload": "x-file: example.file"}
       responses:
         "200":
-          application/json: {"created_at": "2024-10-02T02:47:01.599Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "document_id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "id": "ver_01h2abcd1234efgh5678jkmnpt", "processing_status": "ready", "title": "Version 2.0", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41/v/1"}
+          application/json: {"created_at": "2024-10-02T02:47:01.599Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user"}, "document_id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "id": "ver_01h2abcd1234efgh5678jkmnpt", "processing_status": "ready", "title": "Version 2.0", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41/v/1"}
         "400":
           application/json: {"code": "permission_denied", "message": "<value>"}
         "429":
@@ -1850,7 +1858,7 @@ examples:
           version_id: "<id>"
       responses:
         "200":
-          application/json: {"created_at": "2024-04-07T22:28:44.078Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "document_id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "id": "ver_01h2abcd1234efgh5678jkmnpt", "processing_status": "processing", "title": "Version 2.0", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41/v/1"}
+          application/json: {"created_at": "2024-04-07T22:28:44.078Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user"}, "document_id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "id": "ver_01h2abcd1234efgh5678jkmnpt", "processing_status": "processing", "title": "Version 2.0", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41/v/1"}
         "400":
           application/json: {"code": "invalid_argument", "message": "<value>"}
         "429":
@@ -1879,7 +1887,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"created_at": "2026-04-02T18:16:04.278Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "document_id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "id": "ver_01h2abcd1234efgh5678jkmnpt", "processing_status": "ready", "title": "Version 2.0", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41/v/1"}
+          application/json: {"created_at": "2026-04-02T18:16:04.278Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "bot"}, "document_id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "id": "ver_01h2abcd1234efgh5678jkmnpt", "processing_status": "ready", "title": "Version 2.0", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41/v/1"}
         "400":
           application/json: {"code": "unavailable", "message": "<value>"}
         "429":
@@ -2025,7 +2033,7 @@ examples:
           organization_id: "<id>"
       responses:
         "200":
-          application/json: {"items": [{"accepted_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "created_at": "2025-10-27T07:43:49.957Z", "email": "dwight@dundermifflin.com", "expires_at": "2025-12-01T10:42:58.059Z", "id": "inv_01h2xcejqtf2nbrexx3vqjhp41", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41", "sender": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "status": "pending"}], "pagination": {"next_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0", "prev_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJwcmV2In0"}}
+          application/json: {"items": [{"accepted_by": {"email": "Lenny63@gmail.com", "id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe"}, "created_at": "2025-10-27T07:43:49.957Z", "email": "dwight@dundermifflin.com", "expires_at": "2025-12-01T10:42:58.059Z", "id": "inv_01h2xcejqtf2nbrexx3vqjhp41", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41", "sender": {"email": "Xzavier_Heidenreich46@gmail.com", "id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe"}, "status": "pending"}], "pagination": {"next_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0", "prev_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJwcmV2In0"}}
         "400":
           application/json: {"code": "unknown", "message": "<value>"}
         "429":
@@ -2054,7 +2062,7 @@ examples:
         application/json: {"email": "Willie_Parisian16@hotmail.com"}
       responses:
         "200":
-          application/json: {"invite": {"accepted_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "created_at": "2025-07-26T07:49:48.068Z", "email": "dwight@dundermifflin.com", "expires_at": "2026-01-04T12:23:16.764Z", "id": "inv_01h2xcejqtf2nbrexx3vqjhp41", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41", "sender": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "status": "revoked"}}
+          application/json: {"invite": {"accepted_by": {"email": "Willie_Parisian16@hotmail.com", "id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe"}, "created_at": "2025-07-26T07:49:48.068Z", "email": "dwight@dundermifflin.com", "expires_at": "2026-01-04T12:23:16.764Z", "id": "inv_01h2xcejqtf2nbrexx3vqjhp41", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41", "sender": {"email": "Joyce_Lubowitz9@gmail.com", "id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe"}, "status": "revoked"}}
         "400":
           application/json: {"code": "deadline_exceeded", "message": "<value>"}
         "429":
@@ -2116,7 +2124,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"invite": {"accepted_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "created_at": "2026-03-26T20:10:39.093Z", "email": "dwight@dundermifflin.com", "expires_at": "2026-01-04T23:55:34.416Z", "id": "inv_01h2xcejqtf2nbrexx3vqjhp41", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41", "sender": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "status": "pending"}}
+          application/json: {"invite": {"accepted_by": {"email": "Natasha1@gmail.com", "id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe"}, "created_at": "2026-03-26T20:10:39.093Z", "email": "dwight@dundermifflin.com", "expires_at": "2026-01-04T23:55:34.416Z", "id": "inv_01h2xcejqtf2nbrexx3vqjhp41", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41", "sender": {"email": "Cindy89@yahoo.com", "id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe"}, "status": "pending"}}
         "400":
           application/json: {"code": "invalid_argument", "message": "<value>"}
         "429":
@@ -2147,7 +2155,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"invite": {"accepted_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "created_at": "2025-02-05T03:30:38.591Z", "email": "dwight@dundermifflin.com", "expires_at": "2024-08-08T12:50:51.355Z", "id": "inv_01h2xcejqtf2nbrexx3vqjhp41", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41", "sender": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "status": "revoked"}}
+          application/json: {"invite": {"accepted_by": {"email": "Freddy.Satterfield90@hotmail.com", "id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe"}, "created_at": "2025-02-05T03:30:38.591Z", "email": "dwight@dundermifflin.com", "expires_at": "2024-08-08T12:50:51.355Z", "id": "inv_01h2xcejqtf2nbrexx3vqjhp41", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41", "sender": {"email": "Jada_Fay@gmail.com", "id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe"}, "status": "revoked"}}
         "400":
           application/json: {"code": "unavailable", "message": "<value>"}
         "429":
@@ -2317,7 +2325,7 @@ examples:
           organization_id: "<id>"
       responses:
         "200":
-          application/json: {"items": [{"email": "Victor.Schmitt89@yahoo.com", "joined_at": "2026-01-01T13:16:21.982Z", "role": "admin", "user": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}}], "pagination": {"next_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0", "prev_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJwcmV2In0"}}
+          application/json: {"items": [{"joined_at": "2026-01-01T13:16:21.982Z", "role": "admin", "user": {"email": "Victor.Schmitt89@yahoo.com", "id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe"}}], "pagination": {"next_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0", "prev_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJwcmV2In0"}}
         "400":
           application/json: {"code": "unavailable", "message": "<value>"}
         "429":
@@ -2375,7 +2383,7 @@ examples:
         application/json: {"role": "member"}
       responses:
         "200":
-          application/json: {"member": {"email": "Angie13@hotmail.com", "joined_at": "2024-02-21T08:29:30.715Z", "role": "admin", "user": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}}}
+          application/json: {"member": {"joined_at": "2024-02-21T08:29:30.715Z", "role": "admin", "user": {"email": "Samanta_Ankunding42@hotmail.com", "id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe"}}}
         "400":
           application/json: {"code": "not_found", "message": "<value>"}
         "429":
@@ -2404,7 +2412,7 @@ examples:
         application/json: {"role": "owner", "user_id": "<id>"}
       responses:
         "200":
-          application/json: {"member": {"email": "Alyson.Swaniawski38@gmail.com", "joined_at": "2025-05-16T09:35:06.867Z", "role": "member", "user": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}}}
+          application/json: {"member": {"joined_at": "2025-05-16T09:35:06.867Z", "role": "member", "user": {"email": "Darwin_Hermiston@gmail.com", "id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe"}}}
         "400":
           application/json: {"code": "unauthenticated", "message": "<value>"}
         "429":
@@ -2414,4 +2422,20 @@ examples:
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Typescript SDK Changes:
-  * `factify.organizations.addOrganizationMember()`: **Added**
+  * `factify.documents.list()`:  `response.items[].createdBy.type` **Changed** (Breaking ⚠️)
+  * `factify.documents.create()`:  `response.document.createdBy.type` **Changed** (Breaking ⚠️)
+  * `factify.documents.get()`:  `response.document.createdBy.type` **Changed** (Breaking ⚠️)
+  * `factify.documents.update()`:  `response.document.createdBy.type` **Changed** (Breaking ⚠️)
+  * `factify.policies.list()`:  `response.items[].attachedBy` **Removed** (Breaking ⚠️)
+  * `factify.policies.attach()`:  `response.attachedBy` **Removed** (Breaking ⚠️)
+  * `factify.versions.list()`:  `response.items[].createdBy.type` **Changed** (Breaking ⚠️)
+  * `factify.versions.create()`:  `response.createdBy.type` **Changed** (Breaking ⚠️)
+  * `factify.versions.get()`:  `response.createdBy.type` **Changed** (Breaking ⚠️)
+  * `factify.versions.update()`:  `response.createdBy.type` **Changed** (Breaking ⚠️)
+  * `factify.organizations.resendOrganizationInvite()`:  `response.invite.acceptedBy` **Changed** (Breaking ⚠️)
+  * `factify.organizations.revokeOrganizationInvite()`:  `response.invite.acceptedBy` **Changed** (Breaking ⚠️)
+  * `factify.organizations.listOrganizationMembers()`:  `response.items[]` **Changed** (Breaking ⚠️)
+  * `factify.organizations.addOrganizationMember()`:  `response.member` **Changed** (Breaking ⚠️)
+  * `factify.organizations.updateOrganizationMember()`:  `response.member` **Changed** (Breaking ⚠️)
+  * `factify.organizations.invites.list()`:  `response.items[].acceptedBy` **Changed** (Breaking ⚠️)
+  * `factify.organizations.invites.create()`:  `response.invite.acceptedBy` **Changed** (Breaking ⚠️)

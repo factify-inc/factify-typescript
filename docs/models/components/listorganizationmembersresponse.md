@@ -10,13 +10,12 @@ import { ListOrganizationMembersResponse } from "@factify/sdk/models/components"
 let value: ListOrganizationMembersResponse = {
   items: [
     {
-      email: "Ted.Towne@gmail.com",
-      joinedAt: new Date("2026-04-07T17:36:58.281Z"),
+      joinedAt: new Date("2024-01-24T20:19:28.086Z"),
       role: "member",
       user: {
+        email: "Sid75@gmail.com",
         id: "user_01h2xcejqtf2nbrexx3vqjhp41",
-        name: "John Doe",
-        type: "user_account",
+        name: "<value>",
       },
     },
   ],

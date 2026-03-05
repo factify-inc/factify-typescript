@@ -26,7 +26,10 @@ export type OrganizationInvite = {
    */
   acceptedAt?: Date | undefined;
   /**
-   * User represents a user or service account.
+   * User represents a human user account.
+   *
+   * @remarks
+   *  Returned by GetUser (endpoint deferred).
    */
   acceptedBy?: User | undefined;
   /**
@@ -57,7 +60,10 @@ export type OrganizationInvite = {
    */
   organizationId: string;
   /**
-   * User represents a user or service account.
+   * User represents a human user account.
+   *
+   * @remarks
+   *  Returned by GetUser (endpoint deferred).
    */
   sender: User;
   status: OrganizationInviteStatus;

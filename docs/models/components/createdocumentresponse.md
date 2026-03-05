@@ -13,8 +13,8 @@ let value: CreateDocumentResponse = {
     createdAt: new Date("2025-03-12T18:55:12.281Z"),
     createdBy: {
       id: "user_01h2xcejqtf2nbrexx3vqjhp41",
-      name: "John Doe",
-      type: "service_account",
+      name: "<value>",
+      type: "bot",
     },
     currentVersion: {
       id: "ver_01h2abcd1234efgh5678jkmnpt",
