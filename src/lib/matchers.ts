@@ -248,7 +248,7 @@ export function match<T, E>(
         break;
       case "fail":
         body = await response.text();
-        raw = undefined;
+        raw = body;
         break;
       default:
         throw new Error(
@@ -285,11 +285,14 @@ export function match<T, E>(
         ...(matcher.hdrs ? { Headers: unpackHeaders(response.headers) } : null),
         [resultKey]: raw,
       };
-    } else {
+    } else if (matcher.hdrs) {
       data = {
         ...options?.extraFields,
         ...(matcher.hdrs ? { Headers: unpackHeaders(response.headers) } : null),
+        ...(isPlainObject(raw) ? raw : null),
       };
+    } else {
+      data = raw;
     }
 
     if ("err" in matcher) {

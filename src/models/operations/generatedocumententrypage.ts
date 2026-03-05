@@ -6,7 +6,6 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,11 +20,8 @@ export type GenerateDocumentEntryPageRequest = {
 };
 
 export type GenerateDocumentEntryPageResponse = {
-  httpMeta: components.HTTPMetadata;
-  /**
-   * Success
-   */
-  generateEntryPageResponse?: components.GenerateEntryPageResponse | undefined;
+  headers: { [k: string]: Array<string> };
+  result: components.GenerateEntryPageResponse;
 };
 
 /** @internal */
@@ -64,15 +60,13 @@ export const GenerateDocumentEntryPageResponse$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    HttpMeta: components.HTTPMetadata$inboundSchema,
-    GenerateEntryPageResponse: types.optional(
-      components.GenerateEntryPageResponse$inboundSchema,
-    ),
+    Headers: z._default(z.record(z.string(), z.array(z.string())), {}),
+    Result: components.GenerateEntryPageResponse$inboundSchema,
   }),
   z.transform((v) => {
     return remap$(v, {
-      "HttpMeta": "httpMeta",
-      "GenerateEntryPageResponse": "generateEntryPageResponse",
+      "Headers": "headers",
+      "Result": "result",
     });
   }),
 );

@@ -181,7 +181,7 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, operations.ListOrganizationsResponse$inboundSchema, {
-      key: "ListOrganizationsResponse",
+      key: "Result",
     }),
     M.jsonErr([400, 401, 403, 404], errors.ErrorResponse$inboundSchema),
     M.jsonErr(429, errors.ErrorResponse$inboundSchema, { hdrs: true }),

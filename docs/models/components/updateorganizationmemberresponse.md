@@ -9,10 +9,10 @@ import { UpdateOrganizationMemberResponse } from "@factify/sdk/models/components
 
 let value: UpdateOrganizationMemberResponse = {
   member: {
-    joinedAt: new Date("2024-03-31T16:00:44.354Z"),
-    role: "member",
+    joinedAt: new Date("2026-12-13T16:53:17.763Z"),
+    role: "admin",
     user: {
-      email: "Sid75@gmail.com",
+      email: "Elyssa_Lesch95@hotmail.com",
       id: "user_01h2xcejqtf2nbrexx3vqjhp41",
       name: "<value>",
     },

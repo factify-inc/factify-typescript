@@ -11,17 +11,17 @@ let value: ListOrganizationInvitesResponse = {
   items: [
     {
       acceptedBy: {
-        email: "Emmanuelle_Halvorson36@gmail.com",
+        email: "Emery98@gmail.com",
         id: "user_01h2xcejqtf2nbrexx3vqjhp41",
         name: "<value>",
       },
-      createdAt: new Date("2024-11-12T18:50:30.225Z"),
+      createdAt: new Date("2026-10-25T05:00:32.524Z"),
       email: "dwight@dundermifflin.com",
-      expiresAt: new Date("2025-02-28T08:16:52.535Z"),
+      expiresAt: new Date("2026-03-14T10:17:27.941Z"),
       id: "inv_01h2xcejqtf2nbrexx3vqjhp41",
       organizationId: "org_01h2xcejqtf2nbrexx3vqjhp41",
       sender: {
-        email: "Haskell45@yahoo.com",
+        email: "Lurline_Klocko10@yahoo.com",
         id: "user_01h2xcejqtf2nbrexx3vqjhp41",
         name: "<value>",
       },

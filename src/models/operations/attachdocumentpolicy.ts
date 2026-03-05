@@ -6,7 +6,6 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -35,11 +34,8 @@ export type AttachDocumentPolicyRequest = {
 };
 
 export type AttachDocumentPolicyResponse = {
-  httpMeta: components.HTTPMetadata;
-  /**
-   * Success
-   */
-  documentPolicy?: components.DocumentPolicy | undefined;
+  headers: { [k: string]: Array<string> };
+  result: components.DocumentPolicy;
 };
 
 /** @internal */
@@ -108,13 +104,13 @@ export const AttachDocumentPolicyResponse$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    HttpMeta: components.HTTPMetadata$inboundSchema,
-    DocumentPolicy: types.optional(components.DocumentPolicy$inboundSchema),
+    Headers: z._default(z.record(z.string(), z.array(z.string())), {}),
+    Result: components.DocumentPolicy$inboundSchema,
   }),
   z.transform((v) => {
     return remap$(v, {
-      "HttpMeta": "httpMeta",
-      "DocumentPolicy": "documentPolicy",
+      "Headers": "headers",
+      "Result": "result",
     });
   }),
 );

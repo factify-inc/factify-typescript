@@ -9,9 +9,9 @@ import { CreateApiKeyResponse } from "@factify/sdk/models/components";
 
 let value: CreateApiKeyResponse = {
   apiKey: {
-    createdAt: new Date("2026-01-09T22:04:27.239Z"),
+    createdAt: new Date("2026-06-27T00:44:47.417Z"),
     id: "key_01jd4h5mck9gq6zrp8bn2t4w3x",
-    isActive: false,
+    isActive: true,
     keyPrefix: "ffy_prod_01jd4h5...",
     name: "Production",
     organizationId: "org_01h2xcejqtf2nbrexx3vqjhp41",

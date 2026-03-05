@@ -6,7 +6,6 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -36,11 +35,8 @@ export type UpdateDocumentRequest = {
 };
 
 export type UpdateDocumentResponse = {
-  httpMeta: components.HTTPMetadata;
-  /**
-   * Success
-   */
-  updateDocumentResponse?: components.UpdateDocumentResponse | undefined;
+  headers: { [k: string]: Array<string> };
+  result: components.UpdateDocumentResponse;
 };
 
 /** @internal */
@@ -104,15 +100,13 @@ export const UpdateDocumentResponse$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    HttpMeta: components.HTTPMetadata$inboundSchema,
-    UpdateDocumentResponse: types.optional(
-      components.UpdateDocumentResponse$inboundSchema,
-    ),
+    Headers: z._default(z.record(z.string(), z.array(z.string())), {}),
+    Result: components.UpdateDocumentResponse$inboundSchema,
   }),
   z.transform((v) => {
     return remap$(v, {
-      "HttpMeta": "httpMeta",
-      "UpdateDocumentResponse": "updateDocumentResponse",
+      "Headers": "headers",
+      "Result": "result",
     });
   }),
 );

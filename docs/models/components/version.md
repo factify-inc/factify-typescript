@@ -8,7 +8,7 @@ Version represents a document version.
 import { Version } from "@factify/sdk/models/components";
 
 let value: Version = {
-  createdAt: new Date("2026-12-20T18:25:22.768Z"),
+  createdAt: new Date("2025-06-08T13:15:20.847Z"),
   createdBy: {
     id: "user_01h2xcejqtf2nbrexx3vqjhp41",
     name: "<value>",
@@ -16,7 +16,7 @@ let value: Version = {
   },
   documentId: "doc_01h2xcejqtf2nbrexx3vqjhp41",
   id: "ver_01h2abcd1234efgh5678jkmnpt",
-  processingStatus: "failed",
+  processingStatus: "ready",
   title: "Version 2.0",
   url: "https://app.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41/v/1",
 };

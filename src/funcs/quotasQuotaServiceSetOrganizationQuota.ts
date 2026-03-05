@@ -177,7 +177,7 @@ async function $do(
     M.json(
       200,
       operations.QuotaServiceSetOrganizationQuotaResponse$inboundSchema,
-      { key: "SetOrganizationQuotaResponse" },
+      { key: "Result" },
     ),
     M.jsonErr([400, 401, 403, 404], errors.ErrorResponse$inboundSchema),
     M.jsonErr(429, errors.ErrorResponse$inboundSchema, { hdrs: true }),
@@ -187,7 +187,7 @@ async function $do(
     M.json(
       "default",
       operations.QuotaServiceSetOrganizationQuotaResponse$inboundSchema,
-      { key: "connect.error" },
+      { key: "Result" },
     ),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

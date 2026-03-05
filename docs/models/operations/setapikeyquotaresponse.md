@@ -5,12 +5,31 @@
 ```typescript
 import { SetAPIKeyQuotaResponse } from "@factify/sdk/models/operations";
 
-let value: SetAPIKeyQuotaResponse = {};
+let value: SetAPIKeyQuotaResponse = {
+  headers: {
+    "key": [
+      "<value 1>",
+    ],
+    "key1": [
+      "<value 1>",
+      "<value 2>",
+      "<value 3>",
+    ],
+    "key2": [
+      "<value 1>",
+    ],
+  },
+  result: {
+    quota: {
+      apiKeyId: "key_01h2xcejqtf2nbrexx3vqjhp41",
+    },
+  },
+};
 ```
 
 ## Fields
 
 | Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
 | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `httpMeta`                                                                             | [components.HTTPMetadata](../../models/components/httpmetadata.md)                     | :heavy_check_mark:                                                                     | N/A                                                                                    |
-| `setAPIKeyQuotaResponse`                                                               | [components.SetAPIKeyQuotaResponse](../../models/components/setapikeyquotaresponse.md) | :heavy_minus_sign:                                                                     | Success                                                                                |
+| `headers`                                                                              | Record<string, *string*[]>                                                             | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `result`                                                                               | [components.SetAPIKeyQuotaResponse](../../models/components/setapikeyquotaresponse.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |

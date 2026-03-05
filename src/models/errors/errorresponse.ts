@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v4-mini";
-import { remap as remap$ } from "../../lib/primitives.js";
 import * as types from "../../types/primitives.js";
 import * as components from "../components/index.js";
 import { FactifyError } from "./factifyerror.js";
@@ -37,7 +36,6 @@ export type ErrorResponseData = {
    * Human-readable error message
    */
   message: string;
-  httpMeta: components.HTTPMetadata;
 };
 
 /**
@@ -92,17 +90,12 @@ export const ErrorResponse$inboundSchema: z.ZodMiniType<
     code: components.ErrorResponseCode$inboundSchema,
     details: types.optional(z.array(components.ErrorDetail$inboundSchema)),
     message: types.string(),
-    HttpMeta: components.HTTPMetadata$inboundSchema,
     request$: z.custom<Request>(x => x instanceof Request),
     response$: z.custom<Response>(x => x instanceof Response),
     body$: z.string(),
   }),
   z.transform((v) => {
-    const remapped = remap$(v, {
-      "HttpMeta": "httpMeta",
-    });
-
-    return new ErrorResponse(remapped, {
+    return new ErrorResponse(v, {
       request: v.request$,
       response: v.response$,
       body: v.body$,

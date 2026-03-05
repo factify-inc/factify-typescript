@@ -5,13 +5,22 @@
 ```typescript
 import { QuotaServiceSetOrganizationQuotaResponse } from "@factify/sdk/models/operations";
 
-let value: QuotaServiceSetOrganizationQuotaResponse = {};
+let value: QuotaServiceSetOrganizationQuotaResponse = {
+  headers: {
+    "key": [
+      "<value 1>",
+      "<value 2>",
+    ],
+  },
+  result: {
+    code: "not_found",
+  },
+};
 ```
 
 ## Fields
 
-| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
-| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `httpMeta`                                                                                         | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                 | :heavy_check_mark:                                                                                 | N/A                                                                                                |
-| `setOrganizationQuotaResponse`                                                                     | [components.SetOrganizationQuotaResponse](../../models/components/setorganizationquotaresponse.md) | :heavy_minus_sign:                                                                                 | Success                                                                                            |
-| `connectError`                                                                                     | [components.ConnectError](../../models/components/connecterror.md)                                 | :heavy_minus_sign:                                                                                 | Error                                                                                              |
+| Field                                                       | Type                                                        | Required                                                    | Description                                                 |
+| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| `headers`                                                   | Record<string, *string*[]>                                  | :heavy_check_mark:                                          | N/A                                                         |
+| `result`                                                    | *operations.QuotaServiceSetOrganizationQuotaResponseResult* | :heavy_check_mark:                                          | N/A                                                         |

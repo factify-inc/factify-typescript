@@ -6,7 +6,6 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,11 +21,8 @@ export type CreateDocumentVersionRequest = {
 };
 
 export type CreateDocumentVersionResponse = {
-  httpMeta: components.HTTPMetadata;
-  /**
-   * Success
-   */
-  version?: components.Version | undefined;
+  headers: { [k: string]: Array<string> };
+  result: components.Version;
 };
 
 /** @internal */
@@ -67,13 +63,13 @@ export const CreateDocumentVersionResponse$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    HttpMeta: components.HTTPMetadata$inboundSchema,
-    Version: types.optional(components.Version$inboundSchema),
+    Headers: z._default(z.record(z.string(), z.array(z.string())), {}),
+    Result: components.Version$inboundSchema,
   }),
   z.transform((v) => {
     return remap$(v, {
-      "HttpMeta": "httpMeta",
-      "Version": "version",
+      "Headers": "headers",
+      "Result": "result",
     });
   }),
 );

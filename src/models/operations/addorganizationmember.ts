@@ -6,7 +6,6 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -36,13 +35,8 @@ export type AddOrganizationMemberRequest = {
 };
 
 export type AddOrganizationMemberResponse = {
-  httpMeta: components.HTTPMetadata;
-  /**
-   * Success
-   */
-  addOrganizationMemberResponse?:
-    | components.AddOrganizationMemberResponse
-    | undefined;
+  headers: { [k: string]: Array<string> };
+  result: components.AddOrganizationMemberResponse;
 };
 
 /** @internal */
@@ -119,15 +113,13 @@ export const AddOrganizationMemberResponse$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    HttpMeta: components.HTTPMetadata$inboundSchema,
-    AddOrganizationMemberResponse: types.optional(
-      components.AddOrganizationMemberResponse$inboundSchema,
-    ),
+    Headers: z._default(z.record(z.string(), z.array(z.string())), {}),
+    Result: components.AddOrganizationMemberResponse$inboundSchema,
   }),
   z.transform((v) => {
     return remap$(v, {
-      "HttpMeta": "httpMeta",
-      "AddOrganizationMemberResponse": "addOrganizationMemberResponse",
+      "Headers": "headers",
+      "Result": "result",
     });
   }),
 );

@@ -10,10 +10,10 @@ import { ListDocumentPoliciesResponse } from "@factify/sdk/models/components";
 let value: ListDocumentPoliciesResponse = {
   items: [
     {
-      attachedAt: new Date("2025-08-20T16:52:51.173Z"),
+      attachedAt: new Date("2025-06-08T16:40:33.225Z"),
       documentId: "doc_01h2xcejqtf2nbrexx3vqjhp41",
       policy: {
-        createdAt: new Date("2025-04-04T15:39:28.718Z"),
+        createdAt: new Date("2024-07-14T16:21:16.629Z"),
         id: "pol_01h2xcejqtf2nbrexx3vqjhp41",
         name: "GDPR Compliance Policy",
       },

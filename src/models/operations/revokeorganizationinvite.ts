@@ -6,7 +6,6 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -34,13 +33,8 @@ export type RevokeOrganizationInviteRequest = {
 };
 
 export type RevokeOrganizationInviteResponse = {
-  httpMeta: components.HTTPMetadata;
-  /**
-   * Success
-   */
-  revokeOrganizationInviteResponse?:
-    | components.RevokeOrganizationInviteResponse
-    | undefined;
+  headers: { [k: string]: Array<string> };
+  result: components.RevokeOrganizationInviteResponse;
 };
 
 /** @internal */
@@ -107,15 +101,13 @@ export const RevokeOrganizationInviteResponse$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    HttpMeta: components.HTTPMetadata$inboundSchema,
-    RevokeOrganizationInviteResponse: types.optional(
-      components.RevokeOrganizationInviteResponse$inboundSchema,
-    ),
+    Headers: z._default(z.record(z.string(), z.array(z.string())), {}),
+    Result: components.RevokeOrganizationInviteResponse$inboundSchema,
   }),
   z.transform((v) => {
     return remap$(v, {
-      "HttpMeta": "httpMeta",
-      "RevokeOrganizationInviteResponse": "revokeOrganizationInviteResponse",
+      "Headers": "headers",
+      "Result": "result",
     });
   }),
 );

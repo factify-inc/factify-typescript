@@ -163,9 +163,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.GetVersionResponse$inboundSchema, {
-      key: "Version",
-    }),
+    M.json(200, operations.GetVersionResponse$inboundSchema, { key: "Result" }),
     M.jsonErr([400, 401, 403, 404], errors.ErrorResponse$inboundSchema),
     M.jsonErr(429, errors.ErrorResponse$inboundSchema, { hdrs: true }),
     M.jsonErr(500, errors.ErrorResponse$inboundSchema),

@@ -10,21 +10,21 @@ import { CreateOrganizationInviteResponse } from "@factify/sdk/models/components
 let value: CreateOrganizationInviteResponse = {
   invite: {
     acceptedBy: {
-      email: "Emmanuelle_Halvorson36@gmail.com",
+      email: "Emery98@gmail.com",
       id: "user_01h2xcejqtf2nbrexx3vqjhp41",
       name: "<value>",
     },
-    createdAt: new Date("2026-12-15T09:38:27.229Z"),
+    createdAt: new Date("2025-05-05T11:45:30.275Z"),
     email: "dwight@dundermifflin.com",
-    expiresAt: new Date("2026-05-22T12:35:42.499Z"),
+    expiresAt: new Date("2025-03-30T17:59:42.596Z"),
     id: "inv_01h2xcejqtf2nbrexx3vqjhp41",
     organizationId: "org_01h2xcejqtf2nbrexx3vqjhp41",
     sender: {
-      email: "Haskell45@yahoo.com",
+      email: "Lurline_Klocko10@yahoo.com",
       id: "user_01h2xcejqtf2nbrexx3vqjhp41",
       name: "<value>",
     },
-    status: "pending",
+    status: "accepted",
   },
 };
 ```

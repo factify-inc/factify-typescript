@@ -436,12 +436,14 @@ run();
 
 [`FactifyError`](./src/models/errors/factifyerror.ts) is the base class for all HTTP error responses. It has the following properties:
 
-| Property                  | Type       | Description                                                                             |
-| ------------------------- | ---------- | --------------------------------------------------------------------------------------- |
-| `error.message`           | `string`   | Error message                                                                           |
-| `error.httpMeta.response` | `Response` | HTTP response. Access to headers and more.                                              |
-| `error.httpMeta.request`  | `Request`  | HTTP request. Access to headers and more.                                               |
-| `error.data$`             |            | Optional. Some errors may contain structured data. [See Error Classes](#error-classes). |
+| Property            | Type       | Description                                                                             |
+| ------------------- | ---------- | --------------------------------------------------------------------------------------- |
+| `error.message`     | `string`   | Error message                                                                           |
+| `error.statusCode`  | `number`   | HTTP response status code eg `404`                                                      |
+| `error.headers`     | `Headers`  | HTTP response headers                                                                   |
+| `error.body`        | `string`   | HTTP body. Can be empty string if no body is returned.                                  |
+| `error.rawResponse` | `Response` | Raw HTTP response                                                                       |
+| `error.data$`       |            | Optional. Some errors may contain structured data. [See Error Classes](#error-classes). |
 
 ### Example
 ```typescript
@@ -464,16 +466,15 @@ async function run() {
     // The base class for HTTP error responses
     if (error instanceof errors.FactifyError) {
       console.log(error.message);
-      console.log(error.httpMeta.response.status);
-      console.log(error.httpMeta.response.headers);
-      console.log(error.httpMeta.request);
+      console.log(error.statusCode);
+      console.log(error.body);
+      console.log(error.headers);
 
       // Depending on the method different errors may be thrown
       if (error instanceof errors.ErrorResponse) {
         console.log(error.data$.code); // components.ErrorResponseCode
         console.log(error.data$.details); // ErrorDetail[]
         console.log(error.data$.message); // string
-        console.log(error.data$.httpMeta); // components.HTTPMetadata
       }
     }
   }

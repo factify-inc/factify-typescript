@@ -5,12 +5,31 @@
 ```typescript
 import { AcceptOrganizationInviteResponse } from "@factify/sdk/models/operations";
 
-let value: AcceptOrganizationInviteResponse = {};
+let value: AcceptOrganizationInviteResponse = {
+  headers: {
+    "key": [
+      "<value 1>",
+      "<value 2>",
+      "<value 3>",
+    ],
+    "key1": [],
+    "key2": [
+      "<value 1>",
+    ],
+  },
+  result: {
+    organization: {
+      createdAt: new Date("2025-08-27T20:19:06.403Z"),
+      id: "org_01h2xcejqtf2nbrexx3vqjhp41",
+      name: "Acme Corporation",
+    },
+  },
+};
 ```
 
 ## Fields
 
 | Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
 | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `httpMeta`                                                                                                 | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                         | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
-| `acceptOrganizationInviteResponse`                                                                         | [components.AcceptOrganizationInviteResponse](../../models/components/acceptorganizationinviteresponse.md) | :heavy_minus_sign:                                                                                         | Success                                                                                                    |
+| `headers`                                                                                                  | Record<string, *string*[]>                                                                                 | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
+| `result`                                                                                                   | [components.AcceptOrganizationInviteResponse](../../models/components/acceptorganizationinviteresponse.md) | :heavy_check_mark:                                                                                         | N/A                                                                                                        |

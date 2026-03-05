@@ -6,18 +6,12 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateOrganizationResponse = {
-  httpMeta: components.HTTPMetadata;
-  /**
-   * Success
-   */
-  createOrganizationResponse?:
-    | components.CreateOrganizationResponse
-    | undefined;
+  headers: { [k: string]: Array<string> };
+  result: components.CreateOrganizationResponse;
 };
 
 /** @internal */
@@ -26,15 +20,13 @@ export const CreateOrganizationResponse$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    HttpMeta: components.HTTPMetadata$inboundSchema,
-    CreateOrganizationResponse: types.optional(
-      components.CreateOrganizationResponse$inboundSchema,
-    ),
+    Headers: z._default(z.record(z.string(), z.array(z.string())), {}),
+    Result: components.CreateOrganizationResponse$inboundSchema,
   }),
   z.transform((v) => {
     return remap$(v, {
-      "HttpMeta": "httpMeta",
-      "CreateOrganizationResponse": "createOrganizationResponse",
+      "Headers": "headers",
+      "Result": "result",
     });
   }),
 );

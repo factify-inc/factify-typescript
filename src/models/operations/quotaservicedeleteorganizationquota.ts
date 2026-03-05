@@ -6,7 +6,7 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -16,18 +16,13 @@ export type QuotaServiceDeleteOrganizationQuotaRequest = {
   body: components.DeleteOrganizationQuotaRequest;
 };
 
+export type QuotaServiceDeleteOrganizationQuotaResponseResult =
+  | components.DeleteOrganizationQuotaResponse
+  | components.ConnectError;
+
 export type QuotaServiceDeleteOrganizationQuotaResponse = {
-  httpMeta: components.HTTPMetadata;
-  /**
-   * Success
-   */
-  deleteOrganizationQuotaResponse?:
-    | components.DeleteOrganizationQuotaResponse
-    | undefined;
-  /**
-   * Error
-   */
-  connectError?: components.ConnectError | undefined;
+  headers: { [k: string]: Array<string> };
+  result: components.DeleteOrganizationQuotaResponse | components.ConnectError;
 };
 
 /** @internal */
@@ -68,20 +63,43 @@ export function quotaServiceDeleteOrganizationQuotaRequestToJSON(
 }
 
 /** @internal */
+export const QuotaServiceDeleteOrganizationQuotaResponseResult$inboundSchema:
+  z.ZodMiniType<QuotaServiceDeleteOrganizationQuotaResponseResult, unknown> =
+    smartUnion([
+      components.DeleteOrganizationQuotaResponse$inboundSchema,
+      components.ConnectError$inboundSchema,
+    ]);
+
+export function quotaServiceDeleteOrganizationQuotaResponseResultFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  QuotaServiceDeleteOrganizationQuotaResponseResult,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      QuotaServiceDeleteOrganizationQuotaResponseResult$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'QuotaServiceDeleteOrganizationQuotaResponseResult' from JSON`,
+  );
+}
+
+/** @internal */
 export const QuotaServiceDeleteOrganizationQuotaResponse$inboundSchema:
   z.ZodMiniType<QuotaServiceDeleteOrganizationQuotaResponse, unknown> = z.pipe(
     z.object({
-      HttpMeta: components.HTTPMetadata$inboundSchema,
-      DeleteOrganizationQuotaResponse: types.optional(
+      Headers: z._default(z.record(z.string(), z.array(z.string())), {}),
+      Result: smartUnion([
         components.DeleteOrganizationQuotaResponse$inboundSchema,
-      ),
-      "connect.error": types.optional(components.ConnectError$inboundSchema),
+        components.ConnectError$inboundSchema,
+      ]),
     }),
     z.transform((v) => {
       return remap$(v, {
-        "HttpMeta": "httpMeta",
-        "DeleteOrganizationQuotaResponse": "deleteOrganizationQuotaResponse",
-        "connect.error": "connectError",
+        "Headers": "headers",
+        "Result": "result",
       });
     }),
   );
