@@ -3,6 +3,7 @@
  */
 
 export * from "./acceptorganizationinvite.js";
+export * from "./addorganizationmember.js";
 export * from "./attachdocumentpolicy.js";
 export * from "./createapikey.js";
 export * from "./createdocument.js";

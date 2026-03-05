@@ -201,6 +201,7 @@ run();
 * [resendOrganizationInvite](docs/sdks/organizations/README.md#resendorganizationinvite) - Resend an invitation email
 * [revokeOrganizationInvite](docs/sdks/organizations/README.md#revokeorganizationinvite) - Revoke an invitation
 * [listOrganizationMembers](docs/sdks/organizations/README.md#listorganizationmembers) - List organization members
+* [addOrganizationMember](docs/sdks/organizations/README.md#addorganizationmember) - Add a member to an organization
 * [removeOrganizationMember](docs/sdks/organizations/README.md#removeorganizationmember) - Remove an organization member
 * [updateOrganizationMember](docs/sdks/organizations/README.md#updateorganizationmember) - Update an organization member
 
@@ -262,6 +263,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`documentsUpdate`](docs/sdks/documents/README.md#update) - Update a document
 - [`entryPagesGenerate`](docs/sdks/entrypages/README.md#generate) - Generate entry page
 - [`organizationsAcceptOrganizationInvite`](docs/sdks/organizations/README.md#acceptorganizationinvite) - Accept an invitation
+- [`organizationsAddOrganizationMember`](docs/sdks/organizations/README.md#addorganizationmember) - Add a member to an organization
 - [`organizationsCreate`](docs/sdks/organizations/README.md#create) - Create an organization
 - [`organizationsGet`](docs/sdks/organizations/README.md#get) - Retrieve an organization
 - [`organizationsInvitesCreate`](docs/sdks/invites/README.md#create) - Invite a user to join an organization

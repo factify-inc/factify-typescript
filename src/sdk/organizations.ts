@@ -3,6 +3,7 @@
  */
 
 import { organizationsAcceptOrganizationInvite } from "../funcs/organizationsAcceptOrganizationInvite.js";
+import { organizationsAddOrganizationMember } from "../funcs/organizationsAddOrganizationMember.js";
 import { organizationsCreate } from "../funcs/organizationsCreate.js";
 import { organizationsGet } from "../funcs/organizationsGet.js";
 import { organizationsList } from "../funcs/organizationsList.js";
@@ -141,6 +142,23 @@ export class Organizations extends ClientSDK {
     PageIterator<operations.ListOrganizationMembersResponse, { cursor: string }>
   > {
     return unwrapResultIterator(organizationsListOrganizationMembers(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Add a member to an organization
+   *
+   * @remarks
+   * Directly adds a user as a member of an organization. Requires manage permission (owner or admin).
+   */
+  async addOrganizationMember(
+    request: operations.AddOrganizationMemberRequest,
+    options?: RequestOptions,
+  ): Promise<operations.AddOrganizationMemberResponse> {
+    return unwrapAsync(organizationsAddOrganizationMember(
       this,
       request,
       options,

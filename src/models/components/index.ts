@@ -4,6 +4,7 @@
 
 export * from "./acceptorganizationinviteresponse.js";
 export * from "./accesslevel.js";
+export * from "./addorganizationmemberresponse.js";
 export * from "./apikey.js";
 export * from "./apikeyquota.js";
 export * from "./connecterror.js";

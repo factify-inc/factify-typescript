@@ -1,13 +1,13 @@
-# UpdateOrganizationMemberResponse
+# AddOrganizationMemberResponse
 
-UpdateOrganizationMemberResponse contains the updated member.
+AddOrganizationMemberResponse contains the added member.
 
 ## Example Usage
 
 ```typescript
-import { UpdateOrganizationMemberResponse } from "@factify/sdk/models/components";
+import { AddOrganizationMemberResponse } from "@factify/sdk/models/components";
 
-let value: UpdateOrganizationMemberResponse = {
+let value: AddOrganizationMemberResponse = {
   member: {
     email: "Wilma_Beer36@gmail.com",
     joinedAt: new Date("2026-05-07T13:49:08.685Z"),
