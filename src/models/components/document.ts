@@ -10,6 +10,10 @@ import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { AccessLevel, AccessLevel$inboundSchema } from "./accesslevel.js";
 import {
+  DocumentPermissionSet,
+  DocumentPermissionSet$inboundSchema,
+} from "./documentpermissionset.js";
+import {
   ProcessingStatus,
   ProcessingStatus$inboundSchema,
 } from "./processingstatus.js";
@@ -42,6 +46,7 @@ export type Document = {
    * Optional document description.
    */
   description?: string | null | undefined;
+  generalAccess?: AccessLevel | undefined;
   /**
    * Unique ID for the document.
    *
@@ -49,11 +54,44 @@ export type Document = {
    *  Pattern: doc_[0-9a-hjkmnp-tv-z]{26}
    */
   id: string;
+  /**
+   * Timestamp when the authenticated user last viewed this document.
+   *
+   * @remarks
+   *  Absent if the user has never viewed it.
+   */
+  lastViewedAt?: Date | undefined;
+  /**
+   * DocumentPermissionSet contains the permissions the authenticated user has on a document.
+   */
+  permissionSet?: DocumentPermissionSet | undefined;
   processingStatus: ProcessingStatus;
+  /**
+   * Timestamp when this document was last shared to the authenticated user.
+   *
+   * @remarks
+   *  Absent if the document was never shared to them.
+   */
+  sharedAt?: Date | undefined;
+  /**
+   * URL of the document thumbnail image.
+   */
+  thumbnailUrl?: string | undefined;
   /**
    * Document title.
    */
   title: string;
+  /**
+   * Timestamp when the document was trashed, if applicable.
+   *
+   * @remarks
+   *  Absent if the document is not trashed.
+   */
+  trashedAt?: Date | undefined;
+  /**
+   * Timestamp when document was last updated.
+   */
+  updatedAt?: Date | undefined;
   /**
    * URL for accessing the document on Factify.
    */
@@ -68,9 +106,16 @@ export const Document$inboundSchema: z.ZodMiniType<Document, unknown> = z.pipe(
     created_by: Subject$inboundSchema,
     current_version: types.optional(VersionRef$inboundSchema),
     description: z.optional(z.nullable(types.string())),
+    general_access: types.optional(AccessLevel$inboundSchema),
     id: types.string(),
+    last_viewed_at: types.optional(types.date()),
+    permission_set: types.optional(DocumentPermissionSet$inboundSchema),
     processing_status: ProcessingStatus$inboundSchema,
+    shared_at: types.optional(types.date()),
+    thumbnail_url: types.optional(types.string()),
     title: types.string(),
+    trashed_at: types.optional(types.date()),
+    updated_at: types.optional(types.date()),
     url: types.string(),
   }),
   z.transform((v) => {
@@ -79,7 +124,14 @@ export const Document$inboundSchema: z.ZodMiniType<Document, unknown> = z.pipe(
       "created_at": "createdAt",
       "created_by": "createdBy",
       "current_version": "currentVersion",
+      "general_access": "generalAccess",
+      "last_viewed_at": "lastViewedAt",
+      "permission_set": "permissionSet",
       "processing_status": "processingStatus",
+      "shared_at": "sharedAt",
+      "thumbnail_url": "thumbnailUrl",
+      "trashed_at": "trashedAt",
+      "updated_at": "updatedAt",
     });
   }),
 );

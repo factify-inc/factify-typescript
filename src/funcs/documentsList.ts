@@ -112,9 +112,14 @@ async function $do(
     "access_level": payload?.access_level,
     "created_by_id": payload?.created_by_id,
     "created.after": payload?.["created.after"],
+    "organization_scope": payload?.organization_scope,
+    "ownership": payload?.ownership,
     "page_size": payload?.page_size,
     "page_token": payload?.page_token,
     "processing_status": payload?.processing_status,
+    "query": payload?.query,
+    "sort": payload?.sort,
+    "trash_state": payload?.trash_state,
   });
 
   const headers = new Headers(compactMap({

@@ -44,6 +44,44 @@ export type ListDocumentsRequest = {
    */
   processingStatus?: Array<components.ProcessingStatus> | undefined;
   /**
+   * Sort field and direction. Prefix with `-` for descending order.
+   *
+   * @remarks
+   *  Allowed values: created_at, updated_at, name, last_viewed_at, last_shared_at.
+   *  Default (omitted): created_at descending.
+   *  REST: ?sort=last_viewed_at or ?sort=-name
+   */
+  sort?: string | undefined;
+  /**
+   * Full-text search filter. Case-insensitive substring match on document name and description.
+   *
+   * @remarks
+   *  REST: ?query=budget
+   */
+  query?: string | undefined;
+  /**
+   * Ownership filter. Returns documents matching the specified ownership state.
+   *
+   * @remarks
+   *  REST: ?ownership=owned or ?ownership=not_owned
+   */
+  ownership?: Array<components.DocumentOwnership> | undefined;
+  /**
+   * Trash state filter. Returns documents matching the specified trash state.
+   *
+   * @remarks
+   *  REST: ?trash_state=active or ?trash_state=trashed or ?trash_state=active&trash_state=trashed
+   *  Default (omitted): active documents only.
+   */
+  trashState?: Array<components.DocumentTrashState> | undefined;
+  /**
+   * Organization scope filter. When true, restrict to documents within the user's organization.
+   *
+   * @remarks
+   *  REST: ?organization_scope=true
+   */
+  organizationScope?: boolean | undefined;
+  /**
    * Filter by created.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)
    */
   createdAfter?: Date | undefined;
@@ -61,6 +99,11 @@ export type ListDocumentsRequest$Outbound = {
   created_by_id?: Array<string> | undefined;
   access_level?: Array<string> | undefined;
   processing_status?: Array<string> | undefined;
+  sort?: string | undefined;
+  query?: string | undefined;
+  ownership?: Array<string> | undefined;
+  trash_state?: Array<string> | undefined;
+  organization_scope?: boolean | undefined;
   "created.after"?: string | undefined;
 };
 
@@ -77,6 +120,13 @@ export const ListDocumentsRequest$outboundSchema: z.ZodMiniType<
     processingStatus: z.optional(
       z.array(components.ProcessingStatus$outboundSchema),
     ),
+    sort: z.optional(z.string()),
+    query: z.optional(z.string()),
+    ownership: z.optional(z.array(components.DocumentOwnership$outboundSchema)),
+    trashState: z.optional(
+      z.array(components.DocumentTrashState$outboundSchema),
+    ),
+    organizationScope: z.optional(z.boolean()),
     createdAfter: z.optional(
       z.pipe(z.date(), z.transform(v => v.toISOString())),
     ),
@@ -88,6 +138,8 @@ export const ListDocumentsRequest$outboundSchema: z.ZodMiniType<
       createdById: "created_by_id",
       accessLevel: "access_level",
       processingStatus: "processing_status",
+      trashState: "trash_state",
+      organizationScope: "organization_scope",
       createdAfter: "created.after",
     });
   }),
