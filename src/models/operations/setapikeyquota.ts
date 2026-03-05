@@ -6,7 +6,6 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -33,11 +32,8 @@ export type SetAPIKeyQuotaRequest = {
 };
 
 export type SetAPIKeyQuotaResponse = {
-  httpMeta: components.HTTPMetadata;
-  /**
-   * Success
-   */
-  setAPIKeyQuotaResponse?: components.SetAPIKeyQuotaResponse | undefined;
+  headers: { [k: string]: Array<string> };
+  result: components.SetAPIKeyQuotaResponse;
 };
 
 /** @internal */
@@ -108,15 +104,13 @@ export const SetAPIKeyQuotaResponse$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    HttpMeta: components.HTTPMetadata$inboundSchema,
-    SetAPIKeyQuotaResponse: types.optional(
-      components.SetAPIKeyQuotaResponse$inboundSchema,
-    ),
+    Headers: z._default(z.record(z.string(), z.array(z.string())), {}),
+    Result: components.SetAPIKeyQuotaResponse$inboundSchema,
   }),
   z.transform((v) => {
     return remap$(v, {
-      "HttpMeta": "httpMeta",
-      "SetAPIKeyQuotaResponse": "setAPIKeyQuotaResponse",
+      "Headers": "headers",
+      "Result": "result",
     });
   }),
 );

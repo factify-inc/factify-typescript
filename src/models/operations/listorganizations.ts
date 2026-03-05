@@ -6,7 +6,6 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,11 +29,8 @@ export type ListOrganizationsRequest = {
 };
 
 export type ListOrganizationsResponse = {
-  httpMeta: components.HTTPMetadata;
-  /**
-   * Success
-   */
-  listOrganizationsResponse?: components.ListOrganizationsResponse | undefined;
+  headers: { [k: string]: Array<string> };
+  result: components.ListOrganizationsResponse;
 };
 
 /** @internal */
@@ -76,15 +72,13 @@ export const ListOrganizationsResponse$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    HttpMeta: components.HTTPMetadata$inboundSchema,
-    ListOrganizationsResponse: types.optional(
-      components.ListOrganizationsResponse$inboundSchema,
-    ),
+    Headers: z._default(z.record(z.string(), z.array(z.string())), {}),
+    Result: components.ListOrganizationsResponse$inboundSchema,
   }),
   z.transform((v) => {
     return remap$(v, {
-      "HttpMeta": "httpMeta",
-      "ListOrganizationsResponse": "listOrganizationsResponse",
+      "Headers": "headers",
+      "Result": "result",
     });
   }),
 );

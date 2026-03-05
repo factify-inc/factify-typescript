@@ -6,7 +6,6 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -28,11 +27,8 @@ export type DetachDocumentPolicyRequest = {
 };
 
 export type DetachDocumentPolicyResponse = {
-  httpMeta: components.HTTPMetadata;
-  /**
-   * Success
-   */
-  empty?: components.Empty | undefined;
+  headers: { [k: string]: Array<string> };
+  result: components.Empty;
 };
 
 /** @internal */
@@ -74,13 +70,13 @@ export const DetachDocumentPolicyResponse$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    HttpMeta: components.HTTPMetadata$inboundSchema,
-    Empty: types.optional(components.Empty$inboundSchema),
+    Headers: z._default(z.record(z.string(), z.array(z.string())), {}),
+    Result: components.Empty$inboundSchema,
   }),
   z.transform((v) => {
     return remap$(v, {
-      "HttpMeta": "httpMeta",
-      "Empty": "empty",
+      "Headers": "headers",
+      "Result": "result",
     });
   }),
 );

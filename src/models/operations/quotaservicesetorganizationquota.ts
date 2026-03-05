@@ -6,7 +6,7 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -16,18 +16,13 @@ export type QuotaServiceSetOrganizationQuotaRequest = {
   body: components.SetOrganizationQuotaRequest;
 };
 
+export type QuotaServiceSetOrganizationQuotaResponseResult =
+  | components.SetOrganizationQuotaResponse
+  | components.ConnectError;
+
 export type QuotaServiceSetOrganizationQuotaResponse = {
-  httpMeta: components.HTTPMetadata;
-  /**
-   * Success
-   */
-  setOrganizationQuotaResponse?:
-    | components.SetOrganizationQuotaResponse
-    | undefined;
-  /**
-   * Error
-   */
-  connectError?: components.ConnectError | undefined;
+  headers: { [k: string]: Array<string> };
+  result: components.SetOrganizationQuotaResponse | components.ConnectError;
 };
 
 /** @internal */
@@ -68,20 +63,43 @@ export function quotaServiceSetOrganizationQuotaRequestToJSON(
 }
 
 /** @internal */
+export const QuotaServiceSetOrganizationQuotaResponseResult$inboundSchema:
+  z.ZodMiniType<QuotaServiceSetOrganizationQuotaResponseResult, unknown> =
+    smartUnion([
+      components.SetOrganizationQuotaResponse$inboundSchema,
+      components.ConnectError$inboundSchema,
+    ]);
+
+export function quotaServiceSetOrganizationQuotaResponseResultFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  QuotaServiceSetOrganizationQuotaResponseResult,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      QuotaServiceSetOrganizationQuotaResponseResult$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'QuotaServiceSetOrganizationQuotaResponseResult' from JSON`,
+  );
+}
+
+/** @internal */
 export const QuotaServiceSetOrganizationQuotaResponse$inboundSchema:
   z.ZodMiniType<QuotaServiceSetOrganizationQuotaResponse, unknown> = z.pipe(
     z.object({
-      HttpMeta: components.HTTPMetadata$inboundSchema,
-      SetOrganizationQuotaResponse: types.optional(
+      Headers: z._default(z.record(z.string(), z.array(z.string())), {}),
+      Result: smartUnion([
         components.SetOrganizationQuotaResponse$inboundSchema,
-      ),
-      "connect.error": types.optional(components.ConnectError$inboundSchema),
+        components.ConnectError$inboundSchema,
+      ]),
     }),
     z.transform((v) => {
       return remap$(v, {
-        "HttpMeta": "httpMeta",
-        "SetOrganizationQuotaResponse": "setOrganizationQuotaResponse",
-        "connect.error": "connectError",
+        "Headers": "headers",
+        "Result": "result",
       });
     }),
   );

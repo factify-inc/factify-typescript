@@ -5,12 +5,31 @@
 ```typescript
 import { ListAPIKeyQuotasResponse } from "@factify/sdk/models/operations";
 
-let value: ListAPIKeyQuotasResponse = {};
+let value: ListAPIKeyQuotasResponse = {
+  headers: {
+    "key": [],
+    "key1": [
+      "<value 1>",
+      "<value 2>",
+    ],
+    "key2": [
+      "<value 1>",
+      "<value 2>",
+    ],
+  },
+  result: {
+    quotas: [
+      {
+        apiKeyId: "key_01h2xcejqtf2nbrexx3vqjhp41",
+      },
+    ],
+  },
+};
 ```
 
 ## Fields
 
 | Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
 | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `httpMeta`                                                                                 | [components.HTTPMetadata](../../models/components/httpmetadata.md)                         | :heavy_check_mark:                                                                         | N/A                                                                                        |
-| `listAPIKeyQuotasResponse`                                                                 | [components.ListAPIKeyQuotasResponse](../../models/components/listapikeyquotasresponse.md) | :heavy_minus_sign:                                                                         | Success                                                                                    |
+| `headers`                                                                                  | Record<string, *string*[]>                                                                 | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `result`                                                                                   | [components.ListAPIKeyQuotasResponse](../../models/components/listapikeyquotasresponse.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |

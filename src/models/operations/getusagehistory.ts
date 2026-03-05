@@ -6,7 +6,6 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,11 +21,8 @@ export type GetUsageHistoryRequest = {
 };
 
 export type GetUsageHistoryResponse = {
-  httpMeta: components.HTTPMetadata;
-  /**
-   * Success
-   */
-  getUsageHistoryResponse?: components.GetUsageHistoryResponse | undefined;
+  headers: { [k: string]: Array<string> };
+  result: components.GetUsageHistoryResponse;
 };
 
 /** @internal */
@@ -66,15 +62,13 @@ export const GetUsageHistoryResponse$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    HttpMeta: components.HTTPMetadata$inboundSchema,
-    GetUsageHistoryResponse: types.optional(
-      components.GetUsageHistoryResponse$inboundSchema,
-    ),
+    Headers: z._default(z.record(z.string(), z.array(z.string())), {}),
+    Result: components.GetUsageHistoryResponse$inboundSchema,
   }),
   z.transform((v) => {
     return remap$(v, {
-      "HttpMeta": "httpMeta",
-      "GetUsageHistoryResponse": "getUsageHistoryResponse",
+      "Headers": "headers",
+      "Result": "result",
     });
   }),
 );
