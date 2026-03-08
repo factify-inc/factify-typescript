@@ -3,23 +3,23 @@ id: 23af0391-5a58-495c-b992-941b55f41c78
 management:
   docChecksum: 7733251bdaca54c45a30e69b91010c5e
   docVersion: 1.0.0
-  speakeasyVersion: 1.741.6
-  generationVersion: 2.849.8
-  releaseVersion: 0.3.14-rc.19
-  configChecksum: a8a673f6715d165bca1fccb9338bee52
+  speakeasyVersion: 1.749.0
+  generationVersion: 2.855.2
+  releaseVersion: 0.3.14
+  configChecksum: 1d8f1d6d165b76aa514055537cc5f2d8
   repoURL: https://github.com/factify-inc/factify-typescript.git
   installationURL: https://github.com/factify-inc/factify-typescript
   published: true
 persistentEdits:
-  generation_id: df7375e2-f114-4bbc-bb7e-e19abb550407
-  pristine_commit_hash: c6dd9407873ab9c77e8b760c329f981c5f354f5d
-  pristine_tree_hash: dbe9d228c3bb9ad9eb755cb12e8884fa407b18a4
+  generation_id: b7595492-0cb1-434b-9ae0-43884c6bbb33
+  pristine_commit_hash: 0fbe89fe89a37eb8b69c7b0f3e077b89fb59e1dd
+  pristine_tree_hash: 6811b747bcfc0b8875394b5bffe0a74a1962fbf2
 features:
   typescript:
     additionalDependencies: 0.1.0
     additionalProperties: 0.1.3
     constsAndDefaults: 0.1.14
-    core: 3.26.40
+    core: 3.26.41
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
@@ -722,12 +722,12 @@ trackedFiles:
     pristine_git_object: 766ea5ba4257419f9fca9da9c6ba895ab05a3f8b
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:b23f5c307bbbf211ec6d1c36ebdaa233e1a0d444
-    pristine_git_object: 609a22c340fb898a75fb0b0310cbc9732b93b4ac
+    last_write_checksum: sha1:10cd8235c7e557b201a55ed5edf03fd2b48ac832
+    pristine_git_object: 836e96d3beebf2956e64e93d2ba07df166d69632
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:5c0379489bd8a679ebffa72f8014f5daa14d5a0a
-    pristine_git_object: cfe8927a52ca99567288ea2c5ae58793b29fb3a7
+    last_write_checksum: sha1:2ce7f33e4da5e1be6404825138a1a222ecefa4f0
+    pristine_git_object: e8120b4f1ca12f9e5050c075cac6bd0ac2807dd4
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:72dd2a6867a44557b35fa72fe5588efc5d08e8e1
@@ -890,8 +890,8 @@ trackedFiles:
     pristine_git_object: 44be0eae8246521b230e8e711a88eff738fc015d
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:71f78fb61e86bb12a29195679a1973b13eba73bc
-    pristine_git_object: 686770ebfbe6bcfa0620e0a25845d1e2722d9fa8
+    last_write_checksum: sha1:b8e8c61a81cfdc723489369d7590aba25b75d207
+    pristine_git_object: 0f2ed80df46b4ba1031541a65df66d12f7248ff0
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -2436,4 +2436,3 @@ examples:
         "500":
           application/json: {"code": "unauthenticated", "message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: "## Typescript SDK Changes:\n* `factify.documents.list()`: \n  *  `request` **Changed**\n  *  `response.items[]` **Changed**\n* `factify.documents.create()`:  `response.document` **Changed**\n* `factify.documents.get()`:  `response.document` **Changed**\n* `factify.documents.update()`:  `response.document` **Changed**\n"
