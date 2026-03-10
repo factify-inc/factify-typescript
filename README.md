@@ -229,6 +229,10 @@ run();
 * [setAPIKeyQuota](docs/sdks/usage/README.md#setapikeyquota) - Set API key quota
 * [getUsageHistory](docs/sdks/usage/README.md#getusagehistory) - Get usage history
 
+### [UserPreferences](docs/sdks/userpreferences/README.md)
+
+* [getUserPreferences](docs/sdks/userpreferences/README.md#getuserpreferences) - Get user preferences
+
 ### [Versions](docs/sdks/versions/README.md)
 
 * [list](docs/sdks/versions/README.md#list) - List document versions
@@ -284,6 +288,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`usageGetUsageHistory`](docs/sdks/usage/README.md#getusagehistory) - Get usage history
 - [`usageListAPIKeyQuotas`](docs/sdks/usage/README.md#listapikeyquotas) - List API key quotas
 - [`usageSetAPIKeyQuota`](docs/sdks/usage/README.md#setapikeyquota) - Set API key quota
+- [`userPreferencesGetUserPreferences`](docs/sdks/userpreferences/README.md#getuserpreferences) - Get user preferences
 - [`versionsCreate`](docs/sdks/versions/README.md#create) - Create a new version
 - [`versionsGet`](docs/sdks/versions/README.md#get) - Retrieve a version
 - [`versionsList`](docs/sdks/versions/README.md#list) - List document versions

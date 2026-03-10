@@ -17,6 +17,7 @@ export * from "./getdocument.js";
 export * from "./getorganization.js";
 export * from "./getorganizationquota.js";
 export * from "./getusagehistory.js";
+export * from "./getuserpreferences.js";
 export * from "./getversion.js";
 export * from "./listapikeyquotas.js";
 export * from "./listapikeys.js";

@@ -195,6 +195,12 @@ actions:
         - "lang": "typescript"
           "label": "getUsageHistory"
           "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.usage.getUsageHistory({\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/user-preferences"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "getUserPreferences"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.userPreferences.getUserPreferences();\n\n  console.log(result);\n}\n\nrun();"
   - target: $["paths"]["/v1beta/versions/{version_id}"]["get"]
     update:
       "x-codeSamples":

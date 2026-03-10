@@ -10,6 +10,7 @@ import { Organizations } from "./organizations.js";
 import { Policies } from "./policies.js";
 import { Quotas } from "./quotas.js";
 import { Usage } from "./usage.js";
+import { UserPreferences } from "./userpreferences.js";
 import { Versions } from "./versions.js";
 
 export class Factify extends ClientSDK {
@@ -51,5 +52,10 @@ export class Factify extends ClientSDK {
   private _usage?: Usage;
   get usage(): Usage {
     return (this._usage ??= new Usage(this._options));
+  }
+
+  private _userPreferences?: UserPreferences;
+  get userPreferences(): UserPreferences {
+    return (this._userPreferences ??= new UserPreferences(this._options));
   }
 }

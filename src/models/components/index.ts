@@ -34,6 +34,7 @@ export * from "./getdocumentresponse.js";
 export * from "./getorganizationquotaresponse.js";
 export * from "./getorganizationresponse.js";
 export * from "./getusagehistoryresponse.js";
+export * from "./getuserpreferencesresponse.js";
 export * from "./listapikeyquotasresponse.js";
 export * from "./listapikeysresponse.js";
 export * from "./listdocumentpoliciesresponse.js";
