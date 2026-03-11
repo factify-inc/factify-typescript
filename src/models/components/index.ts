@@ -30,6 +30,7 @@ export * from "./empty.js";
 export * from "./errordetail.js";
 export * from "./errorresponse.js";
 export * from "./generateentrypageresponse.js";
+export * from "./getdocumentquotaresponse.js";
 export * from "./getdocumentresponse.js";
 export * from "./getorganizationquotaresponse.js";
 export * from "./getorganizationresponse.js";

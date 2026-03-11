@@ -185,6 +185,7 @@ run();
 
 * [list](docs/sdks/documents/README.md#list) - List documents
 * [create](docs/sdks/documents/README.md#create) - Create a document
+* [getDocumentQuota](docs/sdks/documents/README.md#getdocumentquota) - Get document quota
 * [get](docs/sdks/documents/README.md#get) - Retrieve a document
 * [update](docs/sdks/documents/README.md#update) - Update a document
 
@@ -263,6 +264,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`apiKeysRevoke`](docs/sdks/apikeys/README.md#revoke) - Revoke an API key
 - [`documentsCreate`](docs/sdks/documents/README.md#create) - Create a document
 - [`documentsGet`](docs/sdks/documents/README.md#get) - Retrieve a document
+- [`documentsGetDocumentQuota`](docs/sdks/documents/README.md#getdocumentquota) - Get document quota
 - [`documentsList`](docs/sdks/documents/README.md#list) - List documents
 - [`documentsUpdate`](docs/sdks/documents/README.md#update) - Update a document
 - [`entryPagesGenerate`](docs/sdks/entrypages/README.md#generate) - Generate entry page

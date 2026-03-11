@@ -4,6 +4,7 @@
 
 import { documentsCreate } from "../funcs/documentsCreate.js";
 import { documentsGet } from "../funcs/documentsGet.js";
+import { documentsGetDocumentQuota } from "../funcs/documentsGetDocumentQuota.js";
 import { documentsList } from "../funcs/documentsList.js";
 import { documentsUpdate } from "../funcs/documentsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -45,6 +46,21 @@ export class Documents extends ClientSDK {
     return unwrapAsync(documentsCreate(
       this,
       request,
+      options,
+    ));
+  }
+
+  /**
+   * Get document quota
+   *
+   * @remarks
+   * Returns the document quota status for the authenticated user's organization, including the number of documents used, the configured limit, and remaining capacity.
+   */
+  async getDocumentQuota(
+    options?: RequestOptions,
+  ): Promise<operations.GetDocumentQuotaResponse> {
+    return unwrapAsync(documentsGetDocumentQuota(
+      this,
       options,
     ));
   }

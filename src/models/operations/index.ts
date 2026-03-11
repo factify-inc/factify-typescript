@@ -14,6 +14,7 @@ export * from "./deleteapikeyquota.js";
 export * from "./detachdocumentpolicy.js";
 export * from "./generatedocumententrypage.js";
 export * from "./getdocument.js";
+export * from "./getdocumentquota.js";
 export * from "./getorganization.js";
 export * from "./getorganizationquota.js";
 export * from "./getusagehistory.js";

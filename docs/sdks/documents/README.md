@@ -8,6 +8,7 @@ Create, retrieve, update, and manage documents.
 
 * [list](#list) - List documents
 * [create](#create) - Create a document
+* [getDocumentQuota](#getdocumentquota) - Get document quota
 * [get](#get) - Retrieve a document
 * [update](#update) - Update a document
 
@@ -161,6 +162,77 @@ run();
 ### Response
 
 **Promise\<[operations.CreateDocumentResponse](../../models/operations/createdocumentresponse.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.ErrorResponse       | 400, 401, 403, 404         | application/json           |
+| errors.ErrorResponse       | 429                        | application/json           |
+| errors.ErrorResponse       | 500                        | application/json           |
+| errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
+
+## getDocumentQuota
+
+Returns the document quota status for the authenticated user's organization, including the number of documents used, the configured limit, and remaining capacity.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="getDocumentQuota" method="get" path="/v1beta/documents/quota" -->
+```typescript
+import { Factify } from "@factify/sdk";
+
+const factify = new Factify({
+  bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+async function run() {
+  const result = await factify.documents.getDocumentQuota();
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { FactifyCore } from "@factify/sdk/core.js";
+import { documentsGetDocumentQuota } from "@factify/sdk/funcs/documentsGetDocumentQuota.js";
+
+// Use `FactifyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const factify = new FactifyCore({
+  bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+async function run() {
+  const res = await documentsGetDocumentQuota(factify);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("documentsGetDocumentQuota failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.GetDocumentQuotaResponse](../../models/operations/getdocumentquotaresponse.md)\>**
 
 ### Errors
 

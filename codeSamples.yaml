@@ -45,6 +45,12 @@ actions:
         - "lang": "typescript"
           "label": "createDocument"
           "source": "import { Factify } from \"@factify/sdk\";\nimport { openAsBlob } from \"node:fs\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.documents.create({\n    payload: await openAsBlob(\"example.file\"),\n    title: \"<value>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/documents/quota"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "getDocumentQuota"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.documents.getDocumentQuota();\n\n  console.log(result);\n}\n\nrun();"
   - target: $["paths"]["/v1beta/documents/{document_id}"]["get"]
     update:
       "x-codeSamples":
