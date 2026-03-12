@@ -3,6 +3,7 @@
  */
 
 import { ClientSDK } from "../lib/sdks.js";
+import { AccessRequests } from "./accessrequests.js";
 import { APIKeys } from "./apikeys.js";
 import { Documents } from "./documents.js";
 import { EntryPages } from "./entrypages.js";
@@ -27,6 +28,11 @@ export class Factify extends ClientSDK {
   private _documents?: Documents;
   get documents(): Documents {
     return (this._documents ??= new Documents(this._options));
+  }
+
+  private _accessRequests?: AccessRequests;
+  get accessRequests(): AccessRequests {
+    return (this._accessRequests ??= new AccessRequests(this._options));
   }
 
   private _entryPages?: EntryPages;

@@ -4,13 +4,17 @@
 
 export * from "./acceptorganizationinvite.js";
 export * from "./addorganizationmember.js";
+export * from "./approveaccessrequest.js";
 export * from "./attachdocumentpolicy.js";
+export * from "./checkaccessrequeststatus.js";
+export * from "./createaccessrequest.js";
 export * from "./createapikey.js";
 export * from "./createdocument.js";
 export * from "./createdocumentversion.js";
 export * from "./createorganization.js";
 export * from "./createorganizationinvite.js";
 export * from "./deleteapikeyquota.js";
+export * from "./denyaccessrequest.js";
 export * from "./detachdocumentpolicy.js";
 export * from "./generatedocumententrypage.js";
 export * from "./getdocument.js";
@@ -20,6 +24,8 @@ export * from "./getorganizationquota.js";
 export * from "./getusagehistory.js";
 export * from "./getuserpreferences.js";
 export * from "./getversion.js";
+export * from "./inspectdocumentaccess.js";
+export * from "./listaccessrequests.js";
 export * from "./listapikeyquotas.js";
 export * from "./listapikeys.js";
 export * from "./listdocumentpolicies.js";

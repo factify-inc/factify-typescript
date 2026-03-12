@@ -175,6 +175,15 @@ run();
 <details open>
 <summary>Available methods</summary>
 
+### [AccessRequests](docs/sdks/accessrequests/README.md)
+
+* [inspectDocumentAccess](docs/sdks/accessrequests/README.md#inspectdocumentaccess) - Inspect document access
+* [listAccessRequests](docs/sdks/accessrequests/README.md#listaccessrequests) - List access requests
+* [createAccessRequest](docs/sdks/accessrequests/README.md#createaccessrequest) - Create an access request
+* [checkAccessRequestStatus](docs/sdks/accessrequests/README.md#checkaccessrequeststatus) - Check access request status
+* [approveAccessRequest](docs/sdks/accessrequests/README.md#approveaccessrequest) - Approve an access request
+* [denyAccessRequest](docs/sdks/accessrequests/README.md#denyaccessrequest) - Deny an access request
+
 ### [APIKeys](docs/sdks/apikeys/README.md)
 
 * [list](docs/sdks/apikeys/README.md#list) - List API keys
@@ -259,6 +268,12 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <summary>Available standalone functions</summary>
 
+- [`accessRequestsApproveAccessRequest`](docs/sdks/accessrequests/README.md#approveaccessrequest) - Approve an access request
+- [`accessRequestsCheckAccessRequestStatus`](docs/sdks/accessrequests/README.md#checkaccessrequeststatus) - Check access request status
+- [`accessRequestsCreateAccessRequest`](docs/sdks/accessrequests/README.md#createaccessrequest) - Create an access request
+- [`accessRequestsDenyAccessRequest`](docs/sdks/accessrequests/README.md#denyaccessrequest) - Deny an access request
+- [`accessRequestsInspectDocumentAccess`](docs/sdks/accessrequests/README.md#inspectdocumentaccess) - Inspect document access
+- [`accessRequestsListAccessRequests`](docs/sdks/accessrequests/README.md#listaccessrequests) - List access requests
 - [`apiKeysCreate`](docs/sdks/apikeys/README.md#create) - Create an API key
 - [`apiKeysList`](docs/sdks/apikeys/README.md#list) - List API keys
 - [`apiKeysRevoke`](docs/sdks/apikeys/README.md#revoke) - Revoke an API key

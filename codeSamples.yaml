@@ -63,6 +63,42 @@ actions:
         - "lang": "typescript"
           "label": "updateDocument"
           "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.documents.update({\n    documentId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/documents/{document_id}/access"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "inspectDocumentAccess"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.accessRequests.inspectDocumentAccess({\n    documentId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/documents/{document_id}/access-requests"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "listAccessRequests"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.accessRequests.listAccessRequests({\n    documentId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/documents/{document_id}/access-requests"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "createAccessRequest"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.accessRequests.createAccessRequest({\n    documentId: \"<id>\",\n    body: {\n      permission: \"view\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/documents/{document_id}/access-requests/status"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "checkAccessRequestStatus"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.accessRequests.checkAccessRequestStatus({\n    documentId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/documents/{document_id}/access-requests/{access_request_id}/approve"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "approveAccessRequest"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.accessRequests.approveAccessRequest({\n    documentId: \"<id>\",\n    accessRequestId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/documents/{document_id}/access-requests/{access_request_id}/deny"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "denyAccessRequest"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.accessRequests.denyAccessRequest({\n    documentId: \"<id>\",\n    accessRequestId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
   - target: $["paths"]["/v1beta/documents/{document_id}/entry_page"]["post"]
     update:
       "x-codeSamples":
