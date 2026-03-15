@@ -1,25 +1,25 @@
 lockVersion: 2.0.0
 id: 23af0391-5a58-495c-b992-941b55f41c78
 management:
-  docChecksum: e68bbaee5756c23a2b4b583ff8a4e0bb
+  docChecksum: c75e1c7163b23a51f6f2f94409443cb0
   docVersion: 1.0.0
-  speakeasyVersion: 1.752.0
-  generationVersion: 2.859.2
-  releaseVersion: 0.3.15-rc.4
-  configChecksum: 5c22add0f23ec0016f13e3c9fc136ac0
+  speakeasyVersion: 1.755.0
+  generationVersion: 2.865.2
+  releaseVersion: 0.3.15-rc.5
+  configChecksum: dd4a01bb73c07c81a96e6f8e785d0018
   repoURL: https://github.com/factify-inc/factify-typescript.git
   installationURL: https://github.com/factify-inc/factify-typescript
   published: true
 persistentEdits:
-  generation_id: 8305e75e-fa93-4735-a1d3-30873bb498bc
-  pristine_commit_hash: b23bb1e6a6c7d6fc9add59938b85e860e5a8c0d7
-  pristine_tree_hash: 6da8ca5301138a1a8529e2c7a136d5355a6a0920
+  generation_id: debf0a7e-b8da-4f49-a0c0-7a3bca2e0108
+  pristine_commit_hash: 54bd5f2760d23d811f1dac67820639990816d5ff
+  pristine_tree_hash: 39c7d3c3728663b063496d12f624b09ad04dcb4c
 features:
   typescript:
     additionalDependencies: 0.1.0
     additionalProperties: 0.1.3
     constsAndDefaults: 0.1.14
-    core: 3.26.41
+    core: 3.26.42
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
@@ -186,8 +186,8 @@ trackedFiles:
     pristine_git_object: b741f9ef3eae7dab25c5a0455ca53049cda9d67d
   docs/models/components/document.md:
     id: 73a00acee39f
-    last_write_checksum: sha1:328ccac90c39510a127f88255b374e712fe8ed08
-    pristine_git_object: ca33fac32cd29989d2e1ed78dccf8487c36df9d5
+    last_write_checksum: sha1:4e88df49ae48770b349ecbf21f15ba59267c4928
+    pristine_git_object: 9a9087fe13866b4e3a2cfd8e75c6fd6ce87cab3e
   docs/models/components/documentownership.md:
     id: 973268a06d03
     last_write_checksum: sha1:fe1c20c682456c0b8ab83abfc74d87aecc837caa
@@ -842,12 +842,12 @@ trackedFiles:
     pristine_git_object: 766ea5ba4257419f9fca9da9c6ba895ab05a3f8b
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:ec93a18b2b9bdca1fb8c9dff3adf19986d9169cc
-    pristine_git_object: 00405eb45587f23d46514f4f4fa03ac9d2714aee
+    last_write_checksum: sha1:443ee55810b8843b6f31350a8a26659b390914a3
+    pristine_git_object: f141ab4bbc27796dea911563f63b94f8faf85e3e
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:9b68d52a8fb977a279b5054bc960da24307aad6f
-    pristine_git_object: 44de467877deb2af60b6fe5fdb01b7bef6369a89
+    last_write_checksum: sha1:c9304f5318dda6f0fc6b2aa72d7db9e70d45d2e1
+    pristine_git_object: c8532a5d4a1ed11cca404b752c12c47637c27bab
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:72dd2a6867a44557b35fa72fe5588efc5d08e8e1
@@ -1042,8 +1042,8 @@ trackedFiles:
     pristine_git_object: 44be0eae8246521b230e8e711a88eff738fc015d
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:1ec0b38ac8379de735d5f1063b74d62c128899a7
-    pristine_git_object: e59fd9c73e0123477a77aaa863f55bc00478025e
+    last_write_checksum: sha1:12cf08c495689a2a96bef1ea6e5807d067fd9d02
+    pristine_git_object: e35f295e5793089894a221329f3d555600a941c7
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -1202,8 +1202,8 @@ trackedFiles:
     pristine_git_object: e06d770ac0f45d1126a099d95471b4cc774c1930
   src/models/components/document.ts:
     id: 908fbd640ca2
-    last_write_checksum: sha1:6ac8514129be916d0e9f6a88fc8d91de1ed6bb09
-    pristine_git_object: 52d87ea19e3e82c303355348ff162cbab49b9bcd
+    last_write_checksum: sha1:4e0c36647b95c317fe636d887b0056c8c0592621
+    pristine_git_object: 0f0ed4415e9ce30da1c232ffadadffa01f28ced2
   src/models/components/documentownership.ts:
     id: 0fdd8ec1a5f9
     last_write_checksum: sha1:53c5201d6a3627449660bd8674795a82113a2be5
@@ -2878,9 +2878,7 @@ examples:
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Typescript SDK Changes:
-  * `factify.accessRequests.inspectDocumentAccess()`: **Added**
-  * `factify.accessRequests.listAccessRequests()`: **Added**
-  * `factify.accessRequests.createAccessRequest()`: **Added**
-  * `factify.accessRequests.checkAccessRequestStatus()`: **Added**
-  * `factify.accessRequests.approveAccessRequest()`: **Added**
-  * `factify.accessRequests.denyAccessRequest()`: **Added**
+  * `factify.documents.list()`:  `response.items[].isDemo` **Added**
+  * `factify.documents.create()`:  `response.document.isDemo` **Added**
+  * `factify.documents.get()`:  `response.document.isDemo` **Added**
+  * `factify.documents.update()`:  `response.document.isDemo` **Added**

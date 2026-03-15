@@ -55,6 +55,10 @@ export type Document = {
    */
   id: string;
   /**
+   * Whether this document is a demo document created during FTUE onboarding.
+   */
+  isDemo?: boolean | undefined;
+  /**
    * Timestamp when the authenticated user last viewed this document.
    *
    * @remarks
@@ -108,6 +112,7 @@ export const Document$inboundSchema: z.ZodMiniType<Document, unknown> = z.pipe(
     description: z.optional(z.nullable(types.string())),
     general_access: types.optional(AccessLevel$inboundSchema),
     id: types.string(),
+    is_demo: types.optional(types.boolean()),
     last_viewed_at: types.optional(types.date()),
     permission_set: types.optional(DocumentPermissionSet$inboundSchema),
     processing_status: ProcessingStatus$inboundSchema,
@@ -125,6 +130,7 @@ export const Document$inboundSchema: z.ZodMiniType<Document, unknown> = z.pipe(
       "created_by": "createdBy",
       "current_version": "currentVersion",
       "general_access": "generalAccess",
+      "is_demo": "isDemo",
       "last_viewed_at": "lastViewedAt",
       "permission_set": "permissionSet",
       "processing_status": "processingStatus",
