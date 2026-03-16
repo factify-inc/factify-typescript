@@ -39,9 +39,9 @@ export type Document = {
    */
   createdBy: Subject;
   /**
-   * VersionRef is a lightweight reference to a version.
+   * Reference to the current version, if any.
    */
-  currentVersion?: VersionRef | undefined;
+  currentVersion?: VersionRef | null | undefined;
   /**
    * Optional document description.
    */
@@ -108,7 +108,7 @@ export const Document$inboundSchema: z.ZodMiniType<Document, unknown> = z.pipe(
     access_level: AccessLevel$inboundSchema,
     created_at: types.date(),
     created_by: Subject$inboundSchema,
-    current_version: types.optional(VersionRef$inboundSchema),
+    current_version: z.optional(z.nullable(VersionRef$inboundSchema)),
     description: z.optional(z.nullable(types.string())),
     general_access: types.optional(AccessLevel$inboundSchema),
     id: types.string(),

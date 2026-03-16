@@ -112,6 +112,7 @@ async function $do(
     "access_level": payload?.access_level,
     "created_by_id": payload?.created_by_id,
     "created.after": payload?.["created.after"],
+    "created.before": payload?.["created.before"],
     "organization_scope": payload?.organization_scope,
     "ownership": payload?.ownership,
     "page_size": payload?.page_size,

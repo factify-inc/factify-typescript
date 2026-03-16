@@ -10,6 +10,8 @@ async function run() {
   const result = await factify.documents.list({
     pageToken:
       "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0",
+    createdAfter: new Date("2023-01-15T01:30:15.01Z"),
+    createdBefore: new Date("2023-01-15T01:30:15.01Z"),
   });
 
   for await (const page of result) {

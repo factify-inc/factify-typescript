@@ -23,6 +23,14 @@ export type ListDocumentsRequest = {
    */
   pageSize?: number | undefined;
   /**
+   * Return results after this timestamp (inclusive).
+   */
+  createdAfter?: Date | undefined;
+  /**
+   * Return results before this timestamp (inclusive).
+   */
+  createdBefore?: Date | undefined;
+  /**
    * Filter by creator ID(s) (user or bot). Returns documents matching ANY of the specified IDs.
    *
    * @remarks
@@ -81,10 +89,6 @@ export type ListDocumentsRequest = {
    *  REST: ?organization_scope=true
    */
   organizationScope?: boolean | undefined;
-  /**
-   * Filter by created.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)
-   */
-  createdAfter?: Date | undefined;
 };
 
 export type ListDocumentsResponse = {
@@ -96,6 +100,8 @@ export type ListDocumentsResponse = {
 export type ListDocumentsRequest$Outbound = {
   page_token?: string | undefined;
   page_size?: number | undefined;
+  "created.after"?: string | undefined;
+  "created.before"?: string | undefined;
   created_by_id?: Array<string> | undefined;
   access_level?: Array<string> | undefined;
   processing_status?: Array<string> | undefined;
@@ -104,7 +110,6 @@ export type ListDocumentsRequest$Outbound = {
   ownership?: Array<string> | undefined;
   trash_state?: Array<string> | undefined;
   organization_scope?: boolean | undefined;
-  "created.after"?: string | undefined;
 };
 
 /** @internal */
@@ -115,6 +120,12 @@ export const ListDocumentsRequest$outboundSchema: z.ZodMiniType<
   z.object({
     pageToken: z.optional(z.string()),
     pageSize: z.optional(z.int()),
+    createdAfter: z.optional(
+      z.pipe(z.date(), z.transform(v => v.toISOString())),
+    ),
+    createdBefore: z.optional(
+      z.pipe(z.date(), z.transform(v => v.toISOString())),
+    ),
     createdById: z.optional(z.array(z.string())),
     accessLevel: z.optional(z.array(components.AccessLevel$outboundSchema)),
     processingStatus: z.optional(
@@ -127,20 +138,18 @@ export const ListDocumentsRequest$outboundSchema: z.ZodMiniType<
       z.array(components.DocumentTrashState$outboundSchema),
     ),
     organizationScope: z.optional(z.boolean()),
-    createdAfter: z.optional(
-      z.pipe(z.date(), z.transform(v => v.toISOString())),
-    ),
   }),
   z.transform((v) => {
     return remap$(v, {
       pageToken: "page_token",
       pageSize: "page_size",
+      createdAfter: "created.after",
+      createdBefore: "created.before",
       createdById: "created_by_id",
       accessLevel: "access_level",
       processingStatus: "processing_status",
       trashState: "trash_state",
       organizationScope: "organization_scope",
-      createdAfter: "created.after",
     });
   }),
 );

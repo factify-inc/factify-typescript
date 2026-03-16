@@ -10,7 +10,7 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Quotas extends ClientSDK {
   /**
-   * DeleteOrganizationQuota removes quota configuration for an organization.  The organization will fall back to default free tier limits.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
+   * DeleteOrganizationQuota
    *
    * @remarks
    * DeleteOrganizationQuota removes quota configuration for an organization.
@@ -29,7 +29,7 @@ export class Quotas extends ClientSDK {
   }
 
   /**
-   * SetOrganizationQuota creates or updates quota configuration for an organization.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
+   * SetOrganizationQuota
    *
    * @remarks
    * SetOrganizationQuota creates or updates quota configuration for an organization.

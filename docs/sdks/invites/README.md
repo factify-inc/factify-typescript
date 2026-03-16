@@ -24,6 +24,8 @@ const factify = new Factify({
 async function run() {
   const result = await factify.organizations.invites.list({
     organizationId: "<id>",
+    createdAfter: new Date("2023-01-15T01:30:15.01Z"),
+    createdBefore: new Date("2023-01-15T01:30:15.01Z"),
   });
 
   for await (const page of result) {
@@ -51,6 +53,8 @@ const factify = new FactifyCore({
 async function run() {
   const res = await organizationsInvitesList(factify, {
     organizationId: "<id>",
+    createdAfter: new Date("2023-01-15T01:30:15.01Z"),
+    createdBefore: new Date("2023-01-15T01:30:15.01Z"),
   });
   if (res.ok) {
     const { value: result } = res;

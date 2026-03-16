@@ -56,9 +56,13 @@ export type ListOrganizationInvitesRequest = {
    */
   senderId?: string | undefined;
   /**
-   * Filter by created.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)
+   * Return results after this timestamp (inclusive).
    */
   createdAfter?: Date | undefined;
+  /**
+   * Return results before this timestamp (inclusive).
+   */
+  createdBefore?: Date | undefined;
 };
 
 export type ListOrganizationInvitesResponse = {
@@ -76,6 +80,7 @@ export type ListOrganizationInvitesRequest$Outbound = {
   "email.exact"?: string | undefined;
   sender_id?: string | undefined;
   "created.after"?: string | undefined;
+  "created.before"?: string | undefined;
 };
 
 /** @internal */
@@ -96,6 +101,9 @@ export const ListOrganizationInvitesRequest$outboundSchema: z.ZodMiniType<
     createdAfter: z.optional(
       z.pipe(z.date(), z.transform(v => v.toISOString())),
     ),
+    createdBefore: z.optional(
+      z.pipe(z.date(), z.transform(v => v.toISOString())),
+    ),
   }),
   z.transform((v) => {
     return remap$(v, {
@@ -106,6 +114,7 @@ export const ListOrganizationInvitesRequest$outboundSchema: z.ZodMiniType<
       emailExact: "email.exact",
       senderId: "sender_id",
       createdAfter: "created.after",
+      createdBefore: "created.before",
     });
   }),
 );

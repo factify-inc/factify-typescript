@@ -341,6 +341,8 @@ const factify = new Factify({
 async function run() {
   const result = await factify.usage.getUsageHistory({
     organizationId: "org_01h2xcejqtf2nbrexx3vqjhp41",
+    dateAfter: new Date("2023-01-15T01:30:15.01Z"),
+    dateBefore: new Date("2023-01-15T01:30:15.01Z"),
   });
 
   console.log(result);
@@ -366,6 +368,8 @@ const factify = new FactifyCore({
 async function run() {
   const res = await usageGetUsageHistory(factify, {
     organizationId: "org_01h2xcejqtf2nbrexx3vqjhp41",
+    dateAfter: new Date("2023-01-15T01:30:15.01Z"),
+    dateBefore: new Date("2023-01-15T01:30:15.01Z"),
   });
   if (res.ok) {
     const { value: result } = res;

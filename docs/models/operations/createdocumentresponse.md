@@ -6,7 +6,21 @@
 import { CreateDocumentResponse } from "@factify/sdk/models/operations";
 
 let value: CreateDocumentResponse = {
-  headers: {},
+  headers: {
+    "key": [
+      "<value 1>",
+      "<value 2>",
+    ],
+    "key1": [
+      "<value 1>",
+      "<value 2>",
+      "<value 3>",
+    ],
+    "key2": [
+      "<value 1>",
+      "<value 2>",
+    ],
+  },
   result: {
     document: {
       accessLevel: "public",
@@ -21,7 +35,7 @@ let value: CreateDocumentResponse = {
       },
       description: "Quarterly financial report for Q4 2024",
       id: "doc_01h2xcejqtf2nbrexx3vqjhp41",
-      processingStatus: "failed",
+      processingStatus: "processing",
       title: "Q4 2024 Financial Report",
       url: "https://app.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41",
     },

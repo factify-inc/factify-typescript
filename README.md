@@ -124,6 +124,8 @@ async function run() {
   const result = await factify.documents.list({
     pageToken:
       "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0",
+    createdAfter: new Date("2023-01-15T01:30:15.01Z"),
+    createdBefore: new Date("2023-01-15T01:30:15.01Z"),
   });
 
   for await (const page of result) {
@@ -228,8 +230,8 @@ run();
 
 ### [Quotas](docs/sdks/quotas/README.md)
 
-* [quotaServiceDeleteOrganizationQuota](docs/sdks/quotas/README.md#quotaservicedeleteorganizationquota) - DeleteOrganizationQuota removes quota configuration for an organization.  The organization will fall back to default free tier limits.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
-* [quotaServiceSetOrganizationQuota](docs/sdks/quotas/README.md#quotaservicesetorganizationquota) - SetOrganizationQuota creates or updates quota configuration for an organization.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
+* [quotaServiceDeleteOrganizationQuota](docs/sdks/quotas/README.md#quotaservicedeleteorganizationquota) - DeleteOrganizationQuota
+* [quotaServiceSetOrganizationQuota](docs/sdks/quotas/README.md#quotaservicesetorganizationquota) - SetOrganizationQuota
 
 ### [Sharing](docs/sdks/sharing/README.md)
 
@@ -308,8 +310,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`policiesAttach`](docs/sdks/policies/README.md#attach) - Attach a policy
 - [`policiesDetach`](docs/sdks/policies/README.md#detach) - Detach a policy
 - [`policiesList`](docs/sdks/policies/README.md#list) - List document policies
-- [`quotasQuotaServiceDeleteOrganizationQuota`](docs/sdks/quotas/README.md#quotaservicedeleteorganizationquota) - DeleteOrganizationQuota removes quota configuration for an organization.  The organization will fall back to default free tier limits.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
-- [`quotasQuotaServiceSetOrganizationQuota`](docs/sdks/quotas/README.md#quotaservicesetorganizationquota) - SetOrganizationQuota creates or updates quota configuration for an organization.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
+- [`quotasQuotaServiceDeleteOrganizationQuota`](docs/sdks/quotas/README.md#quotaservicedeleteorganizationquota) - DeleteOrganizationQuota
+- [`quotasQuotaServiceSetOrganizationQuota`](docs/sdks/quotas/README.md#quotaservicesetorganizationquota) - SetOrganizationQuota
 - [`sharingCreateShareLink`](docs/sdks/sharing/README.md#createsharelink) - Create share link
 - [`sharingGetGeneralAccess`](docs/sdks/sharing/README.md#getgeneralaccess) - Get general access
 - [`sharingGrant`](docs/sdks/sharing/README.md#grant) - Grant document access

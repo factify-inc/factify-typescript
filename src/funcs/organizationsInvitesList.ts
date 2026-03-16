@@ -116,6 +116,7 @@ async function $do(
 
   const query = encodeFormQuery({
     "created.after": payload["created.after"],
+    "created.before": payload["created.before"],
     "email.contains": payload["email.contains"],
     "email.exact": payload["email.exact"],
     "page_size": payload.page_size,

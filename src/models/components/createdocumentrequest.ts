@@ -16,7 +16,10 @@ export type CreateDocumentRequestPayload = {
  * CreateDocumentRequest contains the file and metadata for creating a document.
  */
 export type CreateDocumentRequest = {
-  accessLevel?: AccessLevel | undefined;
+  /**
+   * Document access level. Defaults to organization if user belongs to an org, otherwise private.
+   */
+  accessLevel?: AccessLevel | null | undefined;
   /**
    * Optional document description.
    */
@@ -63,7 +66,7 @@ export function createDocumentRequestPayloadToJSON(
 
 /** @internal */
 export type CreateDocumentRequest$Outbound = {
-  access_level?: string | undefined;
+  access_level?: string | null | undefined;
   description?: string | null | undefined;
   payload: CreateDocumentRequestPayload$Outbound | Blob;
   title: string;
@@ -75,7 +78,7 @@ export const CreateDocumentRequest$outboundSchema: z.ZodMiniType<
   CreateDocumentRequest
 > = z.pipe(
   z.object({
-    accessLevel: z.optional(AccessLevel$outboundSchema),
+    accessLevel: z.optional(z.nullable(AccessLevel$outboundSchema)),
     description: z.optional(z.nullable(z.string())),
     payload: z.union([
       z.lazy(() => CreateDocumentRequestPayload$outboundSchema),

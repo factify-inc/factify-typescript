@@ -27,7 +27,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * SetOrganizationQuota creates or updates quota configuration for an organization.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
+ * SetOrganizationQuota
  *
  * @remarks
  * SetOrganizationQuota creates or updates quota configuration for an organization.

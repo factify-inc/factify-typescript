@@ -15,9 +15,13 @@ export type GetUsageHistoryRequest = {
    */
   organizationId?: string | undefined;
   /**
-   * Filter by date.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)
+   * Return results after this timestamp (inclusive).
    */
   dateAfter?: Date | undefined;
+  /**
+   * Return results before this timestamp (inclusive).
+   */
+  dateBefore?: Date | undefined;
 };
 
 export type GetUsageHistoryResponse = {
@@ -29,6 +33,7 @@ export type GetUsageHistoryResponse = {
 export type GetUsageHistoryRequest$Outbound = {
   organization_id?: string | undefined;
   "date.after"?: string | undefined;
+  "date.before"?: string | undefined;
 };
 
 /** @internal */
@@ -39,11 +44,13 @@ export const GetUsageHistoryRequest$outboundSchema: z.ZodMiniType<
   z.object({
     organizationId: z.optional(z.string()),
     dateAfter: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    dateBefore: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
   }),
   z.transform((v) => {
     return remap$(v, {
       organizationId: "organization_id",
       dateAfter: "date.after",
+      dateBefore: "date.before",
     });
   }),
 );

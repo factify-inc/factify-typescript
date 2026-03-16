@@ -2,7 +2,7 @@
 
 ## Overview
 
-Create, retrieve, update, and manage documents.
+Create and manage legally-binding documents.
 
 ### Available Operations
 
@@ -29,6 +29,8 @@ const factify = new Factify({
 async function run() {
   const result = await factify.documents.list({
     pageToken: "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0",
+    createdAfter: new Date("2023-01-15T01:30:15.01Z"),
+    createdBefore: new Date("2023-01-15T01:30:15.01Z"),
   });
 
   for await (const page of result) {
@@ -56,6 +58,8 @@ const factify = new FactifyCore({
 async function run() {
   const res = await documentsList(factify, {
     pageToken: "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0",
+    createdAfter: new Date("2023-01-15T01:30:15.01Z"),
+    createdBefore: new Date("2023-01-15T01:30:15.01Z"),
   });
   if (res.ok) {
     const { value: result } = res;

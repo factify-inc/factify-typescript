@@ -2,8 +2,8 @@ speakeasyVersion: 1.755.0
 sources:
     factify-api:
         sourceNamespace: factify-api
-        sourceRevisionDigest: sha256:22b8685367f5f812695b5ec847076a003d10ceebd15cfc644600b16086c2d9ef
-        sourceBlobDigest: sha256:5caf1c898df4afb1934788dcb26c55b0109a2d64f8413fc7d46889f743392a33
+        sourceRevisionDigest: sha256:7baf4b1574ccc8a168c5afce88f4773dddec864710add8726f44c0f847302694
+        sourceBlobDigest: sha256:8f95da934adcf1681f44544198794954a6bbcf12c637043066969b32d282d1db
         tags:
             - latest
             - 1.0.0
@@ -11,10 +11,10 @@ targets:
     typescript:
         source: factify-api
         sourceNamespace: factify-api
-        sourceRevisionDigest: sha256:22b8685367f5f812695b5ec847076a003d10ceebd15cfc644600b16086c2d9ef
-        sourceBlobDigest: sha256:5caf1c898df4afb1934788dcb26c55b0109a2d64f8413fc7d46889f743392a33
+        sourceRevisionDigest: sha256:7baf4b1574ccc8a168c5afce88f4773dddec864710add8726f44c0f847302694
+        sourceBlobDigest: sha256:8f95da934adcf1681f44544198794954a6bbcf12c637043066969b32d282d1db
         codeSamplesNamespace: factify-api-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:fdff122f70d96d957622d2bd4682aa17b07b8feca8c4213eebf5bfaf0a754a4d
+        codeSamplesRevisionDigest: sha256:9e971e3f3690450af8e3906d071204dfab3f9ed74e33ae29a7a1ef80892da591
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

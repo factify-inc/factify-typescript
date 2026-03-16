@@ -97,6 +97,7 @@ async function $do(
 
   const query = encodeFormQuery({
     "date.after": payload?.["date.after"],
+    "date.before": payload?.["date.before"],
     "organization_id": payload?.organization_id,
   });
 
