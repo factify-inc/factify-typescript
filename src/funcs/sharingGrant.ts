@@ -4,7 +4,7 @@
 
 import * as z from "zod/v4-mini";
 import { FactifyCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { encodeJSON, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -27,18 +27,18 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Check access request status
+ * Grant document access
  *
  * @remarks
- * Returns whether the caller has a pending access request for the document.
+ * Grant access to one or more recipients.
  */
-export function accessRequestsCheckAccessRequestStatus(
+export function sharingGrant(
   client: FactifyCore,
-  request: operations.CheckAccessRequestStatusRequest,
+  request: operations.GrantDocumentAccessRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.CheckAccessRequestStatusResponse,
+    operations.GrantDocumentAccessResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -59,12 +59,12 @@ export function accessRequestsCheckAccessRequestStatus(
 
 async function $do(
   client: FactifyCore,
-  request: operations.CheckAccessRequestStatusRequest,
+  request: operations.GrantDocumentAccessRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.CheckAccessRequestStatusResponse,
+      operations.GrantDocumentAccessResponse,
       | errors.ErrorResponse
       | FactifyError
       | ResponseValidationError
@@ -81,14 +81,14 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      z.parse(operations.CheckAccessRequestStatusRequest$outboundSchema, value),
+      z.parse(operations.GrantDocumentAccessRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = null;
+  const body = encodeJSON("body", payload.body, { explode: true });
 
   const pathParams = {
     document_id: encodeSimple("document_id", payload.document_id, {
@@ -97,11 +97,10 @@ async function $do(
     }),
   };
 
-  const path = pathToFunc(
-    "/v1beta/documents/{document_id}/access-requests/status",
-  )(pathParams);
+  const path = pathToFunc("/v1beta/documents/{document_id}/share")(pathParams);
 
   const headers = new Headers(compactMap({
+    "Content-Type": "application/json",
     Accept: "application/json",
   }));
 
@@ -112,7 +111,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "checkAccessRequestStatus",
+    operationID: "grantDocumentAccess",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -126,7 +125,7 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "GET",
+    method: "POST",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
@@ -155,7 +154,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.CheckAccessRequestStatusResponse,
+    operations.GrantDocumentAccessResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -166,7 +165,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.CheckAccessRequestStatusResponse$inboundSchema, {
+    M.json(200, operations.GrantDocumentAccessResponse$inboundSchema, {
       key: "Result",
     }),
     M.jsonErr([400, 401, 403, 404], errors.ErrorResponse$inboundSchema),

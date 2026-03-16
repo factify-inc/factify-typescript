@@ -4,7 +4,7 @@
 
 import * as z from "zod/v4-mini";
 import { FactifyCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { encodeJSON, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -27,18 +27,18 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Inspect document access
+ * Set general access
  *
  * @remarks
- * Returns the caller's permissions and any access policies on a document.
+ * Set general access level for a document.
  */
-export function accessRequestsInspectDocumentAccess(
+export function sharingSetGeneralAccess(
   client: FactifyCore,
-  request: operations.InspectDocumentAccessRequest,
+  request: operations.SetGeneralAccessRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.InspectDocumentAccessResponse,
+    operations.SetGeneralAccessResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -59,12 +59,12 @@ export function accessRequestsInspectDocumentAccess(
 
 async function $do(
   client: FactifyCore,
-  request: operations.InspectDocumentAccessRequest,
+  request: operations.SetGeneralAccessRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.InspectDocumentAccessResponse,
+      operations.SetGeneralAccessResponse,
       | errors.ErrorResponse
       | FactifyError
       | ResponseValidationError
@@ -81,14 +81,14 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      z.parse(operations.InspectDocumentAccessRequest$outboundSchema, value),
+      z.parse(operations.SetGeneralAccessRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = null;
+  const body = encodeJSON("body", payload.body, { explode: true });
 
   const pathParams = {
     document_id: encodeSimple("document_id", payload.document_id, {
@@ -97,9 +97,12 @@ async function $do(
     }),
   };
 
-  const path = pathToFunc("/v1beta/documents/{document_id}/access")(pathParams);
+  const path = pathToFunc("/v1beta/documents/{document_id}/general-access")(
+    pathParams,
+  );
 
   const headers = new Headers(compactMap({
+    "Content-Type": "application/json",
     Accept: "application/json",
   }));
 
@@ -110,7 +113,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "inspectDocumentAccess",
+    operationID: "setGeneralAccess",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -124,7 +127,7 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "GET",
+    method: "PUT",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
@@ -153,7 +156,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.InspectDocumentAccessResponse,
+    operations.SetGeneralAccessResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -164,7 +167,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.InspectDocumentAccessResponse$inboundSchema, {
+    M.json(200, operations.SetGeneralAccessResponse$inboundSchema, {
       key: "Result",
     }),
     M.jsonErr([400, 401, 403, 404], errors.ErrorResponse$inboundSchema),

@@ -27,18 +27,18 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List access requests
+ * Get general access
  *
  * @remarks
- * Lists pending access requests for the specified document.
+ * Get general access level for a document.
  */
-export function accessRequestsListAccessRequests(
+export function sharingGetGeneralAccess(
   client: FactifyCore,
-  request: operations.ListAccessRequestsRequest,
+  request: operations.GetGeneralAccessRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.ListAccessRequestsResponse,
+    operations.GetGeneralAccessResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -59,12 +59,12 @@ export function accessRequestsListAccessRequests(
 
 async function $do(
   client: FactifyCore,
-  request: operations.ListAccessRequestsRequest,
+  request: operations.GetGeneralAccessRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.ListAccessRequestsResponse,
+      operations.GetGeneralAccessResponse,
       | errors.ErrorResponse
       | FactifyError
       | ResponseValidationError
@@ -81,7 +81,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      z.parse(operations.ListAccessRequestsRequest$outboundSchema, value),
+      z.parse(operations.GetGeneralAccessRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -97,7 +97,7 @@ async function $do(
     }),
   };
 
-  const path = pathToFunc("/v1beta/documents/{document_id}/access-requests")(
+  const path = pathToFunc("/v1beta/documents/{document_id}/general-access")(
     pathParams,
   );
 
@@ -112,7 +112,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "listAccessRequests",
+    operationID: "getGeneralAccess",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -155,7 +155,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.ListAccessRequestsResponse,
+    operations.GetGeneralAccessResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -166,7 +166,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.ListAccessRequestsResponse$inboundSchema, {
+    M.json(200, operations.GetGeneralAccessResponse$inboundSchema, {
       key: "Result",
     }),
     M.jsonErr([400, 401, 403, 404], errors.ErrorResponse$inboundSchema),

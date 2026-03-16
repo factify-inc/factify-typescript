@@ -4,14 +4,14 @@
 
 ### Available Operations
 
-* [inspectDocumentAccess](#inspectdocumentaccess) - Inspect document access
-* [listAccessRequests](#listaccessrequests) - List access requests
-* [createAccessRequest](#createaccessrequest) - Create an access request
-* [checkAccessRequestStatus](#checkaccessrequeststatus) - Check access request status
-* [approveAccessRequest](#approveaccessrequest) - Approve an access request
-* [denyAccessRequest](#denyaccessrequest) - Deny an access request
+* [inspect](#inspect) - Inspect document access
+* [list](#list) - List access requests
+* [create](#create) - Create an access request
+* [checkStatus](#checkstatus) - Check access request status
+* [approve](#approve) - Approve an access request
+* [deny](#deny) - Deny an access request
 
-## inspectDocumentAccess
+## inspect
 
 Returns the caller's permissions and any access policies on a document.
 
@@ -26,7 +26,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.accessRequests.inspectDocumentAccess({
+  const result = await factify.accessRequests.inspect({
     documentId: "<id>",
   });
 
@@ -42,7 +42,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { accessRequestsInspectDocumentAccess } from "@factify/sdk/funcs/accessRequestsInspectDocumentAccess.js";
+import { accessRequestsInspect } from "@factify/sdk/funcs/accessRequestsInspect.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -51,14 +51,14 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await accessRequestsInspectDocumentAccess(factify, {
+  const res = await accessRequestsInspect(factify, {
     documentId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("accessRequestsInspectDocumentAccess failed:", res.error);
+    console.log("accessRequestsInspect failed:", res.error);
   }
 }
 
@@ -87,7 +87,7 @@ run();
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## listAccessRequests
+## list
 
 Lists pending access requests for the specified document.
 
@@ -102,7 +102,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.accessRequests.listAccessRequests({
+  const result = await factify.accessRequests.list({
     documentId: "<id>",
   });
 
@@ -118,7 +118,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { accessRequestsListAccessRequests } from "@factify/sdk/funcs/accessRequestsListAccessRequests.js";
+import { accessRequestsList } from "@factify/sdk/funcs/accessRequestsList.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -127,14 +127,14 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await accessRequestsListAccessRequests(factify, {
+  const res = await accessRequestsList(factify, {
     documentId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("accessRequestsListAccessRequests failed:", res.error);
+    console.log("accessRequestsList failed:", res.error);
   }
 }
 
@@ -163,7 +163,7 @@ run();
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## createAccessRequest
+## create
 
 Creates a new access request for the specified document.
 
@@ -178,7 +178,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.accessRequests.createAccessRequest({
+  const result = await factify.accessRequests.create({
     documentId: "<id>",
     body: {
       permission: "view",
@@ -197,7 +197,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { accessRequestsCreateAccessRequest } from "@factify/sdk/funcs/accessRequestsCreateAccessRequest.js";
+import { accessRequestsCreate } from "@factify/sdk/funcs/accessRequestsCreate.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -206,7 +206,7 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await accessRequestsCreateAccessRequest(factify, {
+  const res = await accessRequestsCreate(factify, {
     documentId: "<id>",
     body: {
       permission: "view",
@@ -216,7 +216,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("accessRequestsCreateAccessRequest failed:", res.error);
+    console.log("accessRequestsCreate failed:", res.error);
   }
 }
 
@@ -245,7 +245,7 @@ run();
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## checkAccessRequestStatus
+## checkStatus
 
 Returns whether the caller has a pending access request for the document.
 
@@ -260,7 +260,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.accessRequests.checkAccessRequestStatus({
+  const result = await factify.accessRequests.checkStatus({
     documentId: "<id>",
   });
 
@@ -276,7 +276,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { accessRequestsCheckAccessRequestStatus } from "@factify/sdk/funcs/accessRequestsCheckAccessRequestStatus.js";
+import { accessRequestsCheckStatus } from "@factify/sdk/funcs/accessRequestsCheckStatus.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -285,14 +285,14 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await accessRequestsCheckAccessRequestStatus(factify, {
+  const res = await accessRequestsCheckStatus(factify, {
     documentId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("accessRequestsCheckAccessRequestStatus failed:", res.error);
+    console.log("accessRequestsCheckStatus failed:", res.error);
   }
 }
 
@@ -321,7 +321,7 @@ run();
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## approveAccessRequest
+## approve
 
 Approve an access request.
 
@@ -336,7 +336,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.accessRequests.approveAccessRequest({
+  const result = await factify.accessRequests.approve({
     documentId: "<id>",
     accessRequestId: "<id>",
     body: {},
@@ -354,7 +354,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { accessRequestsApproveAccessRequest } from "@factify/sdk/funcs/accessRequestsApproveAccessRequest.js";
+import { accessRequestsApprove } from "@factify/sdk/funcs/accessRequestsApprove.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -363,7 +363,7 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await accessRequestsApproveAccessRequest(factify, {
+  const res = await accessRequestsApprove(factify, {
     documentId: "<id>",
     accessRequestId: "<id>",
     body: {},
@@ -372,7 +372,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("accessRequestsApproveAccessRequest failed:", res.error);
+    console.log("accessRequestsApprove failed:", res.error);
   }
 }
 
@@ -401,7 +401,7 @@ run();
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## denyAccessRequest
+## deny
 
 Deny an access request.
 
@@ -416,7 +416,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.accessRequests.denyAccessRequest({
+  const result = await factify.accessRequests.deny({
     documentId: "<id>",
     accessRequestId: "<id>",
     body: {},
@@ -434,7 +434,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { accessRequestsDenyAccessRequest } from "@factify/sdk/funcs/accessRequestsDenyAccessRequest.js";
+import { accessRequestsDeny } from "@factify/sdk/funcs/accessRequestsDeny.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -443,7 +443,7 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await accessRequestsDenyAccessRequest(factify, {
+  const res = await accessRequestsDeny(factify, {
     documentId: "<id>",
     accessRequestId: "<id>",
     body: {},
@@ -452,7 +452,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("accessRequestsDenyAccessRequest failed:", res.error);
+    console.log("accessRequestsDeny failed:", res.error);
   }
 }
 

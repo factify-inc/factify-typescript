@@ -32,7 +32,7 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Approve an access request.
  */
-export function accessRequestsApproveAccessRequest(
+export function accessRequestsApprove(
   client: FactifyCore,
   request: operations.ApproveAccessRequestRequest,
   options?: RequestOptions,

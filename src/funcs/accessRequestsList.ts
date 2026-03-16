@@ -4,7 +4,7 @@
 
 import * as z from "zod/v4-mini";
 import { FactifyCore } from "../core.js";
-import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -27,18 +27,18 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Deny an access request
+ * List access requests
  *
  * @remarks
- * Deny an access request.
+ * Lists pending access requests for the specified document.
  */
-export function accessRequestsDenyAccessRequest(
+export function accessRequestsList(
   client: FactifyCore,
-  request: operations.DenyAccessRequestRequest,
+  request: operations.ListAccessRequestsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.DenyAccessRequestResponse,
+    operations.ListAccessRequestsResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -59,12 +59,12 @@ export function accessRequestsDenyAccessRequest(
 
 async function $do(
   client: FactifyCore,
-  request: operations.DenyAccessRequestRequest,
+  request: operations.ListAccessRequestsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.DenyAccessRequestResponse,
+      operations.ListAccessRequestsResponse,
       | errors.ErrorResponse
       | FactifyError
       | ResponseValidationError
@@ -81,33 +81,27 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      z.parse(operations.DenyAccessRequestRequest$outboundSchema, value),
+      z.parse(operations.ListAccessRequestsRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.body, { explode: true });
+  const body = null;
 
   const pathParams = {
-    access_request_id: encodeSimple(
-      "access_request_id",
-      payload.access_request_id,
-      { explode: false, charEncoding: "percent" },
-    ),
     document_id: encodeSimple("document_id", payload.document_id, {
       explode: false,
       charEncoding: "percent",
     }),
   };
 
-  const path = pathToFunc(
-    "/v1beta/documents/{document_id}/access-requests/{access_request_id}/deny",
-  )(pathParams);
+  const path = pathToFunc("/v1beta/documents/{document_id}/access-requests")(
+    pathParams,
+  );
 
   const headers = new Headers(compactMap({
-    "Content-Type": "application/json",
     Accept: "application/json",
   }));
 
@@ -118,7 +112,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "denyAccessRequest",
+    operationID: "listAccessRequests",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -132,7 +126,7 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "POST",
+    method: "GET",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
@@ -161,7 +155,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.DenyAccessRequestResponse,
+    operations.ListAccessRequestsResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -172,7 +166,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.DenyAccessRequestResponse$inboundSchema, {
+    M.json(200, operations.ListAccessRequestsResponse$inboundSchema, {
       key: "Result",
     }),
     M.jsonErr([400, 401, 403, 404], errors.ErrorResponse$inboundSchema),

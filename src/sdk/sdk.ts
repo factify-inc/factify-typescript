@@ -10,6 +10,7 @@ import { EntryPages } from "./entrypages.js";
 import { Organizations } from "./organizations.js";
 import { Policies } from "./policies.js";
 import { Quotas } from "./quotas.js";
+import { Sharing } from "./sharing.js";
 import { Usage } from "./usage.js";
 import { UserPreferences } from "./userpreferences.js";
 import { Versions } from "./versions.js";
@@ -38,6 +39,11 @@ export class Factify extends ClientSDK {
   private _entryPages?: EntryPages;
   get entryPages(): EntryPages {
     return (this._entryPages ??= new EntryPages(this._options));
+  }
+
+  private _sharing?: Sharing;
+  get sharing(): Sharing {
+    return (this._sharing ??= new Sharing(this._options));
   }
 
   private _policies?: Policies;

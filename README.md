@@ -177,12 +177,12 @@ run();
 
 ### [AccessRequests](docs/sdks/accessrequests/README.md)
 
-* [inspectDocumentAccess](docs/sdks/accessrequests/README.md#inspectdocumentaccess) - Inspect document access
-* [listAccessRequests](docs/sdks/accessrequests/README.md#listaccessrequests) - List access requests
-* [createAccessRequest](docs/sdks/accessrequests/README.md#createaccessrequest) - Create an access request
-* [checkAccessRequestStatus](docs/sdks/accessrequests/README.md#checkaccessrequeststatus) - Check access request status
-* [approveAccessRequest](docs/sdks/accessrequests/README.md#approveaccessrequest) - Approve an access request
-* [denyAccessRequest](docs/sdks/accessrequests/README.md#denyaccessrequest) - Deny an access request
+* [inspect](docs/sdks/accessrequests/README.md#inspect) - Inspect document access
+* [list](docs/sdks/accessrequests/README.md#list) - List access requests
+* [create](docs/sdks/accessrequests/README.md#create) - Create an access request
+* [checkStatus](docs/sdks/accessrequests/README.md#checkstatus) - Check access request status
+* [approve](docs/sdks/accessrequests/README.md#approve) - Approve an access request
+* [deny](docs/sdks/accessrequests/README.md#deny) - Deny an access request
 
 ### [APIKeys](docs/sdks/apikeys/README.md)
 
@@ -231,6 +231,16 @@ run();
 * [quotaServiceDeleteOrganizationQuota](docs/sdks/quotas/README.md#quotaservicedeleteorganizationquota) - DeleteOrganizationQuota removes quota configuration for an organization.  The organization will fall back to default free tier limits.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
 * [quotaServiceSetOrganizationQuota](docs/sdks/quotas/README.md#quotaservicesetorganizationquota) - SetOrganizationQuota creates or updates quota configuration for an organization.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
 
+### [Sharing](docs/sdks/sharing/README.md)
+
+* [getGeneralAccess](docs/sdks/sharing/README.md#getgeneralaccess) - Get general access
+* [setGeneralAccess](docs/sdks/sharing/README.md#setgeneralaccess) - Set general access
+* [list](docs/sdks/sharing/README.md#list) - List document access
+* [grant](docs/sdks/sharing/README.md#grant) - Grant document access
+* [createShareLink](docs/sdks/sharing/README.md#createsharelink) - Create share link
+* [revoke](docs/sdks/sharing/README.md#revoke) - Revoke document access
+* [update](docs/sdks/sharing/README.md#update) - Update document access
+
 ### [Usage](docs/sdks/usage/README.md)
 
 * [getOrganizationQuota](docs/sdks/usage/README.md#getorganizationquota) - Get organization quota status
@@ -268,12 +278,12 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <summary>Available standalone functions</summary>
 
-- [`accessRequestsApproveAccessRequest`](docs/sdks/accessrequests/README.md#approveaccessrequest) - Approve an access request
-- [`accessRequestsCheckAccessRequestStatus`](docs/sdks/accessrequests/README.md#checkaccessrequeststatus) - Check access request status
-- [`accessRequestsCreateAccessRequest`](docs/sdks/accessrequests/README.md#createaccessrequest) - Create an access request
-- [`accessRequestsDenyAccessRequest`](docs/sdks/accessrequests/README.md#denyaccessrequest) - Deny an access request
-- [`accessRequestsInspectDocumentAccess`](docs/sdks/accessrequests/README.md#inspectdocumentaccess) - Inspect document access
-- [`accessRequestsListAccessRequests`](docs/sdks/accessrequests/README.md#listaccessrequests) - List access requests
+- [`accessRequestsApprove`](docs/sdks/accessrequests/README.md#approve) - Approve an access request
+- [`accessRequestsCheckStatus`](docs/sdks/accessrequests/README.md#checkstatus) - Check access request status
+- [`accessRequestsCreate`](docs/sdks/accessrequests/README.md#create) - Create an access request
+- [`accessRequestsDeny`](docs/sdks/accessrequests/README.md#deny) - Deny an access request
+- [`accessRequestsInspect`](docs/sdks/accessrequests/README.md#inspect) - Inspect document access
+- [`accessRequestsList`](docs/sdks/accessrequests/README.md#list) - List access requests
 - [`apiKeysCreate`](docs/sdks/apikeys/README.md#create) - Create an API key
 - [`apiKeysList`](docs/sdks/apikeys/README.md#list) - List API keys
 - [`apiKeysRevoke`](docs/sdks/apikeys/README.md#revoke) - Revoke an API key
@@ -300,6 +310,13 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`policiesList`](docs/sdks/policies/README.md#list) - List document policies
 - [`quotasQuotaServiceDeleteOrganizationQuota`](docs/sdks/quotas/README.md#quotaservicedeleteorganizationquota) - DeleteOrganizationQuota removes quota configuration for an organization.  The organization will fall back to default free tier limits.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
 - [`quotasQuotaServiceSetOrganizationQuota`](docs/sdks/quotas/README.md#quotaservicesetorganizationquota) - SetOrganizationQuota creates or updates quota configuration for an organization.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
+- [`sharingCreateShareLink`](docs/sdks/sharing/README.md#createsharelink) - Create share link
+- [`sharingGetGeneralAccess`](docs/sdks/sharing/README.md#getgeneralaccess) - Get general access
+- [`sharingGrant`](docs/sdks/sharing/README.md#grant) - Grant document access
+- [`sharingList`](docs/sdks/sharing/README.md#list) - List document access
+- [`sharingRevoke`](docs/sdks/sharing/README.md#revoke) - Revoke document access
+- [`sharingSetGeneralAccess`](docs/sdks/sharing/README.md#setgeneralaccess) - Set general access
+- [`sharingUpdate`](docs/sdks/sharing/README.md#update) - Update document access
 - [`usageDeleteAPIKeyQuota`](docs/sdks/usage/README.md#deleteapikeyquota) - Delete API key quota
 - [`usageGetOrganizationQuota`](docs/sdks/usage/README.md#getorganizationquota) - Get organization quota status
 - [`usageGetUsageHistory`](docs/sdks/usage/README.md#getusagehistory) - Get usage history
