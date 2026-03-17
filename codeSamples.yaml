@@ -80,7 +80,7 @@ actions:
       "x-codeSamples":
         - "lang": "typescript"
           "label": "createAccessRequest"
-          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.accessRequests.create({\n    documentId: \"<id>\",\n    body: {\n      permission: \"view\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.accessRequests.create({\n    documentId: \"<id>\",\n    body: {\n      message: \"Need access for quarterly review\",\n      permission: \"view\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
   - target: $["paths"]["/v1beta/documents/{document_id}/access-requests/status"]["get"]
     update:
       "x-codeSamples":

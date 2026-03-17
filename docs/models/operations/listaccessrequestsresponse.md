@@ -18,6 +18,7 @@ let value: ListAccessRequestsResponse = {
         createdAt: new Date("2024-01-13T00:05:28.860Z"),
         documentId: "doc_01h2xcejqtf2nbrexx3vqjhp41",
         id: "acr_01h2xcejqtf2nbrexx3vqjhp41",
+        message: "Need access for quarterly review",
         permission: "view",
         requestStatus: "denied",
         subject: {
@@ -25,6 +26,7 @@ let value: ListAccessRequestsResponse = {
           name: "<value>",
           type: "user",
         },
+        subjectEmail: "dwight@dundermifflin.com",
         updatedAt: new Date("2025-06-26T12:22:36.104Z"),
       },
     ],

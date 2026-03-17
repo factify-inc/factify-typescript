@@ -181,6 +181,7 @@ async function run() {
   const result = await factify.accessRequests.create({
     documentId: "<id>",
     body: {
+      message: "Need access for quarterly review",
       permission: "view",
     },
   });
@@ -209,6 +210,7 @@ async function run() {
   const res = await accessRequestsCreate(factify, {
     documentId: "<id>",
     body: {
+      message: "Need access for quarterly review",
       permission: "view",
     },
   });
