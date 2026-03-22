@@ -6,12 +6,12 @@
 import { GetDocumentRequest } from "@factify/sdk/models/operations";
 
 let value: GetDocumentRequest = {
-  documentId: "<id>",
+  documentId: "doc_01h2xcejqtf2nbrexx3vqjhp41",
 };
 ```
 
 ## Fields
 
-| Field                                             | Type                                              | Required                                          | Description                                       |
-| ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
-| `documentId`                                      | *string*                                          | :heavy_check_mark:                                | Document ID.<br/> Pattern: doc_[0-9a-hjkmnp-tv-z]{26} |
+| Field                          | Type                           | Required                       | Description                    | Example                        |
+| ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
+| `documentId`                   | *string*                       | :heavy_check_mark:             | Document ID.                   | doc_01h2xcejqtf2nbrexx3vqjhp41 |

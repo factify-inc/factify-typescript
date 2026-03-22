@@ -12,9 +12,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type GetDocumentRequest = {
   /**
    * Document ID.
-   *
-   * @remarks
-   *  Pattern: doc_[0-9a-hjkmnp-tv-z]{26}
    */
   documentId: string;
 };

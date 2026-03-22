@@ -11,6 +11,12 @@ Create and manage legally-binding documents.
 * [getDocumentQuota](#getdocumentquota) - Get document quota
 * [get](#get) - Retrieve a document
 * [update](#update) - Update a document
+* [listDuplicates](#listduplicates) - List duplicate documents
+* [export](#export) - Export a document
+* [process](#process) - Process a document
+* [transferOwnership](#transferownership) - Transfer document ownership
+* [trash](#trash) - Trash a document
+* [untrash](#untrash) - Restore a document from trash
 
 ## list
 
@@ -391,6 +397,480 @@ run();
 ### Response
 
 **Promise\<[operations.UpdateDocumentResponse](../../models/operations/updatedocumentresponse.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.ErrorResponse       | 400, 401, 403, 404         | application/json           |
+| errors.ErrorResponse       | 429                        | application/json           |
+| errors.ErrorResponse       | 500                        | application/json           |
+| errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
+
+## listDuplicates
+
+Finds documents that are visual duplicates of the specified document using perceptual hashing.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="listDocumentDuplicates" method="get" path="/v1beta/documents/{document_id}/duplicates" -->
+```typescript
+import { Factify } from "@factify/sdk";
+
+const factify = new Factify({
+  bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+async function run() {
+  const result = await factify.documents.listDuplicates({
+    documentId: "doc_01h2xcejqtf2nbrexx3vqjhp41",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { FactifyCore } from "@factify/sdk/core.js";
+import { documentsListDuplicates } from "@factify/sdk/funcs/documentsListDuplicates.js";
+
+// Use `FactifyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const factify = new FactifyCore({
+  bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+async function run() {
+  const res = await documentsListDuplicates(factify, {
+    documentId: "doc_01h2xcejqtf2nbrexx3vqjhp41",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("documentsListDuplicates failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.ListDocumentDuplicatesRequest](../../models/operations/listdocumentduplicatesrequest.md)                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.ListDocumentDuplicatesResponse](../../models/operations/listdocumentduplicatesresponse.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.ErrorResponse       | 400, 401, 403, 404         | application/json           |
+| errors.ErrorResponse       | 429                        | application/json           |
+| errors.ErrorResponse       | 500                        | application/json           |
+| errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
+
+## export
+
+Generates a time-limited download URL for the document PDF.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="exportDocument" method="get" path="/v1beta/documents/{document_id}/export" -->
+```typescript
+import { Factify } from "@factify/sdk";
+
+const factify = new Factify({
+  bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+async function run() {
+  const result = await factify.documents.export({
+    documentId: "doc_01h2xcejqtf2nbrexx3vqjhp41",
+    versionId: "ver_01h2abcd1234efgh5678jkmnpt",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { FactifyCore } from "@factify/sdk/core.js";
+import { documentsExport } from "@factify/sdk/funcs/documentsExport.js";
+
+// Use `FactifyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const factify = new FactifyCore({
+  bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+async function run() {
+  const res = await documentsExport(factify, {
+    documentId: "doc_01h2xcejqtf2nbrexx3vqjhp41",
+    versionId: "ver_01h2abcd1234efgh5678jkmnpt",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("documentsExport failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.ExportDocumentRequest](../../models/operations/exportdocumentrequest.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.ExportDocumentResponse](../../models/operations/exportdocumentresponse.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.ErrorResponse       | 400, 401, 403, 404         | application/json           |
+| errors.ErrorResponse       | 429                        | application/json           |
+| errors.ErrorResponse       | 500                        | application/json           |
+| errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
+
+## process
+
+Triggers the AI processing pipeline (extraction and summarization) for the document's current or specified version.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="processDocument" method="post" path="/v1beta/documents/{document_id}/process" example="validation_error" -->
+```typescript
+import { Factify } from "@factify/sdk";
+
+const factify = new Factify({
+  bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+async function run() {
+  const result = await factify.documents.process({
+    documentId: "doc_01h2xcejqtf2nbrexx3vqjhp41",
+    body: {
+      versionId: "ver_01h2abcd1234efgh5678jkmnpt",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { FactifyCore } from "@factify/sdk/core.js";
+import { documentsProcess } from "@factify/sdk/funcs/documentsProcess.js";
+
+// Use `FactifyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const factify = new FactifyCore({
+  bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+async function run() {
+  const res = await documentsProcess(factify, {
+    documentId: "doc_01h2xcejqtf2nbrexx3vqjhp41",
+    body: {
+      versionId: "ver_01h2abcd1234efgh5678jkmnpt",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("documentsProcess failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.ProcessDocumentRequest](../../models/operations/processdocumentrequest.md)                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.ProcessDocumentResponse](../../models/operations/processdocumentresponse.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.ErrorResponse       | 400, 401, 403, 404         | application/json           |
+| errors.ErrorResponse       | 429                        | application/json           |
+| errors.ErrorResponse       | 500                        | application/json           |
+| errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
+
+## transferOwnership
+
+Transfers ownership of a document to another user in the organization.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="transferDocumentOwnership" method="post" path="/v1beta/documents/{document_id}/transfer" example="validation_error" -->
+```typescript
+import { Factify } from "@factify/sdk";
+
+const factify = new Factify({
+  bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+async function run() {
+  const result = await factify.documents.transferOwnership({
+    documentId: "doc_01h2xcejqtf2nbrexx3vqjhp41",
+    body: {
+      newOwnerId: "user_01h2xcejqtf2nbrexx3vqjhp41",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { FactifyCore } from "@factify/sdk/core.js";
+import { documentsTransferOwnership } from "@factify/sdk/funcs/documentsTransferOwnership.js";
+
+// Use `FactifyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const factify = new FactifyCore({
+  bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+async function run() {
+  const res = await documentsTransferOwnership(factify, {
+    documentId: "doc_01h2xcejqtf2nbrexx3vqjhp41",
+    body: {
+      newOwnerId: "user_01h2xcejqtf2nbrexx3vqjhp41",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("documentsTransferOwnership failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.TransferDocumentOwnershipRequest](../../models/operations/transferdocumentownershiprequest.md)                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.TransferDocumentOwnershipResponse](../../models/operations/transferdocumentownershipresponse.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.ErrorResponse       | 400, 401, 403, 404         | application/json           |
+| errors.ErrorResponse       | 429                        | application/json           |
+| errors.ErrorResponse       | 500                        | application/json           |
+| errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
+
+## trash
+
+Moves a document to trash and revokes all non-owner access.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="trashDocument" method="post" path="/v1beta/documents/{document_id}/trash" example="validation_error" -->
+```typescript
+import { Factify } from "@factify/sdk";
+
+const factify = new Factify({
+  bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+async function run() {
+  const result = await factify.documents.trash({
+    documentId: "doc_01h2xcejqtf2nbrexx3vqjhp41",
+    body: {},
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { FactifyCore } from "@factify/sdk/core.js";
+import { documentsTrash } from "@factify/sdk/funcs/documentsTrash.js";
+
+// Use `FactifyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const factify = new FactifyCore({
+  bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+async function run() {
+  const res = await documentsTrash(factify, {
+    documentId: "doc_01h2xcejqtf2nbrexx3vqjhp41",
+    body: {},
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("documentsTrash failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.TrashDocumentRequest](../../models/operations/trashdocumentrequest.md)                                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.TrashDocumentResponse](../../models/operations/trashdocumentresponse.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.ErrorResponse       | 400, 401, 403, 404         | application/json           |
+| errors.ErrorResponse       | 429                        | application/json           |
+| errors.ErrorResponse       | 500                        | application/json           |
+| errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
+
+## untrash
+
+Restores a document from trash. Previous sharing and access permissions are NOT restored.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="untrashDocument" method="post" path="/v1beta/documents/{document_id}/untrash" example="validation_error" -->
+```typescript
+import { Factify } from "@factify/sdk";
+
+const factify = new Factify({
+  bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+async function run() {
+  const result = await factify.documents.untrash({
+    documentId: "doc_01h2xcejqtf2nbrexx3vqjhp41",
+    body: {},
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { FactifyCore } from "@factify/sdk/core.js";
+import { documentsUntrash } from "@factify/sdk/funcs/documentsUntrash.js";
+
+// Use `FactifyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const factify = new FactifyCore({
+  bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+async function run() {
+  const res = await documentsUntrash(factify, {
+    documentId: "doc_01h2xcejqtf2nbrexx3vqjhp41",
+    body: {},
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("documentsUntrash failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.UntrashDocumentRequest](../../models/operations/untrashdocumentrequest.md)                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.UntrashDocumentResponse](../../models/operations/untrashdocumentresponse.md)\>**
 
 ### Errors
 

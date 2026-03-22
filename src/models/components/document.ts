@@ -66,6 +66,13 @@ export type Document = {
    */
   lastViewedAt?: Date | undefined;
   /**
+   * Organization that owns this document (via the document creator).
+   *
+   * @remarks
+   *  Empty if the owner's organization could not be resolved.
+   */
+  ownerOrganizationId?: string | undefined;
+  /**
    * DocumentPermissionSet contains the permissions the authenticated user has on a document.
    */
   permissionSet?: DocumentPermissionSet | undefined;
@@ -114,6 +121,7 @@ export const Document$inboundSchema: z.ZodMiniType<Document, unknown> = z.pipe(
     id: types.string(),
     is_demo: types.optional(types.boolean()),
     last_viewed_at: types.optional(types.date()),
+    owner_organization_id: types.optional(types.string()),
     permission_set: types.optional(DocumentPermissionSet$inboundSchema),
     processing_status: ProcessingStatus$inboundSchema,
     shared_at: types.optional(types.date()),
@@ -132,6 +140,7 @@ export const Document$inboundSchema: z.ZodMiniType<Document, unknown> = z.pipe(
       "general_access": "generalAccess",
       "is_demo": "isDemo",
       "last_viewed_at": "lastViewedAt",
+      "owner_organization_id": "ownerOrganizationId",
       "permission_set": "permissionSet",
       "processing_status": "processingStatus",
       "shared_at": "sharedAt",

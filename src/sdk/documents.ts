@@ -3,9 +3,15 @@
  */
 
 import { documentsCreate } from "../funcs/documentsCreate.js";
+import { documentsExport } from "../funcs/documentsExport.js";
 import { documentsGet } from "../funcs/documentsGet.js";
 import { documentsGetDocumentQuota } from "../funcs/documentsGetDocumentQuota.js";
 import { documentsList } from "../funcs/documentsList.js";
+import { documentsListDuplicates } from "../funcs/documentsListDuplicates.js";
+import { documentsProcess } from "../funcs/documentsProcess.js";
+import { documentsTransferOwnership } from "../funcs/documentsTransferOwnership.js";
+import { documentsTrash } from "../funcs/documentsTrash.js";
+import { documentsUntrash } from "../funcs/documentsUntrash.js";
 import { documentsUpdate } from "../funcs/documentsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -93,6 +99,108 @@ export class Documents extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.UpdateDocumentResponse> {
     return unwrapAsync(documentsUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List duplicate documents
+   *
+   * @remarks
+   * Finds documents that are visual duplicates of the specified document using perceptual hashing.
+   */
+  async listDuplicates(
+    request: operations.ListDocumentDuplicatesRequest,
+    options?: RequestOptions,
+  ): Promise<operations.ListDocumentDuplicatesResponse> {
+    return unwrapAsync(documentsListDuplicates(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Export a document
+   *
+   * @remarks
+   * Generates a time-limited download URL for the document PDF.
+   */
+  async export(
+    request: operations.ExportDocumentRequest,
+    options?: RequestOptions,
+  ): Promise<operations.ExportDocumentResponse> {
+    return unwrapAsync(documentsExport(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Process a document
+   *
+   * @remarks
+   * Triggers the AI processing pipeline (extraction and summarization) for the document's current or specified version.
+   */
+  async process(
+    request: operations.ProcessDocumentRequest,
+    options?: RequestOptions,
+  ): Promise<operations.ProcessDocumentResponse> {
+    return unwrapAsync(documentsProcess(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Transfer document ownership
+   *
+   * @remarks
+   * Transfers ownership of a document to another user in the organization.
+   */
+  async transferOwnership(
+    request: operations.TransferDocumentOwnershipRequest,
+    options?: RequestOptions,
+  ): Promise<operations.TransferDocumentOwnershipResponse> {
+    return unwrapAsync(documentsTransferOwnership(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Trash a document
+   *
+   * @remarks
+   * Moves a document to trash and revokes all non-owner access.
+   */
+  async trash(
+    request: operations.TrashDocumentRequest,
+    options?: RequestOptions,
+  ): Promise<operations.TrashDocumentResponse> {
+    return unwrapAsync(documentsTrash(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Restore a document from trash
+   *
+   * @remarks
+   * Restores a document from trash. Previous sharing and access permissions are NOT restored.
+   */
+  async untrash(
+    request: operations.UntrashDocumentRequest,
+    options?: RequestOptions,
+  ): Promise<operations.UntrashDocumentResponse> {
+    return unwrapAsync(documentsUntrash(
       this,
       request,
       options,

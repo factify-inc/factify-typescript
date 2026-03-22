@@ -26,9 +26,6 @@ export type UpdateDocumentUpdateDocumentRequest = {
 export type UpdateDocumentRequest = {
   /**
    * Document ID to update.
-   *
-   * @remarks
-   *  Pattern: doc_[0-9a-hjkmnp-tv-z]{26}
    */
   documentId: string;
   body: UpdateDocumentUpdateDocumentRequest;

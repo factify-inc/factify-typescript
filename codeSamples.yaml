@@ -99,12 +99,24 @@ actions:
         - "lang": "typescript"
           "label": "denyAccessRequest"
           "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.accessRequests.deny({\n    documentId: \"<id>\",\n    accessRequestId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/documents/{document_id}/duplicates"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "listDocumentDuplicates"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.documents.listDuplicates({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
   - target: $["paths"]["/v1beta/documents/{document_id}/entry_page"]["post"]
     update:
       "x-codeSamples":
         - "lang": "typescript"
           "label": "generateDocumentEntryPage"
           "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.entryPages.generate({\n    documentId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/documents/{document_id}/export"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "exportDocument"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.documents.export({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n    versionId: \"ver_01h2abcd1234efgh5678jkmnpt\",\n  });\n\n  console.log(result);\n}\n\nrun();"
   - target: $["paths"]["/v1beta/documents/{document_id}/general-access"]["get"]
     update:
       "x-codeSamples":
@@ -135,6 +147,12 @@ actions:
         - "lang": "typescript"
           "label": "detachDocumentPolicy"
           "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.policies.detach({\n    documentId: \"<id>\",\n    policyId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/documents/{document_id}/process"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "processDocument"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.documents.process({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n    body: {\n      versionId: \"ver_01h2abcd1234efgh5678jkmnpt\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
   - target: $["paths"]["/v1beta/documents/{document_id}/share"]["get"]
     update:
       "x-codeSamples":
@@ -171,6 +189,24 @@ actions:
         - "lang": "typescript"
           "label": "getDocumentTimeline"
           "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.timelines.getDocumentTimeline({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/documents/{document_id}/transfer"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "transferDocumentOwnership"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.documents.transferOwnership({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n    body: {\n      newOwnerId: \"user_01h2xcejqtf2nbrexx3vqjhp41\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/documents/{document_id}/trash"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "trashDocument"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.documents.trash({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/documents/{document_id}/untrash"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "untrashDocument"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.documents.untrash({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
   - target: $["paths"]["/v1beta/documents/{document_id}/versions"]["get"]
     update:
       "x-codeSamples":

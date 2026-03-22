@@ -199,6 +199,12 @@ run();
 * [getDocumentQuota](docs/sdks/documents/README.md#getdocumentquota) - Get document quota
 * [get](docs/sdks/documents/README.md#get) - Retrieve a document
 * [update](docs/sdks/documents/README.md#update) - Update a document
+* [listDuplicates](docs/sdks/documents/README.md#listduplicates) - List duplicate documents
+* [export](docs/sdks/documents/README.md#export) - Export a document
+* [process](docs/sdks/documents/README.md#process) - Process a document
+* [transferOwnership](docs/sdks/documents/README.md#transferownership) - Transfer document ownership
+* [trash](docs/sdks/documents/README.md#trash) - Trash a document
+* [untrash](docs/sdks/documents/README.md#untrash) - Restore a document from trash
 
 ### [EntryPages](docs/sdks/entrypages/README.md)
 
@@ -304,9 +310,15 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`apiKeysList`](docs/sdks/apikeys/README.md#list) - List API keys
 - [`apiKeysRevoke`](docs/sdks/apikeys/README.md#revoke) - Revoke an API key
 - [`documentsCreate`](docs/sdks/documents/README.md#create) - Create a document
+- [`documentsExport`](docs/sdks/documents/README.md#export) - Export a document
 - [`documentsGet`](docs/sdks/documents/README.md#get) - Retrieve a document
 - [`documentsGetDocumentQuota`](docs/sdks/documents/README.md#getdocumentquota) - Get document quota
 - [`documentsList`](docs/sdks/documents/README.md#list) - List documents
+- [`documentsListDuplicates`](docs/sdks/documents/README.md#listduplicates) - List duplicate documents
+- [`documentsProcess`](docs/sdks/documents/README.md#process) - Process a document
+- [`documentsTransferOwnership`](docs/sdks/documents/README.md#transferownership) - Transfer document ownership
+- [`documentsTrash`](docs/sdks/documents/README.md#trash) - Trash a document
+- [`documentsUntrash`](docs/sdks/documents/README.md#untrash) - Restore a document from trash
 - [`documentsUpdate`](docs/sdks/documents/README.md#update) - Update a document
 - [`entryPagesGenerate`](docs/sdks/entrypages/README.md#generate) - Generate entry page
 - [`invitesAcceptOrganizationInvite`](docs/sdks/invites/README.md#acceptorganizationinvite) - Accept an invitation
