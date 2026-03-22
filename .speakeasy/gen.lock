@@ -5,15 +5,15 @@ management:
   docVersion: 1.0.0-rc.1
   speakeasyVersion: 1.759.0
   generationVersion: 2.869.3
-  releaseVersion: 1.0.0-rc.1
-  configChecksum: 591663e36748abb31512cfb613561e19
+  releaseVersion: 1.0.0
+  configChecksum: ed6b7a88067fd502f9a71824b40926d3
   repoURL: https://github.com/factify-inc/factify-typescript.git
   installationURL: https://github.com/factify-inc/factify-typescript
   published: true
 persistentEdits:
-  generation_id: 0e930d76-d1ef-4c85-892a-9b77fc30fdd0
-  pristine_commit_hash: 9225e1939dff0ee14a0aa448fa9e85a3d6c06600
-  pristine_tree_hash: 709e0697f4b6b9b844d7e93c2a2f87a03fa612c7
+  generation_id: a85e2c39-c002-41fb-b137-91a3530d5608
+  pristine_commit_hash: 6889512cd81f91ec4470f4c0ec6008b1b4e0f405
+  pristine_tree_hash: 9d5eca5629284351999779197cbdadf3df1b59bc
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -1053,12 +1053,12 @@ trackedFiles:
     pristine_git_object: 766ea5ba4257419f9fca9da9c6ba895ab05a3f8b
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:745d4b16afbefc23d38689257ac84ba31b690878
-    pristine_git_object: 796de2c6f2a21b9571edc64455b3fc365dcd4e36
+    last_write_checksum: sha1:edaecd3eef74000061ec51207c1bd904b37ecc95
+    pristine_git_object: c23db22492d71c974ab245481c90a7a022d5657d
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:0fd4a3c9ec3de9bb37c4eb7568ae87281aa56605
-    pristine_git_object: 27184193ad4e1987fc91fb0e94bdc7bc63b6587d
+    last_write_checksum: sha1:65d0ce4af9f7d859b465008aa4a4a0f4de38c08b
+    pristine_git_object: 08f7c9cdbce747fc766d012bc7303ab703ced51a
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:72dd2a6867a44557b35fa72fe5588efc5d08e8e1
@@ -1305,8 +1305,8 @@ trackedFiles:
     pristine_git_object: 44be0eae8246521b230e8e711a88eff738fc015d
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:16c1bae67962896584e9b7a6fa91555b0984a71d
-    pristine_git_object: bf66e396a1a2bc7ed19b49ae252b6651dc18beb7
+    last_write_checksum: sha1:96a62f8611986eeb9d3a33569179949bba9e68a8
+    pristine_git_object: cbcc482b29ff97bb93d89ceadc5d8864fac8c2dc
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -3731,39 +3731,3 @@ examples:
         "500":
           application/json: {"code": "internal", "message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Typescript SDK Changes:
-  * `factify.documents.getQuota()`: **Added**
-  * `factify.timelines.get()`: **Added**
-  * `factify.organizations.update()`: **Added**
-  * `factify.organizations.invites.accept()`: **Added**
-  * `factify.organizations.invites.resend()`: **Added**
-  * `factify.organizations.invites.revoke()`: **Added**
-  * `factify.organizations.members.list()`: **Added**
-  * `factify.organizations.members.add()`: **Added**
-  * `factify.organizations.members.remove()`: **Added**
-  * `factify.organizations.members.update()`: **Added**
-  * `factify.usage.get()`: **Added**
-  * `factify.usage.listKeyQuotas()`: **Added**
-  * `factify.usage.deleteKeyQuota()`: **Added**
-  * `factify.usage.setKeyQuota()`: **Added**
-  * `factify.usage.getHistory()`: **Added**
-  * `factify.userPreferences.get()`: **Added**
-  * `factify.quotas.quotaServiceDeleteOrganizationQuota()`: **Removed** (Breaking ⚠️)
-  * `factify.quotas.quotaServiceSetOrganizationQuota()`: **Removed** (Breaking ⚠️)
-  * `factify.documents.getDocumentQuota()`: **Removed** (Breaking ⚠️)
-  * `factify.timelines.getDocumentTimeline()`: **Removed** (Breaking ⚠️)
-  * `factify.organizations.updateOrganization()`: **Removed** (Breaking ⚠️)
-  * `factify.invites.acceptOrganizationInvite()`: **Removed** (Breaking ⚠️)
-  * `factify.invites.resendOrganizationInvite()`: **Removed** (Breaking ⚠️)
-  * `factify.invites.revokeOrganizationInvite()`: **Removed** (Breaking ⚠️)
-  * `factify.members.listOrganizationMembers()`: **Removed** (Breaking ⚠️)
-  * `factify.members.addOrganizationMember()`: **Removed** (Breaking ⚠️)
-  * `factify.members.removeOrganizationMember()`: **Removed** (Breaking ⚠️)
-  * `factify.members.updateOrganizationMember()`: **Removed** (Breaking ⚠️)
-  * `factify.usage.getOrganizationQuota()`: **Removed** (Breaking ⚠️)
-  * `factify.usage.listApiKeyQuotas()`: **Removed** (Breaking ⚠️)
-  * `factify.usage.deleteApiKeyQuota()`: **Removed** (Breaking ⚠️)
-  * `factify.usage.setApiKeyQuota()`: **Removed** (Breaking ⚠️)
-  * `factify.usage.getUsageHistory()`: **Removed** (Breaking ⚠️)
-  * `factify.userPreferences.getUserPreferences()`: **Removed** (Breaking ⚠️)
