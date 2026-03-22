@@ -7,15 +7,15 @@ import { GetOrganizationResponse } from "@factify/sdk/models/operations";
 
 let value: GetOrganizationResponse = {
   headers: {
-    "key": [
+    "key": [],
+    "key1": [
       "<value 1>",
       "<value 2>",
     ],
-    "key1": [],
   },
   result: {
     organization: {
-      createdAt: new Date("2025-08-27T20:19:06.403Z"),
+      createdAt: new Date("2025-09-01T16:09:14.393Z"),
       id: "org_01h2xcejqtf2nbrexx3vqjhp41",
       name: "Acme Corporation",
     },

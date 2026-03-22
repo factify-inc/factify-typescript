@@ -6,22 +6,32 @@
 import { ListOrganizationInvitesResponse } from "@factify/sdk/models/operations";
 
 let value: ListOrganizationInvitesResponse = {
-  headers: {},
+  headers: {
+    "key": [
+      "<value 1>",
+      "<value 2>",
+    ],
+    "key1": [
+      "<value 1>",
+      "<value 2>",
+      "<value 3>",
+    ],
+  },
   result: {
     items: [
       {
         acceptedBy: {
-          email: "Emery98@gmail.com",
+          email: "Mozell84@hotmail.com",
           id: "user_01h2xcejqtf2nbrexx3vqjhp41",
           name: "<value>",
         },
-        createdAt: new Date("2026-10-25T05:00:32.524Z"),
+        createdAt: new Date("2025-10-19T15:11:45.441Z"),
         email: "dwight@dundermifflin.com",
-        expiresAt: new Date("2026-03-14T10:17:27.941Z"),
+        expiresAt: new Date("2025-03-15T15:49:46.314Z"),
         id: "inv_01h2xcejqtf2nbrexx3vqjhp41",
         organizationId: "org_01h2xcejqtf2nbrexx3vqjhp41",
         sender: {
-          email: "Lurline_Klocko10@yahoo.com",
+          email: "Glenna.Pouros88@gmail.com",
           id: "user_01h2xcejqtf2nbrexx3vqjhp41",
           name: "<value>",
         },

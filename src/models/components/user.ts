@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
@@ -16,19 +17,43 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type User = {
   email: string;
+  /**
+   * Family name (last name) of the user.
+   */
+  familyName?: string | null | undefined;
+  /**
+   * Given name (first name) of the user.
+   */
+  givenName?: string | null | undefined;
   id: string;
   /**
    * Display name of the user.
    */
   name: string;
+  /**
+   * URL of the user's profile image.
+   */
+  profileImageUrl?: string | null | undefined;
 };
 
 /** @internal */
-export const User$inboundSchema: z.ZodMiniType<User, unknown> = z.object({
-  email: types.string(),
-  id: types.string(),
-  name: types.string(),
-});
+export const User$inboundSchema: z.ZodMiniType<User, unknown> = z.pipe(
+  z.object({
+    email: types.string(),
+    family_name: z.optional(z.nullable(types.string())),
+    given_name: z.optional(z.nullable(types.string())),
+    id: types.string(),
+    name: types.string(),
+    profile_image_url: z.optional(z.nullable(types.string())),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      "family_name": "familyName",
+      "given_name": "givenName",
+      "profile_image_url": "profileImageUrl",
+    });
+  }),
+);
 
 export function userFromJSON(
   jsonString: string,

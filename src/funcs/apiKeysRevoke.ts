@@ -95,7 +95,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1beta/api-keys/{api_key_id}/revoke")(pathParams);
 
   const headers = new Headers(compactMap({

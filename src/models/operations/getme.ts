@@ -9,19 +9,19 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type CreateOrganizationResponse = {
+export type GetMeResponse = {
   headers: { [k: string]: Array<string> };
-  result: components.CreateOrganizationResponse;
+  result: components.GetMeResponse;
 };
 
 /** @internal */
-export const CreateOrganizationResponse$inboundSchema: z.ZodMiniType<
-  CreateOrganizationResponse,
+export const GetMeResponse$inboundSchema: z.ZodMiniType<
+  GetMeResponse,
   unknown
 > = z.pipe(
   z.object({
     Headers: z._default(z.record(z.string(), z.array(z.string())), {}),
-    Result: components.CreateOrganizationResponse$inboundSchema,
+    Result: components.GetMeResponse$inboundSchema,
   }),
   z.transform((v) => {
     return remap$(v, {
@@ -31,12 +31,12 @@ export const CreateOrganizationResponse$inboundSchema: z.ZodMiniType<
   }),
 );
 
-export function createOrganizationResponseFromJSON(
+export function getMeResponseFromJSON(
   jsonString: string,
-): SafeParseResult<CreateOrganizationResponse, SDKValidationError> {
+): SafeParseResult<GetMeResponse, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateOrganizationResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateOrganizationResponse' from JSON`,
+    (x) => GetMeResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetMeResponse' from JSON`,
   );
 }

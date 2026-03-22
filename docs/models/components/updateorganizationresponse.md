@@ -1,15 +1,15 @@
-# CreateOrganizationResponse
+# UpdateOrganizationResponse
 
-CreateOrganizationResponse contains the newly created organization.
+UpdateOrganizationResponse contains the updated organization.
 
 ## Example Usage
 
 ```typescript
-import { CreateOrganizationResponse } from "@factify/sdk/models/components";
+import { UpdateOrganizationResponse } from "@factify/sdk/models/components";
 
-let value: CreateOrganizationResponse = {
+let value: UpdateOrganizationResponse = {
   organization: {
-    createdAt: new Date("2025-08-27T20:19:06.403Z"),
+    createdAt: new Date("2025-09-01T16:09:14.393Z"),
     id: "org_01h2xcejqtf2nbrexx3vqjhp41",
     name: "Acme Corporation",
   },

@@ -10,21 +10,21 @@ import { RevokeOrganizationInviteResponse } from "@factify/sdk/models/components
 let value: RevokeOrganizationInviteResponse = {
   invite: {
     acceptedBy: {
-      email: "Emery98@gmail.com",
+      email: "Mozell84@hotmail.com",
       id: "user_01h2xcejqtf2nbrexx3vqjhp41",
       name: "<value>",
     },
-    createdAt: new Date("2025-05-05T11:45:30.275Z"),
+    createdAt: new Date("2024-10-07T07:46:45.100Z"),
     email: "dwight@dundermifflin.com",
-    expiresAt: new Date("2025-03-30T17:59:42.596Z"),
+    expiresAt: new Date("2024-02-24T07:14:51.419Z"),
     id: "inv_01h2xcejqtf2nbrexx3vqjhp41",
     organizationId: "org_01h2xcejqtf2nbrexx3vqjhp41",
     sender: {
-      email: "Lurline_Klocko10@yahoo.com",
+      email: "Glenna.Pouros88@gmail.com",
       id: "user_01h2xcejqtf2nbrexx3vqjhp41",
       name: "<value>",
     },
-    status: "accepted",
+    status: "revoked",
   },
 };
 ```

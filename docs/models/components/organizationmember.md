@@ -11,7 +11,7 @@ let value: OrganizationMember = {
   joinedAt: new Date("2026-01-29T11:08:35.536Z"),
   role: "member",
   user: {
-    email: "Elyssa_Lesch95@hotmail.com",
+    email: "Vinnie_Harvey64@yahoo.com",
     id: "user_01h2xcejqtf2nbrexx3vqjhp41",
     name: "<value>",
   },

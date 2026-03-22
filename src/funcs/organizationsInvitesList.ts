@@ -109,7 +109,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1beta/organizations/{organization_id}/invites")(
     pathParams,
   );

@@ -165,6 +165,12 @@ actions:
         - "lang": "typescript"
           "label": "updateDocumentAccess"
           "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.sharing.update({\n    documentId: \"<id>\",\n    recipientId: \"<id>\",\n    body: {\n      documentRole: \"admin\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/documents/{document_id}/timeline"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "getDocumentTimeline"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.timelines.getDocumentTimeline({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
   - target: $["paths"]["/v1beta/documents/{document_id}/versions"]["get"]
     update:
       "x-codeSamples":
@@ -177,24 +183,30 @@ actions:
         - "lang": "typescript"
           "label": "createDocumentVersion"
           "source": "import { Factify } from \"@factify/sdk\";\nimport { openAsBlob } from \"node:fs\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.versions.create({\n    documentId: \"<id>\",\n    body: {\n      payload: await openAsBlob(\"example.file\"),\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/me"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "getMe"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.users.getMe();\n\n  console.log(result);\n}\n\nrun();"
   - target: $["paths"]["/v1beta/organizations"]["get"]
     update:
       "x-codeSamples":
         - "lang": "typescript"
           "label": "listOrganizations"
           "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.list();\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
-  - target: $["paths"]["/v1beta/organizations"]["post"]
-    update:
-      "x-codeSamples":
-        - "lang": "typescript"
-          "label": "createOrganization"
-          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.create({\n    name: \"<value>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
   - target: $["paths"]["/v1beta/organizations/{organization_id}"]["get"]
     update:
       "x-codeSamples":
         - "lang": "typescript"
           "label": "getOrganization"
           "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.get({\n    organizationId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/organizations/{organization_id}"]["patch"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "updateOrganization"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.updateOrganization({\n    organizationId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
   - target: $["paths"]["/v1beta/organizations/{organization_id}/invites"]["get"]
     update:
       "x-codeSamples":
@@ -212,43 +224,43 @@ actions:
       "x-codeSamples":
         - "lang": "typescript"
           "label": "acceptOrganizationInvite"
-          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.acceptOrganizationInvite({\n    organizationId: \"<id>\",\n    body: {\n      token: \"<value>\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.invites.acceptOrganizationInvite({\n    organizationId: \"<id>\",\n    body: {\n      token: \"<value>\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
   - target: $["paths"]["/v1beta/organizations/{organization_id}/invites/{invite_id}/resend"]["post"]
     update:
       "x-codeSamples":
         - "lang": "typescript"
           "label": "resendOrganizationInvite"
-          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.resendOrganizationInvite({\n    organizationId: \"<id>\",\n    inviteId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.invites.resendOrganizationInvite({\n    organizationId: \"<id>\",\n    inviteId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
   - target: $["paths"]["/v1beta/organizations/{organization_id}/invites/{invite_id}/revoke"]["post"]
     update:
       "x-codeSamples":
         - "lang": "typescript"
           "label": "revokeOrganizationInvite"
-          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.revokeOrganizationInvite({\n    organizationId: \"<id>\",\n    inviteId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.invites.revokeOrganizationInvite({\n    organizationId: \"<id>\",\n    inviteId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
   - target: $["paths"]["/v1beta/organizations/{organization_id}/members"]["get"]
     update:
       "x-codeSamples":
         - "lang": "typescript"
           "label": "listOrganizationMembers"
-          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.listOrganizationMembers({\n    organizationId: \"<id>\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.members.listOrganizationMembers({\n    organizationId: \"<id>\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
   - target: $["paths"]["/v1beta/organizations/{organization_id}/members"]["post"]
     update:
       "x-codeSamples":
         - "lang": "typescript"
           "label": "addOrganizationMember"
-          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.addOrganizationMember({\n    organizationId: \"<id>\",\n    body: {\n      role: \"owner\",\n      userId: \"<id>\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.members.addOrganizationMember({\n    organizationId: \"<id>\",\n    body: {\n      role: \"owner\",\n      userId: \"<id>\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
   - target: $["paths"]["/v1beta/organizations/{organization_id}/members/{user_id}"]["delete"]
     update:
       "x-codeSamples":
         - "lang": "typescript"
           "label": "removeOrganizationMember"
-          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.removeOrganizationMember({\n    organizationId: \"<id>\",\n    userId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.members.removeOrganizationMember({\n    organizationId: \"<id>\",\n    userId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
   - target: $["paths"]["/v1beta/organizations/{organization_id}/members/{user_id}"]["patch"]
     update:
       "x-codeSamples":
         - "lang": "typescript"
           "label": "updateOrganizationMember"
-          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.updateOrganizationMember({\n    organizationId: \"<id>\",\n    userId: \"<id>\",\n    body: {\n      role: \"member\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.members.updateOrganizationMember({\n    organizationId: \"<id>\",\n    userId: \"<id>\",\n    body: {\n      role: \"member\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
   - target: $["paths"]["/v1beta/quota"]["get"]
     update:
       "x-codeSamples":

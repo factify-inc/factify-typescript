@@ -204,23 +204,29 @@ run();
 
 * [generate](docs/sdks/entrypages/README.md#generate) - Generate entry page
 
+### [Invites](docs/sdks/invites/README.md)
+
+* [acceptOrganizationInvite](docs/sdks/invites/README.md#acceptorganizationinvite) - Accept an invitation
+* [resendOrganizationInvite](docs/sdks/invites/README.md#resendorganizationinvite) - Resend an invitation email
+* [revokeOrganizationInvite](docs/sdks/invites/README.md#revokeorganizationinvite) - Revoke an invitation
+
+### [Members](docs/sdks/members/README.md)
+
+* [listOrganizationMembers](docs/sdks/members/README.md#listorganizationmembers) - List organization members
+* [addOrganizationMember](docs/sdks/members/README.md#addorganizationmember) - Add a member to an organization
+* [removeOrganizationMember](docs/sdks/members/README.md#removeorganizationmember) - Remove an organization member
+* [updateOrganizationMember](docs/sdks/members/README.md#updateorganizationmember) - Update an organization member
+
 ### [Organizations](docs/sdks/organizations/README.md)
 
 * [list](docs/sdks/organizations/README.md#list) - List organizations
-* [create](docs/sdks/organizations/README.md#create) - Create an organization
 * [get](docs/sdks/organizations/README.md#get) - Retrieve an organization
-* [acceptOrganizationInvite](docs/sdks/organizations/README.md#acceptorganizationinvite) - Accept an invitation
-* [resendOrganizationInvite](docs/sdks/organizations/README.md#resendorganizationinvite) - Resend an invitation email
-* [revokeOrganizationInvite](docs/sdks/organizations/README.md#revokeorganizationinvite) - Revoke an invitation
-* [listOrganizationMembers](docs/sdks/organizations/README.md#listorganizationmembers) - List organization members
-* [addOrganizationMember](docs/sdks/organizations/README.md#addorganizationmember) - Add a member to an organization
-* [removeOrganizationMember](docs/sdks/organizations/README.md#removeorganizationmember) - Remove an organization member
-* [updateOrganizationMember](docs/sdks/organizations/README.md#updateorganizationmember) - Update an organization member
+* [updateOrganization](docs/sdks/organizations/README.md#updateorganization) - Update an organization
 
-### [Organizations.Invites](docs/sdks/invites/README.md)
+### [Organizations.Invites](docs/sdks/organizationsinvites/README.md)
 
-* [list](docs/sdks/invites/README.md#list) - List organization invitations
-* [create](docs/sdks/invites/README.md#create) - Invite a user to join an organization
+* [list](docs/sdks/organizationsinvites/README.md#list) - List organization invitations
+* [create](docs/sdks/organizationsinvites/README.md#create) - Invite a user to join an organization
 
 ### [Policies](docs/sdks/policies/README.md)
 
@@ -243,6 +249,10 @@ run();
 * [revoke](docs/sdks/sharing/README.md#revoke) - Revoke document access
 * [update](docs/sdks/sharing/README.md#update) - Update document access
 
+### [Timelines](docs/sdks/timelines/README.md)
+
+* [getDocumentTimeline](docs/sdks/timelines/README.md#getdocumenttimeline) - Get document timeline
+
 ### [Usage](docs/sdks/usage/README.md)
 
 * [getOrganizationQuota](docs/sdks/usage/README.md#getorganizationquota) - Get organization quota status
@@ -254,6 +264,10 @@ run();
 ### [UserPreferences](docs/sdks/userpreferences/README.md)
 
 * [getUserPreferences](docs/sdks/userpreferences/README.md#getuserpreferences) - Get user preferences
+
+### [Users](docs/sdks/users/README.md)
+
+* [getMe](docs/sdks/users/README.md#getme) - Get current user
 
 ### [Versions](docs/sdks/versions/README.md)
 
@@ -295,18 +309,18 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`documentsList`](docs/sdks/documents/README.md#list) - List documents
 - [`documentsUpdate`](docs/sdks/documents/README.md#update) - Update a document
 - [`entryPagesGenerate`](docs/sdks/entrypages/README.md#generate) - Generate entry page
-- [`organizationsAcceptOrganizationInvite`](docs/sdks/organizations/README.md#acceptorganizationinvite) - Accept an invitation
-- [`organizationsAddOrganizationMember`](docs/sdks/organizations/README.md#addorganizationmember) - Add a member to an organization
-- [`organizationsCreate`](docs/sdks/organizations/README.md#create) - Create an organization
+- [`invitesAcceptOrganizationInvite`](docs/sdks/invites/README.md#acceptorganizationinvite) - Accept an invitation
+- [`invitesResendOrganizationInvite`](docs/sdks/invites/README.md#resendorganizationinvite) - Resend an invitation email
+- [`invitesRevokeOrganizationInvite`](docs/sdks/invites/README.md#revokeorganizationinvite) - Revoke an invitation
+- [`membersAddOrganizationMember`](docs/sdks/members/README.md#addorganizationmember) - Add a member to an organization
+- [`membersListOrganizationMembers`](docs/sdks/members/README.md#listorganizationmembers) - List organization members
+- [`membersRemoveOrganizationMember`](docs/sdks/members/README.md#removeorganizationmember) - Remove an organization member
+- [`membersUpdateOrganizationMember`](docs/sdks/members/README.md#updateorganizationmember) - Update an organization member
 - [`organizationsGet`](docs/sdks/organizations/README.md#get) - Retrieve an organization
-- [`organizationsInvitesCreate`](docs/sdks/invites/README.md#create) - Invite a user to join an organization
-- [`organizationsInvitesList`](docs/sdks/invites/README.md#list) - List organization invitations
+- [`organizationsInvitesCreate`](docs/sdks/organizationsinvites/README.md#create) - Invite a user to join an organization
+- [`organizationsInvitesList`](docs/sdks/organizationsinvites/README.md#list) - List organization invitations
 - [`organizationsList`](docs/sdks/organizations/README.md#list) - List organizations
-- [`organizationsListOrganizationMembers`](docs/sdks/organizations/README.md#listorganizationmembers) - List organization members
-- [`organizationsRemoveOrganizationMember`](docs/sdks/organizations/README.md#removeorganizationmember) - Remove an organization member
-- [`organizationsResendOrganizationInvite`](docs/sdks/organizations/README.md#resendorganizationinvite) - Resend an invitation email
-- [`organizationsRevokeOrganizationInvite`](docs/sdks/organizations/README.md#revokeorganizationinvite) - Revoke an invitation
-- [`organizationsUpdateOrganizationMember`](docs/sdks/organizations/README.md#updateorganizationmember) - Update an organization member
+- [`organizationsUpdateOrganization`](docs/sdks/organizations/README.md#updateorganization) - Update an organization
 - [`policiesAttach`](docs/sdks/policies/README.md#attach) - Attach a policy
 - [`policiesDetach`](docs/sdks/policies/README.md#detach) - Detach a policy
 - [`policiesList`](docs/sdks/policies/README.md#list) - List document policies
@@ -319,12 +333,14 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`sharingRevoke`](docs/sdks/sharing/README.md#revoke) - Revoke document access
 - [`sharingSetGeneralAccess`](docs/sdks/sharing/README.md#setgeneralaccess) - Set general access
 - [`sharingUpdate`](docs/sdks/sharing/README.md#update) - Update document access
+- [`timelinesGetDocumentTimeline`](docs/sdks/timelines/README.md#getdocumenttimeline) - Get document timeline
 - [`usageDeleteAPIKeyQuota`](docs/sdks/usage/README.md#deleteapikeyquota) - Delete API key quota
 - [`usageGetOrganizationQuota`](docs/sdks/usage/README.md#getorganizationquota) - Get organization quota status
 - [`usageGetUsageHistory`](docs/sdks/usage/README.md#getusagehistory) - Get usage history
 - [`usageListAPIKeyQuotas`](docs/sdks/usage/README.md#listapikeyquotas) - List API key quotas
 - [`usageSetAPIKeyQuota`](docs/sdks/usage/README.md#setapikeyquota) - Set API key quota
 - [`userPreferencesGetUserPreferences`](docs/sdks/userpreferences/README.md#getuserpreferences) - Get user preferences
+- [`usersGetMe`](docs/sdks/users/README.md#getme) - Get current user
 - [`versionsCreate`](docs/sdks/versions/README.md#create) - Create a new version
 - [`versionsGet`](docs/sdks/versions/README.md#get) - Retrieve a version
 - [`versionsList`](docs/sdks/versions/README.md#list) - List document versions

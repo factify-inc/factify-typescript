@@ -12,7 +12,7 @@ let value: AddOrganizationMemberResponse = {
       joinedAt: new Date("2026-12-13T16:53:17.763Z"),
       role: "admin",
       user: {
-        email: "Elyssa_Lesch95@hotmail.com",
+        email: "Vinnie_Harvey64@yahoo.com",
         id: "user_01h2xcejqtf2nbrexx3vqjhp41",
         name: "<value>",
       },

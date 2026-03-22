@@ -6,6 +6,7 @@ import * as z from "zod/v4-mini";
 import { FactifyCore } from "../core.js";
 import { appendForm, encodeSimple } from "../lib/encodings.js";
 import {
+  bytesToBlob,
   getContentTypeFromFileName,
   readableStreamToArrayBuffer,
 } from "../lib/files.js";
@@ -105,18 +106,10 @@ async function $do(
     const contentType =
       getContentTypeFromFileName(payload.body.payload.fileName)
       || "application/octet-stream";
-    const blob = new Blob([buffer], { type: contentType });
-    appendForm(body, "payload", blob, payload.body.payload.fileName);
-  } else if (payload.body.payload.content instanceof Uint8Array) {
-    const contentType =
-      getContentTypeFromFileName(payload.body.payload.fileName)
-      || "application/octet-stream";
     appendForm(
       body,
       "payload",
-      new Blob([new Uint8Array(payload.body.payload.content).buffer], {
-        type: contentType,
-      }),
+      bytesToBlob(buffer, contentType),
       payload.body.payload.fileName,
     );
   } else {
@@ -126,7 +119,7 @@ async function $do(
     appendForm(
       body,
       "payload",
-      new Blob([payload.body.payload.content], { type: contentType }),
+      bytesToBlob(payload.body.payload.content, contentType),
       payload.body.payload.fileName,
     );
   }
@@ -143,7 +136,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1beta/documents/{document_id}/versions")(
     pathParams,
   );

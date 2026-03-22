@@ -11,7 +11,7 @@ import { OrganizationInvite } from "@factify/sdk/models/components";
 
 let value: OrganizationInvite = {
   acceptedBy: {
-    email: "Emery98@gmail.com",
+    email: "Mozell84@hotmail.com",
     id: "user_01h2xcejqtf2nbrexx3vqjhp41",
     name: "<value>",
   },
@@ -21,7 +21,7 @@ let value: OrganizationInvite = {
   id: "inv_01h2xcejqtf2nbrexx3vqjhp41",
   organizationId: "org_01h2xcejqtf2nbrexx3vqjhp41",
   sender: {
-    email: "Lurline_Klocko10@yahoo.com",
+    email: "Glenna.Pouros88@gmail.com",
     id: "user_01h2xcejqtf2nbrexx3vqjhp41",
     name: "<value>",
   },

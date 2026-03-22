@@ -9,9 +9,9 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Organization, Organization$inboundSchema } from "./organization.js";
 
 /**
- * CreateOrganizationResponse contains the newly created organization.
+ * UpdateOrganizationResponse contains the updated organization.
  */
-export type CreateOrganizationResponse = {
+export type UpdateOrganizationResponse = {
   /**
    * Organization represents a Factify organization.
    */
@@ -19,19 +19,19 @@ export type CreateOrganizationResponse = {
 };
 
 /** @internal */
-export const CreateOrganizationResponse$inboundSchema: z.ZodMiniType<
-  CreateOrganizationResponse,
+export const UpdateOrganizationResponse$inboundSchema: z.ZodMiniType<
+  UpdateOrganizationResponse,
   unknown
 > = z.object({
   organization: Organization$inboundSchema,
 });
 
-export function createOrganizationResponseFromJSON(
+export function updateOrganizationResponseFromJSON(
   jsonString: string,
-): SafeParseResult<CreateOrganizationResponse, SDKValidationError> {
+): SafeParseResult<UpdateOrganizationResponse, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateOrganizationResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateOrganizationResponse' from JSON`,
+    (x) => UpdateOrganizationResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateOrganizationResponse' from JSON`,
   );
 }

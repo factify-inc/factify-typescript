@@ -27,18 +27,18 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Accept an invitation
+ * Update an organization member
  *
  * @remarks
- * Accepts the invitation and adds the authenticated user as a member of the organization. The authenticated user's verified email must match the invitation email (case-insensitive). Returns PERMISSION_DENIED if emails don't match, FAILED_PRECONDITION if the user is already a member, or NOT_FOUND if the invitation is invalid/expired.
+ * Update a member's role within an organization. Requires manage permission (owner or admin). The organization owner's role cannot be changed.
  */
-export function organizationsAcceptOrganizationInvite(
+export function membersUpdateOrganizationMember(
   client: FactifyCore,
-  request: operations.AcceptOrganizationInviteRequest,
+  request: operations.UpdateOrganizationMemberRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.AcceptOrganizationInviteResponse,
+    operations.UpdateOrganizationMemberResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -59,12 +59,12 @@ export function organizationsAcceptOrganizationInvite(
 
 async function $do(
   client: FactifyCore,
-  request: operations.AcceptOrganizationInviteRequest,
+  request: operations.UpdateOrganizationMemberRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.AcceptOrganizationInviteResponse,
+      operations.UpdateOrganizationMemberResponse,
       | errors.ErrorResponse
       | FactifyError
       | ResponseValidationError
@@ -81,7 +81,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      z.parse(operations.AcceptOrganizationInviteRequest$outboundSchema, value),
+      z.parse(operations.UpdateOrganizationMemberRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -95,10 +95,13 @@ async function $do(
       explode: false,
       charEncoding: "percent",
     }),
+    user_id: encodeSimple("user_id", payload.user_id, {
+      explode: false,
+      charEncoding: "percent",
+    }),
   };
-
   const path = pathToFunc(
-    "/v1beta/organizations/{organization_id}/invites/accept",
+    "/v1beta/organizations/{organization_id}/members/{user_id}",
   )(pathParams);
 
   const headers = new Headers(compactMap({
@@ -113,7 +116,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "acceptOrganizationInvite",
+    operationID: "updateOrganizationMember",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -127,7 +130,7 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "POST",
+    method: "PATCH",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
@@ -156,7 +159,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.AcceptOrganizationInviteResponse,
+    operations.UpdateOrganizationMemberResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -167,7 +170,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.AcceptOrganizationInviteResponse$inboundSchema, {
+    M.json(200, operations.UpdateOrganizationMemberResponse$inboundSchema, {
       key: "Result",
     }),
     M.jsonErr([400, 401, 403, 404], errors.ErrorResponse$inboundSchema),

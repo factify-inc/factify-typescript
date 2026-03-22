@@ -1,22 +1,15 @@
-# CreateOrganizationResponse
+# UpdateOrganizationResponse
 
 ## Example Usage
 
 ```typescript
-import { CreateOrganizationResponse } from "@factify/sdk/models/operations";
+import { UpdateOrganizationResponse } from "@factify/sdk/models/operations";
 
-let value: CreateOrganizationResponse = {
-  headers: {
-    "key": [],
-    "key1": [
-      "<value 1>",
-      "<value 2>",
-      "<value 3>",
-    ],
-  },
+let value: UpdateOrganizationResponse = {
+  headers: {},
   result: {
     organization: {
-      createdAt: new Date("2025-08-27T20:19:06.403Z"),
+      createdAt: new Date("2025-09-01T16:09:14.393Z"),
       id: "org_01h2xcejqtf2nbrexx3vqjhp41",
       name: "Acme Corporation",
     },
@@ -29,4 +22,4 @@ let value: CreateOrganizationResponse = {
 | Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
 | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | `headers`                                                                                      | Record<string, *string*[]>                                                                     | :heavy_check_mark:                                                                             | N/A                                                                                            |
-| `result`                                                                                       | [components.CreateOrganizationResponse](../../models/components/createorganizationresponse.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `result`                                                                                       | [components.UpdateOrganizationResponse](../../models/components/updateorganizationresponse.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |

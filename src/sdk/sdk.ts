@@ -7,12 +7,16 @@ import { AccessRequests } from "./accessrequests.js";
 import { APIKeys } from "./apikeys.js";
 import { Documents } from "./documents.js";
 import { EntryPages } from "./entrypages.js";
+import { Invites } from "./invites.js";
+import { Members } from "./members.js";
 import { Organizations } from "./organizations.js";
 import { Policies } from "./policies.js";
 import { Quotas } from "./quotas.js";
 import { Sharing } from "./sharing.js";
+import { Timelines } from "./timelines.js";
 import { Usage } from "./usage.js";
 import { UserPreferences } from "./userpreferences.js";
+import { Users } from "./users.js";
 import { Versions } from "./versions.js";
 
 export class Factify extends ClientSDK {
@@ -51,14 +55,34 @@ export class Factify extends ClientSDK {
     return (this._policies ??= new Policies(this._options));
   }
 
+  private _timelines?: Timelines;
+  get timelines(): Timelines {
+    return (this._timelines ??= new Timelines(this._options));
+  }
+
   private _versions?: Versions;
   get versions(): Versions {
     return (this._versions ??= new Versions(this._options));
   }
 
+  private _users?: Users;
+  get users(): Users {
+    return (this._users ??= new Users(this._options));
+  }
+
   private _organizations?: Organizations;
   get organizations(): Organizations {
     return (this._organizations ??= new Organizations(this._options));
+  }
+
+  private _invites?: Invites;
+  get invites(): Invites {
+    return (this._invites ??= new Invites(this._options));
+  }
+
+  private _members?: Members;
+  get members(): Members {
+    return (this._members ??= new Members(this._options));
   }
 
   private _usage?: Usage;

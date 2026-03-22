@@ -25,6 +25,10 @@ export type Organization = {
    */
   id: string;
   /**
+   * Optional — organizations may not have a logo.
+   */
+  logoImageUrl?: string | null | undefined;
+  /**
    * Human-readable organization name.
    */
   name: string;
@@ -36,11 +40,13 @@ export const Organization$inboundSchema: z.ZodMiniType<Organization, unknown> =
     z.object({
       created_at: types.date(),
       id: types.string(),
+      logo_image_url: z.optional(z.nullable(types.string())),
       name: types.string(),
     }),
     z.transform((v) => {
       return remap$(v, {
         "created_at": "createdAt",
+        "logo_image_url": "logoImageUrl",
       });
     }),
   );

@@ -6,6 +6,7 @@ import * as z from "zod/v4-mini";
 import { FactifyCore } from "../core.js";
 import { appendForm } from "../lib/encodings.js";
 import {
+  bytesToBlob,
   getContentTypeFromFileName,
   readableStreamToArrayBuffer,
 } from "../lib/files.js";
@@ -102,17 +103,10 @@ async function $do(
     const buffer = await readableStreamToArrayBuffer(payload.payload.content);
     const contentType = getContentTypeFromFileName(payload.payload.fileName)
       || "application/octet-stream";
-    const blob = new Blob([buffer], { type: contentType });
-    appendForm(body, "payload", blob, payload.payload.fileName);
-  } else if (payload.payload.content instanceof Uint8Array) {
-    const contentType = getContentTypeFromFileName(payload.payload.fileName)
-      || "application/octet-stream";
     appendForm(
       body,
       "payload",
-      new Blob([new Uint8Array(payload.payload.content).buffer], {
-        type: contentType,
-      }),
+      bytesToBlob(buffer, contentType),
       payload.payload.fileName,
     );
   } else {
@@ -121,7 +115,7 @@ async function $do(
     appendForm(
       body,
       "payload",
-      new Blob([payload.payload.content], { type: contentType }),
+      bytesToBlob(payload.payload.content, contentType),
       payload.payload.fileName,
     );
   }

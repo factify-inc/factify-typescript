@@ -9,7 +9,7 @@ import { AcceptOrganizationInviteResponse } from "@factify/sdk/models/components
 
 let value: AcceptOrganizationInviteResponse = {
   organization: {
-    createdAt: new Date("2025-08-27T20:19:06.403Z"),
+    createdAt: new Date("2025-09-01T16:09:14.393Z"),
     id: "org_01h2xcejqtf2nbrexx3vqjhp41",
     name: "Acme Corporation",
   },

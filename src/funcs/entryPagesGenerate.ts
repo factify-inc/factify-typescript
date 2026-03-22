@@ -99,7 +99,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1beta/documents/{document_id}/entry_page")(
     pathParams,
   );

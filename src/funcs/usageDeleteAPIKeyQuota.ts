@@ -96,7 +96,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/v1beta/quota/keys/{api_key_id}")(pathParams);
 
   const query = encodeFormQuery({
