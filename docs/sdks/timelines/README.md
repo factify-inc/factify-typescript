@@ -4,9 +4,9 @@
 
 ### Available Operations
 
-* [getDocumentTimeline](#getdocumenttimeline) - Get document timeline
+* [get](#get) - Get document timeline
 
-## getDocumentTimeline
+## get
 
 Retrieves timeline events for a document. Admins see all events; viewers see only their own.
 
@@ -21,7 +21,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.timelines.getDocumentTimeline({
+  const result = await factify.timelines.get({
     documentId: "doc_01h2xcejqtf2nbrexx3vqjhp41",
   });
 
@@ -37,7 +37,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { timelinesGetDocumentTimeline } from "@factify/sdk/funcs/timelinesGetDocumentTimeline.js";
+import { timelinesGet } from "@factify/sdk/funcs/timelinesGet.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -46,14 +46,14 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await timelinesGetDocumentTimeline(factify, {
+  const res = await timelinesGet(factify, {
     documentId: "doc_01h2xcejqtf2nbrexx3vqjhp41",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("timelinesGetDocumentTimeline failed:", res.error);
+    console.log("timelinesGet failed:", res.error);
   }
 }
 

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v4-mini";
 import { FactifyCore } from "../core.js";
-import { encodeFormQuery } from "../lib/encodings.js";
+import { encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -27,18 +27,18 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Get organization quota status
+ * Remove an organization member
  *
  * @remarks
- * Returns the current quota status for an organization including usage, limits, tier, and reset date.
+ * Remove a member from an organization. Requires manage permission, or the member can remove themselves. The organization owner cannot be removed.
  */
-export function usageGetOrganizationQuota(
+export function organizationsMembersRemove(
   client: FactifyCore,
-  request?: operations.GetOrganizationQuotaRequest | undefined,
+  request: operations.RemoveOrganizationMemberRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetOrganizationQuotaResponse,
+    operations.RemoveOrganizationMemberResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -59,12 +59,12 @@ export function usageGetOrganizationQuota(
 
 async function $do(
   client: FactifyCore,
-  request?: operations.GetOrganizationQuotaRequest | undefined,
+  request: operations.RemoveOrganizationMemberRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetOrganizationQuotaResponse,
+      operations.RemoveOrganizationMemberResponse,
       | errors.ErrorResponse
       | FactifyError
       | ResponseValidationError
@@ -81,10 +81,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      z.parse(
-        z.optional(operations.GetOrganizationQuotaRequest$outboundSchema),
-        value,
-      ),
+      z.parse(operations.RemoveOrganizationMemberRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -93,11 +90,19 @@ async function $do(
   const payload = parsed.value;
   const body = null;
 
-  const path = pathToFunc("/v1beta/quota")();
-
-  const query = encodeFormQuery({
-    "organization_id": payload?.organization_id,
-  });
+  const pathParams = {
+    organization_id: encodeSimple("organization_id", payload.organization_id, {
+      explode: false,
+      charEncoding: "percent",
+    }),
+    user_id: encodeSimple("user_id", payload.user_id, {
+      explode: false,
+      charEncoding: "percent",
+    }),
+  };
+  const path = pathToFunc(
+    "/v1beta/organizations/{organization_id}/members/{user_id}",
+  )(pathParams);
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -110,7 +115,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "getOrganizationQuota",
+    operationID: "removeOrganizationMember",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -124,11 +129,10 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "GET",
+    method: "DELETE",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
-    query: query,
     body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
@@ -154,7 +158,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetOrganizationQuotaResponse,
+    operations.RemoveOrganizationMemberResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -165,7 +169,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.GetOrganizationQuotaResponse$inboundSchema, {
+    M.json(200, operations.RemoveOrganizationMemberResponse$inboundSchema, {
       key: "Result",
     }),
     M.jsonErr([400, 401, 403, 404], errors.ErrorResponse$inboundSchema),

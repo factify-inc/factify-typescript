@@ -158,12 +158,13 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.quotas.quotaServiceDeleteOrganizationQuota({
-    connectProtocolVersion: 1,
-    body: {},
+  const result = await factify.apiKeys.list({
+    organizationId: "<id>",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -196,7 +197,7 @@ run();
 
 * [list](docs/sdks/documents/README.md#list) - List documents
 * [create](docs/sdks/documents/README.md#create) - Create a document
-* [getDocumentQuota](docs/sdks/documents/README.md#getdocumentquota) - Get document quota
+* [getQuota](docs/sdks/documents/README.md#getquota) - Get document quota
 * [get](docs/sdks/documents/README.md#get) - Retrieve a document
 * [update](docs/sdks/documents/README.md#update) - Update a document
 * [listDuplicates](docs/sdks/documents/README.md#listduplicates) - List duplicate documents
@@ -210,40 +211,32 @@ run();
 
 * [generate](docs/sdks/entrypages/README.md#generate) - Generate entry page
 
-### [Invites](docs/sdks/invites/README.md)
-
-* [acceptOrganizationInvite](docs/sdks/invites/README.md#acceptorganizationinvite) - Accept an invitation
-* [resendOrganizationInvite](docs/sdks/invites/README.md#resendorganizationinvite) - Resend an invitation email
-* [revokeOrganizationInvite](docs/sdks/invites/README.md#revokeorganizationinvite) - Revoke an invitation
-
-### [Members](docs/sdks/members/README.md)
-
-* [listOrganizationMembers](docs/sdks/members/README.md#listorganizationmembers) - List organization members
-* [addOrganizationMember](docs/sdks/members/README.md#addorganizationmember) - Add a member to an organization
-* [removeOrganizationMember](docs/sdks/members/README.md#removeorganizationmember) - Remove an organization member
-* [updateOrganizationMember](docs/sdks/members/README.md#updateorganizationmember) - Update an organization member
-
 ### [Organizations](docs/sdks/organizations/README.md)
 
 * [list](docs/sdks/organizations/README.md#list) - List organizations
 * [get](docs/sdks/organizations/README.md#get) - Retrieve an organization
-* [updateOrganization](docs/sdks/organizations/README.md#updateorganization) - Update an organization
+* [update](docs/sdks/organizations/README.md#update) - Update an organization
 
-### [Organizations.Invites](docs/sdks/organizationsinvites/README.md)
+### [Organizations.Invites](docs/sdks/invites/README.md)
 
-* [list](docs/sdks/organizationsinvites/README.md#list) - List organization invitations
-* [create](docs/sdks/organizationsinvites/README.md#create) - Invite a user to join an organization
+* [list](docs/sdks/invites/README.md#list) - List organization invitations
+* [create](docs/sdks/invites/README.md#create) - Invite a user to join an organization
+* [accept](docs/sdks/invites/README.md#accept) - Accept an invitation
+* [resend](docs/sdks/invites/README.md#resend) - Resend an invitation email
+* [revoke](docs/sdks/invites/README.md#revoke) - Revoke an invitation
+
+### [Organizations.Members](docs/sdks/members/README.md)
+
+* [list](docs/sdks/members/README.md#list) - List organization members
+* [add](docs/sdks/members/README.md#add) - Add a member to an organization
+* [remove](docs/sdks/members/README.md#remove) - Remove an organization member
+* [update](docs/sdks/members/README.md#update) - Update an organization member
 
 ### [Policies](docs/sdks/policies/README.md)
 
 * [list](docs/sdks/policies/README.md#list) - List document policies
 * [attach](docs/sdks/policies/README.md#attach) - Attach a policy
 * [detach](docs/sdks/policies/README.md#detach) - Detach a policy
-
-### [Quotas](docs/sdks/quotas/README.md)
-
-* [quotaServiceDeleteOrganizationQuota](docs/sdks/quotas/README.md#quotaservicedeleteorganizationquota) - DeleteOrganizationQuota
-* [quotaServiceSetOrganizationQuota](docs/sdks/quotas/README.md#quotaservicesetorganizationquota) - SetOrganizationQuota
 
 ### [Sharing](docs/sdks/sharing/README.md)
 
@@ -257,19 +250,19 @@ run();
 
 ### [Timelines](docs/sdks/timelines/README.md)
 
-* [getDocumentTimeline](docs/sdks/timelines/README.md#getdocumenttimeline) - Get document timeline
+* [get](docs/sdks/timelines/README.md#get) - Get document timeline
 
 ### [Usage](docs/sdks/usage/README.md)
 
-* [getOrganizationQuota](docs/sdks/usage/README.md#getorganizationquota) - Get organization quota status
-* [listAPIKeyQuotas](docs/sdks/usage/README.md#listapikeyquotas) - List API key quotas
-* [deleteAPIKeyQuota](docs/sdks/usage/README.md#deleteapikeyquota) - Delete API key quota
-* [setAPIKeyQuota](docs/sdks/usage/README.md#setapikeyquota) - Set API key quota
-* [getUsageHistory](docs/sdks/usage/README.md#getusagehistory) - Get usage history
+* [get](docs/sdks/usage/README.md#get) - Get organization quota status
+* [listKeyQuotas](docs/sdks/usage/README.md#listkeyquotas) - List API key quotas
+* [deleteKeyQuota](docs/sdks/usage/README.md#deletekeyquota) - Delete API key quota
+* [setKeyQuota](docs/sdks/usage/README.md#setkeyquota) - Set API key quota
+* [getHistory](docs/sdks/usage/README.md#gethistory) - Get usage history
 
 ### [UserPreferences](docs/sdks/userpreferences/README.md)
 
-* [getUserPreferences](docs/sdks/userpreferences/README.md#getuserpreferences) - Get user preferences
+* [get](docs/sdks/userpreferences/README.md#get) - Get user preferences
 
 ### [Users](docs/sdks/users/README.md)
 
@@ -312,7 +305,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`documentsCreate`](docs/sdks/documents/README.md#create) - Create a document
 - [`documentsExport`](docs/sdks/documents/README.md#export) - Export a document
 - [`documentsGet`](docs/sdks/documents/README.md#get) - Retrieve a document
-- [`documentsGetDocumentQuota`](docs/sdks/documents/README.md#getdocumentquota) - Get document quota
+- [`documentsGetQuota`](docs/sdks/documents/README.md#getquota) - Get document quota
 - [`documentsList`](docs/sdks/documents/README.md#list) - List documents
 - [`documentsListDuplicates`](docs/sdks/documents/README.md#listduplicates) - List duplicate documents
 - [`documentsProcess`](docs/sdks/documents/README.md#process) - Process a document
@@ -321,23 +314,21 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`documentsUntrash`](docs/sdks/documents/README.md#untrash) - Restore a document from trash
 - [`documentsUpdate`](docs/sdks/documents/README.md#update) - Update a document
 - [`entryPagesGenerate`](docs/sdks/entrypages/README.md#generate) - Generate entry page
-- [`invitesAcceptOrganizationInvite`](docs/sdks/invites/README.md#acceptorganizationinvite) - Accept an invitation
-- [`invitesResendOrganizationInvite`](docs/sdks/invites/README.md#resendorganizationinvite) - Resend an invitation email
-- [`invitesRevokeOrganizationInvite`](docs/sdks/invites/README.md#revokeorganizationinvite) - Revoke an invitation
-- [`membersAddOrganizationMember`](docs/sdks/members/README.md#addorganizationmember) - Add a member to an organization
-- [`membersListOrganizationMembers`](docs/sdks/members/README.md#listorganizationmembers) - List organization members
-- [`membersRemoveOrganizationMember`](docs/sdks/members/README.md#removeorganizationmember) - Remove an organization member
-- [`membersUpdateOrganizationMember`](docs/sdks/members/README.md#updateorganizationmember) - Update an organization member
 - [`organizationsGet`](docs/sdks/organizations/README.md#get) - Retrieve an organization
-- [`organizationsInvitesCreate`](docs/sdks/organizationsinvites/README.md#create) - Invite a user to join an organization
-- [`organizationsInvitesList`](docs/sdks/organizationsinvites/README.md#list) - List organization invitations
+- [`organizationsInvitesAccept`](docs/sdks/invites/README.md#accept) - Accept an invitation
+- [`organizationsInvitesCreate`](docs/sdks/invites/README.md#create) - Invite a user to join an organization
+- [`organizationsInvitesList`](docs/sdks/invites/README.md#list) - List organization invitations
+- [`organizationsInvitesResend`](docs/sdks/invites/README.md#resend) - Resend an invitation email
+- [`organizationsInvitesRevoke`](docs/sdks/invites/README.md#revoke) - Revoke an invitation
 - [`organizationsList`](docs/sdks/organizations/README.md#list) - List organizations
-- [`organizationsUpdateOrganization`](docs/sdks/organizations/README.md#updateorganization) - Update an organization
+- [`organizationsMembersAdd`](docs/sdks/members/README.md#add) - Add a member to an organization
+- [`organizationsMembersList`](docs/sdks/members/README.md#list) - List organization members
+- [`organizationsMembersRemove`](docs/sdks/members/README.md#remove) - Remove an organization member
+- [`organizationsMembersUpdate`](docs/sdks/members/README.md#update) - Update an organization member
+- [`organizationsUpdate`](docs/sdks/organizations/README.md#update) - Update an organization
 - [`policiesAttach`](docs/sdks/policies/README.md#attach) - Attach a policy
 - [`policiesDetach`](docs/sdks/policies/README.md#detach) - Detach a policy
 - [`policiesList`](docs/sdks/policies/README.md#list) - List document policies
-- [`quotasQuotaServiceDeleteOrganizationQuota`](docs/sdks/quotas/README.md#quotaservicedeleteorganizationquota) - DeleteOrganizationQuota
-- [`quotasQuotaServiceSetOrganizationQuota`](docs/sdks/quotas/README.md#quotaservicesetorganizationquota) - SetOrganizationQuota
 - [`sharingCreateShareLink`](docs/sdks/sharing/README.md#createsharelink) - Create share link
 - [`sharingGetGeneralAccess`](docs/sdks/sharing/README.md#getgeneralaccess) - Get general access
 - [`sharingGrant`](docs/sdks/sharing/README.md#grant) - Grant document access
@@ -345,13 +336,13 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`sharingRevoke`](docs/sdks/sharing/README.md#revoke) - Revoke document access
 - [`sharingSetGeneralAccess`](docs/sdks/sharing/README.md#setgeneralaccess) - Set general access
 - [`sharingUpdate`](docs/sdks/sharing/README.md#update) - Update document access
-- [`timelinesGetDocumentTimeline`](docs/sdks/timelines/README.md#getdocumenttimeline) - Get document timeline
-- [`usageDeleteAPIKeyQuota`](docs/sdks/usage/README.md#deleteapikeyquota) - Delete API key quota
-- [`usageGetOrganizationQuota`](docs/sdks/usage/README.md#getorganizationquota) - Get organization quota status
-- [`usageGetUsageHistory`](docs/sdks/usage/README.md#getusagehistory) - Get usage history
-- [`usageListAPIKeyQuotas`](docs/sdks/usage/README.md#listapikeyquotas) - List API key quotas
-- [`usageSetAPIKeyQuota`](docs/sdks/usage/README.md#setapikeyquota) - Set API key quota
-- [`userPreferencesGetUserPreferences`](docs/sdks/userpreferences/README.md#getuserpreferences) - Get user preferences
+- [`timelinesGet`](docs/sdks/timelines/README.md#get) - Get document timeline
+- [`usageDeleteKeyQuota`](docs/sdks/usage/README.md#deletekeyquota) - Delete API key quota
+- [`usageGet`](docs/sdks/usage/README.md#get) - Get organization quota status
+- [`usageGetHistory`](docs/sdks/usage/README.md#gethistory) - Get usage history
+- [`usageListKeyQuotas`](docs/sdks/usage/README.md#listkeyquotas) - List API key quotas
+- [`usageSetKeyQuota`](docs/sdks/usage/README.md#setkeyquota) - Set API key quota
+- [`userPreferencesGet`](docs/sdks/userpreferences/README.md#get) - Get user preferences
 - [`usersGetMe`](docs/sdks/users/README.md#getme) - Get current user
 - [`versionsCreate`](docs/sdks/versions/README.md#create) - Create a new version
 - [`versionsGet`](docs/sdks/versions/README.md#get) - Retrieve a version
@@ -445,9 +436,8 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.quotas.quotaServiceDeleteOrganizationQuota({
-    connectProtocolVersion: 1,
-    body: {},
+  const result = await factify.apiKeys.list({
+    organizationId: "<id>",
   }, {
     retries: {
       strategy: "backoff",
@@ -461,7 +451,9 @@ async function run() {
     },
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -487,12 +479,13 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.quotas.quotaServiceDeleteOrganizationQuota({
-    connectProtocolVersion: 1,
-    body: {},
+  const result = await factify.apiKeys.list({
+    organizationId: "<id>",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -525,12 +518,13 @@ const factify = new Factify({
 
 async function run() {
   try {
-    const result = await factify.quotas.quotaServiceDeleteOrganizationQuota({
-      connectProtocolVersion: 1,
-      body: {},
+    const result = await factify.apiKeys.list({
+      organizationId: "<id>",
     });
 
-    console.log(result);
+    for await (const page of result) {
+      console.log(page);
+    }
   } catch (error) {
     // The base class for HTTP error responses
     if (error instanceof errors.FactifyError) {
@@ -541,7 +535,7 @@ async function run() {
 
       // Depending on the method different errors may be thrown
       if (error instanceof errors.ErrorResponse) {
-        console.log(error.data$.code); // components.ErrorResponseCode
+        console.log(error.data$.code); // components.Code
         console.log(error.data$.details); // ErrorDetail[]
         console.log(error.data$.message); // string
       }
@@ -599,12 +593,13 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.quotas.quotaServiceDeleteOrganizationQuota({
-    connectProtocolVersion: 1,
-    body: {},
+  const result = await factify.apiKeys.list({
+    organizationId: "<id>",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -623,12 +618,13 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.quotas.quotaServiceDeleteOrganizationQuota({
-    connectProtocolVersion: 1,
-    body: {},
+  const result = await factify.apiKeys.list({
+    organizationId: "<id>",
   });
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();

@@ -6,13 +6,13 @@ Query API usage and quota information for your organization.
 
 ### Available Operations
 
-* [getOrganizationQuota](#getorganizationquota) - Get organization quota status
-* [listAPIKeyQuotas](#listapikeyquotas) - List API key quotas
-* [deleteAPIKeyQuota](#deleteapikeyquota) - Delete API key quota
-* [setAPIKeyQuota](#setapikeyquota) - Set API key quota
-* [getUsageHistory](#getusagehistory) - Get usage history
+* [get](#get) - Get organization quota status
+* [listKeyQuotas](#listkeyquotas) - List API key quotas
+* [deleteKeyQuota](#deletekeyquota) - Delete API key quota
+* [setKeyQuota](#setkeyquota) - Set API key quota
+* [getHistory](#gethistory) - Get usage history
 
-## getOrganizationQuota
+## get
 
 Returns the current quota status for an organization including usage, limits, tier, and reset date.
 
@@ -27,7 +27,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.usage.getOrganizationQuota({
+  const result = await factify.usage.get({
     organizationId: "org_01h2xcejqtf2nbrexx3vqjhp41",
   });
 
@@ -43,7 +43,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { usageGetOrganizationQuota } from "@factify/sdk/funcs/usageGetOrganizationQuota.js";
+import { usageGet } from "@factify/sdk/funcs/usageGet.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -52,14 +52,14 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await usageGetOrganizationQuota(factify, {
+  const res = await usageGet(factify, {
     organizationId: "org_01h2xcejqtf2nbrexx3vqjhp41",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("usageGetOrganizationQuota failed:", res.error);
+    console.log("usageGet failed:", res.error);
   }
 }
 
@@ -88,7 +88,7 @@ run();
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## listAPIKeyQuotas
+## listKeyQuotas
 
 Returns all per-key quota configurations and current usage for an organization.
 
@@ -103,7 +103,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.usage.listAPIKeyQuotas({
+  const result = await factify.usage.listKeyQuotas({
     organizationId: "org_01h2xcejqtf2nbrexx3vqjhp41",
   });
 
@@ -119,7 +119,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { usageListAPIKeyQuotas } from "@factify/sdk/funcs/usageListAPIKeyQuotas.js";
+import { usageListKeyQuotas } from "@factify/sdk/funcs/usageListKeyQuotas.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -128,14 +128,14 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await usageListAPIKeyQuotas(factify, {
+  const res = await usageListKeyQuotas(factify, {
     organizationId: "org_01h2xcejqtf2nbrexx3vqjhp41",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("usageListAPIKeyQuotas failed:", res.error);
+    console.log("usageListKeyQuotas failed:", res.error);
   }
 }
 
@@ -164,7 +164,7 @@ run();
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## deleteAPIKeyQuota
+## deleteKeyQuota
 
 Removes the per-key quota limit. The key will only be subject to the organization-level quota.
 
@@ -179,7 +179,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.usage.deleteAPIKeyQuota({
+  const result = await factify.usage.deleteKeyQuota({
     apiKeyId: "<id>",
     organizationId: "org_01h2xcejqtf2nbrexx3vqjhp41",
   });
@@ -196,7 +196,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { usageDeleteAPIKeyQuota } from "@factify/sdk/funcs/usageDeleteAPIKeyQuota.js";
+import { usageDeleteKeyQuota } from "@factify/sdk/funcs/usageDeleteKeyQuota.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -205,7 +205,7 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await usageDeleteAPIKeyQuota(factify, {
+  const res = await usageDeleteKeyQuota(factify, {
     apiKeyId: "<id>",
     organizationId: "org_01h2xcejqtf2nbrexx3vqjhp41",
   });
@@ -213,7 +213,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("usageDeleteAPIKeyQuota failed:", res.error);
+    console.log("usageDeleteKeyQuota failed:", res.error);
   }
 }
 
@@ -242,7 +242,7 @@ run();
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## setAPIKeyQuota
+## setKeyQuota
 
 Creates or updates a per-key quota limit. The key will be enforced independently of the organization quota.
 
@@ -257,7 +257,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.usage.setAPIKeyQuota({
+  const result = await factify.usage.setKeyQuota({
     apiKeyId: "<id>",
     body: {
       organizationId: "org_01h2xcejqtf2nbrexx3vqjhp41",
@@ -276,7 +276,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { usageSetAPIKeyQuota } from "@factify/sdk/funcs/usageSetAPIKeyQuota.js";
+import { usageSetKeyQuota } from "@factify/sdk/funcs/usageSetKeyQuota.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -285,7 +285,7 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await usageSetAPIKeyQuota(factify, {
+  const res = await usageSetKeyQuota(factify, {
     apiKeyId: "<id>",
     body: {
       organizationId: "org_01h2xcejqtf2nbrexx3vqjhp41",
@@ -295,7 +295,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("usageSetAPIKeyQuota failed:", res.error);
+    console.log("usageSetKeyQuota failed:", res.error);
   }
 }
 
@@ -324,7 +324,7 @@ run();
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## getUsageHistory
+## getHistory
 
 Returns daily usage records for an organization within a specified date range.
 
@@ -339,7 +339,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.usage.getUsageHistory({
+  const result = await factify.usage.getHistory({
     organizationId: "org_01h2xcejqtf2nbrexx3vqjhp41",
     dateAfter: new Date("2023-01-15T01:30:15.01Z"),
     dateBefore: new Date("2023-01-15T01:30:15.01Z"),
@@ -357,7 +357,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { usageGetUsageHistory } from "@factify/sdk/funcs/usageGetUsageHistory.js";
+import { usageGetHistory } from "@factify/sdk/funcs/usageGetHistory.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -366,7 +366,7 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await usageGetUsageHistory(factify, {
+  const res = await usageGetHistory(factify, {
     organizationId: "org_01h2xcejqtf2nbrexx3vqjhp41",
     dateAfter: new Date("2023-01-15T01:30:15.01Z"),
     dateBefore: new Date("2023-01-15T01:30:15.01Z"),
@@ -375,7 +375,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("usageGetUsageHistory failed:", res.error);
+    console.log("usageGetHistory failed:", res.error);
   }
 }
 

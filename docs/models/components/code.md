@@ -1,4 +1,4 @@
-# ErrorResponseCode
+# Code
 
 ConnectRPC error code. Maps to HTTP status codes:
 - invalid_argument, failed_precondition -> 400
@@ -17,9 +17,9 @@ ConnectRPC error code. Maps to HTTP status codes:
 ## Example Usage
 
 ```typescript
-import { ErrorResponseCode } from "@factify/sdk/models/components";
+import { Code } from "@factify/sdk/models/components";
 
-let value: ErrorResponseCode = "canceled";
+let value: Code = "unknown";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```

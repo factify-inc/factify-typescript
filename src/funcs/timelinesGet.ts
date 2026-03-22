@@ -4,7 +4,7 @@
 
 import * as z from "zod/v4-mini";
 import { FactifyCore } from "../core.js";
-import { encodeFormQuery } from "../lib/encodings.js";
+import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -27,18 +27,18 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List API key quotas
+ * Get document timeline
  *
  * @remarks
- * Returns all per-key quota configurations and current usage for an organization.
+ * Retrieves timeline events for a document. Admins see all events; viewers see only their own.
  */
-export function usageListAPIKeyQuotas(
+export function timelinesGet(
   client: FactifyCore,
-  request?: operations.ListAPIKeyQuotasRequest | undefined,
+  request: operations.GetDocumentTimelineRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.ListAPIKeyQuotasResponse,
+    operations.GetDocumentTimelineResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -59,12 +59,12 @@ export function usageListAPIKeyQuotas(
 
 async function $do(
   client: FactifyCore,
-  request?: operations.ListAPIKeyQuotasRequest | undefined,
+  request: operations.GetDocumentTimelineRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.ListAPIKeyQuotasResponse,
+      operations.GetDocumentTimelineResponse,
       | errors.ErrorResponse
       | FactifyError
       | ResponseValidationError
@@ -81,10 +81,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      z.parse(
-        z.optional(operations.ListAPIKeyQuotasRequest$outboundSchema),
-        value,
-      ),
+      z.parse(operations.GetDocumentTimelineRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -93,10 +90,19 @@ async function $do(
   const payload = parsed.value;
   const body = null;
 
-  const path = pathToFunc("/v1beta/quota/keys")();
+  const pathParams = {
+    document_id: encodeSimple("document_id", payload.document_id, {
+      explode: false,
+      charEncoding: "percent",
+    }),
+  };
+  const path = pathToFunc("/v1beta/documents/{document_id}/timeline")(
+    pathParams,
+  );
 
   const query = encodeFormQuery({
-    "organization_id": payload?.organization_id,
+    "cursor": payload.cursor,
+    "page_size": payload.page_size,
   });
 
   const headers = new Headers(compactMap({
@@ -110,7 +116,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "listAPIKeyQuotas",
+    operationID: "getDocumentTimeline",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -154,7 +160,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.ListAPIKeyQuotasResponse,
+    operations.GetDocumentTimelineResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -165,7 +171,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.ListAPIKeyQuotasResponse$inboundSchema, {
+    M.json(200, operations.GetDocumentTimelineResponse$inboundSchema, {
       key: "Result",
     }),
     M.jsonErr([400, 401, 403, 404], errors.ErrorResponse$inboundSchema),

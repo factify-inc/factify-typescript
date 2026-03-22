@@ -8,7 +8,7 @@ Create and manage legally-binding documents.
 
 * [list](#list) - List documents
 * [create](#create) - Create a document
-* [getDocumentQuota](#getdocumentquota) - Get document quota
+* [getQuota](#getquota) - Get document quota
 * [get](#get) - Retrieve a document
 * [update](#update) - Update a document
 * [listDuplicates](#listduplicates) - List duplicate documents
@@ -182,7 +182,7 @@ run();
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## getDocumentQuota
+## getQuota
 
 Returns the document quota status for the authenticated user's organization, including the number of documents used, the configured limit, and remaining capacity.
 
@@ -197,7 +197,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.documents.getDocumentQuota();
+  const result = await factify.documents.getQuota();
 
   console.log(result);
 }
@@ -211,7 +211,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { documentsGetDocumentQuota } from "@factify/sdk/funcs/documentsGetDocumentQuota.js";
+import { documentsGetQuota } from "@factify/sdk/funcs/documentsGetQuota.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -220,12 +220,12 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await documentsGetDocumentQuota(factify);
+  const res = await documentsGetQuota(factify);
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("documentsGetDocumentQuota failed:", res.error);
+    console.log("documentsGetQuota failed:", res.error);
   }
 }
 

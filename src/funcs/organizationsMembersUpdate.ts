@@ -4,7 +4,7 @@
 
 import * as z from "zod/v4-mini";
 import { FactifyCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { encodeJSON, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -27,18 +27,18 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Remove an organization member
+ * Update an organization member
  *
  * @remarks
- * Remove a member from an organization. Requires manage permission, or the member can remove themselves. The organization owner cannot be removed.
+ * Update a member's role within an organization. Requires manage permission (owner or admin). The organization owner's role cannot be changed.
  */
-export function membersRemoveOrganizationMember(
+export function organizationsMembersUpdate(
   client: FactifyCore,
-  request: operations.RemoveOrganizationMemberRequest,
+  request: operations.UpdateOrganizationMemberRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.RemoveOrganizationMemberResponse,
+    operations.UpdateOrganizationMemberResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -59,12 +59,12 @@ export function membersRemoveOrganizationMember(
 
 async function $do(
   client: FactifyCore,
-  request: operations.RemoveOrganizationMemberRequest,
+  request: operations.UpdateOrganizationMemberRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.RemoveOrganizationMemberResponse,
+      operations.UpdateOrganizationMemberResponse,
       | errors.ErrorResponse
       | FactifyError
       | ResponseValidationError
@@ -81,14 +81,14 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      z.parse(operations.RemoveOrganizationMemberRequest$outboundSchema, value),
+      z.parse(operations.UpdateOrganizationMemberRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = null;
+  const body = encodeJSON("body", payload.body, { explode: true });
 
   const pathParams = {
     organization_id: encodeSimple("organization_id", payload.organization_id, {
@@ -105,6 +105,7 @@ async function $do(
   )(pathParams);
 
   const headers = new Headers(compactMap({
+    "Content-Type": "application/json",
     Accept: "application/json",
   }));
 
@@ -115,7 +116,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "removeOrganizationMember",
+    operationID: "updateOrganizationMember",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -129,7 +130,7 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "DELETE",
+    method: "PATCH",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
@@ -158,7 +159,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.RemoveOrganizationMemberResponse,
+    operations.UpdateOrganizationMemberResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -169,7 +170,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.RemoveOrganizationMemberResponse$inboundSchema, {
+    M.json(200, operations.UpdateOrganizationMemberResponse$inboundSchema, {
       key: "Result",
     }),
     M.jsonErr([400, 401, 403, 404], errors.ErrorResponse$inboundSchema),

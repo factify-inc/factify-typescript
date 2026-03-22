@@ -4,7 +4,7 @@
 
 import * as z from "zod/v4-mini";
 import { FactifyCore } from "../core.js";
-import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -27,18 +27,18 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Revoke an invitation
+ * Delete API key quota
  *
  * @remarks
- * Revoke a pending invitation, preventing the recipient from joining. Requires permission to manage organization members.
+ * Removes the per-key quota limit. The key will only be subject to the organization-level quota.
  */
-export function invitesRevokeOrganizationInvite(
+export function usageDeleteKeyQuota(
   client: FactifyCore,
-  request: operations.RevokeOrganizationInviteRequest,
+  request: operations.DeleteAPIKeyQuotaRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.RevokeOrganizationInviteResponse,
+    operations.DeleteAPIKeyQuotaResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -59,12 +59,12 @@ export function invitesRevokeOrganizationInvite(
 
 async function $do(
   client: FactifyCore,
-  request: operations.RevokeOrganizationInviteRequest,
+  request: operations.DeleteAPIKeyQuotaRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.RevokeOrganizationInviteResponse,
+      operations.DeleteAPIKeyQuotaResponse,
       | errors.ErrorResponse
       | FactifyError
       | ResponseValidationError
@@ -81,31 +81,28 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      z.parse(operations.RevokeOrganizationInviteRequest$outboundSchema, value),
+      z.parse(operations.DeleteAPIKeyQuotaRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.body, { explode: true });
+  const body = null;
 
   const pathParams = {
-    invite_id: encodeSimple("invite_id", payload.invite_id, {
-      explode: false,
-      charEncoding: "percent",
-    }),
-    organization_id: encodeSimple("organization_id", payload.organization_id, {
+    api_key_id: encodeSimple("api_key_id", payload.api_key_id, {
       explode: false,
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc(
-    "/v1beta/organizations/{organization_id}/invites/{invite_id}/revoke",
-  )(pathParams);
+  const path = pathToFunc("/v1beta/quota/keys/{api_key_id}")(pathParams);
+
+  const query = encodeFormQuery({
+    "organization_id": payload.organization_id,
+  });
 
   const headers = new Headers(compactMap({
-    "Content-Type": "application/json",
     Accept: "application/json",
   }));
 
@@ -116,7 +113,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "revokeOrganizationInvite",
+    operationID: "deleteAPIKeyQuota",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -130,10 +127,11 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "POST",
+    method: "DELETE",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
+    query: query,
     body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
@@ -159,7 +157,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.RevokeOrganizationInviteResponse,
+    operations.DeleteAPIKeyQuotaResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -170,7 +168,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.RevokeOrganizationInviteResponse$inboundSchema, {
+    M.json(200, operations.DeleteAPIKeyQuotaResponse$inboundSchema, {
       key: "Result",
     }),
     M.jsonErr([400, 401, 403, 404], errors.ErrorResponse$inboundSchema),

@@ -27,18 +27,18 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Accept an invitation
+ * Revoke an invitation
  *
  * @remarks
- * Accepts the invitation and adds the authenticated user as a member of the organization. The authenticated user's verified email must match the invitation email (case-insensitive). Returns PERMISSION_DENIED if emails don't match, FAILED_PRECONDITION if the user is already a member, or NOT_FOUND if the invitation is invalid/expired.
+ * Revoke a pending invitation, preventing the recipient from joining. Requires permission to manage organization members.
  */
-export function invitesAcceptOrganizationInvite(
+export function organizationsInvitesRevoke(
   client: FactifyCore,
-  request: operations.AcceptOrganizationInviteRequest,
+  request: operations.RevokeOrganizationInviteRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.AcceptOrganizationInviteResponse,
+    operations.RevokeOrganizationInviteResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -59,12 +59,12 @@ export function invitesAcceptOrganizationInvite(
 
 async function $do(
   client: FactifyCore,
-  request: operations.AcceptOrganizationInviteRequest,
+  request: operations.RevokeOrganizationInviteRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.AcceptOrganizationInviteResponse,
+      operations.RevokeOrganizationInviteResponse,
       | errors.ErrorResponse
       | FactifyError
       | ResponseValidationError
@@ -81,7 +81,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      z.parse(operations.AcceptOrganizationInviteRequest$outboundSchema, value),
+      z.parse(operations.RevokeOrganizationInviteRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -91,13 +91,17 @@ async function $do(
   const body = encodeJSON("body", payload.body, { explode: true });
 
   const pathParams = {
+    invite_id: encodeSimple("invite_id", payload.invite_id, {
+      explode: false,
+      charEncoding: "percent",
+    }),
     organization_id: encodeSimple("organization_id", payload.organization_id, {
       explode: false,
       charEncoding: "percent",
     }),
   };
   const path = pathToFunc(
-    "/v1beta/organizations/{organization_id}/invites/accept",
+    "/v1beta/organizations/{organization_id}/invites/{invite_id}/revoke",
   )(pathParams);
 
   const headers = new Headers(compactMap({
@@ -112,7 +116,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "acceptOrganizationInvite",
+    operationID: "revokeOrganizationInvite",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -155,7 +159,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.AcceptOrganizationInviteResponse,
+    operations.RevokeOrganizationInviteResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -166,7 +170,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.AcceptOrganizationInviteResponse$inboundSchema, {
+    M.json(200, operations.RevokeOrganizationInviteResponse$inboundSchema, {
       key: "Result",
     }),
     M.jsonErr([400, 401, 403, 404], errors.ErrorResponse$inboundSchema),

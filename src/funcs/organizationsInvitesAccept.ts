@@ -27,18 +27,18 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Set API key quota
+ * Accept an invitation
  *
  * @remarks
- * Creates or updates a per-key quota limit. The key will be enforced independently of the organization quota.
+ * Accepts the invitation and adds the authenticated user as a member of the organization. The authenticated user's verified email must match the invitation email (case-insensitive). Returns PERMISSION_DENIED if emails don't match, FAILED_PRECONDITION if the user is already a member, or NOT_FOUND if the invitation is invalid/expired.
  */
-export function usageSetAPIKeyQuota(
+export function organizationsInvitesAccept(
   client: FactifyCore,
-  request: operations.SetAPIKeyQuotaRequest,
+  request: operations.AcceptOrganizationInviteRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.SetAPIKeyQuotaResponse,
+    operations.AcceptOrganizationInviteResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -59,12 +59,12 @@ export function usageSetAPIKeyQuota(
 
 async function $do(
   client: FactifyCore,
-  request: operations.SetAPIKeyQuotaRequest,
+  request: operations.AcceptOrganizationInviteRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.SetAPIKeyQuotaResponse,
+      operations.AcceptOrganizationInviteResponse,
       | errors.ErrorResponse
       | FactifyError
       | ResponseValidationError
@@ -80,7 +80,8 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => z.parse(operations.SetAPIKeyQuotaRequest$outboundSchema, value),
+    (value) =>
+      z.parse(operations.AcceptOrganizationInviteRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -90,12 +91,14 @@ async function $do(
   const body = encodeJSON("body", payload.body, { explode: true });
 
   const pathParams = {
-    api_key_id: encodeSimple("api_key_id", payload.api_key_id, {
+    organization_id: encodeSimple("organization_id", payload.organization_id, {
       explode: false,
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/v1beta/quota/keys/{api_key_id}")(pathParams);
+  const path = pathToFunc(
+    "/v1beta/organizations/{organization_id}/invites/accept",
+  )(pathParams);
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
@@ -109,7 +112,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "setAPIKeyQuota",
+    operationID: "acceptOrganizationInvite",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -123,7 +126,7 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "PUT",
+    method: "POST",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
@@ -152,7 +155,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.SetAPIKeyQuotaResponse,
+    operations.AcceptOrganizationInviteResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -163,7 +166,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.SetAPIKeyQuotaResponse$inboundSchema, {
+    M.json(200, operations.AcceptOrganizationInviteResponse$inboundSchema, {
       key: "Result",
     }),
     M.jsonErr([400, 401, 403, 404], errors.ErrorResponse$inboundSchema),

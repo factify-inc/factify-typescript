@@ -27,18 +27,19 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Resend an invitation email
+ * Update an organization
  *
  * @remarks
- * Resend an invitation email to the recipient. Useful if the original email was lost or expired. Requires permission to invite organization members.
+ * Update an organization's display name.
+ *  Authorization: Requires organization#administer permission (owner or admin).
  */
-export function invitesResendOrganizationInvite(
+export function organizationsUpdate(
   client: FactifyCore,
-  request: operations.ResendOrganizationInviteRequest,
+  request: operations.UpdateOrganizationRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.ResendOrganizationInviteResponse,
+    operations.UpdateOrganizationResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -59,12 +60,12 @@ export function invitesResendOrganizationInvite(
 
 async function $do(
   client: FactifyCore,
-  request: operations.ResendOrganizationInviteRequest,
+  request: operations.UpdateOrganizationRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.ResendOrganizationInviteResponse,
+      operations.UpdateOrganizationResponse,
       | errors.ErrorResponse
       | FactifyError
       | ResponseValidationError
@@ -81,7 +82,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      z.parse(operations.ResendOrganizationInviteRequest$outboundSchema, value),
+      z.parse(operations.UpdateOrganizationRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -91,18 +92,14 @@ async function $do(
   const body = encodeJSON("body", payload.body, { explode: true });
 
   const pathParams = {
-    invite_id: encodeSimple("invite_id", payload.invite_id, {
-      explode: false,
-      charEncoding: "percent",
-    }),
     organization_id: encodeSimple("organization_id", payload.organization_id, {
       explode: false,
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc(
-    "/v1beta/organizations/{organization_id}/invites/{invite_id}/resend",
-  )(pathParams);
+  const path = pathToFunc("/v1beta/organizations/{organization_id}")(
+    pathParams,
+  );
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
@@ -116,7 +113,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "resendOrganizationInvite",
+    operationID: "updateOrganization",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -130,7 +127,7 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "POST",
+    method: "PATCH",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
@@ -159,7 +156,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.ResendOrganizationInviteResponse,
+    operations.UpdateOrganizationResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -170,7 +167,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.ResendOrganizationInviteResponse$inboundSchema, {
+    M.json(200, operations.UpdateOrganizationResponse$inboundSchema, {
       key: "Result",
     }),
     M.jsonErr([400, 401, 403, 404], errors.ErrorResponse$inboundSchema),

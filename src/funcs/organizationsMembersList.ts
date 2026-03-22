@@ -4,7 +4,8 @@
 
 import * as z from "zod/v4-mini";
 import { FactifyCore } from "../core.js";
-import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { dlv } from "../lib/dlv.js";
+import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -25,31 +26,38 @@ import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
+import {
+  createPageIterator,
+  haltIterator,
+  PageIterator,
+  Paginator,
+} from "../types/operations.js";
 
 /**
- * DeleteOrganizationQuota
+ * List organization members
  *
  * @remarks
- * DeleteOrganizationQuota removes quota configuration for an organization.
- *  The organization will fall back to default free tier limits.
- *  Requires platform admin permission. ConnectRPC only (not exposed via REST).
+ * List members of an organization. Requires organization membership.
  */
-export function quotasQuotaServiceDeleteOrganizationQuota(
+export function organizationsMembersList(
   client: FactifyCore,
-  request: operations.QuotaServiceDeleteOrganizationQuotaRequest,
+  request: operations.ListOrganizationMembersRequest,
   options?: RequestOptions,
 ): APIPromise<
-  Result<
-    operations.QuotaServiceDeleteOrganizationQuotaResponse,
-    | errors.ErrorResponse
-    | FactifyError
-    | ResponseValidationError
-    | ConnectionError
-    | RequestAbortedError
-    | RequestTimeoutError
-    | InvalidRequestError
-    | UnexpectedClientError
-    | SDKValidationError
+  PageIterator<
+    Result<
+      operations.ListOrganizationMembersResponse,
+      | errors.ErrorResponse
+      | FactifyError
+      | ResponseValidationError
+      | ConnectionError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | InvalidRequestError
+      | UnexpectedClientError
+      | SDKValidationError
+    >,
+    { cursor: string }
   >
 > {
   return new APIPromise($do(
@@ -61,21 +69,24 @@ export function quotasQuotaServiceDeleteOrganizationQuota(
 
 async function $do(
   client: FactifyCore,
-  request: operations.QuotaServiceDeleteOrganizationQuotaRequest,
+  request: operations.ListOrganizationMembersRequest,
   options?: RequestOptions,
 ): Promise<
   [
-    Result<
-      operations.QuotaServiceDeleteOrganizationQuotaResponse,
-      | errors.ErrorResponse
-      | FactifyError
-      | ResponseValidationError
-      | ConnectionError
-      | RequestAbortedError
-      | RequestTimeoutError
-      | InvalidRequestError
-      | UnexpectedClientError
-      | SDKValidationError
+    PageIterator<
+      Result<
+        operations.ListOrganizationMembersResponse,
+        | errors.ErrorResponse
+        | FactifyError
+        | ResponseValidationError
+        | ConnectionError
+        | RequestAbortedError
+        | RequestTimeoutError
+        | InvalidRequestError
+        | UnexpectedClientError
+        | SDKValidationError
+      >,
+      { cursor: string }
     >,
     APICall,
   ]
@@ -83,35 +94,32 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      z.parse(
-        operations.QuotaServiceDeleteOrganizationQuotaRequest$outboundSchema,
-        value,
-      ),
+      z.parse(operations.ListOrganizationMembersRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return [parsed, { status: "invalid" }];
+    return [haltIterator(parsed), { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.body, { explode: true });
+  const body = null;
 
-  const path = pathToFunc(
-    "/factify.api.v1beta.QuotaService/DeleteOrganizationQuota",
-  )();
+  const pathParams = {
+    organization_id: encodeSimple("organization_id", payload.organization_id, {
+      explode: false,
+      charEncoding: "percent",
+    }),
+  };
+  const path = pathToFunc("/v1beta/organizations/{organization_id}/members")(
+    pathParams,
+  );
+
+  const query = encodeFormQuery({
+    "page_size": payload.page_size,
+    "page_token": payload.page_token,
+  });
 
   const headers = new Headers(compactMap({
-    "Content-Type": "application/json",
     Accept: "application/json",
-    "Connect-Protocol-Version": encodeSimple(
-      "Connect-Protocol-Version",
-      payload["Connect-Protocol-Version"],
-      { explode: false, charEncoding: "none" },
-    ),
-    "Connect-Timeout-Ms": encodeSimple(
-      "Connect-Timeout-Ms",
-      payload["Connect-Timeout-Ms"],
-      { explode: false, charEncoding: "none" },
-    ),
   }));
 
   const secConfig = await extractSecurity(client._options.bearerAuth);
@@ -121,7 +129,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "QuotaService_DeleteOrganizationQuota",
+    operationID: "listOrganizationMembers",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -135,16 +143,17 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "POST",
+    method: "GET",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
+    query: query,
     body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return [requestRes, { status: "invalid" }];
+    return [haltIterator(requestRes), { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -155,7 +164,7 @@ async function $do(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return [doResult, { status: "request-error", request: req }];
+    return [haltIterator(doResult), { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -163,8 +172,8 @@ async function $do(
     HttpMeta: { Response: response, Request: req },
   };
 
-  const [result] = await M.match<
-    operations.QuotaServiceDeleteOrganizationQuotaResponse,
+  const [result, raw] = await M.match<
+    operations.ListOrganizationMembersResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -175,25 +184,67 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(
-      200,
-      operations.QuotaServiceDeleteOrganizationQuotaResponse$inboundSchema,
-      { key: "Result" },
-    ),
+    M.json(200, operations.ListOrganizationMembersResponse$inboundSchema, {
+      key: "Result",
+    }),
     M.jsonErr([400, 401, 403, 404], errors.ErrorResponse$inboundSchema),
     M.jsonErr(429, errors.ErrorResponse$inboundSchema, { hdrs: true }),
     M.jsonErr(500, errors.ErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
-    M.json(
-      "default",
-      operations.QuotaServiceDeleteOrganizationQuotaResponse$inboundSchema,
-      { key: "Result" },
-    ),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {
-    return [result, { status: "complete", request: req, response }];
+    return [haltIterator(result), {
+      status: "complete",
+      request: req,
+      response,
+    }];
   }
 
-  return [result, { status: "complete", request: req, response }];
+  const nextFunc = (
+    responseData: unknown,
+  ): {
+    next: Paginator<
+      Result<
+        operations.ListOrganizationMembersResponse,
+        | errors.ErrorResponse
+        | FactifyError
+        | ResponseValidationError
+        | ConnectionError
+        | RequestAbortedError
+        | RequestTimeoutError
+        | InvalidRequestError
+        | UnexpectedClientError
+        | SDKValidationError
+      >
+    >;
+    "~next"?: { cursor: string };
+  } => {
+    const nextCursor = dlv(responseData, "pagination.next_page_token");
+    if (typeof nextCursor !== "string") {
+      return { next: () => null };
+    }
+    if (nextCursor.trim() === "") {
+      return { next: () => null };
+    }
+
+    const nextVal = () =>
+      organizationsMembersList(
+        client,
+        {
+          ...request,
+          pageToken: nextCursor,
+        },
+        options,
+      );
+
+    return { next: nextVal, "~next": { cursor: nextCursor } };
+  };
+
+  const page = { ...result, ...nextFunc(raw) };
+  return [{ ...page, ...createPageIterator(page, (v) => !v.ok) }, {
+    status: "complete",
+    request: req,
+    response,
+  }];
 }

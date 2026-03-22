@@ -15,6 +15,3 @@ export type QuotaTier = OpenEnum<typeof QuotaTier>;
 /** @internal */
 export const QuotaTier$inboundSchema: z.ZodMiniType<QuotaTier, unknown> =
   openEnums.inboundSchema(QuotaTier);
-/** @internal */
-export const QuotaTier$outboundSchema: z.ZodMiniType<string, QuotaTier> =
-  openEnums.outboundSchema(QuotaTier);

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v4-mini";
 import { FactifyCore } from "../core.js";
-import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { encodeFormQuery } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -27,19 +27,18 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * SetOrganizationQuota
+ * List API key quotas
  *
  * @remarks
- * SetOrganizationQuota creates or updates quota configuration for an organization.
- *  Requires platform admin permission. ConnectRPC only (not exposed via REST).
+ * Returns all per-key quota configurations and current usage for an organization.
  */
-export function quotasQuotaServiceSetOrganizationQuota(
+export function usageListKeyQuotas(
   client: FactifyCore,
-  request: operations.QuotaServiceSetOrganizationQuotaRequest,
+  request?: operations.ListAPIKeyQuotasRequest | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.QuotaServiceSetOrganizationQuotaResponse,
+    operations.ListAPIKeyQuotasResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -60,12 +59,12 @@ export function quotasQuotaServiceSetOrganizationQuota(
 
 async function $do(
   client: FactifyCore,
-  request: operations.QuotaServiceSetOrganizationQuotaRequest,
+  request?: operations.ListAPIKeyQuotasRequest | undefined,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.QuotaServiceSetOrganizationQuotaResponse,
+      operations.ListAPIKeyQuotasResponse,
       | errors.ErrorResponse
       | FactifyError
       | ResponseValidationError
@@ -83,7 +82,7 @@ async function $do(
     request,
     (value) =>
       z.parse(
-        operations.QuotaServiceSetOrganizationQuotaRequest$outboundSchema,
+        z.optional(operations.ListAPIKeyQuotasRequest$outboundSchema),
         value,
       ),
     "Input validation failed",
@@ -92,25 +91,16 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.body, { explode: true });
+  const body = null;
 
-  const path = pathToFunc(
-    "/factify.api.v1beta.QuotaService/SetOrganizationQuota",
-  )();
+  const path = pathToFunc("/v1beta/quota/keys")();
+
+  const query = encodeFormQuery({
+    "organization_id": payload?.organization_id,
+  });
 
   const headers = new Headers(compactMap({
-    "Content-Type": "application/json",
     Accept: "application/json",
-    "Connect-Protocol-Version": encodeSimple(
-      "Connect-Protocol-Version",
-      payload["Connect-Protocol-Version"],
-      { explode: false, charEncoding: "none" },
-    ),
-    "Connect-Timeout-Ms": encodeSimple(
-      "Connect-Timeout-Ms",
-      payload["Connect-Timeout-Ms"],
-      { explode: false, charEncoding: "none" },
-    ),
   }));
 
   const secConfig = await extractSecurity(client._options.bearerAuth);
@@ -120,7 +110,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "QuotaService_SetOrganizationQuota",
+    operationID: "listAPIKeyQuotas",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -134,10 +124,11 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "POST",
+    method: "GET",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
+    query: query,
     body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
@@ -163,7 +154,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.QuotaServiceSetOrganizationQuotaResponse,
+    operations.ListAPIKeyQuotasResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -174,21 +165,14 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(
-      200,
-      operations.QuotaServiceSetOrganizationQuotaResponse$inboundSchema,
-      { key: "Result" },
-    ),
+    M.json(200, operations.ListAPIKeyQuotasResponse$inboundSchema, {
+      key: "Result",
+    }),
     M.jsonErr([400, 401, 403, 404], errors.ErrorResponse$inboundSchema),
     M.jsonErr(429, errors.ErrorResponse$inboundSchema, { hdrs: true }),
     M.jsonErr(500, errors.ErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
-    M.json(
-      "default",
-      operations.QuotaServiceSetOrganizationQuotaResponse$inboundSchema,
-      { key: "Result" },
-    ),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];

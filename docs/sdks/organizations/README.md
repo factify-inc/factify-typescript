@@ -8,7 +8,7 @@ Create and manage organizations.
 
 * [list](#list) - List organizations
 * [get](#get) - Retrieve an organization
-* [updateOrganization](#updateorganization) - Update an organization
+* [update](#update) - Update an organization
 
 ## list
 
@@ -162,7 +162,7 @@ run();
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## updateOrganization
+## update
 
 Update an organization's display name.
  Authorization: Requires organization#administer permission (owner or admin).
@@ -178,7 +178,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.organizations.updateOrganization({
+  const result = await factify.organizations.update({
     organizationId: "<id>",
     body: {},
   });
@@ -195,7 +195,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { organizationsUpdateOrganization } from "@factify/sdk/funcs/organizationsUpdateOrganization.js";
+import { organizationsUpdate } from "@factify/sdk/funcs/organizationsUpdate.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -204,7 +204,7 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await organizationsUpdateOrganization(factify, {
+  const res = await organizationsUpdate(factify, {
     organizationId: "<id>",
     body: {},
   });
@@ -212,7 +212,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("organizationsUpdateOrganization failed:", res.error);
+    console.log("organizationsUpdate failed:", res.error);
   }
 }
 

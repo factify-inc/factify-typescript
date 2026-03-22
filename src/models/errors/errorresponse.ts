@@ -27,7 +27,7 @@ export type ErrorResponseData = {
    * - unimplemented -> 501
    * - unavailable -> 503
    */
-  code: components.ErrorResponseCode;
+  code: components.Code;
   /**
    * Structured error details for programmatic handling
    */
@@ -58,7 +58,7 @@ export class ErrorResponse extends FactifyError {
    * - unimplemented -> 501
    * - unavailable -> 503
    */
-  code: components.ErrorResponseCode;
+  code: components.Code;
   /**
    * Structured error details for programmatic handling
    */
@@ -87,7 +87,7 @@ export const ErrorResponse$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    code: components.ErrorResponseCode$inboundSchema,
+    code: components.Code$inboundSchema,
     details: types.optional(z.array(components.ErrorDetail$inboundSchema)),
     message: types.string(),
     request$: z.custom<Request>(x => x instanceof Request),

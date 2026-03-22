@@ -1,17 +1,15 @@
-# Members
+# Organizations.Members
 
 ## Overview
 
-Manage organization members and their roles.
-
 ### Available Operations
 
-* [listOrganizationMembers](#listorganizationmembers) - List organization members
-* [addOrganizationMember](#addorganizationmember) - Add a member to an organization
-* [removeOrganizationMember](#removeorganizationmember) - Remove an organization member
-* [updateOrganizationMember](#updateorganizationmember) - Update an organization member
+* [list](#list) - List organization members
+* [add](#add) - Add a member to an organization
+* [remove](#remove) - Remove an organization member
+* [update](#update) - Update an organization member
 
-## listOrganizationMembers
+## list
 
 List members of an organization. Requires organization membership.
 
@@ -26,7 +24,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.members.listOrganizationMembers({
+  const result = await factify.organizations.members.list({
     organizationId: "<id>",
   });
 
@@ -44,7 +42,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { membersListOrganizationMembers } from "@factify/sdk/funcs/membersListOrganizationMembers.js";
+import { organizationsMembersList } from "@factify/sdk/funcs/organizationsMembersList.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -53,7 +51,7 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await membersListOrganizationMembers(factify, {
+  const res = await organizationsMembersList(factify, {
     organizationId: "<id>",
   });
   if (res.ok) {
@@ -62,7 +60,7 @@ async function run() {
     console.log(page);
   }
   } else {
-    console.log("membersListOrganizationMembers failed:", res.error);
+    console.log("organizationsMembersList failed:", res.error);
   }
 }
 
@@ -91,7 +89,7 @@ run();
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## addOrganizationMember
+## add
 
 Directly adds a user as a member of an organization. Requires manage permission (owner or admin).
 
@@ -106,7 +104,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.members.addOrganizationMember({
+  const result = await factify.organizations.members.add({
     organizationId: "<id>",
     body: {
       role: "owner",
@@ -126,7 +124,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { membersAddOrganizationMember } from "@factify/sdk/funcs/membersAddOrganizationMember.js";
+import { organizationsMembersAdd } from "@factify/sdk/funcs/organizationsMembersAdd.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -135,7 +133,7 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await membersAddOrganizationMember(factify, {
+  const res = await organizationsMembersAdd(factify, {
     organizationId: "<id>",
     body: {
       role: "owner",
@@ -146,7 +144,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("membersAddOrganizationMember failed:", res.error);
+    console.log("organizationsMembersAdd failed:", res.error);
   }
 }
 
@@ -175,7 +173,7 @@ run();
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## removeOrganizationMember
+## remove
 
 Remove a member from an organization. Requires manage permission, or the member can remove themselves. The organization owner cannot be removed.
 
@@ -190,7 +188,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.members.removeOrganizationMember({
+  const result = await factify.organizations.members.remove({
     organizationId: "<id>",
     userId: "<id>",
   });
@@ -207,7 +205,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { membersRemoveOrganizationMember } from "@factify/sdk/funcs/membersRemoveOrganizationMember.js";
+import { organizationsMembersRemove } from "@factify/sdk/funcs/organizationsMembersRemove.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -216,7 +214,7 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await membersRemoveOrganizationMember(factify, {
+  const res = await organizationsMembersRemove(factify, {
     organizationId: "<id>",
     userId: "<id>",
   });
@@ -224,7 +222,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("membersRemoveOrganizationMember failed:", res.error);
+    console.log("organizationsMembersRemove failed:", res.error);
   }
 }
 
@@ -253,7 +251,7 @@ run();
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## updateOrganizationMember
+## update
 
 Update a member's role within an organization. Requires manage permission (owner or admin). The organization owner's role cannot be changed.
 
@@ -268,7 +266,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.members.updateOrganizationMember({
+  const result = await factify.organizations.members.update({
     organizationId: "<id>",
     userId: "<id>",
     body: {
@@ -288,7 +286,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { membersUpdateOrganizationMember } from "@factify/sdk/funcs/membersUpdateOrganizationMember.js";
+import { organizationsMembersUpdate } from "@factify/sdk/funcs/organizationsMembersUpdate.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -297,7 +295,7 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await membersUpdateOrganizationMember(factify, {
+  const res = await organizationsMembersUpdate(factify, {
     organizationId: "<id>",
     userId: "<id>",
     body: {
@@ -308,7 +306,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("membersUpdateOrganizationMember failed:", res.error);
+    console.log("organizationsMembersUpdate failed:", res.error);
   }
 }
 

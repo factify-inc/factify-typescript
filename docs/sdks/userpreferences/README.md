@@ -4,9 +4,9 @@
 
 ### Available Operations
 
-* [getUserPreferences](#getuserpreferences) - Get user preferences
+* [get](#get) - Get user preferences
 
-## getUserPreferences
+## get
 
 Returns the authenticated user's onboarding preferences. Only available for user accounts, not API keys.
 
@@ -21,7 +21,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.userPreferences.getUserPreferences();
+  const result = await factify.userPreferences.get();
 
   console.log(result);
 }
@@ -35,7 +35,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { userPreferencesGetUserPreferences } from "@factify/sdk/funcs/userPreferencesGetUserPreferences.js";
+import { userPreferencesGet } from "@factify/sdk/funcs/userPreferencesGet.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -44,12 +44,12 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await userPreferencesGetUserPreferences(factify);
+  const res = await userPreferencesGet(factify);
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("userPreferencesGetUserPreferences failed:", res.error);
+    console.log("userPreferencesGet failed:", res.error);
   }
 }
 

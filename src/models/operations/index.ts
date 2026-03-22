@@ -42,8 +42,6 @@ export * from "./listorganizationinvites.js";
 export * from "./listorganizationmembers.js";
 export * from "./listorganizations.js";
 export * from "./processdocument.js";
-export * from "./quotaservicedeleteorganizationquota.js";
-export * from "./quotaservicesetorganizationquota.js";
 export * from "./removeorganizationmember.js";
 export * from "./resendorganizationinvite.js";
 export * from "./revokeapikey.js";

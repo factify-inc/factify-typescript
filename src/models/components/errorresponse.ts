@@ -22,7 +22,7 @@ import { OpenEnum } from "../../types/enums.js";
  * - unimplemented -> 501
  * - unavailable -> 503
  */
-export const ErrorResponseCode = {
+export const Code = {
   Unknown: "unknown",
   InvalidArgument: "invalid_argument",
   Unauthenticated: "unauthenticated",
@@ -53,10 +53,8 @@ export const ErrorResponseCode = {
  * - unimplemented -> 501
  * - unavailable -> 503
  */
-export type ErrorResponseCode = OpenEnum<typeof ErrorResponseCode>;
+export type Code = OpenEnum<typeof Code>;
 
 /** @internal */
-export const ErrorResponseCode$inboundSchema: z.ZodMiniType<
-  ErrorResponseCode,
-  unknown
-> = openEnums.inboundSchema(ErrorResponseCode);
+export const Code$inboundSchema: z.ZodMiniType<Code, unknown> = openEnums
+  .inboundSchema(Code);

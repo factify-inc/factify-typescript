@@ -24,17 +24,17 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Get user preferences
+ * Get document quota
  *
  * @remarks
- * Returns the authenticated user's onboarding preferences. Only available for user accounts, not API keys.
+ * Returns the document quota status for the authenticated user's organization, including the number of documents used, the configured limit, and remaining capacity.
  */
-export function userPreferencesGetUserPreferences(
+export function documentsGetQuota(
   client: FactifyCore,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetUserPreferencesResponse,
+    operations.GetDocumentQuotaResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -58,7 +58,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.GetUserPreferencesResponse,
+      operations.GetDocumentQuotaResponse,
       | errors.ErrorResponse
       | FactifyError
       | ResponseValidationError
@@ -72,7 +72,7 @@ async function $do(
     APICall,
   ]
 > {
-  const path = pathToFunc("/v1beta/user-preferences")();
+  const path = pathToFunc("/v1beta/documents/quota")();
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -85,7 +85,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "getUserPreferences",
+    operationID: "getDocumentQuota",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -127,7 +127,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetUserPreferencesResponse,
+    operations.GetDocumentQuotaResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -138,7 +138,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.GetUserPreferencesResponse$inboundSchema, {
+    M.json(200, operations.GetDocumentQuotaResponse$inboundSchema, {
       key: "Result",
     }),
     M.jsonErr([400, 401, 403, 404], errors.ErrorResponse$inboundSchema),

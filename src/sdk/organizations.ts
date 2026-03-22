@@ -4,17 +4,23 @@
 
 import { organizationsGet } from "../funcs/organizationsGet.js";
 import { organizationsList } from "../funcs/organizationsList.js";
-import { organizationsUpdateOrganization } from "../funcs/organizationsUpdateOrganization.js";
+import { organizationsUpdate } from "../funcs/organizationsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 import { PageIterator, unwrapResultIterator } from "../types/operations.js";
-import { OrganizationsInvites } from "./organizationsinvites.js";
+import { Invites } from "./invites.js";
+import { Members } from "./members.js";
 
 export class Organizations extends ClientSDK {
-  private _invites?: OrganizationsInvites;
-  get invites(): OrganizationsInvites {
-    return (this._invites ??= new OrganizationsInvites(this._options));
+  private _invites?: Invites;
+  get invites(): Invites {
+    return (this._invites ??= new Invites(this._options));
+  }
+
+  private _members?: Members;
+  get members(): Members {
+    return (this._members ??= new Members(this._options));
   }
 
   /**
@@ -60,11 +66,11 @@ export class Organizations extends ClientSDK {
    * Update an organization's display name.
    *  Authorization: Requires organization#administer permission (owner or admin).
    */
-  async updateOrganization(
+  async update(
     request: operations.UpdateOrganizationRequest,
     options?: RequestOptions,
   ): Promise<operations.UpdateOrganizationResponse> {
-    return unwrapAsync(organizationsUpdateOrganization(
+    return unwrapAsync(organizationsUpdate(
       this,
       request,
       options,
