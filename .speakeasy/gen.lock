@@ -9,7 +9,7 @@ management:
   configChecksum: 591663e36748abb31512cfb613561e19
   repoURL: https://github.com/factify-inc/factify-typescript.git
   installationURL: https://github.com/factify-inc/factify-typescript
-  published: true
+  published: false
 persistentEdits:
   generation_id: 27349410-5da2-4111-95b0-b6d661b889cb
   pristine_commit_hash: a9c7acd389ce157d47cea48c4f8bdfb2f966bfdb
