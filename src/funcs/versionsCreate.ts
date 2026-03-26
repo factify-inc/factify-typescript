@@ -98,7 +98,9 @@ async function $do(
   const body = new FormData();
 
   if (isBlobLike(payload.body.payload)) {
-    appendForm(body, "payload", payload.body.payload);
+    const blob = payload.body.payload;
+    const name = "name" in blob ? (blob.name as string) : undefined;
+    appendForm(body, "payload", blob, name);
   } else if (isReadableStream(payload.body.payload.content)) {
     const buffer = await readableStreamToArrayBuffer(
       payload.body.payload.content,

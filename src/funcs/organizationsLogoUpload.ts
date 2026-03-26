@@ -4,19 +4,13 @@
 
 import * as z from "zod/v4-mini";
 import { FactifyCore } from "../core.js";
-import { appendForm } from "../lib/encodings.js";
-import {
-  bytesToBlob,
-  getContentTypeFromFileName,
-  readableStreamToArrayBuffer,
-} from "../lib/files.js";
+import { encodeJSON, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import * as components from "../models/components/index.js";
 import { FactifyError } from "../models/errors/factifyerror.js";
 import {
   ConnectionError,
@@ -30,23 +24,21 @@ import { ResponseValidationError } from "../models/errors/responsevalidationerro
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
-import { isBlobLike } from "../types/blobs.js";
 import { Result } from "../types/fp.js";
-import { isReadableStream } from "../types/streams.js";
 
 /**
- * Create a document
+ * Upload organization logo
  *
  * @remarks
- * Creates a new document by uploading a PDF file.
+ * Uploads a logo image for an organization. Accepts JPEG, PNG, WebP, or SVG formats up to 2 MB.
  */
-export function documentsCreate(
+export function organizationsLogoUpload(
   client: FactifyCore,
-  request: components.CreateDocumentRequest,
+  request: operations.UploadOrganizationLogoRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.CreateDocumentResponse,
+    operations.UploadOrganizationLogoResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -67,12 +59,12 @@ export function documentsCreate(
 
 async function $do(
   client: FactifyCore,
-  request: components.CreateDocumentRequest,
+  request: operations.UploadOrganizationLogoRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.CreateDocumentResponse,
+      operations.UploadOrganizationLogoResponse,
       | errors.ErrorResponse
       | FactifyError
       | ResponseValidationError
@@ -88,50 +80,28 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => z.parse(components.CreateDocumentRequest$outboundSchema, value),
+    (value) =>
+      z.parse(operations.UploadOrganizationLogoRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = new FormData();
+  const body = encodeJSON("body", payload.body, { explode: true });
 
-  if (isBlobLike(payload.payload)) {
-    const blob = payload.payload;
-    const name = "name" in blob ? (blob.name as string) : undefined;
-    appendForm(body, "payload", blob, name);
-  } else if (isReadableStream(payload.payload.content)) {
-    const buffer = await readableStreamToArrayBuffer(payload.payload.content);
-    const contentType = getContentTypeFromFileName(payload.payload.fileName)
-      || "application/octet-stream";
-    appendForm(
-      body,
-      "payload",
-      bytesToBlob(buffer, contentType),
-      payload.payload.fileName,
-    );
-  } else {
-    const contentType = getContentTypeFromFileName(payload.payload.fileName)
-      || "application/octet-stream";
-    appendForm(
-      body,
-      "payload",
-      bytesToBlob(payload.payload.content, contentType),
-      payload.payload.fileName,
-    );
-  }
-  appendForm(body, "title", payload.title);
-  if (payload.access_level !== undefined) {
-    appendForm(body, "access_level", payload.access_level);
-  }
-  if (payload.description !== undefined) {
-    appendForm(body, "description", payload.description);
-  }
-
-  const path = pathToFunc("/v1beta/documents")();
+  const pathParams = {
+    organization_id: encodeSimple("organization_id", payload.organization_id, {
+      explode: false,
+      charEncoding: "percent",
+    }),
+  };
+  const path = pathToFunc("/v1beta/organizations/{organization_id}/logo")(
+    pathParams,
+  );
 
   const headers = new Headers(compactMap({
+    "Content-Type": "application/json",
     Accept: "application/json",
   }));
 
@@ -142,7 +112,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "createDocument",
+    operationID: "uploadOrganizationLogo",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -185,7 +155,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.CreateDocumentResponse,
+    operations.UploadOrganizationLogoResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -196,7 +166,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.CreateDocumentResponse$inboundSchema, {
+    M.json(200, operations.UploadOrganizationLogoResponse$inboundSchema, {
       key: "Result",
     }),
     M.jsonErr([400, 401, 403, 404], errors.ErrorResponse$inboundSchema),

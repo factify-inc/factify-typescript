@@ -3,6 +3,7 @@
  */
 
 import { organizationsGet } from "../funcs/organizationsGet.js";
+import { organizationsGetPublicProfile } from "../funcs/organizationsGetPublicProfile.js";
 import { organizationsList } from "../funcs/organizationsList.js";
 import { organizationsUpdate } from "../funcs/organizationsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -10,12 +11,18 @@ import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 import { PageIterator, unwrapResultIterator } from "../types/operations.js";
 import { Invites } from "./invites.js";
+import { Logo } from "./logo.js";
 import { Members } from "./members.js";
 
 export class Organizations extends ClientSDK {
   private _invites?: Invites;
   get invites(): Invites {
     return (this._invites ??= new Invites(this._options));
+  }
+
+  private _logo?: Logo;
+  get logo(): Logo {
+    return (this._logo ??= new Logo(this._options));
   }
 
   private _members?: Members;
@@ -71,6 +78,23 @@ export class Organizations extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.UpdateOrganizationResponse> {
     return unwrapAsync(organizationsUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get an organization's public profile
+   *
+   * @remarks
+   * Returns the public-facing profile of an organization. This endpoint does not require authentication.
+   */
+  async getPublicProfile(
+    request: operations.GetOrganizationPublicProfileRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetOrganizationPublicProfileResponse> {
+    return unwrapAsync(organizationsGetPublicProfile(
       this,
       request,
       options,

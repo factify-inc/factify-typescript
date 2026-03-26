@@ -261,6 +261,12 @@ actions:
         - "lang": "typescript"
           "label": "revokeOrganizationInvite"
           "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.invites.revoke({\n    organizationId: \"<id>\",\n    inviteId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/organizations/{organization_id}/logo"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "uploadOrganizationLogo"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.logo.upload({\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
   - target: $["paths"]["/v1beta/organizations/{organization_id}/members"]["get"]
     update:
       "x-codeSamples":
@@ -285,6 +291,12 @@ actions:
         - "lang": "typescript"
           "label": "updateOrganizationMember"
           "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.members.update({\n    organizationId: \"<id>\",\n    userId: \"<id>\",\n    body: {\n      role: \"member\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/organizations/{organization_id}/public-profile"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "getOrganizationPublicProfile"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.getPublicProfile({\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
   - target: $["paths"]["/v1beta/quota"]["get"]
     update:
       "x-codeSamples":

@@ -216,6 +216,7 @@ run();
 * [list](docs/sdks/organizations/README.md#list) - List organizations
 * [get](docs/sdks/organizations/README.md#get) - Retrieve an organization
 * [update](docs/sdks/organizations/README.md#update) - Update an organization
+* [getPublicProfile](docs/sdks/organizations/README.md#getpublicprofile) - Get an organization's public profile
 
 ### [Organizations.Invites](docs/sdks/invites/README.md)
 
@@ -224,6 +225,10 @@ run();
 * [accept](docs/sdks/invites/README.md#accept) - Accept an invitation
 * [resend](docs/sdks/invites/README.md#resend) - Resend an invitation email
 * [revoke](docs/sdks/invites/README.md#revoke) - Revoke an invitation
+
+### [Organizations.Logo](docs/sdks/logo/README.md)
+
+* [upload](docs/sdks/logo/README.md#upload) - Upload organization logo
 
 ### [Organizations.Members](docs/sdks/members/README.md)
 
@@ -315,12 +320,14 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`documentsUpdate`](docs/sdks/documents/README.md#update) - Update a document
 - [`entryPagesGenerate`](docs/sdks/entrypages/README.md#generate) - Generate entry page
 - [`organizationsGet`](docs/sdks/organizations/README.md#get) - Retrieve an organization
+- [`organizationsGetPublicProfile`](docs/sdks/organizations/README.md#getpublicprofile) - Get an organization's public profile
 - [`organizationsInvitesAccept`](docs/sdks/invites/README.md#accept) - Accept an invitation
 - [`organizationsInvitesCreate`](docs/sdks/invites/README.md#create) - Invite a user to join an organization
 - [`organizationsInvitesList`](docs/sdks/invites/README.md#list) - List organization invitations
 - [`organizationsInvitesResend`](docs/sdks/invites/README.md#resend) - Resend an invitation email
 - [`organizationsInvitesRevoke`](docs/sdks/invites/README.md#revoke) - Revoke an invitation
 - [`organizationsList`](docs/sdks/organizations/README.md#list) - List organizations
+- [`organizationsLogoUpload`](docs/sdks/logo/README.md#upload) - Upload organization logo
 - [`organizationsMembersAdd`](docs/sdks/members/README.md#add) - Add a member to an organization
 - [`organizationsMembersList`](docs/sdks/members/README.md#list) - List organization members
 - [`organizationsMembersRemove`](docs/sdks/members/README.md#remove) - Remove an organization member
