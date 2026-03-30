@@ -126,6 +126,9 @@ async function run() {
       "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0",
     createdAfter: new Date("2023-01-15T01:30:15.01Z"),
     createdBefore: new Date("2023-01-15T01:30:15.01Z"),
+    createdById: [
+      "user_01h2xcejqtf2nbrexx3vqjhp41",
+    ],
   });
 
   for await (const page of result) {
@@ -180,12 +183,12 @@ run();
 
 ### [AccessRequests](docs/sdks/accessrequests/README.md)
 
-* [inspect](docs/sdks/accessrequests/README.md#inspect) - Inspect document access
 * [list](docs/sdks/accessrequests/README.md#list) - List access requests
 * [create](docs/sdks/accessrequests/README.md#create) - Create an access request
 * [checkStatus](docs/sdks/accessrequests/README.md#checkstatus) - Check access request status
 * [approve](docs/sdks/accessrequests/README.md#approve) - Approve an access request
 * [deny](docs/sdks/accessrequests/README.md#deny) - Deny an access request
+* [inspect](docs/sdks/accessrequests/README.md#inspect) - Inspect document access
 
 ### [APIKeys](docs/sdks/apikeys/README.md)
 

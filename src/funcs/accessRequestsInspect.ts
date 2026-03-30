@@ -96,7 +96,9 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/v1beta/documents/{document_id}/access")(pathParams);
+  const path = pathToFunc("/v1beta/documents/{document_id}/capabilities")(
+    pathParams,
+  );
 
   const headers = new Headers(compactMap({
     Accept: "application/json",

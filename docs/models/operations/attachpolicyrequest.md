@@ -8,12 +8,12 @@ AttachPolicyRequest specifies a policy to attach to a document.
 import { AttachPolicyRequest } from "@factify/sdk/models/operations";
 
 let value: AttachPolicyRequest = {
-  policyId: "<id>",
+  policyId: "pol_01h2xcejqtf2nbrexx3vqjhp41",
 };
 ```
 
 ## Fields
 
-| Field                                                     | Type                                                      | Required                                                  | Description                                               |
-| --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
-| `policyId`                                                | *string*                                                  | :heavy_check_mark:                                        | Policy ID to attach.<br/> Pattern: pol_[0-9a-hjkmnp-tv-z]{26} |
+| Field                                                     | Type                                                      | Required                                                  | Description                                               | Example                                                   |
+| --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
+| `policyId`                                                | *string*                                                  | :heavy_check_mark:                                        | Policy ID to attach.<br/> Pattern: pol_[0-9a-hjkmnp-tv-z]{26} | pol_01h2xcejqtf2nbrexx3vqjhp41                            |

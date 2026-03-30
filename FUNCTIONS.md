@@ -33,6 +33,9 @@ async function run() {
     pageToken: "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0",
     createdAfter: new Date("2023-01-15T01:30:15.01Z"),
     createdBefore: new Date("2023-01-15T01:30:15.01Z"),
+    createdById: [
+      "user_01h2xcejqtf2nbrexx3vqjhp41",
+    ],
   });
   if (res.ok) {
     const { value: result } = res;

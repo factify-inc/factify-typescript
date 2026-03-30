@@ -14,23 +14,6 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class AccessRequests extends ClientSDK {
   /**
-   * Inspect document access
-   *
-   * @remarks
-   * Returns the caller's permissions and any access policies on a document.
-   */
-  async inspect(
-    request: operations.InspectDocumentAccessRequest,
-    options?: RequestOptions,
-  ): Promise<operations.InspectDocumentAccessResponse> {
-    return unwrapAsync(accessRequestsInspect(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * List access requests
    *
    * @remarks
@@ -109,6 +92,23 @@ export class AccessRequests extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.DenyAccessRequestResponse> {
     return unwrapAsync(accessRequestsDeny(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Inspect document access
+   *
+   * @remarks
+   * Returns the caller's permissions and any access policies on a document.
+   */
+  async inspect(
+    request: operations.InspectDocumentAccessRequest,
+    options?: RequestOptions,
+  ): Promise<operations.InspectDocumentAccessResponse> {
+    return unwrapAsync(accessRequestsInspect(
       this,
       request,
       options,

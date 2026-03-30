@@ -18,7 +18,7 @@ Get general access level for a document.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="getGeneralAccess" method="get" path="/v1beta/documents/{document_id}/general-access" -->
+<!-- UsageSnippet language="typescript" operationID="getGeneralAccess" method="get" path="/v1beta/documents/{document_id}/access" -->
 ```typescript
 import { Factify } from "@factify/sdk";
 
@@ -94,7 +94,7 @@ Set general access level for a document.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="setGeneralAccess" method="put" path="/v1beta/documents/{document_id}/general-access" example="validation_error" -->
+<!-- UsageSnippet language="typescript" operationID="setGeneralAccess" method="put" path="/v1beta/documents/{document_id}/access" example="validation_error" -->
 ```typescript
 import { Factify } from "@factify/sdk";
 

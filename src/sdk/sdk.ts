@@ -27,6 +27,11 @@ export class Factify extends ClientSDK {
     return (this._documents ??= new Documents(this._options));
   }
 
+  private _sharing?: Sharing;
+  get sharing(): Sharing {
+    return (this._sharing ??= new Sharing(this._options));
+  }
+
   private _accessRequests?: AccessRequests;
   get accessRequests(): AccessRequests {
     return (this._accessRequests ??= new AccessRequests(this._options));
@@ -35,11 +40,6 @@ export class Factify extends ClientSDK {
   private _entryPages?: EntryPages;
   get entryPages(): EntryPages {
     return (this._entryPages ??= new EntryPages(this._options));
-  }
-
-  private _sharing?: Sharing;
-  get sharing(): Sharing {
-    return (this._sharing ??= new Sharing(this._options));
   }
 
   private _policies?: Policies;
