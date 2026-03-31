@@ -12,7 +12,6 @@ import { Policies } from "./policies.js";
 import { Sharing } from "./sharing.js";
 import { Timelines } from "./timelines.js";
 import { Usage } from "./usage.js";
-import { UserPreferences } from "./userpreferences.js";
 import { Users } from "./users.js";
 import { Versions } from "./versions.js";
 
@@ -70,10 +69,5 @@ export class Factify extends ClientSDK {
   private _usage?: Usage;
   get usage(): Usage {
     return (this._usage ??= new Usage(this._options));
-  }
-
-  private _userPreferences?: UserPreferences;
-  get userPreferences(): UserPreferences {
-    return (this._userPreferences ??= new UserPreferences(this._options));
   }
 }

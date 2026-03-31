@@ -6,8 +6,14 @@ import { usersGetMe } from "../funcs/usersGetMe.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
+import { Preferences } from "./preferences.js";
 
 export class Users extends ClientSDK {
+  private _preferences?: Preferences;
+  get preferences(): Preferences {
+    return (this._preferences ??= new Preferences(this._options));
+  }
+
   /**
    * Get current user
    *

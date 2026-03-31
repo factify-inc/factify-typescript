@@ -268,13 +268,13 @@ run();
 * [setKeyQuota](docs/sdks/usage/README.md#setkeyquota) - Set API key quota
 * [getHistory](docs/sdks/usage/README.md#gethistory) - Get usage history
 
-### [UserPreferences](docs/sdks/userpreferences/README.md)
-
-* [get](docs/sdks/userpreferences/README.md#get) - Get user preferences
-
 ### [Users](docs/sdks/users/README.md)
 
 * [getMe](docs/sdks/users/README.md#getme) - Get current user
+
+### [Users.Preferences](docs/sdks/preferences/README.md)
+
+* [get](docs/sdks/preferences/README.md#get) - Get user preferences
 
 ### [Versions](docs/sdks/versions/README.md)
 
@@ -352,8 +352,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`usageGetHistory`](docs/sdks/usage/README.md#gethistory) - Get usage history
 - [`usageListKeyQuotas`](docs/sdks/usage/README.md#listkeyquotas) - List API key quotas
 - [`usageSetKeyQuota`](docs/sdks/usage/README.md#setkeyquota) - Set API key quota
-- [`userPreferencesGet`](docs/sdks/userpreferences/README.md#get) - Get user preferences
 - [`usersGetMe`](docs/sdks/users/README.md#getme) - Get current user
+- [`usersPreferencesGet`](docs/sdks/preferences/README.md#get) - Get user preferences
 - [`versionsCreate`](docs/sdks/versions/README.md#create) - Create a new version
 - [`versionsGet`](docs/sdks/versions/README.md#get) - Retrieve a version
 - [`versionsList`](docs/sdks/versions/README.md#list) - List document versions

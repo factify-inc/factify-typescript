@@ -1,4 +1,4 @@
-# UserPreferences
+# Users.Preferences
 
 ## Overview
 
@@ -21,7 +21,7 @@ const factify = new Factify({
 });
 
 async function run() {
-  const result = await factify.userPreferences.get();
+  const result = await factify.users.preferences.get();
 
   console.log(result);
 }
@@ -35,7 +35,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FactifyCore } from "@factify/sdk/core.js";
-import { userPreferencesGet } from "@factify/sdk/funcs/userPreferencesGet.js";
+import { usersPreferencesGet } from "@factify/sdk/funcs/usersPreferencesGet.js";
 
 // Use `FactifyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -44,12 +44,12 @@ const factify = new FactifyCore({
 });
 
 async function run() {
-  const res = await userPreferencesGet(factify);
+  const res = await usersPreferencesGet(factify);
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("userPreferencesGet failed:", res.error);
+    console.log("usersPreferencesGet failed:", res.error);
   }
 }
 

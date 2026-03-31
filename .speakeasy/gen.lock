@@ -1,28 +1,28 @@
 lockVersion: 2.0.0
 id: 23af0391-5a58-495c-b992-941b55f41c78
 management:
-  docChecksum: e234483b4fec0f08be5ac263bb0eda34
-  docVersion: 1.1.0-rc.5
-  speakeasyVersion: 1.759.3
-  generationVersion: 2.869.25
-  releaseVersion: 1.1.0-rc.5
-  configChecksum: a34dfa7d82f497e3a1cf7b59b32ee00d
+  docChecksum: 71304894bbd4f22bcc3aac4322d85466
+  docVersion: 1.1.0-rc.6
+  speakeasyVersion: 1.761.0
+  generationVersion: 2.879.1
+  releaseVersion: 1.1.0-rc.6
+  configChecksum: 6041f9b0e055ee87b649a267330614c4
   repoURL: https://github.com/factify-inc/factify-typescript.git
   installationURL: https://github.com/factify-inc/factify-typescript
   published: true
 persistentEdits:
-  generation_id: aa1da7a4-a6ee-4952-8a4f-76eb62373326
-  pristine_commit_hash: 20f6ee289af9b0c8ae3ef8aa59d39ed05dfd428a
-  pristine_tree_hash: 1ed7f39aa5a878ecdc1dd89d30e373d13f914fec
+  generation_id: 9f6871da-7e52-4ee3-b386-8a9952d2c93d
+  pristine_commit_hash: a064b0df34ad5506d146c5daa7a062ccc81d53f7
+  pristine_tree_hash: 60714e1e1ea3501e3abdd0fa09f173d619e034d6
 features:
   typescript:
     additionalDependencies: 0.1.0
-    core: 3.26.44
+    core: 3.26.46
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
     examples: 2.82.5
-    globalSecurity: 2.82.15
+    globalSecurity: 2.82.16
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.1
     globalServerURLs: 2.83.1
@@ -1039,6 +1039,10 @@ trackedFiles:
     id: 636269b04e57
     last_write_checksum: sha1:a60183c091d2a95778fb22b8a4262051dbfc7c32
     pristine_git_object: 6ec3d7d6801935402c3ca1eb07c2da1e085ff058
+  docs/sdks/preferences/README.md:
+    id: 6a64506aa707
+    last_write_checksum: sha1:6a574ebab43106bcbf6d1cf0d530a1cab4f47055
+    pristine_git_object: 96d94b35ff55e59325dfd981f5c5a275ecff5867
   docs/sdks/sharing/README.md:
     id: b7142786849e
     last_write_checksum: sha1:8d0b26e54733e8a759a98342a86cca781ce0209d
@@ -1051,10 +1055,6 @@ trackedFiles:
     id: 631af2d7ce26
     last_write_checksum: sha1:6f9ccc34b79fc847c00d8d0e26a18ccca1a80412
     pristine_git_object: 232276bda6184e7744684d392f1cd5457a03d45b
-  docs/sdks/userpreferences/README.md:
-    id: c37855687dd1
-    last_write_checksum: sha1:b5a0bb55a8f39fe50c862b4c5dfebd59264ac566
-    pristine_git_object: 9c5b40c6a43d5fb6a1371c68f4d69306a3242990
   docs/sdks/users/README.md:
     id: 5d80027045fe
     last_write_checksum: sha1:14da18017d06732ec656dd07611fca858b87a06d
@@ -1085,12 +1085,12 @@ trackedFiles:
     pristine_git_object: 766ea5ba4257419f9fca9da9c6ba895ab05a3f8b
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:3c0f6eb3adee7a67a75b9dca43c030ce24cddbbe
-    pristine_git_object: 4482cb6593901eeaf1a6e6561c7ed016b3f4aabd
+    last_write_checksum: sha1:d7b75bea62bcdbc80b262f8d04f1e378de6bb95e
+    pristine_git_object: 0b6d65ed0a2d81ebdbecd007962dfc880f10fe35
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:a2a610cb3e1fda6b967c83e26fc93826aca4dda7
-    pristine_git_object: 151d852605fa8363b6bf053c2d7f1b8f46374e94
+    last_write_checksum: sha1:5b7aebf97245fb0d746d9ffb2608302abe270fc0
+    pristine_git_object: 1006380f36f65cd4cde0c1a0aee761f552d8e1fe
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:72dd2a6867a44557b35fa72fe5588efc5d08e8e1
@@ -1299,14 +1299,14 @@ trackedFiles:
     id: 61ddd2bd5dcf
     last_write_checksum: sha1:22bae8ad961c747205d7d608bcab80ef326143b8
     pristine_git_object: 88c31b3bb7b5e00027f2c06b10ff80dd243b9cc3
-  src/funcs/userPreferencesGet.ts:
-    id: d86c6779dc9c
-    last_write_checksum: sha1:c15c01996890e5986639ee20feab9e03e8104640
-    pristine_git_object: 76a8b3bf2b89fd0904ba23810b04c4f33c15a8e7
   src/funcs/usersGetMe.ts:
     id: bba06feb1322
     last_write_checksum: sha1:1741a92cfc08713a26fc0bebb91eaec05e327f8e
     pristine_git_object: 2cd376a547b110c47e3adcdf0fc8b77fd3a81ba8
+  src/funcs/usersPreferencesGet.ts:
+    id: fcafaed4819c
+    last_write_checksum: sha1:e4e71ea4e12b0f28e68c023e2f48afaa5edb8425
+    pristine_git_object: 7f927d0727d1892667cbbdf5a5119bf59a0e8b20
   src/funcs/versionsCreate.ts:
     id: 21b7cdaed201
     last_write_checksum: sha1:ccb4c10956ea17e419b14dec502655bed9cad494
@@ -1345,8 +1345,8 @@ trackedFiles:
     pristine_git_object: 44be0eae8246521b230e8e711a88eff738fc015d
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:b6d5c9e76be36da59c045968954819f4925a99c5
-    pristine_git_object: ce4d190a62c21dae858148ea5f072ba92643a1f4
+    last_write_checksum: sha1:47980c396bd3b29558ef412df4d60479e3b6d741
+    pristine_git_object: b02bce56aba2dfa759846f1d3e2830d9b35061f7
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -1393,8 +1393,8 @@ trackedFiles:
     pristine_git_object: 52a2bf0ac3dbb307f60a853494827cd0c431eba0
   src/lib/security.ts:
     id: 0502afa7922e
-    last_write_checksum: sha1:02af5a7b0a9f5c4c2550bd7c60e29810e75c85a7
-    pristine_git_object: 92ab7b464d18cfbfed854e22268365c2166009e3
+    last_write_checksum: sha1:729a28ca2b091d0e020756abdd7ac0acf2c516ab
+    pristine_git_object: 7c0874d6e6bf144caddb0ca4938b522a998ef711
   src/lib/url.ts:
     id: b0057e24ed76
     last_write_checksum: sha1:3bceadd74bf0b31adf13eb06b7531077c3e07d65
@@ -2095,10 +2095,14 @@ trackedFiles:
     id: 56c143102e2a
     last_write_checksum: sha1:3442acf9ea51dc4b91b0159f52e51e05614260a3
     pristine_git_object: 36e4a2f5d5ad056cfb63bd41b1323a0838f5e4e3
+  src/sdk/preferences.ts:
+    id: f43cdb223930
+    last_write_checksum: sha1:7964042eca1b6766bd9041956e53bcc7bbfc3de9
+    pristine_git_object: 98ad33d53e265639302aa8d3ff64eac79e63bfdb
   src/sdk/sdk.ts:
     id: 784571af2f69
-    last_write_checksum: sha1:d65e00bfa37b3de68182fb81c587b166ad46dc2f
-    pristine_git_object: 91c220a5a82417ca98f93b7588cd7e6609275da7
+    last_write_checksum: sha1:13e63cacde5c6e7d3e71d89c56e0787673e54e73
+    pristine_git_object: 5386861e02a774eb63946b34aa6d21d3c594ffb6
   src/sdk/sharing.ts:
     id: 4e50be72719c
     last_write_checksum: sha1:30cf601c4678420ef92c9b39880d2dc89cbb257a
@@ -2111,14 +2115,10 @@ trackedFiles:
     id: e4cbe77b260e
     last_write_checksum: sha1:98a6e4d45bc107413fad7d84016cd63a2a29ea94
     pristine_git_object: 631e643a587e0b7bdf40cc9a1396d44edd77bcda
-  src/sdk/userpreferences.ts:
-    id: f649b14b3fd7
-    last_write_checksum: sha1:56b4d8ff40da50f13830407facac9ee04bdb8bb3
-    pristine_git_object: 71189afb64740294940c803e538ba14eea11a647
   src/sdk/users.ts:
     id: 2df5828eed03
-    last_write_checksum: sha1:4fd20956676d40a2d6ebf9d49fcecd67828c19d8
-    pristine_git_object: 3ba08a47af376fc23916fbc12410a19a156e85db
+    last_write_checksum: sha1:6548bd2acbbab48c6cb9c0a4adeab17bfb987c84
+    pristine_git_object: 11a99e6d1eb03281a0ce108aea8eceb47e7f0e15
   src/sdk/versions.ts:
     id: c70305fd6acb
     last_write_checksum: sha1:8b34eb416215b6801e2ce963a256b22dc7d770b1
@@ -3847,3 +3847,7 @@ examples:
         "500":
           application/json: {"code": "already_exists", "message": "<value>"}
 examplesVersion: 1.0.2
+releaseNotes: |
+  ## Typescript SDK Changes:
+  * `factify.users.preferences.get()`: **Added**
+  * `factify.userPreferences.get()`: **Removed** (Breaking ⚠️)

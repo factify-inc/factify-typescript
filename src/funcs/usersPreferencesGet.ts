@@ -29,7 +29,7 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Returns the authenticated user's onboarding preferences. Only available for user accounts, not API keys.
  */
-export function userPreferencesGet(
+export function usersPreferencesGet(
   client: FactifyCore,
   options?: RequestOptions,
 ): APIPromise<
