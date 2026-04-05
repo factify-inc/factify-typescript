@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 23af0391-5a58-495c-b992-941b55f41c78
 management:
-  docChecksum: 71304894bbd4f22bcc3aac4322d85466
-  docVersion: 1.1.0-rc.6
-  speakeasyVersion: 1.761.0
-  generationVersion: 2.879.1
-  releaseVersion: 1.1.0-rc.6
-  configChecksum: 6041f9b0e055ee87b649a267330614c4
+  docChecksum: b041107afa9d6464a5f0d52def47b3c7
+  docVersion: 1.1.0-rc.7
+  speakeasyVersion: 1.761.1
+  generationVersion: 2.879.6
+  releaseVersion: 1.1.0-rc.7
+  configChecksum: f6b54c4c5f7046628a42dd93a03917cc
   repoURL: https://github.com/factify-inc/factify-typescript.git
   installationURL: https://github.com/factify-inc/factify-typescript
   published: true
 persistentEdits:
-  generation_id: 9f6871da-7e52-4ee3-b386-8a9952d2c93d
-  pristine_commit_hash: a064b0df34ad5506d146c5daa7a062ccc81d53f7
-  pristine_tree_hash: 60714e1e1ea3501e3abdd0fa09f173d619e034d6
+  generation_id: 238aaf7d-847d-490d-944c-e85c6a153308
+  pristine_commit_hash: d06bd67f45d76a87e7d671f5c7f985e5dad16dd7
+  pristine_tree_hash: 4875a020045fab5789fecf84cffc39d59105656e
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -769,8 +769,8 @@ trackedFiles:
     pristine_git_object: 6959647e2f050a683e2a62b3dc7d80bbc92ad1b9
   docs/models/operations/listdocumentsrequest.md:
     id: 2b4bc2b3a90a
-    last_write_checksum: sha1:87500efcd8d3a24aac79ff86140b6bb8a8dda466
-    pristine_git_object: be0284734e224e531d1c0748ed63853099e12327
+    last_write_checksum: sha1:4e3390948e6e1ab7f7ba1b2ed6865ea417977393
+    pristine_git_object: a1f30f56e1fcfd0dd6489bf15eb0884cc3eda396
   docs/models/operations/listdocumentsresponse.md:
     id: 99e553893d30
     last_write_checksum: sha1:29a0a173a18e25e944a6e6097b2d3bd8e2d83cdf
@@ -1085,12 +1085,12 @@ trackedFiles:
     pristine_git_object: 766ea5ba4257419f9fca9da9c6ba895ab05a3f8b
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:d7b75bea62bcdbc80b262f8d04f1e378de6bb95e
-    pristine_git_object: 0b6d65ed0a2d81ebdbecd007962dfc880f10fe35
+    last_write_checksum: sha1:a5fe510e3c51a3431d987f3277e22d8b55382f59
+    pristine_git_object: 773313530f57b8511f9cad3f0a47c46f91afebed
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:5b7aebf97245fb0d746d9ffb2608302abe270fc0
-    pristine_git_object: 1006380f36f65cd4cde0c1a0aee761f552d8e1fe
+    last_write_checksum: sha1:bfa2bfcd2ffea9a500cc9e8f94cfb99ff1ac94d7
+    pristine_git_object: 92d5666e83b2ca9e6f12ab0f1277994763fa285f
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:72dd2a6867a44557b35fa72fe5588efc5d08e8e1
@@ -1149,8 +1149,8 @@ trackedFiles:
     pristine_git_object: 1afd2f6201f3dda452c7fab5cd2cad9265ea1c9d
   src/funcs/documentsList.ts:
     id: f2d6920c437a
-    last_write_checksum: sha1:f33aad9f9be75deda8e89d087df7e54921b177c7
-    pristine_git_object: 62f4b49d51815c5b36a8b4292e60a09754d0418a
+    last_write_checksum: sha1:037483755af719d94559d69aea5e3e582ac94c6f
+    pristine_git_object: 4db4c5ed096fa760624f19c652c90ecc076c1df8
   src/funcs/documentsListDuplicates.ts:
     id: e31dae13a13c
     last_write_checksum: sha1:c071326ca7abcc993526cd43bb1d23287b33626c
@@ -1345,8 +1345,8 @@ trackedFiles:
     pristine_git_object: 44be0eae8246521b230e8e711a88eff738fc015d
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:47980c396bd3b29558ef412df4d60479e3b6d741
-    pristine_git_object: b02bce56aba2dfa759846f1d3e2830d9b35061f7
+    last_write_checksum: sha1:0dd5f8f5d180613b504ce0729c35caf216e014fe
+    pristine_git_object: d022bdb3654a6ded9db9770ce687e2a2890eaf00
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -1969,8 +1969,8 @@ trackedFiles:
     pristine_git_object: a18a7889016ef7c352581b368df319195da5e789
   src/models/operations/listdocuments.ts:
     id: d043af72bf36
-    last_write_checksum: sha1:100a2b2861299048eaf93aafd2972d6d710b1897
-    pristine_git_object: 42781c67a81235a1542452deae19769303c6f157
+    last_write_checksum: sha1:883668d958ec2654b3ce8174c176c0132b91ab77
+    pristine_git_object: 433234da9375c1ac141ed95d38552b238d1e24cf
   src/models/operations/listdocumentversions.ts:
     id: 77bde9e60b0f
     last_write_checksum: sha1:504256293e1060a915f4bb3a18dfc69679ec50d8
@@ -3849,5 +3849,4 @@ examples:
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Typescript SDK Changes:
-  * `factify.users.preferences.get()`: **Added**
-  * `factify.userPreferences.get()`: **Removed** (Breaking ⚠️)
+  * `factify.documents.list()`:  `request` **Changed**

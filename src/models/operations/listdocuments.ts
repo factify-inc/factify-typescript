@@ -89,6 +89,21 @@ export type ListDocumentsRequest = {
    *  REST: ?organization_scope=true
    */
   organizationScope?: boolean | undefined;
+  /**
+   * Case-insensitive substring match on document title.
+   *
+   * @remarks
+   *  REST: ?title_contains=quarterly
+   */
+  titleContains?: string | undefined;
+  /**
+   * Case-insensitive substring match on document description.
+   *
+   * @remarks
+   *  Documents with no description set will not match this filter.
+   *  REST: ?description_contains=financial
+   */
+  descriptionContains?: string | undefined;
 };
 
 export type ListDocumentsResponse = {
@@ -110,6 +125,8 @@ export type ListDocumentsRequest$Outbound = {
   ownership?: Array<string> | undefined;
   trash_state?: Array<string> | undefined;
   organization_scope?: boolean | undefined;
+  title_contains?: string | undefined;
+  description_contains?: string | undefined;
 };
 
 /** @internal */
@@ -138,6 +155,8 @@ export const ListDocumentsRequest$outboundSchema: z.ZodMiniType<
       z.array(components.DocumentTrashState$outboundSchema),
     ),
     organizationScope: z.optional(z.boolean()),
+    titleContains: z.optional(z.string()),
+    descriptionContains: z.optional(z.string()),
   }),
   z.transform((v) => {
     return remap$(v, {
@@ -150,6 +169,8 @@ export const ListDocumentsRequest$outboundSchema: z.ZodMiniType<
       processingStatus: "processing_status",
       trashState: "trash_state",
       organizationScope: "organization_scope",
+      titleContains: "title_contains",
+      descriptionContains: "description_contains",
     });
   }),
 );

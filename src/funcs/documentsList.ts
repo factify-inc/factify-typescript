@@ -113,6 +113,7 @@ async function $do(
     "created_by_id": payload?.created_by_id,
     "created.after": payload?.["created.after"],
     "created.before": payload?.["created.before"],
+    "description_contains": payload?.description_contains,
     "organization_scope": payload?.organization_scope,
     "ownership": payload?.ownership,
     "page_size": payload?.page_size,
@@ -120,6 +121,7 @@ async function $do(
     "processing_status": payload?.processing_status,
     "query": payload?.query,
     "sort": payload?.sort,
+    "title_contains": payload?.title_contains,
     "trash_state": payload?.trash_state,
   });
 
