@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 23af0391-5a58-495c-b992-941b55f41c78
 management:
-  docChecksum: b041107afa9d6464a5f0d52def47b3c7
-  docVersion: 1.1.0-rc.7
+  docChecksum: 75a87b72914c280c4c8b6aae298c6409
+  docVersion: 1.1.0-rc.8
   speakeasyVersion: 1.761.1
   generationVersion: 2.879.6
-  releaseVersion: 1.1.0-rc.7
-  configChecksum: f6b54c4c5f7046628a42dd93a03917cc
+  releaseVersion: 1.1.0-rc.8
+  configChecksum: 05a8b196fd1bf72acd9cb73408186612
   repoURL: https://github.com/factify-inc/factify-typescript.git
   installationURL: https://github.com/factify-inc/factify-typescript
   published: true
 persistentEdits:
-  generation_id: 238aaf7d-847d-490d-944c-e85c6a153308
-  pristine_commit_hash: d06bd67f45d76a87e7d671f5c7f985e5dad16dd7
-  pristine_tree_hash: 4875a020045fab5789fecf84cffc39d59105656e
+  generation_id: a3ffd0ff-6b9f-4871-bbd4-acb359192b07
+  pristine_commit_hash: 9d4dc1ce0c979ceb9cef28af3204fe750768cf30
+  pristine_tree_hash: b5570490e17ba07329cab47534aa7837055deddb
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -417,8 +417,8 @@ trackedFiles:
     pristine_git_object: fa36e8e63e741f9568fd8aaca617731027ec7750
   docs/models/components/timelineeventtype.md:
     id: 740db76bf6bb
-    last_write_checksum: sha1:6d7d45c95d3bf6029d0f23c7c4790ebb32cf4846
-    pristine_git_object: b93d9344b5a29b1462d7413e78e14ba401cc2064
+    last_write_checksum: sha1:80c6706ade3f447651bdd9830cffede5616e2749
+    pristine_git_object: 8a0445192416e1e0a4b9137996d12f6ccd450e8b
   docs/models/components/transferdocumentownershipresponse.md:
     id: 9ac4a380e506
     last_write_checksum: sha1:bb0e074aa208e9a852172478e44fb9c8967ec10f
@@ -1085,12 +1085,12 @@ trackedFiles:
     pristine_git_object: 766ea5ba4257419f9fca9da9c6ba895ab05a3f8b
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:a5fe510e3c51a3431d987f3277e22d8b55382f59
-    pristine_git_object: 773313530f57b8511f9cad3f0a47c46f91afebed
+    last_write_checksum: sha1:a9cf1c6bed6d97559271f8f351ef7252a8f6281a
+    pristine_git_object: f5fd73f986a7965fb655595640762f222dcb5f94
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:bfa2bfcd2ffea9a500cc9e8f94cfb99ff1ac94d7
-    pristine_git_object: 92d5666e83b2ca9e6f12ab0f1277994763fa285f
+    last_write_checksum: sha1:dad83c5e3259bd2234658d5926ac8f7957a127b2
+    pristine_git_object: 4a9e5ccb63a67a8c6e0667eea761a947dbb0b4f0
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:72dd2a6867a44557b35fa72fe5588efc5d08e8e1
@@ -1345,8 +1345,8 @@ trackedFiles:
     pristine_git_object: 44be0eae8246521b230e8e711a88eff738fc015d
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:0dd5f8f5d180613b504ce0729c35caf216e014fe
-    pristine_git_object: d022bdb3654a6ded9db9770ce687e2a2890eaf00
+    last_write_checksum: sha1:da8d46181f8f4360fc6772527f19e9cbe1f23072
+    pristine_git_object: b1b19efcb68daed4b643e4c0a91a0a547c5ebb04
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -1745,8 +1745,8 @@ trackedFiles:
     pristine_git_object: 1e77c33137f8ac98f6738f7ba95cb897289fb384
   src/models/components/timelineeventtype.ts:
     id: bdc5befa1110
-    last_write_checksum: sha1:f6354ab267dea1e36d8b0f6a74871dae2fa0ac64
-    pristine_git_object: 5964e714f96dc90e3f827a1ff8281ce3a52ed5d5
+    last_write_checksum: sha1:a83dbe1f3f8810ce6302e64701ef11ebf2c9d995
+    pristine_git_object: 392b8949f5c309c44c5c8137081e1e64fcddea23
   src/models/components/transferdocumentownershipresponse.ts:
     id: 6ce7da99557d
     last_write_checksum: sha1:96d5e026fe941791c7b1c27f43e3f880108d2e52
@@ -3849,4 +3849,4 @@ examples:
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Typescript SDK Changes:
-  * `factify.documents.list()`:  `request` **Changed**
+  * `factify.timelines.get()`:  `response.events[].eventType` **Changed** (Breaking ⚠️)

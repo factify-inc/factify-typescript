@@ -7,39 +7,30 @@ import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
 export const TimelineEventType = {
-  TimelineEventTypeUnspecified: "TIMELINE_EVENT_TYPE_UNSPECIFIED",
-  TimelineEventTypeCommentCreated: "TIMELINE_EVENT_TYPE_COMMENT_CREATED",
-  TimelineEventTypeCommentUpdated: "TIMELINE_EVENT_TYPE_COMMENT_UPDATED",
-  TimelineEventTypeThreadCreated: "TIMELINE_EVENT_TYPE_THREAD_CREATED",
-  TimelineEventTypeThreadUpdated: "TIMELINE_EVENT_TYPE_THREAD_UPDATED",
-  TimelineEventTypeApprovalVoted: "TIMELINE_EVENT_TYPE_APPROVAL_VOTED",
-  TimelineEventTypeApprovalStarted: "TIMELINE_EVENT_TYPE_APPROVAL_STARTED",
-  TimelineEventTypeApprovalTerminated:
-    "TIMELINE_EVENT_TYPE_APPROVAL_TERMINATED",
-  TimelineEventTypeDocumentLoaded: "TIMELINE_EVENT_TYPE_DOCUMENT_LOADED",
-  TimelineEventTypeApprovalReady: "TIMELINE_EVENT_TYPE_APPROVAL_READY",
-  TimelineEventTypeApprovalSubmitted: "TIMELINE_EVENT_TYPE_APPROVAL_SUBMITTED",
-  TimelineEventTypeApprovalSkipDissemination:
-    "TIMELINE_EVENT_TYPE_APPROVAL_SKIP_DISSEMINATION",
-  TimelineEventTypeDocumentCreated: "TIMELINE_EVENT_TYPE_DOCUMENT_CREATED",
-  TimelineEventTypeDocumentUpdated: "TIMELINE_EVENT_TYPE_DOCUMENT_UPDATED",
-  TimelineEventTypeCommentDeleted: "TIMELINE_EVENT_TYPE_COMMENT_DELETED",
-  TimelineEventTypeDocumentUserAccessGranted:
-    "TIMELINE_EVENT_TYPE_DOCUMENT_USER_ACCESS_GRANTED",
-  TimelineEventTypeDocumentUserAccessRevoked:
-    "TIMELINE_EVENT_TYPE_DOCUMENT_USER_ACCESS_REVOKED",
-  TimelineEventTypeDocumentEntryPageDownloaded:
-    "TIMELINE_EVENT_TYPE_DOCUMENT_ENTRY_PAGE_DOWNLOADED",
-  TimelineEventTypeDocumentVersionUploaded:
-    "TIMELINE_EVENT_TYPE_DOCUMENT_VERSION_UPLOADED",
-  TimelineEventTypeDocumentPrinted: "TIMELINE_EVENT_TYPE_DOCUMENT_PRINTED",
-  TimelineEventTypeDocumentSettingsAccessChanged:
-    "TIMELINE_EVENT_TYPE_DOCUMENT_SETTINGS_ACCESS_CHANGED",
-  TimelineEventTypeAnnotationAdded: "TIMELINE_EVENT_TYPE_ANNOTATION_ADDED",
-  TimelineEventTypeAnnotationEdited: "TIMELINE_EVENT_TYPE_ANNOTATION_EDITED",
-  TimelineEventTypeAnnotationDeleted: "TIMELINE_EVENT_TYPE_ANNOTATION_DELETED",
-  TimelineEventTypeAnnotationResolved:
-    "TIMELINE_EVENT_TYPE_ANNOTATION_RESOLVED",
+  CommentCreated: "comment_created",
+  CommentUpdated: "comment_updated",
+  ThreadCreated: "thread_created",
+  ThreadUpdated: "thread_updated",
+  ApprovalVoted: "approval_voted",
+  ApprovalStarted: "approval_started",
+  ApprovalTerminated: "approval_terminated",
+  DocumentLoaded: "document_loaded",
+  ApprovalReady: "approval_ready",
+  ApprovalSubmitted: "approval_submitted",
+  ApprovalSkipDissemination: "approval_skip_dissemination",
+  DocumentCreated: "document_created",
+  DocumentUpdated: "document_updated",
+  CommentDeleted: "comment_deleted",
+  DocumentUserAccessGranted: "document_user_access_granted",
+  DocumentUserAccessRevoked: "document_user_access_revoked",
+  DocumentEntryPageDownloaded: "document_entry_page_downloaded",
+  DocumentVersionUploaded: "document_version_uploaded",
+  DocumentPrinted: "document_printed",
+  DocumentSettingsAccessChanged: "document_settings_access_changed",
+  AnnotationAdded: "annotation_added",
+  AnnotationEdited: "annotation_edited",
+  AnnotationDeleted: "annotation_deleted",
+  AnnotationResolved: "annotation_resolved",
 } as const;
 export type TimelineEventType = OpenEnum<typeof TimelineEventType>;
 
