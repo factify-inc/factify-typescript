@@ -246,6 +246,10 @@ run();
 * [attach](docs/sdks/policies/README.md#attach) - Attach a policy
 * [detach](docs/sdks/policies/README.md#detach) - Detach a policy
 
+### [Records](docs/sdks/records/README.md)
+
+* [get](docs/sdks/records/README.md#get) - Retrieve a record
+
 ### [Sharing](docs/sdks/sharing/README.md)
 
 * [getGeneralAccess](docs/sdks/sharing/README.md#getgeneralaccess) - Get general access
@@ -339,6 +343,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`policiesAttach`](docs/sdks/policies/README.md#attach) - Attach a policy
 - [`policiesDetach`](docs/sdks/policies/README.md#detach) - Detach a policy
 - [`policiesList`](docs/sdks/policies/README.md#list) - List document policies
+- [`recordsGet`](docs/sdks/records/README.md#get) - Retrieve a record
 - [`sharingCreateShareLink`](docs/sdks/sharing/README.md#createsharelink) - Create share link
 - [`sharingGetGeneralAccess`](docs/sdks/sharing/README.md#getgeneralaccess) - Get general access
 - [`sharingGrant`](docs/sdks/sharing/README.md#grant) - Grant document access

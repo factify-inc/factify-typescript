@@ -26,6 +26,7 @@ export * from "./getme.js";
 export * from "./getorganization.js";
 export * from "./getorganizationpublicprofile.js";
 export * from "./getorganizationquota.js";
+export * from "./getrecord.js";
 export * from "./getusagehistory.js";
 export * from "./getuserpreferences.js";
 export * from "./getversion.js";

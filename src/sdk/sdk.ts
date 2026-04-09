@@ -9,6 +9,7 @@ import { Documents } from "./documents.js";
 import { EntryPages } from "./entrypages.js";
 import { Organizations } from "./organizations.js";
 import { Policies } from "./policies.js";
+import { Records } from "./records.js";
 import { Sharing } from "./sharing.js";
 import { Timelines } from "./timelines.js";
 import { Usage } from "./usage.js";
@@ -69,5 +70,10 @@ export class Factify extends ClientSDK {
   private _usage?: Usage;
   get usage(): Usage {
     return (this._usage ??= new Usage(this._options));
+  }
+
+  private _records?: Records;
+  get records(): Records {
+    return (this._records ??= new Records(this._options));
   }
 }
