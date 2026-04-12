@@ -4,7 +4,7 @@
 
 import * as z from "zod/v4-mini";
 import { FactifyCore } from "../core.js";
-import { appendForm } from "../lib/encodings.js";
+import { appendForm, normalizeBlob } from "../lib/encodings.js";
 import {
   bytesToBlob,
   getContentTypeFromFileName,
@@ -98,8 +98,9 @@ async function $do(
   const body = new FormData();
 
   if (isBlobLike(payload.payload)) {
-    const blob = payload.payload;
-    const name = "name" in blob ? (blob.name as string) : undefined;
+    const file = payload.payload;
+    const blob = await normalizeBlob(file);
+    const name = "name" in file ? (file.name as string) : undefined;
     appendForm(body, "payload", blob, name);
   } else if (isReadableStream(payload.payload.content)) {
     const buffer = await readableStreamToArrayBuffer(payload.payload.content);

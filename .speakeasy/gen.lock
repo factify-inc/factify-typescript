@@ -1,23 +1,23 @@
 lockVersion: 2.0.0
 id: 23af0391-5a58-495c-b992-941b55f41c78
 management:
-  docChecksum: 2f21ad1d6dc583236cda8a250505515a
-  docVersion: 1.1.0-rc.9
-  speakeasyVersion: 1.761.1
-  generationVersion: 2.879.6
-  releaseVersion: 1.1.0-rc.9
-  configChecksum: 40f0b018995a706e3fd793e0abf2249b
+  docChecksum: 002dc8bda46980ebd3a67e62bf0c77bc
+  docVersion: 1.1.0-rc.10
+  speakeasyVersion: 1.761.3
+  generationVersion: 2.879.11
+  releaseVersion: 1.1.0-rc.10
+  configChecksum: acfd583f3bcd30bcf8dc2b385b77fef8
   repoURL: https://github.com/factify-inc/factify-typescript.git
   installationURL: https://github.com/factify-inc/factify-typescript
   published: true
 persistentEdits:
-  generation_id: 7c433755-e71c-4186-876f-90d7314abe27
-  pristine_commit_hash: 77d579e7215d9b6b6a9cd2893bb293706964f6e8
-  pristine_tree_hash: ce1d25317086eff63619740a25636456bdbf6e78
+  generation_id: 7502d08f-2ce3-4929-9f32-583793083821
+  pristine_commit_hash: 7bbc749ce539bef1c7fe6646ea34c8698f0d5b68
+  pristine_tree_hash: 3464bc46c80b47a9bf55fa9f3f834b188756bb8e
 features:
   typescript:
     additionalDependencies: 0.1.0
-    core: 3.26.46
+    core: 3.26.47
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
@@ -1365,12 +1365,12 @@ trackedFiles:
     pristine_git_object: 766ea5ba4257419f9fca9da9c6ba895ab05a3f8b
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:59cbe7ca5c6111511b74ea15f3e46d4c4a1ceb6e
-    pristine_git_object: f8c5068deec924f8dc2b9f8b52df24ab572236e8
+    last_write_checksum: sha1:97edf452b8fd7359e4caa507e87a37329f5c03ee
+    pristine_git_object: 81fbe2436fd372f3c91e8603c1a8bf3a7d3de603
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:3def9261f7570e337794a0f972f1d9762c26aae6
-    pristine_git_object: cf1c0415fce947d4d3a1ccd63b299617df5b52bc
+    last_write_checksum: sha1:eeb6d9410d46334729a2c8bcf63c9ba127c881c6
+    pristine_git_object: b9b33083e90e16ce892c3383a5b9f58079199efd
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:72dd2a6867a44557b35fa72fe5588efc5d08e8e1
@@ -1413,8 +1413,8 @@ trackedFiles:
     pristine_git_object: 9f2f04d249a7b9fc7c1153e807ee9602a1efc3b6
   src/funcs/documentsCreate.ts:
     id: 2740abd23711
-    last_write_checksum: sha1:6405b79a4bb8e32ee7d934380197193ea2d2eca7
-    pristine_git_object: 42e37918b331f2d3b71af2676d436084ee42b8d4
+    last_write_checksum: sha1:1d43699f57774ddf9a53074b8171cd56e8971f64
+    pristine_git_object: a2b4eacc4d71f25d8c832fb6002e7c47fe12cb26
   src/funcs/documentsExport.ts:
     id: 646ca4b1e9d2
     last_write_checksum: sha1:94166541dfd8f57f1e0907379ba17f764062827b
@@ -1593,8 +1593,8 @@ trackedFiles:
     pristine_git_object: 7f927d0727d1892667cbbdf5a5119bf59a0e8b20
   src/funcs/versionsCreate.ts:
     id: 21b7cdaed201
-    last_write_checksum: sha1:ccb4c10956ea17e419b14dec502655bed9cad494
-    pristine_git_object: b68965fe3e8bfc00694b266e6e5f8cc7f3a3e4b0
+    last_write_checksum: sha1:7cba1a24c0b2ac2550636d8c72af85919249dda7
+    pristine_git_object: fba100318557525686f19f9474bc316cca490166
   src/funcs/versionsGet.ts:
     id: db5697b9312c
     last_write_checksum: sha1:f2f9ed14c2eea80416917d9fe2fafc7798e8a5bc
@@ -1629,16 +1629,16 @@ trackedFiles:
     pristine_git_object: 44be0eae8246521b230e8e711a88eff738fc015d
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:ff76eb425c8ee86cdcd5ce029602115101bcbc44
-    pristine_git_object: a519bb345cf880263ebc4ccc9f4dfcaf918425bc
+    last_write_checksum: sha1:33abb9b7beb4b53bb6147c818abe6a193259d504
+    pristine_git_object: 0026c53753c4cc6e07680e5212c63d23d5633bf9
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
     pristine_git_object: e81091f5e536f82739f71379b1fddc2d147c49e2
   src/lib/encodings.ts:
     id: 3bd8ead98afd
-    last_write_checksum: sha1:b48cffc0f56fc00e869370f4aa8213f31bf61d8b
-    pristine_git_object: be115d7726c292f8a415045959372f6d46171278
+    last_write_checksum: sha1:3e6784ec96431e0d8f98f67b3eae38d7b368264c
+    pristine_git_object: caeae5469fc8bd37da5aa7fd46d928eec5dc4b3a
   src/lib/files.ts:
     id: e5efa54fcb95
     last_write_checksum: sha1:795c14026405d547bfc47012f7ad9666e530fa7f
@@ -4348,6 +4348,3 @@ examples:
         "500":
           application/json: {"code": "canceled", "message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Typescript SDK Changes:
-  * `factify.records.get()`: **Added**
