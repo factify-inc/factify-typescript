@@ -327,12 +327,6 @@ actions:
         - "lang": "typescript"
           "label": "getUsageHistory"
           "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.usage.getHistory({\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n    dateAfter: new Date(\"2023-01-15T01:30:15.01Z\"),\n    dateBefore: new Date(\"2023-01-15T01:30:15.01Z\"),\n  });\n\n  console.log(result);\n}\n\nrun();"
-  - target: $["paths"]["/v1beta/records"]["get"]
-    update:
-      "x-codeSamples":
-        - "lang": "typescript"
-          "label": "getRecord"
-          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.records.get({\n    versionId: \"ver_01h2abcd1234efgh5678jkmnpt\",\n  });\n\n  console.log(result);\n}\n\nrun();"
   - target: $["paths"]["/v1beta/user-preferences"]["get"]
     update:
       "x-codeSamples":
@@ -351,3 +345,9 @@ actions:
         - "lang": "typescript"
           "label": "updateVersion"
           "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.versions.update({\n    versionId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+  - target: $["paths"]["/v1beta/versions/{version_id}/record"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "typescript"
+          "label": "getVersionRecord"
+          "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.versions.getRecord({\n    versionId: \"ver_01h2abcd1234efgh5678jkmnpt\",\n  });\n\n  console.log(result);\n}\n\nrun();"

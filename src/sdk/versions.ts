@@ -4,6 +4,7 @@
 
 import { versionsCreate } from "../funcs/versionsCreate.js";
 import { versionsGet } from "../funcs/versionsGet.js";
+import { versionsGetRecord } from "../funcs/versionsGetRecord.js";
 import { versionsList } from "../funcs/versionsList.js";
 import { versionsUpdate } from "../funcs/versionsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -76,6 +77,23 @@ export class Versions extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.UpdateVersionResponse> {
     return unwrapAsync(versionsUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Retrieve a record
+   *
+   * @remarks
+   * Retrieves the processed content record for a given version. The content oneof is populated based on source_format: document formats (pdf, docx, markdown) populate the document field; spreadsheet formats (xlsx, csv) populate the spreadsheet field.
+   */
+  async getRecord(
+    request: operations.GetVersionRecordRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetVersionRecordResponse> {
+    return unwrapAsync(versionsGetRecord(
       this,
       request,
       options,

@@ -1,11 +1,11 @@
-# GetRecordRequest
+# GetVersionRecordRequest
 
 ## Example Usage
 
 ```typescript
-import { GetRecordRequest } from "@factify/sdk/models/operations";
+import { GetVersionRecordRequest } from "@factify/sdk/models/operations";
 
-let value: GetRecordRequest = {
+let value: GetVersionRecordRequest = {
   versionId: "ver_01h2abcd1234efgh5678jkmnpt",
 };
 ```

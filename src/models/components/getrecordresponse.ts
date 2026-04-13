@@ -7,68 +7,90 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
+import { smartUnion } from "../../types/smartUnion.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  QcrV1alphaDocumentLayout,
-  QcrV1alphaDocumentLayout$inboundSchema,
-} from "./qcrv1alphadocumentlayout.js";
+  DocumentBundle,
+  DocumentBundle$inboundSchema,
+} from "./documentbundle.js";
 import {
-  QcrV1alphaDocumentRecord,
-  QcrV1alphaDocumentRecord$inboundSchema,
-} from "./qcrv1alphadocumentrecord.js";
+  SpreadsheetBundle,
+  SpreadsheetBundle$inboundSchema,
+} from "./spreadsheetbundle.js";
 
-/**
- * GetRecordResponse contains the processed document content and layout.
- */
-export type GetRecordResponse = {
+export type Spreadsheet = {
   /**
-   * DocumentRecord is the QCR representation of an ingested document.
-   *
-   * @remarks
-   *  Immutable once extracted. Source-format-agnostic.
-   *
-   *  Structure is a flat sequence of blocks. Sections provide optional grouping
-   *  and can nest, but block-level elements (paragraphs, tables, etc.) are leaves
-   *  — they do not contain other blocks. This constrains nesting to only what is
-   *  semantically valid and gives every element a natural positional address.
-   *
-   *  Addressing convention: every element is addressable by its index path through
-   *  the typed containment hierarchy. Examples:
-   *    blocks[2]                        → third block
-   *    blocks[2].section.blocks[0]      → first block inside a section
-   *    blocks[4].table.rows[1].cells[0] → second row, first cell of a table
-   *    blocks[3].list.items[2]          → third item of a list
-   *
-   *  These addresses are deterministic for a given record and are used by
-   *  DocumentLayout to join layout data to semantic content.
+   * SpreadsheetBundle groups a spreadsheet record with its optional grid layout.
    */
-  document?: QcrV1alphaDocumentRecord | undefined;
+  spreadsheet: SpreadsheetBundle;
   /**
    * Unique record ID (UUID format).
    */
   id?: string | undefined;
   /**
-   * Top-level layout structure, joined to a DocumentRecord by record_id.
-   *
-   * @remarks
-   *  Used with the Block-based record representation (DocumentRecord.blocks).
-   */
-  layout?: QcrV1alphaDocumentLayout | undefined;
-  /**
-   * Source format of the original upload (e.g., pdf, docx, xlsx).
+   * Source format of the original upload (e.g., pdf, docx, xlsx, csv).
    */
   sourceFormat?: string | undefined;
 };
 
+export type GetRecordResponseDocument = {
+  /**
+   * DocumentBundle groups a document record with its optional spatial layout.
+   */
+  document: DocumentBundle;
+  /**
+   * Unique record ID (UUID format).
+   */
+  id?: string | undefined;
+  /**
+   * Source format of the original upload (e.g., pdf, docx, xlsx, csv).
+   */
+  sourceFormat?: string | undefined;
+};
+
+/**
+ * GetRecordResponse contains the processed content and layout for a version.
+ *
+ * @remarks
+ *  The content oneof is populated based on source_format:
+ *    - document formats (pdf, docx, markdown): document field
+ *    - spreadsheet formats (xlsx, csv):        spreadsheet field
+ */
+export type GetRecordResponse = GetRecordResponseDocument | Spreadsheet;
+
 /** @internal */
-export const GetRecordResponse$inboundSchema: z.ZodMiniType<
-  GetRecordResponse,
+export const Spreadsheet$inboundSchema: z.ZodMiniType<Spreadsheet, unknown> = z
+  .pipe(
+    z.object({
+      spreadsheet: SpreadsheetBundle$inboundSchema,
+      id: types.optional(types.string()),
+      source_format: types.optional(types.string()),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        "source_format": "sourceFormat",
+      });
+    }),
+  );
+
+export function spreadsheetFromJSON(
+  jsonString: string,
+): SafeParseResult<Spreadsheet, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Spreadsheet$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Spreadsheet' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetRecordResponseDocument$inboundSchema: z.ZodMiniType<
+  GetRecordResponseDocument,
   unknown
 > = z.pipe(
   z.object({
-    document: types.optional(QcrV1alphaDocumentRecord$inboundSchema),
+    document: DocumentBundle$inboundSchema,
     id: types.optional(types.string()),
-    layout: types.optional(QcrV1alphaDocumentLayout$inboundSchema),
     source_format: types.optional(types.string()),
   }),
   z.transform((v) => {
@@ -77,6 +99,25 @@ export const GetRecordResponse$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+
+export function getRecordResponseDocumentFromJSON(
+  jsonString: string,
+): SafeParseResult<GetRecordResponseDocument, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetRecordResponseDocument$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetRecordResponseDocument' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetRecordResponse$inboundSchema: z.ZodMiniType<
+  GetRecordResponse,
+  unknown
+> = smartUnion([
+  z.lazy(() => GetRecordResponseDocument$inboundSchema),
+  z.lazy(() => Spreadsheet$inboundSchema),
+]);
 
 export function getRecordResponseFromJSON(
   jsonString: string,

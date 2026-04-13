@@ -4,7 +4,7 @@
 
 import * as z from "zod/v4-mini";
 import { FactifyCore } from "../core.js";
-import { encodeFormQuery } from "../lib/encodings.js";
+import { encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -30,15 +30,15 @@ import { Result } from "../types/fp.js";
  * Retrieve a record
  *
  * @remarks
- * Retrieves the processed document content record for a given version. Returns the full document and layout data.
+ * Retrieves the processed content record for a given version. The content oneof is populated based on source_format: document formats (pdf, docx, markdown) populate the document field; spreadsheet formats (xlsx, csv) populate the spreadsheet field.
  */
-export function recordsGet(
+export function versionsGetRecord(
   client: FactifyCore,
-  request: operations.GetRecordRequest,
+  request: operations.GetVersionRecordRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetRecordResponse,
+    operations.GetVersionRecordResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -59,12 +59,12 @@ export function recordsGet(
 
 async function $do(
   client: FactifyCore,
-  request: operations.GetRecordRequest,
+  request: operations.GetVersionRecordRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetRecordResponse,
+      operations.GetVersionRecordResponse,
       | errors.ErrorResponse
       | FactifyError
       | ResponseValidationError
@@ -80,7 +80,8 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => z.parse(operations.GetRecordRequest$outboundSchema, value),
+    (value) =>
+      z.parse(operations.GetVersionRecordRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -89,11 +90,13 @@ async function $do(
   const payload = parsed.value;
   const body = null;
 
-  const path = pathToFunc("/v1beta/records")();
-
-  const query = encodeFormQuery({
-    "version_id": payload.version_id,
-  });
+  const pathParams = {
+    version_id: encodeSimple("version_id", payload.version_id, {
+      explode: false,
+      charEncoding: "percent",
+    }),
+  };
+  const path = pathToFunc("/v1beta/versions/{version_id}/record")(pathParams);
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -106,7 +109,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "getRecord",
+    operationID: "getVersionRecord",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -124,7 +127,6 @@ async function $do(
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
-    query: query,
     body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
@@ -150,7 +152,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetRecordResponse,
+    operations.GetVersionRecordResponse,
     | errors.ErrorResponse
     | FactifyError
     | ResponseValidationError
@@ -161,7 +163,9 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.GetRecordResponse$inboundSchema, { key: "Result" }),
+    M.json(200, operations.GetVersionRecordResponse$inboundSchema, {
+      key: "Result",
+    }),
     M.jsonErr([400, 401, 403, 404], errors.ErrorResponse$inboundSchema),
     M.jsonErr(429, errors.ErrorResponse$inboundSchema, { hdrs: true }),
     M.jsonErr(500, errors.ErrorResponse$inboundSchema),

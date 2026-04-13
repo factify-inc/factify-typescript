@@ -10,6 +10,7 @@ Document version tracking and management.
 * [create](#create) - Create a new version
 * [get](#get) - Retrieve a version
 * [update](#update) - Update a version
+* [getRecord](#getrecord) - Retrieve a record
 
 ## list
 
@@ -321,6 +322,82 @@ run();
 ### Response
 
 **Promise\<[operations.UpdateVersionResponse](../../models/operations/updateversionresponse.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.ErrorResponse       | 400, 401, 403, 404         | application/json           |
+| errors.ErrorResponse       | 429                        | application/json           |
+| errors.ErrorResponse       | 500                        | application/json           |
+| errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
+
+## getRecord
+
+Retrieves the processed content record for a given version. The content oneof is populated based on source_format: document formats (pdf, docx, markdown) populate the document field; spreadsheet formats (xlsx, csv) populate the spreadsheet field.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="getVersionRecord" method="get" path="/v1beta/versions/{version_id}/record" -->
+```typescript
+import { Factify } from "@factify/sdk";
+
+const factify = new Factify({
+  bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+async function run() {
+  const result = await factify.versions.getRecord({
+    versionId: "ver_01h2abcd1234efgh5678jkmnpt",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { FactifyCore } from "@factify/sdk/core.js";
+import { versionsGetRecord } from "@factify/sdk/funcs/versionsGetRecord.js";
+
+// Use `FactifyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const factify = new FactifyCore({
+  bearerAuth: "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+async function run() {
+  const res = await versionsGetRecord(factify, {
+    versionId: "ver_01h2abcd1234efgh5678jkmnpt",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("versionsGetRecord failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetVersionRecordRequest](../../models/operations/getversionrecordrequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.GetVersionRecordResponse](../../models/operations/getversionrecordresponse.md)\>**
 
 ### Errors
 

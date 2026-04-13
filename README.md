@@ -246,10 +246,6 @@ run();
 * [attach](docs/sdks/policies/README.md#attach) - Attach a policy
 * [detach](docs/sdks/policies/README.md#detach) - Detach a policy
 
-### [Records](docs/sdks/records/README.md)
-
-* [get](docs/sdks/records/README.md#get) - Retrieve a record
-
 ### [Sharing](docs/sdks/sharing/README.md)
 
 * [getGeneralAccess](docs/sdks/sharing/README.md#getgeneralaccess) - Get general access
@@ -286,6 +282,7 @@ run();
 * [create](docs/sdks/versions/README.md#create) - Create a new version
 * [get](docs/sdks/versions/README.md#get) - Retrieve a version
 * [update](docs/sdks/versions/README.md#update) - Update a version
+* [getRecord](docs/sdks/versions/README.md#getrecord) - Retrieve a record
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -343,7 +340,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`policiesAttach`](docs/sdks/policies/README.md#attach) - Attach a policy
 - [`policiesDetach`](docs/sdks/policies/README.md#detach) - Detach a policy
 - [`policiesList`](docs/sdks/policies/README.md#list) - List document policies
-- [`recordsGet`](docs/sdks/records/README.md#get) - Retrieve a record
 - [`sharingCreateShareLink`](docs/sdks/sharing/README.md#createsharelink) - Create share link
 - [`sharingGetGeneralAccess`](docs/sdks/sharing/README.md#getgeneralaccess) - Get general access
 - [`sharingGrant`](docs/sdks/sharing/README.md#grant) - Grant document access
@@ -361,6 +357,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`usersPreferencesGet`](docs/sdks/preferences/README.md#get) - Get user preferences
 - [`versionsCreate`](docs/sdks/versions/README.md#create) - Create a new version
 - [`versionsGet`](docs/sdks/versions/README.md#get) - Retrieve a version
+- [`versionsGetRecord`](docs/sdks/versions/README.md#getrecord) - Retrieve a record
 - [`versionsList`](docs/sdks/versions/README.md#list) - List document versions
 - [`versionsUpdate`](docs/sdks/versions/README.md#update) - Update a version
 

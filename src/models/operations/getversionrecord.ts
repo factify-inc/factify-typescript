@@ -9,7 +9,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type GetRecordRequest = {
+export type GetVersionRecordRequest = {
   /**
    * Version ID to retrieve the record for.
    *
@@ -19,20 +19,20 @@ export type GetRecordRequest = {
   versionId: string;
 };
 
-export type GetRecordResponse = {
+export type GetVersionRecordResponse = {
   headers: { [k: string]: Array<string> };
   result: components.GetRecordResponse;
 };
 
 /** @internal */
-export type GetRecordRequest$Outbound = {
+export type GetVersionRecordRequest$Outbound = {
   version_id: string;
 };
 
 /** @internal */
-export const GetRecordRequest$outboundSchema: z.ZodMiniType<
-  GetRecordRequest$Outbound,
-  GetRecordRequest
+export const GetVersionRecordRequest$outboundSchema: z.ZodMiniType<
+  GetVersionRecordRequest$Outbound,
+  GetVersionRecordRequest
 > = z.pipe(
   z.object({
     versionId: z.string(),
@@ -44,17 +44,17 @@ export const GetRecordRequest$outboundSchema: z.ZodMiniType<
   }),
 );
 
-export function getRecordRequestToJSON(
-  getRecordRequest: GetRecordRequest,
+export function getVersionRecordRequestToJSON(
+  getVersionRecordRequest: GetVersionRecordRequest,
 ): string {
   return JSON.stringify(
-    GetRecordRequest$outboundSchema.parse(getRecordRequest),
+    GetVersionRecordRequest$outboundSchema.parse(getVersionRecordRequest),
   );
 }
 
 /** @internal */
-export const GetRecordResponse$inboundSchema: z.ZodMiniType<
-  GetRecordResponse,
+export const GetVersionRecordResponse$inboundSchema: z.ZodMiniType<
+  GetVersionRecordResponse,
   unknown
 > = z.pipe(
   z.object({
@@ -69,12 +69,12 @@ export const GetRecordResponse$inboundSchema: z.ZodMiniType<
   }),
 );
 
-export function getRecordResponseFromJSON(
+export function getVersionRecordResponseFromJSON(
   jsonString: string,
-): SafeParseResult<GetRecordResponse, SDKValidationError> {
+): SafeParseResult<GetVersionRecordResponse, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => GetRecordResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetRecordResponse' from JSON`,
+    (x) => GetVersionRecordResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetVersionRecordResponse' from JSON`,
   );
 }
