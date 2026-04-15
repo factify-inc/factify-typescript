@@ -85,6 +85,14 @@ export type Document = {
    */
   sharedAt?: Date | undefined;
   /**
+   * Original file format of the document's current version (e.g., "pdf", "docx", "xlsx", "csv", "markdown").
+   *
+   * @remarks
+   *  Output-only field — not validated on input. Values are always one of the canonical format names
+   *  written by the upload layer; arbitrary strings will not appear here.
+   */
+  sourceFormat?: string | undefined;
+  /**
    * URL of the document thumbnail image.
    */
   thumbnailUrl?: string | undefined;
@@ -125,6 +133,7 @@ export const Document$inboundSchema: z.ZodMiniType<Document, unknown> = z.pipe(
     permission_set: types.optional(DocumentPermissionSet$inboundSchema),
     processing_status: ProcessingStatus$inboundSchema,
     shared_at: types.optional(types.date()),
+    source_format: types.optional(types.string()),
     thumbnail_url: types.optional(types.string()),
     title: types.string(),
     trashed_at: types.optional(types.date()),
@@ -144,6 +153,7 @@ export const Document$inboundSchema: z.ZodMiniType<Document, unknown> = z.pipe(
       "permission_set": "permissionSet",
       "processing_status": "processingStatus",
       "shared_at": "sharedAt",
+      "source_format": "sourceFormat",
       "thumbnail_url": "thumbnailUrl",
       "trashed_at": "trashedAt",
       "updated_at": "updatedAt",

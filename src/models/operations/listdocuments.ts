@@ -5,9 +5,19 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+export const SourceFormat = {
+  Pdf: "pdf",
+  Docx: "docx",
+  Xlsx: "xlsx",
+  Csv: "csv",
+  Markdown: "markdown",
+} as const;
+export type SourceFormat = ClosedEnum<typeof SourceFormat>;
 
 export type ListDocumentsRequest = {
   /**
@@ -104,12 +114,24 @@ export type ListDocumentsRequest = {
    *  REST: ?description_contains=financial
    */
   descriptionContains?: string | undefined;
+  /**
+   * Filter by source format(s). Returns documents matching ANY of the specified formats.
+   *
+   * @remarks
+   *  Allowed values: pdf, docx, xlsx, csv, markdown.
+   *  REST: ?source_format=pdf or ?source_format=docx&source_format=xlsx
+   */
+  sourceFormat?: Array<SourceFormat> | undefined;
 };
 
 export type ListDocumentsResponse = {
   headers: { [k: string]: Array<string> };
   result: components.ListDocumentsResponse;
 };
+
+/** @internal */
+export const SourceFormat$outboundSchema: z.ZodMiniEnum<typeof SourceFormat> = z
+  .enum(SourceFormat);
 
 /** @internal */
 export type ListDocumentsRequest$Outbound = {
@@ -127,6 +149,7 @@ export type ListDocumentsRequest$Outbound = {
   organization_scope?: boolean | undefined;
   title_contains?: string | undefined;
   description_contains?: string | undefined;
+  source_format?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -157,6 +180,7 @@ export const ListDocumentsRequest$outboundSchema: z.ZodMiniType<
     organizationScope: z.optional(z.boolean()),
     titleContains: z.optional(z.string()),
     descriptionContains: z.optional(z.string()),
+    sourceFormat: z.optional(z.array(SourceFormat$outboundSchema)),
   }),
   z.transform((v) => {
     return remap$(v, {
@@ -171,6 +195,7 @@ export const ListDocumentsRequest$outboundSchema: z.ZodMiniType<
       organizationScope: "organization_scope",
       titleContains: "title_contains",
       descriptionContains: "description_contains",
+      sourceFormat: "source_format",
     });
   }),
 );

@@ -121,6 +121,7 @@ async function $do(
     "processing_status": payload?.processing_status,
     "query": payload?.query,
     "sort": payload?.sort,
+    "source_format": payload?.source_format,
     "title_contains": payload?.title_contains,
     "trash_state": payload?.trash_state,
   });
