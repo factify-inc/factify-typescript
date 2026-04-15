@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 23af0391-5a58-495c-b992-941b55f41c78
 management:
-  docChecksum: 5789d8d64828e467235467ab82ec9f2c
-  docVersion: 1.1.0-rc.13
+  docChecksum: 04e53e05521bee7a7f1a751601d9856e
+  docVersion: 1.1.0-rc.1
   speakeasyVersion: 1.761.5
   generationVersion: 2.879.13
-  releaseVersion: 1.1.0-rc.13
-  configChecksum: 174652619d622ef5d7455e4d29453469
+  releaseVersion: 1.1.0-rc.1
+  configChecksum: e693ccaee9e8e83d0c813eae289c6b34
   repoURL: https://github.com/factify-inc/factify-typescript.git
   installationURL: https://github.com/factify-inc/factify-typescript
   published: true
 persistentEdits:
-  generation_id: 8cef6ef4-af02-45c0-ad85-6338bc3a7d77
-  pristine_commit_hash: e36f2ca87167272427f04b0e0e848dce77b4e4d5
-  pristine_tree_hash: 5e6beee3f07a23a36669f0163f764446847fe611
+  generation_id: 100fab47-1391-4065-b5b3-42dad3eeb57c
+  pristine_commit_hash: 0164760b26ec367478f8e8118b36ec1ae9071a5a
+  pristine_tree_hash: f66f2ea128094bd5ae7625278e4b8753587ed6f3
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -1389,16 +1389,16 @@ trackedFiles:
     pristine_git_object: 63233d77fb5305163ace0e66887876bbc22d9c20
   docs/models/operations/updateorganizationrequest.md:
     id: 443648f7cb2d
-    last_write_checksum: sha1:8c88af7252eb10dacb3ab99781758c052258234b
-    pristine_git_object: 13f177e1addbbad65271f37227ed51b1054fcd6c
+    last_write_checksum: sha1:c706310df9f691e9acb46665c4cc04cca75310fe
+    pristine_git_object: 6e8dd88fbca1fb937779fbce62b9e7369cd1ab7b
   docs/models/operations/updateorganizationresponse.md:
     id: c85d429c788f
     last_write_checksum: sha1:66359da30707066addf4b66e16b1302437d52a62
     pristine_git_object: d3f554d33c4e10112d56988c08b97438881c20b9
   docs/models/operations/updateorganizationupdateorganizationrequest.md:
     id: 3307325c4a79
-    last_write_checksum: sha1:a1a664de80246f5c60c8c3e33f4dff5e55e7343f
-    pristine_git_object: 2a708505fbc8644fd328ae5379e09c3ac999e2c7
+    last_write_checksum: sha1:f69383c4f7850c0f59e0311f9c7a18d1c68c7e95
+    pristine_git_object: 53bfc5be4a75d8416a5d814574e2d68e52089f74
   docs/models/operations/updateversionrequest.md:
     id: 10c20744b90f
     last_write_checksum: sha1:3da05f279d7f49b8133ccba95a079f582244a99d
@@ -1505,12 +1505,12 @@ trackedFiles:
     pristine_git_object: 766ea5ba4257419f9fca9da9c6ba895ab05a3f8b
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:f19e3b4a9d7028b3a46186862d6ba3981d2fe4be
-    pristine_git_object: 1599ef6475637fbc36fe84d466347c5df03eca48
+    last_write_checksum: sha1:290a9a19be26c3bc99e0d0eed0d77de5a6543522
+    pristine_git_object: 4c84852023c9f28f34e295e54a6977e60cc45149
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:ecb8f9cd0caf4e85596cb284454c547fee768a85
-    pristine_git_object: 841f98d6aa6b2a94244fe3aabd13f2e074cefe7a
+    last_write_checksum: sha1:d17ee54bb012f1186a29f02a438fb61055761872
+    pristine_git_object: 5ae9cfe392ec170be1b72cb4e3b5fa2e1b1b73aa
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:72dd2a6867a44557b35fa72fe5588efc5d08e8e1
@@ -1769,8 +1769,8 @@ trackedFiles:
     pristine_git_object: 44be0eae8246521b230e8e711a88eff738fc015d
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:f50ef0f276c9ff3eae4eb35715df68fd32b15634
-    pristine_git_object: f269f2190a78b38358845bd11d10dcba48ce2109
+    last_write_checksum: sha1:44d69a67c27a8675deb2f6c0845d1d74f52f9ad9
+    pristine_git_object: 5b2d93d7736baccde21f2dbf80b05f38d5c5dcf0
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -2761,8 +2761,8 @@ trackedFiles:
     pristine_git_object: 86b81280e8bb97b95829e28da2c16d1990b00b3d
   src/models/operations/updateorganization.ts:
     id: 5864beae849f
-    last_write_checksum: sha1:141edbf9ea484f6b45a89e87aaf51620e30a5af9
-    pristine_git_object: 6c278611be82c5fc27fda1c2cf31d66a20189e83
+    last_write_checksum: sha1:3df693bb39baac616651642292e2dc528b3dd150
+    pristine_git_object: d0b07826a7ba2de5322dbe228545fc763898460f
   src/models/operations/updateorganizationmember.ts:
     id: 782264f8280d
     last_write_checksum: sha1:62189d0ecc26baaaff29edf40be2b8e3e16b6ee2
@@ -4617,4 +4617,4 @@ examples:
         "500":
           application/json: {"code": "unauthenticated", "message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: "## Typescript SDK Changes:\n* `factify.documents.list()`: \n  *  `request.sourceFormat` **Added**\n  *  `response.items[].sourceFormat` **Added**\n* `factify.documents.create()`:  `response.document.sourceFormat` **Added**\n* `factify.documents.get()`:  `response.document.sourceFormat` **Added**\n* `factify.documents.update()`:  `response.document.sourceFormat` **Added**\n"
+releaseNotes: "## Typescript SDK Changes:\n* `factify.organizations.update()`: \n  *  `request.body.logoImageUrl` **Added**\n"

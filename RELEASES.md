@@ -605,3 +605,13 @@ Based on:
 - [typescript v1.1.0-rc.13] .
 ### Releases
 - [NPM v1.1.0-rc.13] https://www.npmjs.com/package/@factify/sdk/v/1.1.0-rc.13 - .
+
+## 2026-04-15 14:26:56
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.761.5 (2.879.13) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v1.1.0-rc.1] .
+### Releases
+- [NPM v1.1.0-rc.1] https://www.npmjs.com/package/@factify/sdk/v/1.1.0-rc.1 - .

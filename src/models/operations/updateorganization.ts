@@ -14,6 +14,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type UpdateOrganizationUpdateOrganizationRequest = {
   /**
+   * Optional logo image URL. nil = no change. Pass the URL returned by UploadOrganizationLogo.
+   */
+  logoImageUrl?: string | null | undefined;
+  /**
    * Optional new display name. nil = no change. Minimum 1 character.
    */
   name?: string | null | undefined;
@@ -37,6 +41,7 @@ export type UpdateOrganizationResponse = {
 
 /** @internal */
 export type UpdateOrganizationUpdateOrganizationRequest$Outbound = {
+  logo_image_url?: string | null | undefined;
   name?: string | null | undefined;
 };
 
@@ -45,9 +50,17 @@ export const UpdateOrganizationUpdateOrganizationRequest$outboundSchema:
   z.ZodMiniType<
     UpdateOrganizationUpdateOrganizationRequest$Outbound,
     UpdateOrganizationUpdateOrganizationRequest
-  > = z.object({
-    name: z.optional(z.nullable(z.string())),
-  });
+  > = z.pipe(
+    z.object({
+      logoImageUrl: z.optional(z.nullable(z.string())),
+      name: z.optional(z.nullable(z.string())),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        logoImageUrl: "logo_image_url",
+      });
+    }),
+  );
 
 export function updateOrganizationUpdateOrganizationRequestToJSON(
   updateOrganizationUpdateOrganizationRequest:
