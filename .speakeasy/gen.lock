@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 23af0391-5a58-495c-b992-941b55f41c78
 management:
-  docChecksum: 8b2942653897d81ff0105f26e6bab3be
-  docVersion: 1.1.0-rc.4
+  docChecksum: 9f9ee0c9441a7b69b59dd8e37f93f610
+  docVersion: 1.1.0-rc.5
   speakeasyVersion: 1.761.9
   generationVersion: 2.881.4
-  releaseVersion: 1.1.0-rc.4
-  configChecksum: d8a728edcf280c30f2ac1c587b9f2d21
+  releaseVersion: 1.1.0-rc.5
+  configChecksum: 2fd68776d1c7dc9935498a351e7e7739
   repoURL: https://github.com/factify-inc/factify-typescript.git
   installationURL: https://github.com/factify-inc/factify-typescript
   published: true
 persistentEdits:
-  generation_id: f756d855-efeb-48f0-84fa-275ddf4bd477
-  pristine_commit_hash: 2631bbec8cc9c87200737415f21997bf33d49275
-  pristine_tree_hash: 5eb422ae99430bf5527649b42ba0a1f852117e6a
+  generation_id: ba269597-6e16-45b2-a790-42849564d69a
+  pristine_commit_hash: 7a08a76c5a19211f6af80fe3121b0606d9bc7a4b
+  pristine_tree_hash: 799567940af741a1e0b869e955e1474e24f8ce3f
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -1505,12 +1505,12 @@ trackedFiles:
     pristine_git_object: 766ea5ba4257419f9fca9da9c6ba895ab05a3f8b
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:743d7b4ed5e2d7384862785bf05e81faf65d4d33
-    pristine_git_object: b676f0481c79aac48abd3d9b14d7b2ab2509e08e
+    last_write_checksum: sha1:3c0f6eb3adee7a67a75b9dca43c030ce24cddbbe
+    pristine_git_object: 4482cb6593901eeaf1a6e6561c7ed016b3f4aabd
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:4102fdb84596cb65a78e6dca3eed4465c84e61c6
-    pristine_git_object: dd1671bacb35278a9ac4baaf4c1a259f78450357
+    last_write_checksum: sha1:a2a610cb3e1fda6b967c83e26fc93826aca4dda7
+    pristine_git_object: 151d852605fa8363b6bf053c2d7f1b8f46374e94
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:72dd2a6867a44557b35fa72fe5588efc5d08e8e1
@@ -1769,8 +1769,8 @@ trackedFiles:
     pristine_git_object: 44be0eae8246521b230e8e711a88eff738fc015d
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:0ab659dc6a96bf7118e9143d6903c5a4fe1ac3aa
-    pristine_git_object: bd597582571c7b91da86ad2ef549d16424de1090
+    last_write_checksum: sha1:b56543e821cbdc501f4b8763e55978d56e3a7c74
+    pristine_git_object: d2259d9f363dc58ccf6f5a5b05bf862227f81d44
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
